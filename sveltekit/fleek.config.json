@@ -1,0 +1,8 @@
+{
+	"sites": [
+		{
+			"slug": "scaffold-eth-alt",
+			"distDir": "build"
+		}
+	]
+}

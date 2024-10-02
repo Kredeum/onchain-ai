@@ -1,0 +1,29 @@
+{
+  "name": "scaffold-eth-alt",
+  "version": "0.0.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "all": "pnpm clean && pnpm install && pnpm chain && pnpm deploy:anvil && pnpm run dev",
+    "clean": "pnpm -r clean && rm -rf node_modules pnpm-lock.yaml .turbo",
+    "chain": "pnpm run --filter foundry chain",
+    "deploy:anvil": "pnpm run --filter foundry deploy:anvil",
+    "deploy:sepolia": "pnpm run --filter foundry deploy:sepolia",
+    "deploy:optimism": "pnpm run --filter foundry deploy:optimism",
+    "deploy:fleek": "pnpm run --filter sveltekit deploy:fleek",
+    "dev": "pnpm run --filter sveltekit dev",
+    "start": "pnpm run dev",
+    "build": "turbo build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@9.4.0",
+  "engines": {
+    "node": "^20",
+    "pnpm": "^9"
+  },
+  "devDependencies": {
+    "turbo": "^2.1.3"
+  }
+}

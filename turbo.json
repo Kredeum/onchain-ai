@@ -1,0 +1,45 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "format": {
+      "inputs": [
+        "src/**"
+      ],
+      "outputLogs": "new-only"
+    },
+    "check": {
+      "dependsOn": [
+        "format"
+      ],
+      "inputs": [
+        "src/**"
+      ],
+      "outputLogs": "new-only"
+    },
+    "build": {
+      "dependsOn": [
+        "check"
+      ],
+      "inputs": [
+        "src/**"
+      ],
+      "outputLogs": "new-only"
+    },
+    "test": {
+      "dependsOn": [
+        "build"
+      ],
+      "cache": false,
+      "inputs": [
+        "src/**"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "inputs": [
+        "src/**"
+      ]
+    }
+  }
+}
