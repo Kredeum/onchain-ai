@@ -1,246 +1,163 @@
 {
-  "10": {
-    "Counter": {
-      "address": "0x07Fc1f455D198B518B1998dCc0EE63cB8c77491d",
-      "abi": [
-        {
-          "type": "function",
-          "name": "increment",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "number",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "setNumber",
-          "inputs": [
-            {
-              "name": "newNumber",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        }
-      ]
-    },
-    "YourContract": {
-      "address": "0xdeF1BB4B94beB5d7f3A921E5DADC3dD2c25016A0",
-      "abi": [
-        {
-          "type": "constructor",
-          "inputs": [
-            {
-              "name": "_owner",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "receive",
-          "stateMutability": "payable"
-        },
-        {
-          "type": "function",
-          "name": "greeting",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "owner",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "premium",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "setGreeting",
-          "inputs": [
-            {
-              "name": "_newGreeting",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "payable"
-        },
-        {
-          "type": "function",
-          "name": "totalCounter",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "userGreetingCounter",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "withdraw",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "event",
-          "name": "GreetingChange",
-          "inputs": [
-            {
-              "name": "greetingSetter",
-              "type": "address",
-              "indexed": true,
-              "internalType": "address"
-            },
-            {
-              "name": "newGreeting",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "premium",
-              "type": "bool",
-              "indexed": false,
-              "internalType": "bool"
-            },
-            {
-              "name": "value",
-              "type": "uint256",
-              "indexed": false,
-              "internalType": "uint256"
-            }
-          ],
-          "anonymous": false
-        }
-      ]
-    }
-  },
   "31337": {
-    "Counter": {
-      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+    "OnChainAI": {
+      "address": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
       "abi": [
         {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "router",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        },
+        {
           "type": "function",
-          "name": "increment",
+          "name": "acceptOwnership",
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
         {
           "type": "function",
-          "name": "number",
+          "name": "donHostedSecretsVersion",
           "inputs": [],
           "outputs": [
             {
               "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
+              "type": "uint64",
+              "internalType": "uint64"
             }
           ],
           "stateMutability": "view"
         },
         {
           "type": "function",
-          "name": "setNumber",
+          "name": "donId",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "gasLimit",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint32",
+              "internalType": "uint32"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "handleOracleFulfillment",
           "inputs": [
             {
-              "name": "newNumber",
-              "type": "uint256",
-              "internalType": "uint256"
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "err",
+              "type": "bytes",
+              "internalType": "bytes"
             }
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        }
-      ]
-    },
-    "YourContract": {
-      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
-      "abi": [
-        {
-          "type": "constructor",
-          "inputs": [
-            {
-              "name": "_owner",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "receive",
-          "stateMutability": "payable"
         },
         {
           "type": "function",
-          "name": "greeting",
+          "name": "javascript",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastError",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastRequestId",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastResponse",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastUserPrompt",
           "inputs": [],
           "outputs": [
             {
@@ -266,281 +183,278 @@
         },
         {
           "type": "function",
-          "name": "premium",
-          "inputs": [],
+          "name": "sendRequest",
+          "inputs": [
+            {
+              "name": "userPrompt",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
           "outputs": [
             {
               "name": "",
-              "type": "bool",
-              "internalType": "bool"
+              "type": "bytes32",
+              "internalType": "bytes32"
             }
           ],
-          "stateMutability": "view"
+          "stateMutability": "payable"
         },
         {
           "type": "function",
-          "name": "setGreeting",
+          "name": "setDonHostedSecretsVersion",
           "inputs": [
             {
-              "name": "_newGreeting",
+              "name": "donHostedSecretsVersion_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setDonID",
+          "inputs": [
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setGasLimit",
+          "inputs": [
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setJavascript",
+          "inputs": [
+            {
+              "name": "javascript_",
               "type": "string",
               "internalType": "string"
             }
           ],
           "outputs": [],
-          "stateMutability": "payable"
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
-          "name": "totalCounter",
+          "name": "setSubscriptionId",
+          "inputs": [
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "subscriptionId",
           "inputs": [],
           "outputs": [
             {
               "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
+              "type": "uint64",
+              "internalType": "uint64"
             }
           ],
           "stateMutability": "view"
         },
         {
           "type": "function",
-          "name": "userGreetingCounter",
+          "name": "transferOwnership",
           "inputs": [
             {
-              "name": "",
+              "name": "to",
               "type": "address",
               "internalType": "address"
             }
           ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
+          "outputs": [],
+          "stateMutability": "nonpayable"
         },
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [],
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
         {
           "type": "event",
-          "name": "GreetingChange",
+          "name": "Javascript",
           "inputs": [
             {
-              "name": "greetingSetter",
-              "type": "address",
-              "indexed": true,
-              "internalType": "address"
-            },
-            {
-              "name": "newGreeting",
+              "name": "javascript",
               "type": "string",
               "indexed": false,
               "internalType": "string"
-            },
-            {
-              "name": "premium",
-              "type": "bool",
-              "indexed": false,
-              "internalType": "bool"
-            },
-            {
-              "name": "value",
-              "type": "uint256",
-              "indexed": false,
-              "internalType": "uint256"
             }
           ],
           "anonymous": false
-        }
-      ]
-    }
-  },
-  "11155111": {
-    "Counter": {
-      "address": "0x82E519C4102F4da880BBf9d41c4153caa4719Fcf",
-      "abi": [
-        {
-          "type": "function",
-          "name": "increment",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "number",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "setNumber",
-          "inputs": [
-            {
-              "name": "newNumber",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        }
-      ]
-    },
-    "YourContract": {
-      "address": "0xc0D919D6A472587311632F548264f4f3F181c16c",
-      "abi": [
-        {
-          "type": "constructor",
-          "inputs": [
-            {
-              "name": "_owner",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "receive",
-          "stateMutability": "payable"
-        },
-        {
-          "type": "function",
-          "name": "greeting",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "owner",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "premium",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bool",
-              "internalType": "bool"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "setGreeting",
-          "inputs": [
-            {
-              "name": "_newGreeting",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "payable"
-        },
-        {
-          "type": "function",
-          "name": "totalCounter",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "userGreetingCounter",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "withdraw",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable"
         },
         {
           "type": "event",
-          "name": "GreetingChange",
+          "name": "OwnershipTransferRequested",
           "inputs": [
             {
-              "name": "greetingSetter",
+              "name": "from",
               "type": "address",
               "indexed": true,
               "internalType": "address"
             },
             {
-              "name": "newGreeting",
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "Request",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "request",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestFulfilled",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestSent",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "Response",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
               "type": "string",
               "indexed": false,
               "internalType": "string"
             },
             {
-              "name": "premium",
-              "type": "bool",
+              "name": "err",
+              "type": "string",
               "indexed": false,
-              "internalType": "bool"
-            },
-            {
-              "name": "value",
-              "type": "uint256",
-              "indexed": false,
-              "internalType": "uint256"
+              "internalType": "string"
             }
           ],
           "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "EmptyArgs",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "EmptySource",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "OnlyRouterCanFulfill",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedRequestID",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ]
         }
       ]
     }

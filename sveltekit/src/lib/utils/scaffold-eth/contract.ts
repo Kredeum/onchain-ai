@@ -18,9 +18,9 @@ import type {
   Log,
   TransactionReceipt
 } from "viem";
-import deploymentsJson from "@scaffold-eth-alt/foundry/deployments.json";
+import deploymentsJson from "@onchain-ai/foundry/deployments.json";
 import scaffoldConfig from "$lib/scaffold.config";
-import type { Config, CreateReadContractParameters } from "@byteatatime/wagmi-svelte";
+import type { Config, CreateReadContractParameters } from "@zapaz/wagmi-svelte";
 import type {
   WriteContractErrorType,
   WriteContractParameters,

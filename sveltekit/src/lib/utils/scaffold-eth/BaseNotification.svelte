@@ -7,7 +7,7 @@
 		InformationCircle,
 		XMark
 	} from "svelte-hero-icons";
-	import toast_, { type Renderable, type Toast } from "@leodog896/svelte-french-toast";
+	import toast_, { type Renderable, type Toast } from "@zapaz/svelte-french-toast";
 
 	const {
 		...allProps

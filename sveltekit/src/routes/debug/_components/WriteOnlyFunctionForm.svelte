@@ -4,7 +4,7 @@
 		createWaitForTransactionReceipt,
 		type CreateWaitForTransactionReceiptReturnType,
 		createWriteContract
-	} from "@byteatatime/wagmi-svelte";
+	} from "@zapaz/wagmi-svelte";
 	import type { Abi, AbiFunction } from "abitype";
 	import type { TransactionReceipt, Address } from "viem";
 	import {

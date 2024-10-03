@@ -1,17 +1,6 @@
 {
-  "10": {
-    "Counter": "0x07Fc1f455D198B518B1998dCc0EE63cB8c77491d",
-    "YourContract": "0xdeF1BB4B94beB5d7f3A921E5DADC3dD2c25016A0",
-    "chainName": "optimism"
-  },
-  "11155111": {
-    "Counter": "0x82E519C4102F4da880BBf9d41c4153caa4719Fcf",
-    "YourContract": "0xc0D919D6A472587311632F548264f4f3F181c16c",
-    "chainName": "sepolia"
-  },
   "31337": {
-    "Counter": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
-    "YourContract": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
-    "chainName": "anvil"
+    "OnChainAI": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
+    "chainName": ""
   }
 }

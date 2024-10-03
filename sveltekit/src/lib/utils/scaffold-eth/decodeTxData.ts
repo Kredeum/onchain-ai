@@ -3,7 +3,7 @@ import type { GenericContractsDeclaration } from "./contract";
 import type { AbiConstructor, AbiError, AbiFallback, AbiFunction } from "abitype";
 import { type Abi, decodeFunctionData, getAbiItem, type AbiEvent } from "viem";
 import { hardhat } from "viem/chains";
-import deploymentsJson from "@scaffold-eth-alt/foundry/deployments.json";
+import deploymentsJson from "@onchain-ai/foundry/deployments.json";
 
 type ContractsInterfaces = Record<string, Abi>;
 type TransactionType = TransactionWithFunction | null;

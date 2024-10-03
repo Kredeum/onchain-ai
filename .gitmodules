@@ -4,3 +4,6 @@
 [submodule "foundry/lib/forge-deploy-lite"]
 	path = foundry/lib/forge-deploy-lite
 	url = https://github.com/zapaz/forge-deploy-lite
+[submodule "foundry/lib/chainlink"]
+	path = foundry/lib/chainlink
+	url = https://github.com/smartcontractkit/chainlink

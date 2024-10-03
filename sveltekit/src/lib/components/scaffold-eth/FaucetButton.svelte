@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createTransactor } from "$lib/runes/transactor.svelte";
-	import { createAccount, createBalance } from "@byteatatime/wagmi-svelte";
+	import { createAccount, createBalance } from "@zapaz/wagmi-svelte";
 	import { Banknotes, Icon } from "svelte-hero-icons";
 	import { createWalletClient, http, parseEther } from "viem";
 	import { anvil } from "viem/chains";

@@ -10,7 +10,7 @@
 		transformAbiFunction
 	} from "./utils";
 	import ContractInput from "./ContractInput.svelte";
-	import { createReadContract } from "@byteatatime/wagmi-svelte";
+	import { createReadContract } from "@zapaz/wagmi-svelte";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 
 	const {

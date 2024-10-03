@@ -5,7 +5,7 @@
   "tasks": {
     "build": {
       "dependsOn": [
-        "@scaffold-eth-alt/foundry#build"
+        "@onchain-ai/foundry#build"
       ],
       "inputs": [
         "src/**"

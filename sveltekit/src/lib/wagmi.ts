@@ -1,6 +1,6 @@
 import { createBurnerConnector } from "./burner-wallet/createBurnerConnector";
 import { getAlchemyHttpUrl } from "./utils/scaffold-eth/networks";
-import { createWagmiConfig } from "@byteatatime/wagmi-svelte";
+import { createWagmiConfig } from "@zapaz/wagmi-svelte";
 import { coinbaseWallet, injected, walletConnect } from '@wagmi/connectors'
 import { createClient, http } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";

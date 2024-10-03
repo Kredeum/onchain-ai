@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Address } from "$lib/components/scaffold-eth";
-	import { createAccount } from "@byteatatime/wagmi-svelte";
+	import { createAccount } from "@zapaz/wagmi-svelte";
 
 	const { address } = $derived.by(createAccount());
 </script>

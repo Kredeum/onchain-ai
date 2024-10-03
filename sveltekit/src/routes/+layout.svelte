@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { WagmiProvider } from "@byteatatime/wagmi-svelte";
+	import { WagmiProvider } from "@zapaz/wagmi-svelte";
 	import "../app.pcss";
 	import ScaffoldEthApp from "$lib/components/ScaffoldEthApp.svelte";
 	import { wagmiConfig } from "$lib/wagmi";
-	import { Toaster } from "@leodog896/svelte-french-toast";
+	import { Toaster } from "@zapaz/svelte-french-toast";
 	import type { Snippet } from "svelte";
 
 	let { children, data }: { children: Snippet; data: { url: string } } = $props();
