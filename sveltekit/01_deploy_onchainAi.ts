@@ -22,7 +22,7 @@ const deployOnChainAI: DeployFunction = async function (hre: HardhatRuntimeEnvir
 
   // if (deployResult.newlyDeployed)
   {
-    writeConfig(chainId, "onChainAI", deployResult.address);
+    writeConfig(chainId, "OnChainAI", deployResult.address);
     // add OnChainAI smartcontract as Consumer on Chainlink Router
     if (chainId != "31337") {
       const routerAbi = ["function addConsumer(uint64,address) external"];
