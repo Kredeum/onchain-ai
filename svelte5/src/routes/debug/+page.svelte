@@ -10,7 +10,7 @@
 		You can debug & interact with your deployed contracts here.
 		<br /> Check
 		<code class="bg-base-300 px-1 text-base font-bold italic [word-spacing:-0.5rem]">
-			sveltekit/src/routes/debug/+page.svelte
+			svelte5/src/routes/debug/+page.svelte
 		</code>
 	</p>
 </div>

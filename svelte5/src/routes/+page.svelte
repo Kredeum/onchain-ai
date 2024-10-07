@@ -20,7 +20,7 @@
 			<code
 				class="bg-base-300 inline-block max-w-full break-words break-all text-base font-bold italic"
 			>
-				sveltekit/src/routes/+page.svelte
+				svelte5/src/routes/+page.svelte
 			</code>
 		</p>
 		<p class="text-center text-lg">

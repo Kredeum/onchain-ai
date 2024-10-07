@@ -1,4 +1,6 @@
 packages:
   - foundry
+  - hardhat
+  - svelte5
   - chainlink
-  - sveltekit
+  - openai

@@ -6,5 +6,5 @@
 <p class="mt-1 break-normal">
 	- Or you can change
 	<code class="bg-base-300 text-base font-bold italic">targetNetwork</code> in
-	<code class="bg-base-300 text-base font-bold italic">sveltekit/src/lib/scaffold.config.ts</code>
+	<code class="bg-base-300 text-base font-bold italic">svelte5/src/lib/scaffold.config.ts</code>
 </p>

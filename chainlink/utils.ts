@@ -1,4 +1,4 @@
-import configJson from "../config.json";
+import configJson from "./config.json";
 import fs from "fs-extra";
 
 type ConfigChain = typeof configJson;

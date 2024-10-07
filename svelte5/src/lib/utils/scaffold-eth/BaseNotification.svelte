@@ -49,7 +49,9 @@
 		{#if typeof content === "string"}
 			{content}
 		{:else}
-			<svelte:component this={content} {...allProps} />
+			{#key content}
+				<content {...allProps}></content>
+			{/key}
 		{/if}
 	</div>
 
