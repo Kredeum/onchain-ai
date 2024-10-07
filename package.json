@@ -10,10 +10,7 @@
     "deploy:anvil": "pnpm run --filter foundry deploy:anvil",
     "deploy:sepolia": "pnpm run --filter foundry deploy:sepolia",
     "deploy:optimism": "pnpm run --filter foundry deploy:optimism",
-    "deploy:fleek": "pnpm run --filter svelte5 deploy:fleek",
-    "dev": "pnpm run --filter svelte5 dev",
-    "start": "pnpm run dev",
-    "build": "turbo build"
+    "deploy:fleek": "pnpm run --filter svelte5 deploy:fleek"
   },
   "keywords": [],
   "author": "",

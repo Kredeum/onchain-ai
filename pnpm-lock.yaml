@@ -12,17 +12,45 @@ importers:
         specifier: ^2.1.3
         version: 2.1.3
 
+  chainlink:
+    dependencies:
+      '@chainlink/functions-toolkit':
+        specifier: ^0.3.2
+        version: 0.3.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      ethers:
+        specifier: ^5.7.2
+        version: 5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.2.0
+      ts-node:
+        specifier: ^10.9.2
+        version: 10.9.2(@types/node@22.7.4)(typescript@5.6.2)
+      utf-8-validate:
+        specifier: ^5.0.10
+        version: 5.0.10
+    devDependencies:
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+      eslint:
+        specifier: ^9.12.0
+        version: 9.12.0(jiti@2.3.2)
+      prettier:
+        specifier: ^3.3.3
+        version: 3.3.3
+
   foundry:
     devDependencies:
       '@chainlink/contracts':
         specifier: ^1.2.0
-        version: 1.2.0(bufferutil@4.0.7)(ethers@5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
+        version: 1.2.0(bufferutil@4.0.8)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@chainlink/env-enc':
         specifier: ^1.0.5
         version: 1.0.5
       '@chainlink/functions-toolkit':
         specifier: ^0.3.2
-        version: 0.3.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+        version: 0.3.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@types/fs-extra':
         specifier: ^11.0.4
         version: 11.0.4
@@ -48,14 +76,14 @@ importers:
         specifier: ^5.6.2
         version: 5.6.2
       utf-8-validate:
-        specifier: ^5.0.2
+        specifier: ^5.0.10
         version: 5.0.10
 
   svelte5:
     dependencies:
       '@castlenine/svelte-qrcode':
         specifier: ^2.3.0
-        version: 2.3.0(svelte@5.0.0-next.260)
+        version: 2.3.0(svelte@5.0.0-next.262)
       '@coinbase/wallet-sdk':
         specifier: ^4.1.0
         version: 4.1.0
@@ -67,16 +95,16 @@ importers:
         version: link:../foundry
       '@sveltejs/adapter-static':
         specifier: ^3.0.5
-        version: 3.0.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))
+        version: 3.0.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))
       '@sveltejs/kit':
-        specifier: ^2.6.1
-        version: 2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
+        specifier: ^2.6.2
+        version: 2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
       '@sveltejs/vite-plugin-svelte':
         specifier: 4.0.0-next.7
-        version: 4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
+        version: 4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
       '@tanstack/svelte-query':
         specifier: ^5.59.0
-        version: 5.59.0(svelte@5.0.0-next.260)
+        version: 5.59.0(svelte@5.0.0-next.262)
       '@types/eslint':
         specifier: ^9.6.1
         version: 9.6.1
@@ -85,18 +113,18 @@ importers:
         version: 22.7.4
       '@typescript-eslint/eslint-plugin':
         specifier: ^8.8.0
-        version: 8.8.0(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2))(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)
+        version: 8.8.0(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2))(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)
       '@typescript-eslint/parser':
         specifier: ^8.8.0
-        version: 8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)
+        version: 8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)
       '@uniswap/sdk-core':
-        specifier: ^5.8.0
+        specifier: ^5.8.1
         version: 5.8.1
       '@uniswap/v2-sdk':
-        specifier: ^4.6.0
+        specifier: ^4.6.1
         version: 4.6.1
       '@wagmi/connectors':
-        specifier: ^5.1.14
+        specifier: ^5.1.15
         version: 5.1.15(@wagmi/core@2.13.8(@tanstack/query-core@5.59.0)(react@18.3.1)(typescript@5.6.2)(viem@2.21.19(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.7(@babel/core@7.25.7))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.2)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.19(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
       '@wagmi/core':
         specifier: ^2.13.8
@@ -106,7 +134,7 @@ importers:
         version: 5.1.11(eoxhu6ocxfic26r5hnkb4er2cu)
       '@zapaz/svelte-french-toast':
         specifier: github:zapaz/svelte-french-toast#dev
-        version: svelte-french-toast@https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.0-next.260)
+        version: svelte-french-toast@https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.0-next.262)
       '@zapaz/wagmi-svelte':
         specifier: github:zapaz/wagmi-svelte#dev
         version: https://codeload.github.com/zapaz/wagmi-svelte/tar.gz/a335b77f72f7e25c9254c5ff7ffd5db49f3111a7(@tanstack/query-core@5.59.0)(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.7)(@babel/preset-env@7.25.7(@babel/core@7.25.7))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.2)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
@@ -123,38 +151,38 @@ importers:
         specifier: ^3.1.8
         version: 3.1.8
       daisyui:
-        specifier: ^4.12.11
+        specifier: ^4.12.12
         version: 4.12.12(postcss@8.4.47)
       eslint:
-        specifier: ^9.11.1
-        version: 9.12.0(jiti@2.3.1)
+        specifier: ^9.12.0
+        version: 9.12.0(jiti@2.3.2)
       eslint-config-prettier:
         specifier: ^9.1.0
-        version: 9.1.0(eslint@9.12.0(jiti@2.3.1))
+        version: 9.1.0(eslint@9.12.0(jiti@2.3.2))
       eslint-plugin-svelte:
         specifier: ^2.44.1
-        version: 2.44.1(eslint@9.12.0(jiti@2.3.1))(svelte@5.0.0-next.260)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))
+        version: 2.44.1(eslint@9.12.0(jiti@2.3.2))(svelte@5.0.0-next.262)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))
       postcss:
         specifier: ^8.4.47
         version: 8.4.47
       postcss-load-config:
         specifier: ^6.0.1
-        version: 6.0.1(jiti@2.3.1)(postcss@8.4.47)(yaml@2.5.1)
+        version: 6.0.1(jiti@2.3.2)(postcss@8.4.47)(yaml@2.5.1)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
       prettier-plugin-svelte:
         specifier: ^3.2.7
-        version: 3.2.7(prettier@3.3.3)(svelte@5.0.0-next.260)
+        version: 3.2.7(prettier@3.3.3)(svelte@5.0.0-next.262)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.8
-        version: 0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0-next.260))(prettier@3.3.3)
+        version: 0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0-next.262))(prettier@3.3.3)
       svelte:
-        specifier: 5.0.0-next.260
-        version: 5.0.0-next.260
+        specifier: 5.0.0-next.262
+        version: 5.0.0-next.262
       svelte-check:
         specifier: ^4.0.4
-        version: 4.0.4(svelte@5.0.0-next.260)(typescript@5.6.2)
+        version: 4.0.4(svelte@5.0.0-next.262)(typescript@5.6.2)
       tailwindcss:
         specifier: ^3.4.13
         version: 3.4.13(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2))
@@ -168,7 +196,7 @@ importers:
         specifier: ^5.6.2
         version: 5.6.2
       viem:
-        specifier: ^2.21.17
+        specifier: ^2.21.19
         version: 2.21.19(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
       vite:
         specifier: ^5.4.8
@@ -179,7 +207,7 @@ importers:
     devDependencies:
       svelte-hero-icons:
         specifier: ^5.2.0
-        version: 5.2.0(svelte@5.0.0-next.260)
+        version: 5.2.0(svelte@5.0.0-next.262)
 
 packages:
 
@@ -4385,8 +4413,8 @@ packages:
     resolution: {integrity: sha512-2yTgeWTWzMWkHu6Jp9NKgePDaYHbntiwvYuuJLbbN9vl7DC9DvXKOB2BC3ZZ92D3cvV/aflH0osDfwpHepQ53w==}
     hasBin: true
 
-  jiti@2.3.1:
-    resolution: {integrity: sha512-xPZ6pPzUifI8XDBBxIL4OB1w1ZKmBpmNEeKwNt2d0Spn8XisAIZhWrlOHq5seBrFGTxVx9PbrWvEMyrk4IO5bA==}
+  jiti@2.3.2:
+    resolution: {integrity: sha512-9ZLDe7kYLCyWTAP6EIyg3B4ZuHy5W0gdy6y1rgrWrAOpTrUU+vKuKa1+OXB7MBkujyvm6a2b7i0ETHQDbgY98A==}
     hasBin: true
 
   joi@17.13.3:
@@ -5996,6 +6024,10 @@ packages:
 
   svelte@5.0.0-next.260:
     resolution: {integrity: sha512-TGcvG71DUklf5P4UmJxOQiVxWYLPp4c6o+NUjmVMsAXKsCMXOTXw+QpnmEWw5D95Sj7SrmAGeIT+p/uvHAUZXg==}
+    engines: {node: '>=18'}
+
+  svelte@5.0.0-next.262:
+    resolution: {integrity: sha512-gAY0POArLN5yI/ihvItG0wQCh7ycfvxSvvVlvPECshFKmR/ep6ZAlqX50+aUGDSG/5megFqnSJfP7piC6lOtew==}
     engines: {node: '>=18'}
 
   system-architecture@0.1.0:
@@ -8015,15 +8047,15 @@ snapshots:
       '@babel/helper-validator-identifier': 7.25.7
       to-fast-properties: 2.0.0
 
-  '@castlenine/svelte-qrcode@2.3.0(svelte@5.0.0-next.260)':
+  '@castlenine/svelte-qrcode@2.3.0(svelte@5.0.0-next.262)':
     dependencies:
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
 
-  '@chainlink/contracts@1.2.0(bufferutil@4.0.7)(ethers@5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)':
+  '@chainlink/contracts@1.2.0(bufferutil@4.0.8)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)':
     dependencies:
       '@changesets/changelog-github': 0.5.0
       '@changesets/cli': 2.27.9
-      '@eth-optimism/contracts': 0.6.0(bufferutil@4.0.7)(ethers@5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
+      '@eth-optimism/contracts': 0.6.0(bufferutil@4.0.8)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
       '@openzeppelin/contracts': 4.9.3
       '@openzeppelin/contracts-upgradeable': 4.9.3
       '@scroll-tech/contracts': 0.1.0
@@ -8045,6 +8077,20 @@ snapshots:
       cbor: 9.0.2
       eth-crypto: 2.6.0(bufferutil@4.0.7)(utf-8-validate@5.0.10)
       ethers: 5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      ganache: 7.9.2
+      uniq: 1.0.1
+    transitivePeerDependencies:
+      - bufferutil
+      - debug
+      - utf-8-validate
+
+  '@chainlink/functions-toolkit@0.3.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+    dependencies:
+      axios: 1.7.7
+      bcrypto: 5.5.2
+      cbor: 9.0.2
+      eth-crypto: 2.6.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ethers: 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       ganache: 7.9.2
       uniq: 1.0.1
     transitivePeerDependencies:
@@ -8312,9 +8358,9 @@ snapshots:
   '@esbuild/win32-x64@0.21.5':
     optional: true
 
-  '@eslint-community/eslint-utils@4.4.0(eslint@9.12.0(jiti@2.3.1))':
+  '@eslint-community/eslint-utils@4.4.0(eslint@9.12.0(jiti@2.3.2))':
     dependencies:
-      eslint: 9.12.0(jiti@2.3.1)
+      eslint: 9.12.0(jiti@2.3.2)
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.11.1': {}
@@ -8351,17 +8397,17 @@ snapshots:
     dependencies:
       levn: 0.4.1
 
-  '@eth-optimism/contracts@0.6.0(bufferutil@4.0.7)(ethers@5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)':
+  '@eth-optimism/contracts@0.6.0(bufferutil@4.0.8)(ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)':
     dependencies:
-      '@eth-optimism/core-utils': 0.12.0(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      '@eth-optimism/core-utils': 0.12.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@ethersproject/abstract-provider': 5.7.0
       '@ethersproject/abstract-signer': 5.7.0
-      ethers: 5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      ethers: 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@eth-optimism/core-utils@0.12.0(bufferutil@4.0.7)(utf-8-validate@5.0.10)':
+  '@eth-optimism/core-utils@0.12.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@ethersproject/abi': 5.7.0
       '@ethersproject/abstract-provider': 5.7.0
@@ -8373,7 +8419,7 @@ snapshots:
       '@ethersproject/hash': 5.7.0
       '@ethersproject/keccak256': 5.7.0
       '@ethersproject/properties': 5.7.0
-      '@ethersproject/providers': 5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      '@ethersproject/providers': 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@ethersproject/rlp': 5.7.0
       '@ethersproject/transactions': 5.7.0
       '@ethersproject/web': 5.7.1
@@ -8572,6 +8618,32 @@ snapshots:
       '@ethersproject/web': 5.7.1
       bech32: 1.1.4
       ws: 7.4.6(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  '@ethersproject/providers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+    dependencies:
+      '@ethersproject/abstract-provider': 5.7.0
+      '@ethersproject/abstract-signer': 5.7.0
+      '@ethersproject/address': 5.7.0
+      '@ethersproject/base64': 5.7.0
+      '@ethersproject/basex': 5.7.0
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/constants': 5.7.0
+      '@ethersproject/hash': 5.7.0
+      '@ethersproject/logger': 5.7.0
+      '@ethersproject/networks': 5.7.1
+      '@ethersproject/properties': 5.7.0
+      '@ethersproject/random': 5.7.0
+      '@ethersproject/rlp': 5.7.0
+      '@ethersproject/sha2': 5.7.0
+      '@ethersproject/strings': 5.7.0
+      '@ethersproject/transactions': 5.7.0
+      '@ethersproject/web': 5.7.1
+      bech32: 1.1.4
+      ws: 7.4.6(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
@@ -9919,13 +9991,13 @@ snapshots:
 
   '@steeze-ui/heroicons@2.4.0': {}
 
-  '@sveltejs/adapter-static@3.0.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))':
+  '@sveltejs/adapter-static@3.0.5(@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))':
     dependencies:
-      '@sveltejs/kit': 2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
+      '@sveltejs/kit': 2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
 
-  '@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))':
+  '@sveltejs/kit@2.6.2(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
+      '@sveltejs/vite-plugin-svelte': 4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
       '@types/cookie': 0.6.0
       cookie: 0.7.2
       devalue: 5.1.1
@@ -9937,27 +10009,27 @@ snapshots:
       sade: 1.8.1
       set-cookie-parser: 2.7.0
       sirv: 2.0.4
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
       tiny-glob: 0.2.9
       vite: 5.4.8(@types/node@22.7.4)(terser@5.34.1)
 
-  '@sveltejs/vite-plugin-svelte-inspector@3.0.0-next.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))':
+  '@sveltejs/vite-plugin-svelte-inspector@3.0.0-next.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
+      '@sveltejs/vite-plugin-svelte': 4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
       debug: 4.3.7
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
       vite: 5.4.8(@types/node@22.7.4)(terser@5.34.1)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))':
+  '@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 3.0.0-next.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.260)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
+      '@sveltejs/vite-plugin-svelte-inspector': 3.0.0-next.3(@sveltejs/vite-plugin-svelte@4.0.0-next.7(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1)))(svelte@5.0.0-next.262)(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
       debug: 4.3.7
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.11
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
       vite: 5.4.8(@types/node@22.7.4)(terser@5.34.1)
       vitefu: 1.0.2(vite@5.4.8(@types/node@22.7.4)(terser@5.34.1))
     transitivePeerDependencies:
@@ -9978,6 +10050,11 @@ snapshots:
     dependencies:
       '@tanstack/query-core': 5.59.0
       svelte: 5.0.0-next.260
+
+  '@tanstack/svelte-query@5.59.0(svelte@5.0.0-next.262)':
+    dependencies:
+      '@tanstack/query-core': 5.59.0
+      svelte: 5.0.0-next.262
 
   '@trufflesuite/uws-js-unofficial@20.30.0-unofficial.0':
     dependencies:
@@ -10080,15 +10157,15 @@ snapshots:
     dependencies:
       '@types/yargs-parser': 21.0.3
 
-  '@typescript-eslint/eslint-plugin@8.8.0(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2))(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)':
+  '@typescript-eslint/eslint-plugin@8.8.0(@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2))(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)':
     dependencies:
       '@eslint-community/regexpp': 4.11.1
-      '@typescript-eslint/parser': 8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)
+      '@typescript-eslint/parser': 8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)
       '@typescript-eslint/scope-manager': 8.8.0
-      '@typescript-eslint/type-utils': 8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)
-      '@typescript-eslint/utils': 8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)
+      '@typescript-eslint/type-utils': 8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)
+      '@typescript-eslint/utils': 8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)
       '@typescript-eslint/visitor-keys': 8.8.0
-      eslint: 9.12.0(jiti@2.3.1)
+      eslint: 9.12.0(jiti@2.3.2)
       graphemer: 1.4.0
       ignore: 5.3.2
       natural-compare: 1.4.0
@@ -10098,14 +10175,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)':
+  '@typescript-eslint/parser@8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.8.0
       '@typescript-eslint/types': 8.8.0
       '@typescript-eslint/typescript-estree': 8.8.0(typescript@5.6.2)
       '@typescript-eslint/visitor-keys': 8.8.0
       debug: 4.3.7
-      eslint: 9.12.0(jiti@2.3.1)
+      eslint: 9.12.0(jiti@2.3.2)
     optionalDependencies:
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -10116,10 +10193,10 @@ snapshots:
       '@typescript-eslint/types': 8.8.0
       '@typescript-eslint/visitor-keys': 8.8.0
 
-  '@typescript-eslint/type-utils@8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)':
+  '@typescript-eslint/type-utils@8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)':
     dependencies:
       '@typescript-eslint/typescript-estree': 8.8.0(typescript@5.6.2)
-      '@typescript-eslint/utils': 8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)
+      '@typescript-eslint/utils': 8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)
       debug: 4.3.7
       ts-api-utils: 1.3.0(typescript@5.6.2)
     optionalDependencies:
@@ -10145,13 +10222,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.8.0(eslint@9.12.0(jiti@2.3.1))(typescript@5.6.2)':
+  '@typescript-eslint/utils@8.8.0(eslint@9.12.0(jiti@2.3.2))(typescript@5.6.2)':
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.12.0(jiti@2.3.1))
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.12.0(jiti@2.3.2))
       '@typescript-eslint/scope-manager': 8.8.0
       '@typescript-eslint/types': 8.8.0
       '@typescript-eslint/typescript-estree': 8.8.0(typescript@5.6.2)
-      eslint: 9.12.0(jiti@2.3.1)
+      eslint: 9.12.0(jiti@2.3.2)
     transitivePeerDependencies:
       - supports-color
       - typescript
@@ -12020,26 +12097,26 @@ snapshots:
 
   escape-string-regexp@4.0.0: {}
 
-  eslint-compat-utils@0.5.1(eslint@9.12.0(jiti@2.3.1)):
+  eslint-compat-utils@0.5.1(eslint@9.12.0(jiti@2.3.2)):
     dependencies:
-      eslint: 9.12.0(jiti@2.3.1)
+      eslint: 9.12.0(jiti@2.3.2)
       semver: 7.6.3
 
-  eslint-config-prettier@9.1.0(eslint@9.12.0(jiti@2.3.1)):
+  eslint-config-prettier@9.1.0(eslint@9.12.0(jiti@2.3.2)):
     dependencies:
-      eslint: 9.12.0(jiti@2.3.1)
+      eslint: 9.12.0(jiti@2.3.2)
 
   eslint-plugin-json@4.0.1:
     dependencies:
       lodash: 4.17.21
       vscode-json-languageservice: 4.2.1
 
-  eslint-plugin-svelte@2.44.1(eslint@9.12.0(jiti@2.3.1))(svelte@5.0.0-next.260)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2)):
+  eslint-plugin-svelte@2.44.1(eslint@9.12.0(jiti@2.3.2))(svelte@5.0.0-next.262)(ts-node@10.9.2(@types/node@22.7.4)(typescript@5.6.2)):
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.12.0(jiti@2.3.1))
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.12.0(jiti@2.3.2))
       '@jridgewell/sourcemap-codec': 1.5.0
-      eslint: 9.12.0(jiti@2.3.1)
-      eslint-compat-utils: 0.5.1(eslint@9.12.0(jiti@2.3.1))
+      eslint: 9.12.0(jiti@2.3.2)
+      eslint-compat-utils: 0.5.1(eslint@9.12.0(jiti@2.3.2))
       esutils: 2.0.3
       known-css-properties: 0.34.0
       postcss: 8.4.47
@@ -12047,9 +12124,9 @@ snapshots:
       postcss-safe-parser: 6.0.0(postcss@8.4.47)
       postcss-selector-parser: 6.1.2
       semver: 7.6.3
-      svelte-eslint-parser: 0.41.1(svelte@5.0.0-next.260)
+      svelte-eslint-parser: 0.41.1(svelte@5.0.0-next.262)
     optionalDependencies:
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
     transitivePeerDependencies:
       - ts-node
 
@@ -12067,9 +12144,9 @@ snapshots:
 
   eslint-visitor-keys@4.1.0: {}
 
-  eslint@9.12.0(jiti@2.3.1):
+  eslint@9.12.0(jiti@2.3.2):
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.0(eslint@9.12.0(jiti@2.3.1))
+      '@eslint-community/eslint-utils': 4.4.0(eslint@9.12.0(jiti@2.3.2))
       '@eslint-community/regexpp': 4.11.1
       '@eslint/config-array': 0.18.0
       '@eslint/core': 0.6.0
@@ -12105,7 +12182,7 @@ snapshots:
       optionator: 0.9.4
       text-table: 0.2.0
     optionalDependencies:
-      jiti: 2.3.1
+      jiti: 2.3.2
     transitivePeerDependencies:
       - supports-color
 
@@ -12166,6 +12243,19 @@ snapshots:
       eccrypto: 1.1.6
       ethereumjs-util: 7.1.5
       ethers: 5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      secp256k1: 5.0.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  eth-crypto@2.6.0(bufferutil@4.0.8)(utf-8-validate@5.0.10):
+    dependencies:
+      '@babel/runtime': 7.20.13
+      '@ethereumjs/tx': 3.5.2
+      '@types/bn.js': 5.1.1
+      eccrypto: 1.1.6
+      ethereumjs-util: 7.1.5
+      ethers: 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       secp256k1: 5.0.0
     transitivePeerDependencies:
       - bufferutil
@@ -12242,6 +12332,42 @@ snapshots:
       '@ethersproject/pbkdf2': 5.7.0
       '@ethersproject/properties': 5.7.0
       '@ethersproject/providers': 5.7.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)
+      '@ethersproject/random': 5.7.0
+      '@ethersproject/rlp': 5.7.0
+      '@ethersproject/sha2': 5.7.0
+      '@ethersproject/signing-key': 5.7.0
+      '@ethersproject/solidity': 5.7.0
+      '@ethersproject/strings': 5.7.0
+      '@ethersproject/transactions': 5.7.0
+      '@ethersproject/units': 5.7.0
+      '@ethersproject/wallet': 5.7.0
+      '@ethersproject/web': 5.7.1
+      '@ethersproject/wordlists': 5.7.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  ethers@5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10):
+    dependencies:
+      '@ethersproject/abi': 5.7.0
+      '@ethersproject/abstract-provider': 5.7.0
+      '@ethersproject/abstract-signer': 5.7.0
+      '@ethersproject/address': 5.7.0
+      '@ethersproject/base64': 5.7.0
+      '@ethersproject/basex': 5.7.0
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/bytes': 5.7.0
+      '@ethersproject/constants': 5.7.0
+      '@ethersproject/contracts': 5.7.0
+      '@ethersproject/hash': 5.7.0
+      '@ethersproject/hdnode': 5.7.0
+      '@ethersproject/json-wallets': 5.7.0
+      '@ethersproject/keccak256': 5.7.0
+      '@ethersproject/logger': 5.7.0
+      '@ethersproject/networks': 5.7.1
+      '@ethersproject/pbkdf2': 5.7.0
+      '@ethersproject/properties': 5.7.0
+      '@ethersproject/providers': 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@ethersproject/random': 5.7.0
       '@ethersproject/rlp': 5.7.0
       '@ethersproject/sha2': 5.7.0
@@ -12907,7 +13033,7 @@ snapshots:
 
   jiti@1.21.6: {}
 
-  jiti@2.3.1: {}
+  jiti@2.3.2: {}
 
   joi@17.13.3:
     dependencies:
@@ -13067,7 +13193,7 @@ snapshots:
       get-port-please: 3.1.2
       h3: 1.13.0
       http-shutdown: 1.2.2
-      jiti: 2.3.1
+      jiti: 2.3.2
       mlly: 1.7.2
       node-forge: 1.3.1
       pathe: 1.1.2
@@ -13823,11 +13949,11 @@ snapshots:
       postcss: 8.4.47
       ts-node: 10.9.2(@types/node@22.7.4)(typescript@5.6.2)
 
-  postcss-load-config@6.0.1(jiti@2.3.1)(postcss@8.4.47)(yaml@2.5.1):
+  postcss-load-config@6.0.1(jiti@2.3.2)(postcss@8.4.47)(yaml@2.5.1):
     dependencies:
       lilconfig: 3.1.2
     optionalDependencies:
-      jiti: 2.3.1
+      jiti: 2.3.2
       postcss: 8.4.47
       yaml: 2.5.1
 
@@ -13865,16 +13991,16 @@ snapshots:
     dependencies:
       single-line-log: 1.1.2
 
-  prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0-next.260):
+  prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0-next.262):
     dependencies:
       prettier: 3.3.3
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
 
-  prettier-plugin-tailwindcss@0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0-next.260))(prettier@3.3.3):
+  prettier-plugin-tailwindcss@0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0-next.262))(prettier@3.3.3):
     dependencies:
       prettier: 3.3.3
     optionalDependencies:
-      prettier-plugin-svelte: 3.2.7(prettier@3.3.3)(svelte@5.0.0-next.260)
+      prettier-plugin-svelte: 3.2.7(prettier@3.3.3)(svelte@5.0.0-next.262)
 
   prettier@2.8.8: {}
 
@@ -14248,7 +14374,7 @@ snapshots:
       bn.js: 4.12.0
       create-hash: 1.2.0
       drbg.js: 1.0.1
-      elliptic: 6.5.7
+      elliptic: 6.5.4
       nan: 2.14.0
       safe-buffer: 5.2.1
     optional: true
@@ -14556,19 +14682,19 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.0.4(svelte@5.0.0-next.260)(typescript@5.6.2):
+  svelte-check@4.0.4(svelte@5.0.0-next.262)(typescript@5.6.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.1
       fdir: 6.4.0
       picocolors: 1.1.0
       sade: 1.8.1
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
       typescript: 5.6.2
     transitivePeerDependencies:
       - picomatch
 
-  svelte-eslint-parser@0.41.1(svelte@5.0.0-next.260):
+  svelte-eslint-parser@0.41.1(svelte@5.0.0-next.262):
     dependencies:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
@@ -14576,23 +14702,39 @@ snapshots:
       postcss: 8.4.47
       postcss-scss: 4.0.9(postcss@8.4.47)
     optionalDependencies:
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
 
-  svelte-french-toast@https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.0-next.260):
+  svelte-french-toast@https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.0-next.262):
     dependencies:
-      svelte: 5.0.0-next.260
-      svelte-writable-derived: 3.1.1(svelte@5.0.0-next.260)
+      svelte: 5.0.0-next.262
+      svelte-writable-derived: 3.1.1(svelte@5.0.0-next.262)
 
-  svelte-hero-icons@5.2.0(svelte@5.0.0-next.260):
+  svelte-hero-icons@5.2.0(svelte@5.0.0-next.262):
     dependencies:
       '@steeze-ui/heroicons': 2.4.0
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
 
-  svelte-writable-derived@3.1.1(svelte@5.0.0-next.260):
+  svelte-writable-derived@3.1.1(svelte@5.0.0-next.262):
     dependencies:
-      svelte: 5.0.0-next.260
+      svelte: 5.0.0-next.262
 
   svelte@5.0.0-next.260:
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@types/estree': 1.0.6
+      acorn: 8.12.1
+      acorn-typescript: 1.4.13(acorn@8.12.1)
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      esm-env: 1.0.0
+      esrap: 1.2.2
+      is-reference: 3.0.2
+      locate-character: 3.0.0
+      magic-string: 0.30.11
+      zimmerframe: 1.1.2
+
+  svelte@5.0.0-next.262:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -15197,6 +15339,11 @@ snapshots:
   ws@7.4.6(bufferutil@4.0.7)(utf-8-validate@5.0.10):
     optionalDependencies:
       bufferutil: 4.0.7
+      utf-8-validate: 5.0.10
+
+  ws@7.4.6(bufferutil@4.0.8)(utf-8-validate@5.0.10):
+    optionalDependencies:
+      bufferutil: 4.0.8
       utf-8-validate: 5.0.10
 
   ws@7.5.10(bufferutil@4.0.8)(utf-8-validate@5.0.10):

@@ -8,7 +8,12 @@ onChainScope
   .task("config", "Display [and update] OnChainAI config")
   .addOptionalParam("donid", "Chainlink DON Id", undefined, types.int)
   .addOptionalParam("subid", "Chainlink Subscription Id", undefined, types.int)
-  .addOptionalParam("router", "Chainlink routeur address", undefined, types.string)
+  .addOptionalParam(
+    "router",
+    "Chainlink routeur address",
+    undefined,
+    types.string,
+  )
   .addOptionalParam("explorer", "Chain explorer url", undefined, types.string)
   .addOptionalParam("chainname", "Chain name", undefined, types.string)
   .addOptionalParam("rpc", "Base Rpc url", undefined, types.string)
@@ -19,7 +24,11 @@ onChainScope
     console.log(config);
 
     const [signer] = await hre.ethers.getSigners();
-    const onChainAI = (await hre.ethers.getContractAt(AbiOnChainAI, config.onChainAI, signer)) as unknown as OnChainAI;
+    const onChainAI = (await hre.ethers.getContractAt(
+      AbiOnChainAI,
+      config.onChainAI,
+      signer,
+    )) as unknown as OnChainAI;
 
     let update = false;
 
@@ -27,7 +36,11 @@ onChainScope
     if (taskArgs.donid) {
       if (taskArgs.donid != (await onChainAI.donId())) {
         const tx = await onChainAI.setDonID(taskArgs.donid);
-        console.log("OnChainAI setDonID Request", taskArgs.donid, `${config.explorer}/tx/${tx.hash}`);
+        console.log(
+          "OnChainAI setDonID Request",
+          taskArgs.donid,
+          `${config.explorer}/tx/${tx.hash}`,
+        );
         const res = await tx.wait();
         console.log("OnChainAI setDonID Result", res?.status || "no status");
       }
@@ -37,15 +50,23 @@ onChainScope
     if (taskArgs.subid) {
       if (taskArgs.subid != (await onChainAI.subscriptionId())) {
         const tx = await onChainAI.setSubscriptionId(taskArgs.donid);
-        console.log("OnChainAI setSubscriptionId Request", taskArgs.subid, `${config.explorer}/tx/${tx.hash}`);
+        console.log(
+          "OnChainAI setSubscriptionId Request",
+          taskArgs.subid,
+          `${config.explorer}/tx/${tx.hash}`,
+        );
         const res = await tx.wait();
-        console.log("OnChainAI setSubscriptionId Result", res?.status || "no status");
+        console.log(
+          "OnChainAI setSubscriptionId Result",
+          res?.status || "no status",
+        );
       }
       writeConfig(chainId, "subscriptionId", taskArgs.subid);
       update = true;
     }
     if (taskArgs.router) {
-      if (config.onChainAI) console.error("Cannot update router after deployment, must redeploy");
+      if (config.onChainAI)
+        console.error("Cannot update router after deployment, must redeploy");
       writeConfig(chainId, "router", taskArgs.router);
       update = true;
     }

@@ -1,4 +1,4 @@
-import configJson from "./config.json";
+import configJson from "../config.json";
 import fs from "fs-extra";
 
 type ConfigChain = typeof configJson;
@@ -14,12 +14,16 @@ const readConfig = (chainId: number | string): ChainValue => {
   const chainIds = Object.keys(configJson);
   const chainKey = String(chainId) as ChainKey;
 
-  if (!chainIds.includes(chainKey)) throw Error("No config for this network!");
+  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
 
   return configJson[chainKey];
 };
 
-const writeConfig = (chainId: number | string, key: ChainValueKey, value: string | number) => {
+const writeConfig = (
+  chainId: number | string,
+  key: ChainValueKey,
+  value: string | number,
+) => {
   const chainIds = Object.keys(configJson);
   const chainKey = String(chainId) as ChainKey;
 

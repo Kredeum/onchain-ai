@@ -11,28 +11,26 @@
       "dependsOn": [
         "format"
       ],
-      "inputs": [
-        "src/**"
-      ],
       "outputLogs": "new-only"
     },
     "build": {
       "dependsOn": [
         "check"
       ],
-      "inputs": [
-        "src/**"
-      ],
       "outputLogs": "new-only"
+    },
+    "start": {
+      "dependsOn": [
+        "build"
+      ],
+      "cache": false,
+      "persistent": true
     },
     "test": {
       "dependsOn": [
         "build"
       ],
-      "cache": false,
-      "inputs": [
-        "src/**"
-      ]
+      "cache": false
     },
     "dev": {
       "cache": false,

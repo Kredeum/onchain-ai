@@ -12,7 +12,12 @@ import AbiOnChainAI from "../abis/OnChainAI.json";
 
 onChainScope
   .task("secrets", "Upload OnChainAI secrets to Chainlink")
-  .addOptionalParam("expiration", "Expiration time in minutes of uploaded secrets ", 60, types.int)
+  .addOptionalParam(
+    "expiration",
+    "Expiration time in minutes of uploaded secrets ",
+    60,
+    types.int,
+  )
   .setAction(async (taskArgs, hre) => {
     const chainId = await hre.getChainId();
     const { rpc, router, donId } = readConfig(chainId);
@@ -27,10 +32,16 @@ onChainScope
     const secrets = { openaiKey: process.env.OPENAI_API_KEY || "" };
 
     const rpcUrl = `${rpc}/${process.env.ALCHEMY_API_KEY}`;
-    if (!rpcUrl) throw new Error(`rpcUrl not provided  - check your environment variables`);
+    if (!rpcUrl)
+      throw new Error(
+        `rpcUrl not provided  - check your environment variables`,
+      );
 
     const privateKey = process.env.DEPLOYER_PRIVATE_KEY;
-    if (!privateKey) throw new Error("private key not provided - check your environment variables");
+    if (!privateKey)
+      throw new Error(
+        "private key not provided - check your environment variables",
+      );
 
     // cannot use v6 hre.ethers.provider, because scaffold-eth-2 is in ethers v6,
     // incompatible with Chainlink that requires ethers v5
@@ -59,9 +70,13 @@ onChainScope
       slotId: slotIdNumber,
       minutesUntilExpiration: expiration,
     });
-    if (!uploadResult.success) throw new Error(`Encrypted secrets not uploaded to ${gatewayUrls}`);
+    if (!uploadResult.success)
+      throw new Error(`Encrypted secrets not uploaded to ${gatewayUrls}`);
 
-    console.log(`\n✅ Secrets uploaded properly to gateways ${gatewayUrls}! Gateways response: `, uploadResult);
+    console.log(
+      `\n✅ Secrets uploaded properly to gateways ${gatewayUrls}! Gateways response: `,
+      uploadResult,
+    );
 
     if (uploadResult.success) {
       const config = readConfig(chainId);
@@ -73,9 +88,18 @@ onChainScope
       )) as unknown as OnChainAI;
 
       // update onchain `donHostedSecretsVersion`
-      const tx = await onChainAI.setDonHostedSecretsVersion(uploadResult.version);
-      console.log("setDonHostedSecretsVersion Request", uploadResult.version, `${config.explorer}/tx/${tx.hash}`);
+      const tx = await onChainAI.setDonHostedSecretsVersion(
+        uploadResult.version,
+      );
+      console.log(
+        "setDonHostedSecretsVersion Request",
+        uploadResult.version,
+        `${config.explorer}/tx/${tx.hash}`,
+      );
       const res = await tx.wait();
-      console.log("setDonHostedSecretsVersion Result", res?.status || "no status");
+      console.log(
+        "setDonHostedSecretsVersion Result",
+        res?.status || "no status",
+      );
     }
   });
