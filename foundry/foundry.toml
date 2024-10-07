@@ -6,7 +6,7 @@ solc = "0.8.19"
 fs_permissions = [
   { access = "read-write", path = "./addresses.json" },
   { access = "read-write", path = "./out" },
-  { access = "read", path = "./chainlink/source" },
+  { access = "read", path = "../chainlink/source" },
 ]
 
 [rpc_endpoints]

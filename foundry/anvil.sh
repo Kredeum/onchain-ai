@@ -1,6 +1,6 @@
 #!/bin/sh
 
-// Help: `anvil.sh --help`
+# Help: `anvil.sh --help`
 if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   echo "Run 'anvil' if not already running"
   echo "Returns after 'Listening', continue to run in background, output logs to 'anvil.log'"
@@ -17,27 +17,27 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   exit 0
 fi
 
-// Kill anvil: `anvil.sh --kill`
+# Kill anvil: `anvil.sh --kill`
 if [ "$1" = "-k" ] || [ "$1" = "--kill" ]; then
   pkill -f anvil
   exit 0
 fi
 
-// Restart anvil: `anvil.sh --restart`
+# Restart anvil: `anvil.sh --restart`
 if [ "$1" = "-r" ] || [ "$1" = "--restart" ]; then
   pkill -f anvil
 fi
 
-// Test anvil port
+# Test anvil port
 if nc -z localhost 8545; then
-  // Echo only
+  # Echo only
   echo "Anvil already running."
 else
-  // Start anvil
+  # Start anvil
   echo "Starting Anvil..." `pwd`
   anvil > ./anvil.log &
 
-  // Wait for: `Listening`...
+  # Wait for: `Listening`...
   while ! grep -q "Listening" < anvil.log; do
     sleep 1
   done

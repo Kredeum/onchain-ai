@@ -137,7 +137,7 @@ Any updated value, will be written to the config file, and store onchain for `do
 
 Router address must be set **before** deployment of a new version of `OnChainAI` contract.
 
-Config file can be found at [packages/hardhat/chainlink/config.json](chainlink/config.json)
+Config file can be found at [chainlink/config.json](chainlink/config.json)
 
 ### Shortcut ⏩
 You can define a shortcut in your package.json like that :
@@ -150,7 +150,7 @@ then call it with `yarn ai <TASK> <OPTIONS>`
 
 ## OpenAI 🧠
 
-A specific `system prompt` is used for each OpenAI request, you can view it inside the javascript code run by `Chainlink DON` : [packages/hardhat/chainlink/source/onChainAI.js](chainlink/source/onChainAI.js)
+A specific `system prompt` is used for each OpenAI request, you can view it inside the javascript code run by `Chainlink DON` : [chainlink/source/onChainAI.js](chainlink/source/onChainAI.js)
 
 
 ## Security 🛡️
