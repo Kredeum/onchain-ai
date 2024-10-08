@@ -24,12 +24,12 @@
 	const handleSend = async () => {
 		try {
 			const makeWriteWithParams = () =>
-        contractWrite!.writeContractAsync({
-          address: deployedContractData!.address,
-          functionName: "sendRequest",
-          abi: deployedContractData!.abi,
-          args: [prompt],
-          value: 2n * 10n ** 15n
+				contractWrite!.writeContractAsync({
+					address: deployedContractData!.address,
+					functionName: "sendRequest",
+					abi: deployedContractData!.abi,
+					args: [prompt],
+					value: 2n * 10n ** 15n
 				});
 			await writeTxn?.(makeWriteWithParams);
 		} catch (e: unknown) {

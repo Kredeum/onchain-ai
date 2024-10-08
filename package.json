@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all": "pnpm clean && pnpm install && pnpm chain && pnpm deploy:anvil && pnpm run dev",
-    "clean": "pnpm -r clean && rm -rf node_modules pnpm-lock.yaml .turbo",
+    "all": "pnpm clean && pnpm install && pnpm chain && pnpm deploy:anvil && turbo dev",
+    "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
     "deploy:anvil": "pnpm run --filter foundry deploy:anvil",
     "deploy:sepolia": "pnpm run --filter foundry deploy:sepolia",

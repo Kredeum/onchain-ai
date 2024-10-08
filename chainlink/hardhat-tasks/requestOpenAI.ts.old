@@ -1,8 +1,8 @@
 import { OnChainAI } from "../../typechain-types";
 import { onChainScope } from "./scope";
 import AbiOnChainAI from "../abis/OnChainAI.json";
-import { readConfig } from "../lib/utils";
 import { types } from "hardhat/config";
+import { readConfig } from "../lib/readFile";
 
 onChainScope
   .task("request", "Read last OnChainAI response [and send OnChainAI request]")

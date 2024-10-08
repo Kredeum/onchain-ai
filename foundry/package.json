@@ -24,7 +24,7 @@
     "build": "forge compile && pnpm run abis",
     "chain": "./anvil.sh",
     "check": "solhint src/**/*.sol",
-    "clean": "rm -rf node_modules out broadcast cache .turbo ",
+    "clean": "rm -rf node_modules .turbo out broadcast cache",
     "deploy:all": "forge script script/DeployAll.s.sol",
     "deploy:anvil": "export CHAIN=anvil SENDER=$ANVIL_SENDER ACCOUNT=$ANVIL_ACCOUNT && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",

@@ -1,16 +1,10 @@
 {
-  "extends": [
-    "//"
-  ],
-  "tasks": {
-    "build": {
-      "dependsOn": [
-        "@onchain-ai/foundry#build"
-      ],
-      "inputs": [
-        "src/**"
-      ],
-      "outputLogs": "new-only"
-    }
-  }
+	"extends": ["//"],
+	"tasks": {
+		"build": {
+			"dependsOn": ["@onchain-ai/foundry#build"],
+			"inputs": ["src/**"],
+			"outputLogs": "new-only"
+		}
+	}
 }

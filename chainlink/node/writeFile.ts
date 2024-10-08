@@ -6,19 +6,6 @@ type ChainKey = keyof ConfigChain;
 type ChainValue = ConfigChain[ChainKey];
 type ChainValueKey = keyof ChainValue;
 
-const readJavascript = (name: string): string => {
-  return fs.readFileSync(`${__dirname}/../source/${name}`, "utf-8");
-};
-
-const readConfig = (chainId: number | string): ChainValue => {
-  const chainIds = Object.keys(configJson);
-  const chainKey = String(chainId) as ChainKey;
-
-  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
-
-  return configJson[chainKey];
-};
-
 const writeConfig = (
   chainId: number | string,
   key: ChainValueKey,
@@ -34,4 +21,4 @@ const writeConfig = (
   fs.writeJsonSync(`${__dirname}/../config.json`, config, { spaces: 2 });
 };
 
-export { readJavascript, readConfig, writeConfig };
+export { writeConfig };

@@ -6,6 +6,7 @@
     "OnChainAI": "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
     "rpc": " ",
     "explorer": " ",
+    "gatewayUrls": [],
     "subscriptionId": 98
   },
   "84532": {
@@ -15,6 +16,10 @@
     "OnChainAI": "0xbfFE7bC0A26FfE6f7882ABb6B7C4f299A5138E66",
     "explorer": "https://sepolia.basescan.org",
     "rpc": "https://base-sepolia.g.alchemy.com/v2",
+    "gatewayUrls": [
+      "https://01.functions-gateway.testnet.chain.link/",
+      "https://02.functions-gateway.testnet.chain.link/"
+    ],
     "subscriptionId": 159
   },
   "11155111": {
@@ -24,6 +29,7 @@
     "OnChainAI": "0x476b318Ea6B93F4a3347215eD06c77Af16cB1566",
     "explorer": "https://sepolia.etherscan.io",
     "rpc": "https://eth-sepolia.g.alchemy.com/v2",
+    "gatewayUrls": [],
     "subscriptionId": 3275
   },
   "11155420": {
@@ -33,6 +39,7 @@
     "OnChainAI": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
     "explorer": "https://sepolia-optimism.etherscan.io",
     "rpc": "https://opt-sepolia.g.alchemy.com/v2",
+    "gatewayUrls": [],
     "subscriptionId": 227
   }
 }

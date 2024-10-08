@@ -3,6 +3,8 @@
 	import { createDeployedContractInfo } from "$lib/runes/deployedContractInfo.svelte";
 	import { createTransactor } from "$lib/runes/transactor.svelte";
 	import { createWriteContract } from "@zapaz/wagmi-svelte";
+	import { readConfig } from "@onchain-ai/chainlink/lib/readFile";
+	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 
 	console.log("OnChainAI");
 
@@ -24,18 +26,21 @@
 	const handleSend = async () => {
 		try {
 			const makeWriteWithParams = () =>
-        contractWrite!.writeContractAsync({
-          address: deployedContractData!.address,
-          functionName: "sendRequest",
-          abi: deployedContractData!.abi,
-          args: [prompt],
-          value: 2n * 10n ** 15n
+				contractWrite!.writeContractAsync({
+					address: deployedContractData!.address,
+					abi: deployedContractData!.abi,
+					functionName: "sendRequest",
+					args: [prompt],
+					value: 2n * 10n ** 15n
 				});
 			await writeTxn?.(makeWriteWithParams);
 		} catch (e: unknown) {
 			console.error("⚡️ handleSend ~ error", e);
 		}
 	};
+
+	const targetNetwork = $derived.by(createTargetNetwork());
+	const chainId = $derived(targetNetwork.id);
 </script>
 
 <div class="flex items-center flex-col flex-grow pt-10 min-w-[320px]">
@@ -52,4 +57,5 @@
 			<span class="text-xl">Send</span>
 		</button>
 	</div>
+	chainId: {chainId}
 </div>

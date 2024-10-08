@@ -1,5 +1,5 @@
 import { onChainScope } from "./scope";
-import { readConfig, writeConfig } from "../lib/utils";
+import { readConfig, writeConfig } from "../lib/readWrite";
 import { OnChainAI } from "../../typechain-types";
 import AbiOnChainAI from "../abis/OnChainAI.json";
 import { types } from "hardhat/config";

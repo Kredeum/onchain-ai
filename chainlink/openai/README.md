@@ -3,6 +3,3 @@
 ## OnChainAI OpenAI prompts
 
 OnChainAI OpenAI prompts and tests
-
-
-
