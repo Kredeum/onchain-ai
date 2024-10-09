@@ -1,17 +1,37 @@
 import scaffoldConfig from "$lib/scaffold.config";
 import type { ChainWithAttributes } from "$lib/utils/scaffold-eth/networks";
 
+let _targetNetworkId: number = $state(scaffoldConfig.targetNetworks[0].id);
+
+const createTargetNetworkId = () => ({
+	get targetNetworkId() {
+		return _targetNetworkId;
+	},
+	set targetNetworkId(newTargetNetworkId: number) {
+		_targetNetworkId = newTargetNetworkId;
+	}
+});
+
 // we store this as a property so we can directly export it
-export const targetNetwork: { targetNetwork: ChainWithAttributes } = $state({
+const targetNetwork: { targetNetwork: ChainWithAttributes } = $state({
 	targetNetwork: scaffoldConfig.targetNetworks[0]
 });
 
-export const setTargetNetwork = (newTargetNetwork: ChainWithAttributes) => {
+const setTargetNetwork = (newTargetNetwork: ChainWithAttributes) => {
 	targetNetwork.targetNetwork = newTargetNetwork;
+	_targetNetworkId = newTargetNetwork.id;
 };
 
-export const nativeCurrencyPrice = $state({ price: 0 });
+const nativeCurrencyPrice = $state({ price: 0 });
 
-export const setNativeCurrencyPrice = (price: number) => {
+const setNativeCurrencyPrice = (price: number) => {
 	nativeCurrencyPrice.price = price;
+};
+
+export {
+	createTargetNetworkId,
+	targetNetwork,
+	nativeCurrencyPrice,
+	setTargetNetwork,
+	setNativeCurrencyPrice
 };

@@ -1,14 +1,14 @@
 {
-  "31337": {
-    "OnChainAI": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
-    "chainName": "anvil"
-  },
-  "84532": {
-    "OnChainAI": "0xbfFE7bC0A26FfE6f7882ABb6B7C4f299A5138E66",
-    "chainName": "base-sepolia"
-  },
   "11155420": {
     "OnChainAI": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
     "chainName": "optimism-sepolia"
+  },
+  "31337": {
+    "OnChainAI": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+    "chainName": "anvil"
+  },
+  "84532": {
+    "OnChainAI": "0x96Af478dc079601439Cac3c5A073a126E4eF5E22",
+    "chainName": "base-sepolia"
   }
 }

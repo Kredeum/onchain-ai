@@ -7,7 +7,7 @@ import {DeployOnChainAI} from "./DeployOnChainAI.s.sol";
 
 contract DeployAll is DeployOnChainAI {
     function run() public override(DeployOnChainAI) {
-        console.log("chainId %s  msg.sender @%s", block.chainid, msg.sender);
+        console.log("chainId %s", block.chainid);
 
         deployOnChainAI();
     }

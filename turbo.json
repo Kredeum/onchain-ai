@@ -13,6 +13,16 @@
       ],
       "outputLogs": "new-only"
     },
+    "dev": {
+      "dependsOn": [
+        "check"
+      ],
+      "cache": false,
+      "persistent": true,
+      "inputs": [
+        "src/**"
+      ]
+    },
     "build": {
       "dependsOn": [
         "check"
@@ -31,13 +41,6 @@
         "build"
       ],
       "cache": false
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "inputs": [
-        "src/**"
-      ]
     }
   }
 }

@@ -5,16 +5,9 @@
 	import { createWriteContract } from "@zapaz/wagmi-svelte";
 	import { readConfig } from "@onchain-ai/chainlink/lib/readFile";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
-
-	console.log("OnChainAI");
+	import { createTargetNetworkId } from "$lib/runes/global.svelte";
 
 	let prompt = $state("");
-
-	const name = "Prompt";
-	const placeholder = "Enter your prompt";
-	const handleChange = (value: string) => {
-		prompt = value;
-	};
 
 	const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
 		createDeployedContractInfo("OnChainAI")
@@ -39,8 +32,7 @@
 		}
 	};
 
-	const targetNetwork = $derived.by(createTargetNetwork());
-	const chainId = $derived(targetNetwork.id);
+	const { targetNetworkId } = $derived.by(createTargetNetworkId);
 </script>
 
 <div class="flex items-center flex-col flex-grow pt-10 min-w-[320px]">
@@ -51,11 +43,18 @@
 	</div>
 
 	<div class="flex flex-col space-y-3">
-		<InputBase {name} value={prompt} {placeholder} onchange={handleChange} />
+		<InputBase
+			name="Prompt"
+			placeholder="Enter your prompt"
+			onchange={(input) => (prompt = input)}
+			value={prompt}
+		/>
 
 		<button class="btn btn-primary btn-sm h-10 rounded-full px-2" onclick={handleSend}>
 			<span class="text-xl">Send</span>
 		</button>
 	</div>
-	chainId: {chainId}
+	<div class="mt-4 text-gray-500">
+		chainId: {targetNetworkId}
+	</div>
 </div>

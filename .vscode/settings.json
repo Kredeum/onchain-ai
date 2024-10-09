@@ -1,4 +1,14 @@
 {
   "liveServer.settings.root": "/svelte5/build/",
-  "liveServer.settings.file": "./index.html"
+  "liveServer.settings.file": "./index.html",
+  "favorites.resources": [
+    {
+      "filePath": "foundry/src/OnChainAI.sol",
+      "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/routes/onchain-ai/+page.svelte",
+      "group": "Default"
+    }
+  ]
 }

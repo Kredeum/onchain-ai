@@ -8,8 +8,7 @@
     "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
     "deploy:anvil": "pnpm run --filter foundry deploy:anvil",
-    "deploy:sepolia": "pnpm run --filter foundry deploy:sepolia",
-    "deploy:optimism": "pnpm run --filter foundry deploy:optimism",
+    "deploy:base-sepolia": "pnpm run --filter foundry deploy:base-sepolia",
     "deploy:fleek": "pnpm run --filter svelte5 deploy:fleek"
   },
   "keywords": [],
