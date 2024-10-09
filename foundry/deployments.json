@@ -1,7 +1,7 @@
 {
   "31337": {
     "OnChainAI": {
-      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
       "abi": [
         {
           "type": "constructor",
@@ -461,7 +461,7 @@
   },
   "84532": {
     "OnChainAI": {
-      "address": "0x96Af478dc079601439Cac3c5A073a126E4eF5E22",
+      "address": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
       "abi": [
         {
           "type": "constructor",

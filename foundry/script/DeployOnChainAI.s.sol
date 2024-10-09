@@ -7,7 +7,7 @@ import {console} from "forge-std/console.sol";
 
 contract DeployOnChainAI is DeployLite {
     function deployOnChainAI() public returns (address) {
-        string memory javascript = vm.readFile("../chainlink/openai/onChainAI.js");
+        string memory javascript = vm.readFile("../chainlink/openai/OnChainAI.js");
         uint32 gasLimit = 300000;
 
         address router = readAddress("router");

@@ -1,5 +1,5 @@
 import { ethers } from "ethers";
-import { readConfig } from "../lib/readFile";
+import { readConfig } from "./readConfig";
 import { getWallet } from "./getWallet";
 
 const setVersion = async (chainId: number, version: number) => {

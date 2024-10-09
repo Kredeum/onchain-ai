@@ -1,6 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { DeployFunction } from "hardhat-deploy/types";
-import { readJavascript, readConfig, writeConfig } from "../chainlink/lib/utils";
+import { readJavascript, readConfig, writeConfig } from "../chainlink/node/readWriteFile";
 
 const deployOnChainAI: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 	const { deployer } = await hre.getNamedAccounts();
@@ -11,7 +11,7 @@ const deployOnChainAI: DeployFunction = async function (hre: HardhatRuntimeEnvir
 
 	const donIdHex = hre.ethers.encodeBytes32String(donId);
 	const gasLimit = 300000;
-	const javascript = readJavascript("onChainAI.js");
+	const javascript = readJavascript("OnChainAI.js");
 
 	const deployResult = await deploy("OnChainAI", {
 		from: deployer,

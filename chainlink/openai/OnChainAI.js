@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
-if (!secrets.openaiKey) throw Error("Need OPENAI_KEY environment variable");
+if (!secrets.openaiApiKey)
+  throw Error("Need OPENAI_API_KEY environment variable");
 
 const data = {
   model: "gpt-4o-mini",
@@ -14,7 +14,7 @@ const openAiResponse = await Functions.makeHttpRequest({
   method: "POST",
   headers: {
     "Content-Type": `application/json`,
-    Authorization: `Bearer ${secrets.openaiKey}`,
+    Authorization: `Bearer ${secrets.openaiApiKey}`,
   },
   data: data,
 });

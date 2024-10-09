@@ -1,5 +1,5 @@
 import { type Wallet, ethers } from "ethers";
-import { readConfig } from "../lib/readFile";
+import { readConfig } from "./readConfig";
 
 const getWallet = async (chainId: number): Promise<Wallet> => {
   const { rpc } = readConfig(chainId);

@@ -1,12 +1,12 @@
 import { SecretsManager } from "@chainlink/functions-toolkit";
-import { readConfig } from "../lib/readFile";
+import { readConfig } from "./readConfig";
 import { getWallet } from "./getWallet";
 
 const uploadSecrets = async (chainId: number, expiration: number) => {
   const { router, donId, gatewayUrls } = readConfig(chainId);
 
   const slotIdNumber = 0;
-  const secrets = { openaiKey: process.env.OPENAI_API_KEY || "" };
+  const secrets = { openaiApiKey: process.env.OPENAI_API_KEY || "" };
 
   const signer = await getWallet(chainId);
 

@@ -1,4 +1,4 @@
 export * from "./getWallet";
-export * from "./readFile";
+export * from "./readConfig";
 export * from "./setVersion";
 export * from "./uploadSecrets";

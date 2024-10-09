@@ -4,11 +4,16 @@
     "chainName": "optimism-sepolia"
   },
   "31337": {
-    "OnChainAI": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+    "OnChainAI": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
     "chainName": "anvil"
   },
   "84532": {
-    "OnChainAI": "0x96Af478dc079601439Cac3c5A073a126E4eF5E22",
-    "chainName": "base-sepolia"
+    "OnChainAI": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
+    "chainName": "base-sepolia",
+    "donId": "fun-base-sepolia-1",
+    "explorer": "https://sepolia.basescan.org",
+    "router": "0xf9B8fc078197181C841c296C876945aaa425B278",
+    "rpc": "https://base-sepolia.g.alchemy.com/v2",
+    "subscriptionId": "159"
   }
 }

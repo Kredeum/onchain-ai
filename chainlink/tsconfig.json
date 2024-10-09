@@ -7,5 +7,5 @@
     "resolveJsonModule": true
   },
   "include": ["**/*.ts"],
-  "exclude": ["openai/onChainAI.js"]
+  "exclude": ["node_modules/**", "**/openai/OnChainAI.js"]
 }
