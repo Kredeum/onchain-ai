@@ -17,7 +17,6 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(
 		] as Contract<TContractName>
 	);
 	let status = $state(ContractCodeStatus.LOADING);
-	const publicClient = $derived.by(createPublicClient({ chainId: targetNetwork.targetNetwork.id }));
 
 	$effect(() => {
 		const checkContractDeployment = async () => {
@@ -25,6 +24,7 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(
 				status = ContractCodeStatus.NOT_FOUND;
 				return;
 			}
+			const publicClient = $derived.by(  createPublicClient({ chainId: targetNetwork.targetNetwork.id }));
 			const code = await publicClient?.getBytecode({
 				address: deployedContract.address as Address
 			});

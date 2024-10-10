@@ -8,17 +8,22 @@
 	const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 
 	const contractsData = $derived.by(getAllContracts);
-	$inspect(contractsData);
-
 	const contractNames = $derived(Object.keys(contractsData));
-	$inspect("contractNames[0]", contractNames[0]);
 
-	let selectedContract = $state<string>();
+	let clickedContractName = $state("");
+  let selectedContract = $derived.by(() => {
+		if (contractNames.length == 0) return;
+
+		if (clickedContractName) return clickedContractName;
+
+		const localStorageContractName = localStorage.getItem(selectedContractStorageKey);
+		if (localStorageContractName && contractNames.includes(localStorageContractName))
+			return localStorageContractName;
+
+		return contractNames[0];
+	});
 	$inspect("selectedContract", selectedContract);
 
-	$effect(
-		() => (selectedContract = localStorage.getItem(selectedContractStorageKey) || contractNames[0])
-	);
 	$effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
 </script>
 
@@ -34,7 +39,7 @@
 						selectedContract
 							? 'no-animation bg-base-300 hover:bg-base-300'
 							: 'bg-base-100 hover:bg-secondary'}"
-						onclick={() => (selectedContract = contractName)}
+						onclick={() => (clickedContractName = contractName)}
 					>
 						{contractName}
 						{#if contractsData[contractName].external}
