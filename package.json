@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all": "pnpm clean && pnpm install && pnpm chain && pnpm deploy:anvil && turbo dev",
+    "all": "pnpm clean && pnpm install && pnpm chain && pnpm deploy:anvil && turbo start",
     "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
     "deploy:anvil": "pnpm run --filter foundry deploy:anvil",

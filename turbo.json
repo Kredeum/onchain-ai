@@ -13,7 +13,7 @@
       ],
       "outputLogs": "new-only"
     },
-    "dev": {
+    "start": {
       "dependsOn": [
         "check"
       ],
@@ -29,7 +29,7 @@
       ],
       "outputLogs": "new-only"
     },
-    "start": {
+    "preview": {
       "dependsOn": [
         "build"
       ],

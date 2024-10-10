@@ -1,5 +1,5 @@
 import { SecretsManager } from "@chainlink/functions-toolkit";
-import { readConfig } from "./readConfig";
+import { readConfig } from "./readJson";
 import { getWallet } from "./getWallet";
 
 const uploadSecrets = async (chainId: number, expiration: number) => {
