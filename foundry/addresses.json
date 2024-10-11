@@ -1,20 +1,4 @@
 {
-  "10": {
-    "OnChainAI": "",
-    "chainName": "optimism"
-  },
-  "8453": {
-    "OnChainAI": "",
-    "chainName": "base"
-  },
-  "31337": {
-    "OnChainAI": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
-    "chainName": "local"
-  },
-  "84532": {
-    "OnChainAI": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
-    "chainName": "base-sepolia"
-  },
   "11155111": {
     "OnChainAI": "0x476b318Ea6B93F4a3347215eD06c77Af16cB1566",
     "chainName": "sepolia"
@@ -22,5 +6,20 @@
   "11155420": {
     "OnChainAI": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
     "chainName": "optimism-sepolia"
+  },
+  "31337": {
+    "OnChainAI": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+    "chainName": "local"
+  },
+  "8453": {
+    "OnChainAI": "0xd798E6E526d7893e4F7aCED9F56DF69643bCf1B6",
+    "chainName": "base",
+    "donId": "fun-base-mainnet-1",
+    "router": "0xf9B8fc078197181C841c296C876945aaa425B278",
+    "subscriptionId": "28"
+  },
+  "84532": {
+    "OnChainAI": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
+    "chainName": "base-sepolia"
   }
 }

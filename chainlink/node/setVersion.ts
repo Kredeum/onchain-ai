@@ -1,24 +1,26 @@
-import { ethers } from "ethers";
-import { readAddresses, readConfig } from "./readJson";
+import { ethers, type Wallet } from "ethers";
+import { readAddresses, readConfig } from "../lib/readJson";
 import { getWallet } from "./getWallet";
 
-const setVersion = async (chainId: number, version: number) => {
+const setVersion = async (
+  chainId: number,
+  version: number,
+  signer?: Wallet,
+): Promise<number> => {
+  signer ||= await getWallet(chainId);
+
   const OnChainAIAbi = ["function setDonHostedSecretsVersion(uint64) external"];
   const { explorer } = readConfig(chainId);
   const { OnChainAI: OnChainAIAddress } = readAddresses(chainId);
-  const signer = await getWallet(chainId);
 
   const onChainAI = new ethers.Contract(OnChainAIAddress, OnChainAIAbi, signer);
 
   // update onchain `donHostedSecretsVersion`
   const tx = await onChainAI.setDonHostedSecretsVersion(version);
-  console.log(
-    "setDonHostedSecretsVersion Request",
-    version,
-    `${explorer}/tx/${tx.hash}`,
-  );
+  console.log(`setDonHostedSecretsVersion ${explorer}/tx/${tx.hash}`);
+
   const res = await tx.wait();
-  console.log("setDonHostedSecretsVersion Result ", res?.status || "no status");
+  return res?.status || 0;
 };
 
 export { setVersion };

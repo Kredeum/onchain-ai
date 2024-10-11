@@ -11,7 +11,7 @@
 	const contractNames = $derived(Object.keys(contractsData));
 
 	let clickedContractName = $state("");
-  let selectedContract = $derived.by(() => {
+	let selectedContract = $derived.by(() => {
 		if (contractNames.length == 0) return;
 
 		if (clickedContractName) return clickedContractName;

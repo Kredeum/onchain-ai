@@ -1,14 +1,19 @@
 import { SecretsManager } from "@chainlink/functions-toolkit";
-import { readConfig } from "./readJson";
+import { readConfig } from "../lib/readJson";
 import { getWallet } from "./getWallet";
+import { type Wallet } from "ethers";
 
-const uploadSecrets = async (chainId: number, expiration: number) => {
+const uploadSecrets = async (
+  chainId: number,
+  expiration: number,
+  signer?: Wallet,
+): Promise<number> => {
+  signer ||= await getWallet(chainId);
+
   const { router, donId, gatewayUrls } = readConfig(chainId);
 
   const slotIdNumber = 0;
   const secrets = { openaiApiKey: process.env.OPENAI_API_KEY || "" };
-
-  const signer = await getWallet(chainId);
 
   // Encrypt secrets
   const secretsManager = new SecretsManager({
@@ -19,10 +24,7 @@ const uploadSecrets = async (chainId: number, expiration: number) => {
   await secretsManager.initialize();
   const encryptedSecretsObj = await secretsManager.encryptSecrets(secrets);
 
-  console.log(
-    `Upload encrypted secret to gateways ${gatewayUrls}. slotId ${slotIdNumber}`,
-  );
-  console.log(`Expiration in minutes: ${expiration}`);
+  // console.log(`Upload encrypted secret to gateways ${gatewayUrls}. slotId ${slotIdNumber}`);
 
   // Upload secrets to the DON
   const result = await secretsManager.uploadEncryptedSecretsToDON({
@@ -31,15 +33,9 @@ const uploadSecrets = async (chainId: number, expiration: number) => {
     slotId: slotIdNumber,
     minutesUntilExpiration: expiration,
   });
-  console.log(JSON.stringify(result, null, 2));
+  // console.log(JSON.stringify(result, null, 2));
 
-  if (result.success) {
-    console.log(`✅ Secrets uploaded properly to gateways !`);
-  } else {
-    throw new Error(`❌ Encrypted secrets not uploaded to gateways`);
-  }
-
-  return result;
+  return result.success ? result.version : 0;
 };
 
 export { uploadSecrets };

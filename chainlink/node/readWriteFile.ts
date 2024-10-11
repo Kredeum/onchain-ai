@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import fs from "fs";
 import jsonConfig from "../config.json";
 import { readConfig } from "../lib/readJson";
 
@@ -22,7 +22,10 @@ const writeConfig = (
   if (!chainIds.includes(chainKey)) throw Error("No config for this network!");
 
   jsonConfig[chainKey][key] = value as never;
-  fs.writeJsonSync(`${__dirname}/../config.json`, jsonConfig, { spaces: 2 });
+  fs.writeFileSync(
+    `${__dirname}/../config.json`,
+    JSON.stringify(jsonConfig, null, 2),
+  );
 };
 
 export { readJavascript, readConfig, writeConfig };

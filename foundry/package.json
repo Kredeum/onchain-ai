@@ -28,9 +28,11 @@
     "deploy:all": "forge script script/DeployAll.s.sol",
     "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",
-    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:base": "CHAIN=base pnpm deploy:mainnet",
+    "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
     "deploy:base-sepolia": "CHAIN=base-sepolia pnpm deploy:testnet",
     "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
     "deploy:validate": "pnpm deploy:all --fork-url $CHAIN && pnpm run abis",
     "format": "forge fmt",
     "test": "forge test"

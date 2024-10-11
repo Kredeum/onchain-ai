@@ -10,7 +10,6 @@ contract DeployOnChainAI is DeployLite {
         address router = readAddress("router");
         string memory javascript = vm.readFile("../chainlink/openai/OnChainAI.js");
         uint64 subscriptionId = uint64(readUint("subscriptionId"));
-        console.log("deployOnChainAI ~ subscriptionId:", subscriptionId);
         uint32 gasLimit = 300000;
         bytes32 donIdHex = bytes32(abi.encodePacked(readString("donId")));
 

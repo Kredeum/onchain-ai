@@ -20,7 +20,7 @@ type AddressesChainKey = keyof AddressesChain;
 type AddressesChainValue = AddressesChain[AddressesChainKey];
 
 const readAddresses = (chainId: number | string): AddressesChainValue => {
-  const chainIds = Object.keys(jsonConfig);
+  const chainIds = Object.keys(jsonAddresses);
   const chainKey = String(chainId) as AddressesChainKey;
 
   if (!chainIds.includes(chainKey))
