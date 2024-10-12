@@ -3,7 +3,8 @@
   "tasks": {
     "format": {
       "inputs": [
-        "src/**"
+        "src/**",
+        "**/*.json"
       ],
       "outputLogs": "new-only"
     },

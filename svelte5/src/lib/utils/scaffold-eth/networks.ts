@@ -17,10 +17,8 @@ export const RPC_CHAIN_NAMES: Record<number, string> = {
 	[chains.goerli.id]: "eth-goerli",
 	[chains.sepolia.id]: "eth-sepolia",
 	[chains.optimism.id]: "opt-mainnet",
-	[chains.optimismGoerli.id]: "opt-goerli",
 	[chains.optimismSepolia.id]: "opt-sepolia",
 	[chains.arbitrum.id]: "arb-mainnet",
-	[chains.arbitrumGoerli.id]: "arb-goerli",
 	[chains.arbitrumSepolia.id]: "arb-sepolia",
 	[chains.polygon.id]: "polygon-mainnet",
 	[chains.polygonMumbai.id]: "polygon-mumbai",
@@ -29,7 +27,6 @@ export const RPC_CHAIN_NAMES: Record<number, string> = {
 	[chains.polygonZkEvm.id]: "polygonzkevm-mainnet",
 	[chains.polygonZkEvmTestnet.id]: "polygonzkevm-testnet",
 	[chains.base.id]: "base-mainnet",
-	[chains.baseGoerli.id]: "base-goerli",
 	[chains.baseSepolia.id]: "base-sepolia"
 };
 
@@ -62,6 +59,12 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
 	},
 	[chains.optimismSepolia.id]: {
 		color: "#f01a37"
+	},
+	[chains.base.id]: {
+		color: "#239ad4"
+	},
+	[chains.baseSepolia.id]: {
+		color: "#239ad4"
 	},
 	[chains.optimism.id]: {
 		color: "#f01a37"

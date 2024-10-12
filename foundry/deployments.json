@@ -1,7 +1,7 @@
 {
   "8453": {
-    "OnChainAI": {
-      "address": "0xd798E6E526d7893e4F7aCED9F56DF69643bCf1B6",
+    "OnChainAIv01": {
+      "address": "0x0000000000000000000000000000000000000000",
       "abi": [
         {
           "type": "constructor",
@@ -30,6 +30,11 @@
               "name": "donId_",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ],
           "stateMutability": "nonpayable"
@@ -40,45 +45,6 @@
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "donHostedSecretsVersion",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "donId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "gasLimit",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint32",
-              "internalType": "uint32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -105,39 +71,13 @@
         },
         {
           "type": "function",
-          "name": "javascript",
+          "name": "lastPrompt",
           "inputs": [],
           "outputs": [
             {
               "name": "",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastError",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastRequestId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
             }
           ],
           "stateMutability": "view"
@@ -145,19 +85,6 @@
         {
           "type": "function",
           "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastUserPrompt",
           "inputs": [],
           "outputs": [
             {
@@ -183,6 +110,38 @@
         },
         {
           "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "sendRequest",
           "inputs": [
             {
@@ -193,7 +152,7 @@
           ],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -254,6 +213,19 @@
         },
         {
           "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "setSubscriptionId",
           "inputs": [
             {
@@ -264,19 +236,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "subscriptionId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -306,12 +265,12 @@
         },
         {
           "type": "event",
-          "name": "Javascript",
+          "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "javascript",
+              "name": "_javascript",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -357,7 +316,7 @@
         },
         {
           "type": "event",
-          "name": "Request",
+          "name": "PromptLog",
           "inputs": [
             {
               "name": "requestId",
@@ -366,10 +325,16 @@
               "internalType": "bytes32"
             },
             {
-              "name": "request",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
             }
           ],
           "anonymous": false
@@ -402,7 +367,7 @@
         },
         {
           "type": "event",
-          "name": "Response",
+          "name": "ResponseLog",
           "inputs": [
             {
               "name": "requestId",
@@ -411,15 +376,15 @@
               "internalType": "bytes32"
             },
             {
-              "name": "response",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             },
             {
-              "name": "err",
+              "name": "response",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -437,7 +402,17 @@
         },
         {
           "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
           "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
           "inputs": []
         },
         {
@@ -447,12 +422,54 @@
         },
         {
           "type": "error",
-          "name": "UnexpectedRequestID",
+          "name": "PaymentRequired",
           "inputs": [
             {
-              "name": "requestId",
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }
@@ -460,8 +477,8 @@
     }
   },
   "31337": {
-    "OnChainAI": {
-      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+    "OnChainAIv01": {
+      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
       "abi": [
         {
           "type": "constructor",
@@ -490,6 +507,11 @@
               "name": "donId_",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ],
           "stateMutability": "nonpayable"
@@ -500,45 +522,6 @@
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "donHostedSecretsVersion",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "donId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "gasLimit",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint32",
-              "internalType": "uint32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -565,39 +548,13 @@
         },
         {
           "type": "function",
-          "name": "javascript",
+          "name": "lastPrompt",
           "inputs": [],
           "outputs": [
             {
               "name": "",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastError",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastRequestId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
             }
           ],
           "stateMutability": "view"
@@ -605,19 +562,6 @@
         {
           "type": "function",
           "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastUserPrompt",
           "inputs": [],
           "outputs": [
             {
@@ -643,6 +587,38 @@
         },
         {
           "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "sendRequest",
           "inputs": [
             {
@@ -653,7 +629,7 @@
           ],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -714,6 +690,19 @@
         },
         {
           "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "setSubscriptionId",
           "inputs": [
             {
@@ -724,19 +713,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "subscriptionId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -766,12 +742,12 @@
         },
         {
           "type": "event",
-          "name": "Javascript",
+          "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "javascript",
+              "name": "_javascript",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -817,7 +793,7 @@
         },
         {
           "type": "event",
-          "name": "Request",
+          "name": "PromptLog",
           "inputs": [
             {
               "name": "requestId",
@@ -826,10 +802,16 @@
               "internalType": "bytes32"
             },
             {
-              "name": "request",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
             }
           ],
           "anonymous": false
@@ -862,7 +844,7 @@
         },
         {
           "type": "event",
-          "name": "Response",
+          "name": "ResponseLog",
           "inputs": [
             {
               "name": "requestId",
@@ -871,15 +853,15 @@
               "internalType": "bytes32"
             },
             {
-              "name": "response",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             },
             {
-              "name": "err",
+              "name": "response",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -897,7 +879,17 @@
         },
         {
           "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
           "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
           "inputs": []
         },
         {
@@ -907,12 +899,54 @@
         },
         {
           "type": "error",
-          "name": "UnexpectedRequestID",
+          "name": "PaymentRequired",
           "inputs": [
             {
-              "name": "requestId",
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }
@@ -920,8 +954,8 @@
     }
   },
   "84532": {
-    "OnChainAI": {
-      "address": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
+    "OnChainAIv01": {
+      "address": "0xEE82451040ED2c9329b1C4416929A2E8350A575b",
       "abi": [
         {
           "type": "constructor",
@@ -950,6 +984,11 @@
               "name": "donId_",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ],
           "stateMutability": "nonpayable"
@@ -960,45 +999,6 @@
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "donHostedSecretsVersion",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "donId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "gasLimit",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint32",
-              "internalType": "uint32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1025,39 +1025,13 @@
         },
         {
           "type": "function",
-          "name": "javascript",
+          "name": "lastPrompt",
           "inputs": [],
           "outputs": [
             {
               "name": "",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastError",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastRequestId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
             }
           ],
           "stateMutability": "view"
@@ -1065,19 +1039,6 @@
         {
           "type": "function",
           "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastUserPrompt",
           "inputs": [],
           "outputs": [
             {
@@ -1103,6 +1064,38 @@
         },
         {
           "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "sendRequest",
           "inputs": [
             {
@@ -1113,7 +1106,7 @@
           ],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -1174,6 +1167,19 @@
         },
         {
           "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "setSubscriptionId",
           "inputs": [
             {
@@ -1184,19 +1190,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "subscriptionId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1226,12 +1219,12 @@
         },
         {
           "type": "event",
-          "name": "Javascript",
+          "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "javascript",
+              "name": "_javascript",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -1277,7 +1270,7 @@
         },
         {
           "type": "event",
-          "name": "Request",
+          "name": "PromptLog",
           "inputs": [
             {
               "name": "requestId",
@@ -1286,10 +1279,16 @@
               "internalType": "bytes32"
             },
             {
-              "name": "request",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
             }
           ],
           "anonymous": false
@@ -1322,7 +1321,7 @@
         },
         {
           "type": "event",
-          "name": "Response",
+          "name": "ResponseLog",
           "inputs": [
             {
               "name": "requestId",
@@ -1331,15 +1330,15 @@
               "internalType": "bytes32"
             },
             {
-              "name": "response",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             },
             {
-              "name": "err",
+              "name": "response",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -1357,7 +1356,17 @@
         },
         {
           "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
           "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
           "inputs": []
         },
         {
@@ -1367,12 +1376,54 @@
         },
         {
           "type": "error",
-          "name": "UnexpectedRequestID",
+          "name": "PaymentRequired",
           "inputs": [
             {
-              "name": "requestId",
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }
@@ -1380,8 +1431,8 @@
     }
   },
   "11155111": {
-    "OnChainAI": {
-      "address": "0x476b318Ea6B93F4a3347215eD06c77Af16cB1566",
+    "OnChainAIv01": {
+      "address": "0x0000000000000000000000000000000000000000",
       "abi": [
         {
           "type": "constructor",
@@ -1410,6 +1461,11 @@
               "name": "donId_",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ],
           "stateMutability": "nonpayable"
@@ -1420,45 +1476,6 @@
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "donHostedSecretsVersion",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "donId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "gasLimit",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint32",
-              "internalType": "uint32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1485,39 +1502,13 @@
         },
         {
           "type": "function",
-          "name": "javascript",
+          "name": "lastPrompt",
           "inputs": [],
           "outputs": [
             {
               "name": "",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastError",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastRequestId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
             }
           ],
           "stateMutability": "view"
@@ -1525,19 +1516,6 @@
         {
           "type": "function",
           "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastUserPrompt",
           "inputs": [],
           "outputs": [
             {
@@ -1563,6 +1541,38 @@
         },
         {
           "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "sendRequest",
           "inputs": [
             {
@@ -1573,7 +1583,7 @@
           ],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -1634,6 +1644,19 @@
         },
         {
           "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "setSubscriptionId",
           "inputs": [
             {
@@ -1644,19 +1667,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "subscriptionId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1686,12 +1696,12 @@
         },
         {
           "type": "event",
-          "name": "Javascript",
+          "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "javascript",
+              "name": "_javascript",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -1737,7 +1747,7 @@
         },
         {
           "type": "event",
-          "name": "Request",
+          "name": "PromptLog",
           "inputs": [
             {
               "name": "requestId",
@@ -1746,10 +1756,16 @@
               "internalType": "bytes32"
             },
             {
-              "name": "request",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
             }
           ],
           "anonymous": false
@@ -1782,7 +1798,7 @@
         },
         {
           "type": "event",
-          "name": "Response",
+          "name": "ResponseLog",
           "inputs": [
             {
               "name": "requestId",
@@ -1791,15 +1807,15 @@
               "internalType": "bytes32"
             },
             {
-              "name": "response",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             },
             {
-              "name": "err",
+              "name": "response",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -1817,7 +1833,17 @@
         },
         {
           "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
           "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
           "inputs": []
         },
         {
@@ -1827,12 +1853,54 @@
         },
         {
           "type": "error",
-          "name": "UnexpectedRequestID",
+          "name": "PaymentRequired",
           "inputs": [
             {
-              "name": "requestId",
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }
@@ -1840,8 +1908,8 @@
     }
   },
   "11155420": {
-    "OnChainAI": {
-      "address": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
+    "OnChainAIv01": {
+      "address": "0x10bdda29d9a84dC0E8C263B29734d4502a74BCF2",
       "abi": [
         {
           "type": "constructor",
@@ -1870,6 +1938,11 @@
               "name": "donId_",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ],
           "stateMutability": "nonpayable"
@@ -1880,45 +1953,6 @@
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "donHostedSecretsVersion",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "donId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "gasLimit",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint32",
-              "internalType": "uint32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1945,39 +1979,13 @@
         },
         {
           "type": "function",
-          "name": "javascript",
+          "name": "lastPrompt",
           "inputs": [],
           "outputs": [
             {
               "name": "",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastError",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastRequestId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
             }
           ],
           "stateMutability": "view"
@@ -1985,19 +1993,6 @@
         {
           "type": "function",
           "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastUserPrompt",
           "inputs": [],
           "outputs": [
             {
@@ -2023,6 +2018,38 @@
         },
         {
           "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "sendRequest",
           "inputs": [
             {
@@ -2033,7 +2060,7 @@
           ],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -2094,6 +2121,19 @@
         },
         {
           "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "setSubscriptionId",
           "inputs": [
             {
@@ -2104,19 +2144,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "subscriptionId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -2146,12 +2173,12 @@
         },
         {
           "type": "event",
-          "name": "Javascript",
+          "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "javascript",
+              "name": "_javascript",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -2197,7 +2224,7 @@
         },
         {
           "type": "event",
-          "name": "Request",
+          "name": "PromptLog",
           "inputs": [
             {
               "name": "requestId",
@@ -2206,10 +2233,16 @@
               "internalType": "bytes32"
             },
             {
-              "name": "request",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
             }
           ],
           "anonymous": false
@@ -2242,7 +2275,7 @@
         },
         {
           "type": "event",
-          "name": "Response",
+          "name": "ResponseLog",
           "inputs": [
             {
               "name": "requestId",
@@ -2251,15 +2284,15 @@
               "internalType": "bytes32"
             },
             {
-              "name": "response",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             },
             {
-              "name": "err",
+              "name": "response",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -2277,7 +2310,17 @@
         },
         {
           "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
           "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
           "inputs": []
         },
         {
@@ -2287,12 +2330,54 @@
         },
         {
           "type": "error",
-          "name": "UnexpectedRequestID",
+          "name": "PaymentRequired",
           "inputs": [
             {
-              "name": "requestId",
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }

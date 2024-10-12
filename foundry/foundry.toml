@@ -2,11 +2,12 @@
 src = "src"
 out = "out"
 libs = ["lib"]
-solc = "0.8.19"
+solc = "0.8.28"
 fs_permissions = [
   { access = "read-write", path = "./addresses.json" },
   { access = "read-write", path = "./out" },
-  { access = "read", path = "../chainlink" },
+  { access = "read", path = "../chainlink/config.json" },
+  { access = "read", path = "../chainlink/openai" },
 ]
 
 [rpc_endpoints]
@@ -23,6 +24,5 @@ optimism = {key = "${ETHERSCAN_API_KEY_OPTIMISM}"}
 optimism-sepolia = { key = "${ETHERSCAN_API_KEY_OPTIMISM}" }
 
 base = {key = "${ETHERSCAN_API_KEY_BASE}"}
-base-sepolia = { key = "${ETHERSCAN_API_KEY_BASE}", url = "https://api-sepolia.basescan.org/api" }
+base-sepolia = { key = "${ETHERSCAN_API_KEY_BASE}"  }
 
-# See more config options https://github.com/foundry-rs/foundry/tree/master/config

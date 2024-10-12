@@ -10,7 +10,7 @@
 	let prompt = $state("");
 
 	const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
-		createDeployedContractInfo("OnChainAI")
+		createDeployedContractInfo("OnChainAIv01")
 	);
 
 	let contractWrite = $derived.by(createWriteContract());
@@ -25,7 +25,7 @@
 					abi: deployedContractData!.abi,
 					functionName: "sendRequest",
 					args: [prompt],
-					value: 2n * 10n ** 15n
+					value: 10n ** 14n
 				});
 			await writeTxn?.(makeWriteWithParams);
 		} catch (e: unknown) {
@@ -35,7 +35,7 @@
 
 	const { targetNetworkId } = $derived.by(createTargetNetworkId);
 	const config = $derived(readConfig(targetNetworkId));
-	const onChainAI = $derived(readAddresses(targetNetworkId).OnChainAI);
+	const onChainAI = $derived(readAddresses(targetNetworkId).OnChainAIv01);
 </script>
 
 <div class="flex items-center flex-col flex-grow pt-10 min-w-[320px]">

@@ -15,7 +15,7 @@
 	};
 
 	const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
-		createDeployedContractInfo("OnChainAI")
+		createDeployedContractInfo("OnChainAIv01")
 	);
 
 	let contractWrite = $derived.by(createWriteContract());
