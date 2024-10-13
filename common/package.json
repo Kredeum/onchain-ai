@@ -1,0 +1,18 @@
+{
+  "author": "",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.7.5",
+    "eslint-plugin-json": "^4.0.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "@onchain-ai/foundry",
+  "scripts": {
+    "abis": "ts-node script/mergeAbis.ts"
+  },
+  "version": "1.0.0"
+}

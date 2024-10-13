@@ -1,31 +1,28 @@
 {
-  "name": "@onchain-ai/chainlink",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "clean": "rm -rf node_modules .turbo",
-    "format": "prettier --write --list-different .",
-    "check": "prettier --check . && eslint **/*.ts",
-    "secrets": "ts-node scripts/upload-secrets.ts"
-  },
-  "keywords": [],
   "author": "",
-  "license": "ISC",
   "dependencies": {
     "@chainlink/functions-toolkit": "^0.3.2",
-    "ethers": "^5.7.2",
-    "ts-node": "^10.9.2",
-    "utf-8-validate": "^5.0.10"
-  },
-  "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
     "@types/prompt-sync": "^4.2.3",
     "@typescript-eslint/eslint-plugin": "^8.8.1",
     "@typescript-eslint/parser": "^8.8.1",
     "eslint": "^9.12.0",
+    "ethers": "^5.7.2",
     "prettier": "^3.3.3",
     "prompt-sync": "^4.2.0",
-    "typescript-eslint": "^8.8.1"
-  }
+    "ts-node": "^10.9.2",
+    "typescript-eslint": "^8.8.1",
+    "utf-8-validate": "^5.0.10"
+  },
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "@onchain-ai/chainlink",
+  "scripts": {
+    "check": "prettier --check . && eslint **/*.ts",
+    "clean": "rm -rf node_modules .turbo",
+    "format": "prettier --write --list-different .",
+    "secrets": "ts-node scripts/upload-secrets.ts"
+  },
+  "version": "1.0.0"
 }

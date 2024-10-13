@@ -268,7 +268,7 @@
           "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "_javascript",
+              "name": "javascript",
               "type": "string",
               "indexed": true,
               "internalType": "string"
@@ -310,6 +310,19 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
             }
           ],
           "anonymous": false
@@ -478,7 +491,7 @@
   },
   "31337": {
     "OnChainAIv01": {
-      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
       "abi": [
         {
           "type": "constructor",
@@ -745,7 +758,7 @@
           "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "_javascript",
+              "name": "javascript",
               "type": "string",
               "indexed": true,
               "internalType": "string"
@@ -787,6 +800,19 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
             }
           ],
           "anonymous": false
@@ -1222,7 +1248,7 @@
           "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "_javascript",
+              "name": "javascript",
               "type": "string",
               "indexed": true,
               "internalType": "string"
@@ -1264,6 +1290,19 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
             }
           ],
           "anonymous": false
@@ -1699,7 +1738,7 @@
           "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "_javascript",
+              "name": "javascript",
               "type": "string",
               "indexed": true,
               "internalType": "string"
@@ -1741,6 +1780,19 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
             }
           ],
           "anonymous": false
@@ -2176,7 +2228,7 @@
           "name": "JavascriptLog",
           "inputs": [
             {
-              "name": "_javascript",
+              "name": "javascript",
               "type": "string",
               "indexed": true,
               "internalType": "string"
@@ -2218,6 +2270,19 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
             }
           ],
           "anonymous": false

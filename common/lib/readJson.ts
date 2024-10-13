@@ -1,4 +1,4 @@
-import jsonConfig from "../config.json";
+import jsonConfig from "../../chainlink/config.json";
 import jsonAddresses from "../../foundry/addresses.json";
 
 type ConfigChain = typeof jsonConfig;

@@ -3,6 +3,7 @@
   "rules": {
     "no-console": "off",
     "func-visibility": ["warn", { "ignoreConstructors": true }],
+    "custom-errors": "off",
     "gas-custom-errors": "off"
   }
 }

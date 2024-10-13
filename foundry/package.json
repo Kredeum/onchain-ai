@@ -2,26 +2,16 @@
   "author": "",
   "description": "",
   "devDependencies": {
-    "@chainlink/contracts": "^1.2.0",
-    "@chainlink/env-enc": "^1.0.5",
-    "@chainlink/functions-toolkit": "^0.3.2",
-    "@types/fs-extra": "^11.0.4",
-    "@types/node": "^22.7.5",
     "eslint-plugin-json": "^4.0.1",
-    "fs-extra": "^11.2.0",
-    "prettier": "^3.3.3",
-    "solhint": "^5.0.3",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.3",
-    "utf-8-validate": "^5.0.10"
+    "solhint": "^5.0.3"
   },
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
   "name": "@onchain-ai/foundry",
   "scripts": {
-    "abis": "ts-node mergeAbis.ts",
-    "build": "forge compile && pnpm run abis",
+
+    "build": "forge compile",
     "chain": "./anvil.sh",
     "check": "solhint src/**/*.sol",
     "clean": "rm -rf node_modules .turbo out broadcast cache",

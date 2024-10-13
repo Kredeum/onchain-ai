@@ -14,9 +14,10 @@ contract OnChainAIv01 is FunctionsClient, ConfirmedOwner {
     error PaymentRequired(uint256 expected, uint256 actual);
     error UnexpectedFullfillRequest(bytes32 expected, string response, string err);
 
-    event JavascriptLog(string indexed _javascript);
+    event JavascriptLog(string indexed javascript);
     event PromptLog(bytes32 indexed requestId, string indexed prompt, address indexed sender);
     event ResponseLog(bytes32 indexed requestId, string indexed prompt, string indexed response);
+    event PriceLog(uint256 indexed price);
 
     mapping(bytes32 => string) public prompts;
     string public lastPrompt;
@@ -64,6 +65,7 @@ contract OnChainAIv01 is FunctionsClient, ConfirmedOwner {
 
     function setPrice(uint256 price_) public onlyOwner {
         price = price_;
+        emit PriceLog(price_);
     }
 
     function setDonHostedSecretsVersion(uint64 donHostedSecretsVersion_) public onlyOwner {

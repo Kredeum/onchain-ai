@@ -6,5 +6,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["mergeAbis.ts"]
+  "include": ["script/mergeAbis.ts"]
 }
