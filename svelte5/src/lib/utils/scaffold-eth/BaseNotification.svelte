@@ -14,10 +14,10 @@
 	}: {
 		toast: Toast;
 		status: "success" | "info" | "loading" | "error" | "warning";
-		content: Renderable;
+		Content: Renderable;
 	} = $props();
 
-	const { toast, status, content } = $derived(allProps);
+	const { toast, status, Content } = $derived(allProps);
 
 	const { position, visible, icon, id } = $derived(toast);
 </script>
@@ -46,11 +46,11 @@
 		{/if}
 	</div>
 	<div class="overflow-x-hidden whitespace-pre-line break-words" class:mt-1={icon}>
-		{#if typeof content === "string"}
-			{content}
+		{#if typeof Content === "string"}
+			{Content}
 		{:else}
-			{#key content}
-				<content {...allProps}></content>
+			{#key Content}
+				<Content {...allProps} />
 			{/key}
 		{/if}
 	</div>

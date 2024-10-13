@@ -2,7 +2,7 @@ import BaseNotification from "./BaseNotification.svelte";
 import toast, { type Renderable, type ToastPosition } from "@zapaz/svelte-french-toast";
 
 type NotificationProps = {
-	content: Renderable;
+	Content: Renderable;
 	status: "success" | "info" | "loading" | "error" | "warning";
 	duration?: number;
 	icon?: string;
@@ -21,7 +21,7 @@ const DEFAULT_DURATION = 3000;
 const DEFAULT_POSITION: ToastPosition = "top-center";
 
 const Notification = ({
-	content,
+	Content,
 	status,
 	duration = DEFAULT_DURATION,
 	icon,
@@ -31,26 +31,26 @@ const Notification = ({
 	return toast.custom(BaseNotification, {
 		duration: status === "loading" ? Infinity : duration,
 		position,
-		props: { ...props, content, status },
+		props: { ...props, Content, status },
 		icon
 	});
 };
 
 export const notification = {
-	success: (content: Renderable, options?: NotificationOptions) => {
-		return Notification({ content, status: "success", ...options });
+	success: (Content: Renderable, options?: NotificationOptions) => {
+		return Notification({ Content, status: "success", ...options });
 	},
-	info: (content: Renderable, options?: NotificationOptions) => {
-		return Notification({ content, status: "info", ...options });
+	info: (Content: Renderable, options?: NotificationOptions) => {
+		return Notification({ Content, status: "info", ...options });
 	},
-	warning: (content: Renderable, options?: NotificationOptions) => {
-		return Notification({ content, status: "warning", ...options });
+	warning: (Content: Renderable, options?: NotificationOptions) => {
+		return Notification({ Content, status: "warning", ...options });
 	},
-	error: (content: Renderable, options?: NotificationOptions) => {
-		return Notification({ content, status: "error", ...options });
+	error: (Content: Renderable, options?: NotificationOptions) => {
+		return Notification({ Content, status: "error", ...options });
 	},
-	loading: (content: Renderable, options?: NotificationOptions) => {
-		return Notification({ content, status: "loading", ...options });
+	loading: (Content: Renderable, options?: NotificationOptions) => {
+		return Notification({ Content, status: "loading", ...options });
 	},
 	remove: (toastId: string) => {
 		toast.remove(toastId);
