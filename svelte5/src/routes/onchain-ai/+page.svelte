@@ -3,7 +3,7 @@
 	import { createDeployedContractInfo } from "$lib/runes/deployedContractInfo.svelte";
 	import { createTransactor } from "$lib/runes/transactor.svelte";
 	import { createWriteContract } from "@zapaz/wagmi-svelte";
-	import { readAddresses, readConfig } from "@onchain-ai/chainlink/lib/readJson";
+	import { readAddresses, readConfig } from "@onchain-ai/common/lib/readJson";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 	import { createTargetNetworkId } from "$lib/runes/global.svelte";
 

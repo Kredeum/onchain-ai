@@ -10,9 +10,9 @@
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
-  "name": "@onchain-ai/foundry",
+  "name": "@onchain-ai/common",
   "scripts": {
-    "abis": "ts-node script/mergeAbis.ts"
+    "build": "ts-node script/mergeAbis.ts"
   },
   "version": "1.0.0"
 }

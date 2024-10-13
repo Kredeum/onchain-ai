@@ -14,21 +14,21 @@
       ],
       "outputLogs": "new-only"
     },
-    "start": {
+    "build": {
       "dependsOn": [
         "check"
+      ],
+      "outputLogs": "new-only"
+    },
+    "start": {
+      "dependsOn": [
+        "build"
       ],
       "cache": false,
       "persistent": true,
       "inputs": [
         "src/**"
       ]
-    },
-    "build": {
-      "dependsOn": [
-        "check"
-      ],
-      "outputLogs": "new-only"
     },
     "preview": {
       "dependsOn": [

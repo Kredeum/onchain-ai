@@ -2,7 +2,7 @@
 	"extends": ["//"],
 	"tasks": {
 		"build": {
-			"dependsOn": ["@onchain-ai/foundry#build"],
+			"dependsOn": ["@onchain-ai/foundry#build", "@onchain-ai/common#build"],
 			"inputs": ["src/**"],
 			"outputLogs": "new-only"
 		}

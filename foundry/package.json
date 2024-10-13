@@ -24,7 +24,7 @@
     "deploy:optimism-sepolia": "CHAIN=optimism-sepolia pnpm deploy:testnet",
     "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify --etherscan-api-key $CHAIN && pnpm run deploy:validate",
     "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify --etherscan-api-key $CHAIN && pnpm run deploy:validate",
-    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN && pnpm run abis",
+    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
     "format": "forge fmt",
     "test": "forge test"
   },
