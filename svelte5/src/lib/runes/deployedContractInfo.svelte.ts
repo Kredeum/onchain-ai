@@ -18,10 +18,6 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(
 	);
 	let status = $state(ContractCodeStatus.LOADING);
 
-	$inspect("targetNetwork.targetNetwork.id:", targetNetwork.targetNetwork.id);
-	$inspect("deployedContract:", deployedContract);
-	$inspect("status:", status);
-
 	$effect(() => {
 		const checkContractDeployment = async () => {
 			if (!deployedContract) {
@@ -31,7 +27,6 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(
 			const publicClient = $derived.by(
 				createPublicClient({ chainId: targetNetwork.targetNetwork.id })
 			);
-			$inspect("publicClient.chain.id:", publicClient?.chain.id);
 
 			const code = await publicClient?.getBytecode({
 				address: deployedContract.address as Address

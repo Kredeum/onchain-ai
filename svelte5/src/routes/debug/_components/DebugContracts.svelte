@@ -22,7 +22,6 @@
 
 		return contractNames[0];
 	});
-	$inspect("selectedContract", selectedContract);
 
 	$effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
 </script>
