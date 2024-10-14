@@ -1,5 +1,5 @@
 import { SecretsManager } from "@chainlink/functions-toolkit";
-import { readConfig } from "../lib/readJson";
+import { readConfig } from "../../common/lib/readJson";
 import { getWallet } from "./getWallet";
 import { type Wallet } from "ethers";
 

@@ -1,4 +1,4 @@
-import { mainnet } from "@zapaz/wagmi-svelte/chains";
+import { mainnet } from "wagmi-svelte/chains";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
 import { type Address, createPublicClient, http, parseAbi } from "viem";

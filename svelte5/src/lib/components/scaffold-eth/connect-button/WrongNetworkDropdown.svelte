@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { createDisconnect } from "@zapaz/wagmi-svelte";
+	import { createDisconnect } from "wagmi-svelte";
 	import { ArrowLeftOnRectangle, ChevronDown, Icon } from "svelte-hero-icons";
 	import NetworkOptions from "./NetworkOptions.svelte";
 

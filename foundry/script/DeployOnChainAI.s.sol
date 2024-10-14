@@ -28,7 +28,7 @@ contract DeployOnChainAI is DeployLite {
 
         bytes memory args = abi.encode(router, javascript, subscriptionId, gasLimit, donIdHex, price);
 
-        return deployLite("OnChainAIv01", args);
+        return deployLite("OnChainAIv1", args);
     }
 
     function run() public virtual {

@@ -1,5 +1,5 @@
 import { targetNetwork } from "./global.svelte";
-import { createPublicClient } from "@zapaz/wagmi-svelte";
+import { createPublicClient } from "wagmi-svelte";
 import {
 	ContractCodeStatus,
 	contracts,

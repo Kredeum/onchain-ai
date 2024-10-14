@@ -20,7 +20,7 @@ import type {
 } from "viem";
 import deploymentsJson from "@onchain-ai/foundry/deployments.json";
 import scaffoldConfig from "$lib/scaffold.config";
-import type { Config, CreateReadContractParameters } from "@zapaz/wagmi-svelte";
+import type { Config, CreateReadContractParameters } from "wagmi-svelte";
 import type {
 	WriteContractErrorType,
 	WriteContractParameters,

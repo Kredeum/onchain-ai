@@ -2,7 +2,7 @@
 	import { isAddress, type Address } from "viem";
 	import { isENS, type CommonInputProps } from "./utils";
 	import InputBase from "./InputBase.svelte";
-	import { createEnsAddress, createEnsName, createEnsAvatar } from "@zapaz/wagmi-svelte";
+	import { createEnsAddress, createEnsName, createEnsAvatar } from "wagmi-svelte";
 	import { blo } from "blo";
 	import { normalize } from "viem/ens";
 

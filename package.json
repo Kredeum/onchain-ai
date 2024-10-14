@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "all": "pnpm clean && pnpm install && pnpm chain && pnpm deploy:anvil && turbo start",
+    "all": "pnpm run clean && pnpm install && pnpm run chain && pnpm run deploy && turbo start",
     "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
-    "deploy:anvil": "pnpm run --filter foundry deploy:anvil",
+    "deploy": "pnpm run --filter foundry deploy",
     "deploy:fleek": "pnpm run --filter svelte5 deploy:fleek"
   },
   "keywords": [],
@@ -18,7 +18,7 @@
     "node": "^20",
     "pnpm": "^9"
   },
-  "devDependencies": {
+  "dependencies": {
     "turbo": "^2.1.3"
   }
 }

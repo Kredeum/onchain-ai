@@ -1,27 +1,22 @@
 {
-  "11155111": {
-    "OnChainAI": "0x476b318Ea6B93F4a3347215eD06c77Af16cB1566",
-    "OnChainAIv01": "0x0000000000000000000000000000000000000000",
-    "chainName": "sepolia"
-  },
   "11155420": {
     "OnChainAI": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
-    "OnChainAIv01": "0x10bdda29d9a84dC0E8C263B29734d4502a74BCF2",
+    "OnChainAIv1": "0xaBC576652433154Ab5F9cF1A2F4f0457d7690cc6",
     "chainName": "optimism-sepolia"
   },
   "31337": {
     "OnChainAI": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
-    "OnChainAIv01": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+    "OnChainAIv1": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
     "chainName": "local"
   },
   "8453": {
     "OnChainAI": "0xd798E6E526d7893e4F7aCED9F56DF69643bCf1B6",
-    "OnChainAIv01": "0x0000000000000000000000000000000000000000",
+    "OnChainAIv1": "0x621b3bA417619f63859D812101bf26Ee01186E9C",
     "chainName": "base"
   },
   "84532": {
     "OnChainAI": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
-    "OnChainAIv01": "0xEE82451040ED2c9329b1C4416929A2E8350A575b",
+    "OnChainAIv1": "0xE4690378ec93F29C97DF0F0C0ba9DBa867c62622",
     "chainName": "base-sepolia"
   }
 }

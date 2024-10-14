@@ -4,7 +4,7 @@
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 	import { replacer } from "$lib/utils/scaffold-eth/common";
 	import { decodeTransactionData, getFunctionDetails } from "$lib/utils/scaffold-eth/decodeTxData";
-	import { createPublicClient } from "@zapaz/wagmi-svelte";
+	import { createPublicClient } from "wagmi-svelte";
 	import {
 		type Transaction,
 		type TransactionReceipt,

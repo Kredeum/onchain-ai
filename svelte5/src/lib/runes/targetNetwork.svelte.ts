@@ -1,5 +1,5 @@
 import { setTargetNetwork, targetNetwork } from "./global.svelte";
-import { createAccount } from "@zapaz/wagmi-svelte";
+import { createAccount } from "wagmi-svelte";
 import scaffoldConfig from "$lib/scaffold.config";
 import { NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/utils/scaffold-eth/networks";
 

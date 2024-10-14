@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
-	import { createPublicClient } from "@zapaz/wagmi-svelte";
+	import { createPublicClient } from "wagmi-svelte";
 	import { isAddress, isHex } from "viem";
 	import { hardhat } from "viem/chains";
 

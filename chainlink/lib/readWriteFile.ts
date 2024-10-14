@@ -1,6 +1,6 @@
 import fs from "fs";
 import jsonConfig from "../config.json";
-import { readConfig } from "../lib/readJson";
+import { readConfig } from "../../common/lib/readJson";
 
 type ConfigChain = typeof jsonConfig;
 type ChainKey = keyof ConfigChain;

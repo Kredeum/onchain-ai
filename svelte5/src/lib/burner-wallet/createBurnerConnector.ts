@@ -10,7 +10,7 @@
  * ```
  */
 import { loadBurnerSK } from "./utils";
-import { BaseError, createWagmiConnector } from "@zapaz/wagmi-svelte";
+import { BaseError, createWagmiConnector } from "wagmi-svelte";
 import {
 	type EIP1193RequestFn,
 	type Hex,

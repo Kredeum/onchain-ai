@@ -1,5 +1,5 @@
 import BaseNotification from "./BaseNotification.svelte";
-import toast, { type Renderable, type ToastPosition } from "@zapaz/svelte-french-toast";
+import toast, { type Renderable, type ToastPosition } from "svelte-french-toast";
 
 type NotificationProps = {
 	Content: Renderable;

@@ -2,7 +2,7 @@
 	import { InputBase } from "$lib/components/scaffold-eth/inputs";
 	import { createDeployedContractInfo } from "$lib/runes/deployedContractInfo.svelte";
 	import { createTransactor } from "$lib/runes/transactor.svelte";
-	import { createWriteContract } from "@zapaz/wagmi-svelte";
+	import { createWriteContract } from "wagmi-svelte";
 	import { readAddresses, readConfig } from "@onchain-ai/common/lib/readJson";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 	import { createTargetNetworkId } from "$lib/runes/global.svelte";
@@ -10,7 +10,7 @@
 	let prompt = $state("");
 
 	const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
-		createDeployedContractInfo("OnChainAIv01")
+		createDeployedContractInfo("OnChainAIv1")
 	);
 
 	let contractWrite = $derived.by(createWriteContract());
@@ -35,7 +35,7 @@
 
 	const { targetNetworkId } = $derived.by(createTargetNetworkId);
 	const config = $derived(readConfig(targetNetworkId));
-	const onChainAI = $derived(readAddresses(targetNetworkId).OnChainAIv01);
+	const onChainAI = $derived(readAddresses(targetNetworkId).OnChainAIv1);
 </script>
 
 <div class="flex items-center flex-col flex-grow pt-10 min-w-[320px]">

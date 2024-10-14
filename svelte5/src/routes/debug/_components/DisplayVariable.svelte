@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
-	import { createReadContract } from "@zapaz/wagmi-svelte";
+	import { createReadContract } from "wagmi-svelte";
 	import type { AbiFunction, Abi } from "abitype";
 	import { ArrowPath, Icon } from "svelte-hero-icons";
 	import type { Address } from "viem";

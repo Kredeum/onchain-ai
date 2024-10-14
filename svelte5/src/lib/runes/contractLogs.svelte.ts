@@ -1,4 +1,4 @@
-import { createPublicClient } from "@zapaz/wagmi-svelte";
+import { createPublicClient } from "wagmi-svelte";
 import type { Address, Log } from "viem";
 
 export const createContractLogs = (address: Address) => {

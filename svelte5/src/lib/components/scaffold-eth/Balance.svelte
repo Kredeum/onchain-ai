@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
-	import { createBlockNumber } from "@zapaz/wagmi-svelte";
+	import { createBlockNumber } from "wagmi-svelte";
 	import { useQueryClient } from "@tanstack/svelte-query";
 	import { formatEther, type Address } from "viem";
 	import { nativeCurrencyPrice } from "$lib/runes/global.svelte";
 	import { untrack } from "svelte";
-	import { createBalance } from "@zapaz/wagmi-svelte";
+	import { createBalance } from "wagmi-svelte";
 
 	const {
 		address,

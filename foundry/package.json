@@ -10,13 +10,13 @@
   "main": "index.js",
   "name": "@onchain-ai/foundry",
   "scripts": {
-
+    "clean": "rm -rf node_modules .turbo out broadcast cache",
+    "format": "forge fmt",
+    "check": "solhint src/**/*.sol",
     "build": "forge compile",
     "chain": "./anvil.sh",
-    "check": "solhint src/**/*.sol",
-    "clean": "rm -rf node_modules .turbo out broadcast cache",
     "deploy:all": "forge script script/DeployAll.s.sol",
-    "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
+    "deploy": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",
     "deploy:base": "CHAIN=base pnpm deploy:mainnet",
     "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
@@ -25,7 +25,6 @@
     "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify --etherscan-api-key $CHAIN && pnpm run deploy:validate",
     "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify --etherscan-api-key $CHAIN && pnpm run deploy:validate",
     "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
-    "format": "forge fmt",
     "test": "forge test"
   },
   "version": "1.0.0"

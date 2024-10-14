@@ -12,6 +12,9 @@
   "main": "index.js",
   "name": "@onchain-ai/common",
   "scripts": {
+    "clean": "rm -rf node_modules .turbo",
+    "format": "prettier --write --list-different .",
+    "check": "prettier --check . && eslint **/*.ts",
     "build": "ts-node script/mergeAbis.ts"
   },
   "version": "1.0.0"

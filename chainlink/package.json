@@ -19,9 +19,9 @@
   "main": "index.js",
   "name": "@onchain-ai/chainlink",
   "scripts": {
-    "check": "prettier --check . && eslint **/*.ts",
     "clean": "rm -rf node_modules .turbo",
     "format": "prettier --write --list-different .",
+    "check": "prettier --check . && eslint **/*.ts",
     "secrets": "ts-node scripts/upload-secrets.ts"
   },
   "version": "1.0.0"

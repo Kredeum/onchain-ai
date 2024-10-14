@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { getNetworkColor } from "$lib/runes/networkColor.svelte";
 	import { getTargetNetworks, type ChainWithAttributes } from "$lib/utils/scaffold-eth/networks";
-	import { createAccount, createSwitchChain } from "@zapaz/wagmi-svelte";
+	import { createAccount, createSwitchChain } from "wagmi-svelte";
 	import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
 	import { createDarkMode } from "$lib/runes/darkMode.svelte";
 

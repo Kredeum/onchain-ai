@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { InputBase } from "./inputs";
-	import { createAccount } from "@zapaz/wagmi-svelte";
+	import { createAccount } from "wagmi-svelte";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 	import { ArrowRight, Icon } from "svelte-hero-icons";
 	import type { Address } from "viem";

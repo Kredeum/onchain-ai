@@ -14,7 +14,7 @@
 	} from "svelte-hero-icons";
 	import NetworkOptions from "./NetworkOptions.svelte";
 	import { getTargetNetworks } from "$lib/utils/scaffold-eth/networks";
-	import { createDisconnect } from "@zapaz/wagmi-svelte";
+	import { createDisconnect } from "wagmi-svelte";
 	import { createOutsideClick } from "$lib/runes/outsideClick.svelte";
 	import { goto } from "$app/navigation";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
