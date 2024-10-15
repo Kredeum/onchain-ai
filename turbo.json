@@ -1,9 +1,15 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": [
+    ".envrc"
+  ],
+  "envMode": "strict",
+  "ui": "stream",
   "tasks": {
     "format": {
       "inputs": [
-        "src/**"
+        "src/**",
+        "**/*.json"
       ],
       "outputLogs": "new-only"
     },
@@ -11,6 +17,11 @@
       "dependsOn": [
         "format"
       ],
+      "outputLogs": "new-only"
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true,
       "inputs": [
         "src/**"
       ],
@@ -20,6 +31,23 @@
       "dependsOn": [
         "check"
       ],
+      "outputLogs": "new-only"
+    },
+    "deploy": {
+      "env": [
+        "ETHERSCAN_API_KEY*"
+      ],
+      "dependsOn": [
+        "build"
+      ],
+      "outputLogs": "new-only"
+    },
+    "start": {
+      "dependsOn": [
+        "deploy"
+      ],
+      "cache": false,
+      "persistent": true,
       "inputs": [
         "src/**"
       ],
@@ -27,19 +55,10 @@
     },
     "test": {
       "dependsOn": [
-        "build"
+        "deploy"
       ],
       "cache": false,
-      "inputs": [
-        "src/**"
-      ]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "inputs": [
-        "src/**"
-      ]
+      "outputLogs": "new-only"
     }
   }
 }

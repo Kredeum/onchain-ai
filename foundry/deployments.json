@@ -1,7 +1,7 @@
 {
-  "31337": {
-    "OnChainAI": {
-      "address": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
+  "8453": {
+    "OnChainAIv1": {
+      "address": "0x6adA42826f85fcDd769dd912709D0dE44e0f26C3",
       "abi": [
         {
           "type": "constructor",
@@ -30,6 +30,11 @@
               "name": "donId_",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ],
           "stateMutability": "nonpayable"
@@ -40,45 +45,6 @@
           "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "donHostedSecretsVersion",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "donId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "gasLimit",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint32",
-              "internalType": "uint32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -105,63 +71,21 @@
         },
         {
           "type": "function",
-          "name": "javascript",
+          "name": "lastInteraction",
           "inputs": [],
           "outputs": [
             {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastError",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastRequestId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
+            },
             {
-              "name": "",
+              "name": "prompt",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastUserPrompt",
-          "inputs": [],
-          "outputs": [
+            },
             {
-              "name": "",
+              "name": "response",
               "type": "string",
               "internalType": "string"
             }
@@ -183,6 +107,38 @@
         },
         {
           "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "sendRequest",
           "inputs": [
             {
@@ -193,7 +149,7 @@
           ],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -254,6 +210,19 @@
         },
         {
           "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
           "name": "setSubscriptionId",
           "inputs": [
             {
@@ -264,19 +233,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "subscriptionId",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint64",
-              "internalType": "uint64"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -306,12 +262,12 @@
         },
         {
           "type": "event",
-          "name": "Javascript",
+          "name": "JavascriptLog",
           "inputs": [
             {
               "name": "javascript",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -357,7 +313,20 @@
         },
         {
           "type": "event",
-          "name": "Request",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PromptLog",
           "inputs": [
             {
               "name": "requestId",
@@ -366,10 +335,16 @@
               "internalType": "bytes32"
             },
             {
-              "name": "request",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
             }
           ],
           "anonymous": false
@@ -402,7 +377,7 @@
         },
         {
           "type": "event",
-          "name": "Response",
+          "name": "ResponseLog",
           "inputs": [
             {
               "name": "requestId",
@@ -411,15 +386,15 @@
               "internalType": "bytes32"
             },
             {
-              "name": "response",
+              "name": "prompt",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             },
             {
-              "name": "err",
+              "name": "response",
               "type": "string",
-              "indexed": false,
+              "indexed": true,
               "internalType": "string"
             }
           ],
@@ -437,7 +412,17 @@
         },
         {
           "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
           "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
           "inputs": []
         },
         {
@@ -447,12 +432,1515 @@
         },
         {
           "type": "error",
-          "name": "UnexpectedRequestID",
+          "name": "PaymentRequired",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "31337": {
+    "OnChainAIv1": {
+      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+      "abi": [
+        {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "router",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "acceptOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "handleOracleFulfillment",
           "inputs": [
             {
               "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "err",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "sendRequest",
+          "inputs": [
+            {
+              "name": "userPrompt",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "setDonHostedSecretsVersion",
+          "inputs": [
+            {
+              "name": "donHostedSecretsVersion_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setDonID",
+          "inputs": [
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setGasLimit",
+          "inputs": [
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setJavascript",
+          "inputs": [
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setSubscriptionId",
+          "inputs": [
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "JavascriptLog",
+          "inputs": [
+            {
+              "name": "javascript",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferRequested",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PromptLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestFulfilled",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestSent",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "ResponseLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "EmptyArgs",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "EmptySource",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "OnlyRouterCanFulfill",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "PaymentRequired",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "84532": {
+    "OnChainAIv1": {
+      "address": "0xb3e223624044cedDedd79859e74a5A8b2ecD2fC7",
+      "abi": [
+        {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "router",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "acceptOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "handleOracleFulfillment",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "err",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "sendRequest",
+          "inputs": [
+            {
+              "name": "userPrompt",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "setDonHostedSecretsVersion",
+          "inputs": [
+            {
+              "name": "donHostedSecretsVersion_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setDonID",
+          "inputs": [
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setGasLimit",
+          "inputs": [
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setJavascript",
+          "inputs": [
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setSubscriptionId",
+          "inputs": [
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "JavascriptLog",
+          "inputs": [
+            {
+              "name": "javascript",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferRequested",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PromptLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestFulfilled",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestSent",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "ResponseLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "EmptyArgs",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "EmptySource",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "OnlyRouterCanFulfill",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "PaymentRequired",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "11155420": {
+    "OnChainAIv1": {
+      "address": "0x50d377994e4C95919843d3b40C81Edf88c37e298",
+      "abi": [
+        {
+          "type": "constructor",
+          "inputs": [
+            {
+              "name": "router",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "acceptOwnership",
+          "inputs": [],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "handleOracleFulfillment",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "err",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "price",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "prompts",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "sendRequest",
+          "inputs": [
+            {
+              "name": "userPrompt",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "setDonHostedSecretsVersion",
+          "inputs": [
+            {
+              "name": "donHostedSecretsVersion_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setDonID",
+          "inputs": [
+            {
+              "name": "donId_",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setGasLimit",
+          "inputs": [
+            {
+              "name": "gasLimit_",
+              "type": "uint32",
+              "internalType": "uint32"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setJavascript",
+          "inputs": [
+            {
+              "name": "javascript_",
+              "type": "string",
+              "internalType": "string"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setPrice",
+          "inputs": [
+            {
+              "name": "price_",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setSubscriptionId",
+          "inputs": [
+            {
+              "name": "subscriptionId_",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "transferOwnership",
+          "inputs": [
+            {
+              "name": "to",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "withdraw",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "JavascriptLog",
+          "inputs": [
+            {
+              "name": "javascript",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferRequested",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "OwnershipTransferred",
+          "inputs": [
+            {
+              "name": "from",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "to",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PriceLog",
+          "inputs": [
+            {
+              "name": "price",
+              "type": "uint256",
+              "indexed": true,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "PromptLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestFulfilled",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestSent",
+          "inputs": [
+            {
+              "name": "id",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "ResponseLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": true,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "error",
+          "name": "EmptyArgs",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "EmptySource",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoEmptyPrompt",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoInlineSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NoValidSecrets",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "OnlyRouterCanFulfill",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "PaymentRequired",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "actual",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "UnexpectedFullfillRequest",
+          "inputs": [
+            {
+              "name": "expected",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "err",
+              "type": "string",
+              "internalType": "string"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "WithdrawFailed",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
             }
           ]
         }

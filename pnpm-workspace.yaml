@@ -1,3 +1,5 @@
 packages:
   - foundry
-  - sveltekit
+  - svelte5
+  - chainlink
+  - common  
