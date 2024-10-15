@@ -33,6 +33,9 @@ export const decodeTransactionData = (tx: TransactionWithFunction) => {
 					| AbiEvent
 					| AbiFallback
 					| AbiFunction;
+
+				if (!("inputs" in abiItem)) break;
+
 				tx.functionArgNames = abiItem?.inputs?.map((input: any) => input.name);
 				tx.functionArgTypes = abiItem?.inputs?.map((input: any) => input.type);
 

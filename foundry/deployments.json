@@ -1,7 +1,7 @@
 {
   "8453": {
     "OnChainAIv1": {
-      "address": "0x621b3bA417619f63859D812101bf26Ee01186E9C",
+      "address": "0x6adA42826f85fcDd769dd912709D0dE44e0f26C3",
       "abi": [
         {
           "type": "constructor",
@@ -71,24 +71,21 @@
         },
         {
           "type": "function",
-          "name": "lastPrompt",
+          "name": "lastInteraction",
           "inputs": [],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
+            },
             {
-              "name": "",
+              "name": "response",
               "type": "string",
               "internalType": "string"
             }
@@ -561,24 +558,21 @@
         },
         {
           "type": "function",
-          "name": "lastPrompt",
+          "name": "lastInteraction",
           "inputs": [],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
+            },
             {
-              "name": "",
+              "name": "response",
               "type": "string",
               "internalType": "string"
             }
@@ -981,7 +975,7 @@
   },
   "84532": {
     "OnChainAIv1": {
-      "address": "0xE4690378ec93F29C97DF0F0C0ba9DBa867c62622",
+      "address": "0xb3e223624044cedDedd79859e74a5A8b2ecD2fC7",
       "abi": [
         {
           "type": "constructor",
@@ -1051,24 +1045,21 @@
         },
         {
           "type": "function",
-          "name": "lastPrompt",
+          "name": "lastInteraction",
           "inputs": [],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
+            },
             {
-              "name": "",
+              "name": "response",
               "type": "string",
               "internalType": "string"
             }
@@ -1471,7 +1462,7 @@
   },
   "11155420": {
     "OnChainAIv1": {
-      "address": "0xaBC576652433154Ab5F9cF1A2F4f0457d7690cc6",
+      "address": "0x50d377994e4C95919843d3b40C81Edf88c37e298",
       "abi": [
         {
           "type": "constructor",
@@ -1541,24 +1532,21 @@
         },
         {
           "type": "function",
-          "name": "lastPrompt",
+          "name": "lastInteraction",
           "inputs": [],
           "outputs": [
             {
-              "name": "",
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "prompt",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastResponse",
-          "inputs": [],
-          "outputs": [
+            },
             {
-              "name": "",
+              "name": "response",
               "type": "string",
               "internalType": "string"
             }

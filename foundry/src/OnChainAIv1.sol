@@ -19,9 +19,15 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     event ResponseLog(bytes32 indexed requestId, string indexed prompt, string indexed response);
     event PriceLog(uint256 indexed price);
 
+    struct Interaction {
+        bytes32 requestId;
+        string prompt;
+        string response;
+    }
+
+    Interaction public lastInteraction;
+
     mapping(bytes32 => string) public prompts;
-    string public lastPrompt;
-    string public lastResponse;
 
     bytes32 internal _donId;
     uint32 internal _gasLimit;
@@ -89,8 +95,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
 
         prompts[requestId] = userPrompt;
 
-        lastPrompt = userPrompt;
-        lastResponse = "";
+        lastInteraction = Interaction(requestId, userPrompt, "");
 
         emit PromptLog(requestId, userPrompt, msg.sender);
     }
@@ -106,8 +111,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
 
         delete prompts[requestId];
 
-        lastPrompt = prompt;
-        lastResponse = responseError;
+        lastInteraction = Interaction(requestId, prompt, responseError);
 
         emit ResponseLog(requestId, prompt, responseError);
     }

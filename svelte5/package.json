@@ -50,7 +50,7 @@
 	"scripts": {
 		"clean": "rm -rf node_modules .turbo build .svelte-kit",
 		"format": "prettier --write --list-different .",
-		"check2": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"build": "vite build",
 		"dev": "vite dev",
 		"start": "vite dev",

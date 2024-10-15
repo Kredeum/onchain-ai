@@ -6,8 +6,19 @@
 	import { readAddresses, readConfig } from "@onchain-ai/common/lib/readJson";
 	import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
 	import { createTargetNetworkId } from "$lib/runes/global.svelte";
+	import Chat from "$lib/onchain-ai/Chat.svelte";
+
+	const prompts: string[] = [];
+	const responses: string[] = [];
 
 	let prompt = $state("");
+	let refresh = $state(0);
+	const reRead = () => refresh++;
+
+	let interaction = $state("");
+	const lastPrompt = $derived(interaction[1]);
+	const lastResponse = $derived(interaction[2]);
+	$inspect("interaction:", interaction);
 
 	const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
 		createDeployedContractInfo("OnChainAIv1")
@@ -31,6 +42,8 @@
 		} catch (e: unknown) {
 			console.error("⚡️ handleSend ~ error", e);
 		}
+		reRead();
+		responses.push();
 	};
 
 	const { targetNetworkId } = $derived.by(createTargetNetworkId);
@@ -62,4 +75,10 @@
 			<em>view on etherscan</em>
 		</a>
 	</div>
+	<div class="w-full max-w-lg">
+		<Chat {refresh} />
+	</div>
+  <div class="mx-8">
+    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+  </div>
 </div>

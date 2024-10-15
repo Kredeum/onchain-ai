@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createTargetNetworkId } from "$lib/runes/global.svelte";
 	import { readDeployments } from "@onchain-ai/common/lib/readJson";
-	import { untrack } from "svelte";
 	import { createReadContract } from "wagmi-svelte";
 
 	const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
@@ -19,6 +18,8 @@
 		}))
 	);
 
+	const readLastResponse = { data: "LR" }; // $derived.by(createReadOnChainAI);
+
 	const functionNameToggle = () => {
 		return functionName === functionNamePair[0] ? functionNamePair[1] : functionNamePair[0];
 	};
@@ -31,6 +32,9 @@
 <div class="px-12 py-12">
 	<h1 class="text-4xl">
 		{readContract?.data}
+	</h1>
+	<h1 class="text-4xl">
+		{readLastResponse?.data}
 	</h1>
 	<button
 		class="btn btn-secondary btn-sm"

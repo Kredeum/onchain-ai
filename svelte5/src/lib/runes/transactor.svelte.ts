@@ -37,7 +37,7 @@ export const createTransactor = (_walletClient?: () => WalletClient): (() => Tra
 			// Get full transaction from public client
 			const publicClient = getPublicClient(wagmiConfig);
 
-			notificationId = notification.loading(TxnNotification, {
+			notificationId = notification.loading(TxnNotification as any, {
 				props: { message: "Awaiting for user confirmation" }
 			});
 			if (typeof tx === "function") {
@@ -53,7 +53,7 @@ export const createTransactor = (_walletClient?: () => WalletClient): (() => Tra
 
 			const blockExplorerTxURL = network ? getBlockExplorerTxLink(network, transactionHash) : "";
 
-			notificationId = notification.loading(TxnNotification, {
+			notificationId = notification.loading(TxnNotification as any, {
 				props: {
 					message: "Waiting for transaction to complete.",
 					blockExplorerLink: blockExplorerTxURL
@@ -66,7 +66,7 @@ export const createTransactor = (_walletClient?: () => WalletClient): (() => Tra
 			});
 			notification.remove(notificationId);
 
-			notification.success(TxnNotification, {
+			notification.success(TxnNotification as any, {
 				props: {
 					message: "Transaction completed successfully!",
 					blockExplorerLink: blockExplorerTxURL

@@ -28,7 +28,7 @@ const Notification = ({
 	position = DEFAULT_POSITION,
 	props
 }: NotificationProps) => {
-	return toast.custom(BaseNotification, {
+	return toast.custom(BaseNotification as any, {
 		duration: status === "loading" ? Infinity : duration,
 		position,
 		props: { ...props, Content, status },
