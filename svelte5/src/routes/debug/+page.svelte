@@ -1,5 +1,5 @@
 <script>
-	import DebugContracts from "./_components/DebugContracts.svelte";
+	import DebugContracts from "../../lib/components/debug/DebugContracts.svelte";
 </script>
 
 <DebugContracts />

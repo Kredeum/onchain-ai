@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from "$app/stores";
-	import AddressComponent from "../_components/AddressComponent.svelte";
+	import AddressComponent from "../../../lib/components/blockexplorer/AddressComponent.svelte";
 
 	const { data }: { data: { contractData: { bytecode: string; assembly: string } } } = $props();
 
