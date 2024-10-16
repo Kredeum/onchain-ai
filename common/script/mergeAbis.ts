@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import fs from "fs";
 import path from "path";
 
@@ -27,7 +28,7 @@ const mergeAbis = async () => {
     }
   }
   console.log("deployments", deployments);
-  await writeJSON("../foundry/deployments.json", deployments, { spaces: 2 });
+  await writeJSON("../svelte5/src/lib/deployments.json", deployments, { spaces: 2 });
 };
 
 mergeAbis().catch(console.error);

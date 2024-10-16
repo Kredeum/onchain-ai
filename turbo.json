@@ -33,10 +33,16 @@
       ],
       "outputLogs": "new-only"
     },
+    "chain": {
+      "cache": false,
+      "persistent": true,
+      "outputLogs": "new-only"
+    },
     "deploy": {
       "env": [
         "ETHERSCAN_API_KEY*"
       ],
+      "cache": false,
       "dependsOn": [
         "build"
       ],

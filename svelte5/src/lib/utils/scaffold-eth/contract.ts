@@ -18,7 +18,7 @@ import type {
   Log,
   TransactionReceipt
 } from "viem";
-import deploymentsJson from "@onchain-ai/foundry/deployments.json";
+import deploymentsJson from "$lib/deployments.json";
 import scaffoldConfig from "$lib/scaffold.config";
 import type { Config, CreateReadContractParameters } from "wagmi-svelte";
 import type {

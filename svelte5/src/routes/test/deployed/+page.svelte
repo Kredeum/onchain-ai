@@ -1,5 +1,5 @@
 <script lang="ts">
-  import deployments from "@onchain-ai/foundry/deployments.json";
+  import deployments from "$lib/deployments.json";
 
   console.log("deployments:", deployments);
 </script>

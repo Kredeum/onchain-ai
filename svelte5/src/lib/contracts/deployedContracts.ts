@@ -1,5 +1,5 @@
 import type { GenericContractsDeclaration } from "$lib/utils/scaffold-eth/contract";
 
-import deployedContractsJson from "@onchain-ai/foundry/deployments.json";
+import deployedContractsJson from "$lib/deployments.json";
 
 export default deployedContractsJson;

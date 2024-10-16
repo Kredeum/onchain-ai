@@ -1,6 +1,6 @@
 import jsonConfig from "../../chainlink/config.json";
 import jsonAddresses from "../../foundry/addresses.json";
-import jsonDeployments from "../../foundry/deployments.json";
+import jsonDeployments from "../../svelte5/src/lib/deployments.json";
 
 type ConfigChain = typeof jsonConfig;
 type ConfigChainKey = keyof ConfigChain;

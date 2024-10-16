@@ -1,7 +1,7 @@
 {
   "author": "",
   "description": "",
-  "devDependencies": {
+  "dependencies": {
     "eslint-plugin-json": "^4.0.1",
     "solhint": "^5.0.3"
   },
@@ -16,7 +16,7 @@
     "build": "forge compile",
     "chain": "./anvil.sh",
     "deploy:all": "forge script script/DeployAll.s.sol",
-    "deploy": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
+    "deploy": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm run chain && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",
     "deploy:base": "CHAIN=base pnpm deploy:mainnet",
     "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
