@@ -5,10 +5,9 @@
     Bars3,
     BugAnt,
     Icon,
-    Link,
+    EllipsisHorizontalCircle,
     type IconSource,
-    AcademicCap,
-    LightBulb
+    ChatBubbleLeftRight
   } from "svelte-hero-icons";
   import ConnectButton from "$lib/components/scaffold-eth/connect-button/ConnectButton.svelte";
   import { FaucetButton } from "$lib/components/scaffold-eth";
@@ -45,15 +44,15 @@
       href: "/debug",
       icon: BugAnt
     },
-    // {
-    //   label: "OnChainlink",
-    //   href: "/on-chainlink",
-    //   icon: AcademicCap
-    // },
+    {
+      label: "Chat",
+      href: "/chat",
+      icon: EllipsisHorizontalCircle
+    },
     {
       label: "OnChainAI",
       href: "/onchain-ai",
-      icon: Link
+      icon: ChatBubbleLeftRight
     }
   ];
 

@@ -267,7 +267,7 @@
             {
               "name": "javascript",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -337,13 +337,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "sender",
               "type": "address",
-              "indexed": true,
+              "indexed": false,
               "internalType": "address"
             }
           ],
@@ -388,13 +388,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "response",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -754,7 +754,7 @@
             {
               "name": "javascript",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -824,13 +824,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "sender",
               "type": "address",
-              "indexed": true,
+              "indexed": false,
               "internalType": "address"
             }
           ],
@@ -875,13 +875,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "response",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -975,7 +975,7 @@
   },
   "84532": {
     "OnChainAIv1": {
-      "address": "0xb3e223624044cedDedd79859e74a5A8b2ecD2fC7",
+      "address": "0x299E0125Fa1754813FE0564355454E1B7b3F7010",
       "abi": [
         {
           "type": "constructor",
@@ -1241,7 +1241,7 @@
             {
               "name": "javascript",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -1311,13 +1311,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "sender",
               "type": "address",
-              "indexed": true,
+              "indexed": false,
               "internalType": "address"
             }
           ],
@@ -1362,13 +1362,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "response",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -1728,7 +1728,7 @@
             {
               "name": "javascript",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
@@ -1798,13 +1798,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "sender",
               "type": "address",
-              "indexed": true,
+              "indexed": false,
               "internalType": "address"
             }
           ],
@@ -1849,13 +1849,13 @@
             {
               "name": "prompt",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             },
             {
               "name": "response",
               "type": "string",
-              "indexed": true,
+              "indexed": false,
               "internalType": "string"
             }
           ],
