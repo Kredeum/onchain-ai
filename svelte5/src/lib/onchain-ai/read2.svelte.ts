@@ -4,33 +4,33 @@ import { untrack } from "svelte";
 import { createReadContract } from "wagmi-svelte";
 
 const createOnchainAIRead = () => {
-	const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
-	const { address, abi } = $derived(readDeployments(chainId).OnChainAIv1);
-	const functionName = "lastResponse";
+  const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
+  const { address, abi } = $derived(readDeployments(chainId).OnChainAIv1);
+  const functionName = "lastResponse";
 
-	let value = $state();
+  let value = $state();
 
-	const readContract = $derived.by(
-		createReadContract(() => ({
-			address,
-			abi,
-			functionName,
-			chainId
-		}))
-	);
+  const readContract = $derived.by(
+    createReadContract(() => ({
+      address,
+      abi,
+      functionName,
+      chainId
+    }))
+  );
 
-	$effect(() => {
-		console.log("<Read $effect ~ reRead");
-		value = readContract?.data;
-	});
+  $effect(() => {
+    console.log("<Read $effect ~ reRead");
+    value = readContract?.data;
+  });
 
-	$inspect("<Read value =", value);
+  $inspect("<Read value =", value);
 
-	return {
-		get value() {
-			return value;
-		}
-	};
+  return {
+    get value() {
+      return value;
+    }
+  };
 };
 
 export { createOnchainAIRead };

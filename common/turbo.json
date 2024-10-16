@@ -2,11 +2,7 @@
   "extends": ["//"],
   "tasks": {
     "build": {
-      "inputs": [
-        "lib/**",
-        "../chainlink/config.json",
-        "../foundry/addresses.json"
-      ],
+      "inputs": ["lib/**", "../chainlink/config.json", "../foundry/addresses.json"],
       "outputLogs": "new-only"
     }
   }

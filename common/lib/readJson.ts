@@ -10,8 +10,7 @@ const readConfig = (chainId: number | string): ConfigChainValue => {
   const chainIds = Object.keys(jsonConfig);
   const chainKey = String(chainId) as ConfigChainKey;
 
-  if (!chainIds.includes(chainKey))
-    throw Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
 
   return jsonConfig[chainKey];
 };
@@ -24,8 +23,7 @@ const readAddresses = (chainId: number | string): AddressesChainValue => {
   const chainIds = Object.keys(jsonAddresses);
   const chainKey = String(chainId) as AddressesChainKey;
 
-  if (!chainIds.includes(chainKey))
-    throw Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
 
   return jsonAddresses[chainKey];
 };
@@ -38,8 +36,7 @@ const readDeployments = (chainId: number | string): DeploymentsChainValue => {
   const chainIds = Object.keys(jsonDeployments);
   const chainKey = String(chainId) as DeploymentsChainKey;
 
-  if (!chainIds.includes(chainKey))
-    throw Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
 
   return jsonDeployments[chainKey];
 };

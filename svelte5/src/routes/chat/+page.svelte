@@ -1,7 +1,7 @@
 <script>
-	import Chat from "$lib/onchain-ai/Chat.svelte";
+  import Chat from "$lib/onchain-ai/Chat.svelte";
 
-	let refresh = $state(0);
+  let refresh = $state(0);
 </script>
 
 <Chat {refresh} />

@@ -5,27 +5,27 @@ import { fetchPriceFromUniswap } from "$lib/utils/scaffold-eth/fetchPriceFromUni
 const enablePolling = false;
 
 export const createNativeCurrencyPrice = () => {
-	const targetNetwork = $derived.by(createTargetNetwork());
-	let nativeCurrencyPrice = $state(0);
+  const targetNetwork = $derived.by(createTargetNetwork());
+  let nativeCurrencyPrice = $state(0);
 
-	const getPrice = async () => {
-		const price = await fetchPriceFromUniswap(targetNetwork);
-		nativeCurrencyPrice = price;
-	};
+  const getPrice = async () => {
+    const price = await fetchPriceFromUniswap(targetNetwork);
+    nativeCurrencyPrice = price;
+  };
 
-	$effect(() => {
-		getPrice();
-	});
+  $effect(() => {
+    getPrice();
+  });
 
-	$effect(() => {
-		if (enablePolling) {
-			setInterval(getPrice, scaffoldConfig.pollingInterval);
-		}
-	});
+  $effect(() => {
+    if (enablePolling) {
+      setInterval(getPrice, scaffoldConfig.pollingInterval);
+    }
+  });
 
-	return {
-		get nativeCurrencyPrice() {
-			return nativeCurrencyPrice;
-		}
-	};
+  return {
+    get nativeCurrencyPrice() {
+      return nativeCurrencyPrice;
+    }
+  };
 };

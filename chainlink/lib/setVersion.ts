@@ -6,7 +6,7 @@ const setVersion = async (
   chainId: number,
   address: string,
   version: number,
-  signer?: Wallet,
+  signer?: Wallet
 ): Promise<number> => {
   signer ||= await getWallet(chainId);
 

@@ -1,12 +1,11 @@
-if (!secrets.openaiApiKey)
-  throw Error("Need OPENAI_API_KEY environment variable");
+if (!secrets.openaiApiKey) throw Error("Need OPENAI_API_KEY environment variable");
 
 const data = {
   model: "gpt-4o-mini",
   messages: [
     { role: "system", content: "Answer in plain text with few words" },
-    { role: "user", content: args[0] },
-  ],
+    { role: "user", content: args[0] }
+  ]
 };
 
 const openAiResponse = await Functions.makeHttpRequest({
@@ -14,9 +13,9 @@ const openAiResponse = await Functions.makeHttpRequest({
   method: "POST",
   headers: {
     "Content-Type": `application/json`,
-    Authorization: `Bearer ${secrets.openaiApiKey}`,
+    Authorization: `Bearer ${secrets.openaiApiKey}`
   },
-  data: data,
+  data: data
 });
 
 const result = openAiResponse.error
