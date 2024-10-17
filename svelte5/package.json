@@ -59,6 +59,7 @@
     "deploy:fleek": "pnpm run build && fleek sites deploy",
     "fleek:login": "fleek login",
     "lint": "prettier --check . && eslint .",
+    "vite-plugin-node-polyfills": "^0.22.0",
     "vercel": "vercel"
   },
   "type": "module",
