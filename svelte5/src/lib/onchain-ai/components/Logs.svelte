@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Address } from "viem";
-  import { createContractLogs } from "$lib/runes/contractLogs.svelte";
+  import { createContractLogs } from "$lib/onchain-ai/runes/logs.svelte";
   import { replacer } from "$lib/utils/scaffold-eth/common";
 
   const { address }: { address: Address } = $props();
