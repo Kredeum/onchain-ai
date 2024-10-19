@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import DebugContracts from "../../lib/components/debug/DebugContracts.svelte";
 </script>
 

@@ -10,7 +10,7 @@
   <body data-sveltekit-preload-data="hover">
     <div style="display: contents">%sveltekit.body%</div>
 
-    <script>
+    <script lang="ts">
       const initialStorageValue = localStorage.getItem("scaffold-eth-dark-mode");
 
       if (initialStorageValue === "true") {
