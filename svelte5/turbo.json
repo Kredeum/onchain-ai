@@ -5,6 +5,11 @@
       "dependsOn": ["@onchain-ai/foundry#build", "@onchain-ai/common#build"],
       "inputs": ["src/**"],
       "outputLogs": "new-only"
+    },
+    "dev": {
+      "dependsOn": ["@onchain-ai/foundry#deploy", "@onchain-ai/common#build"],
+      "inputs": ["src/**"],
+      "outputLogs": "new-only"
     }
   }
 }

@@ -1,18 +1,15 @@
-<script>
-  // import Events from "$lib/onchain-ai/components/Events.svelte";
-  import Logs from "$lib/onchain-ai/components/Logs.svelte";
-  import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
+<script lang="ts">
+  import Events from "$lib/onchain-ai/components/Events.svelte";
 
-  const { address } = $derived.by(createOnchainAI);
-
-  let refresh = $state(0);
+  let refresh: number = $state(0);
 </script>
 
-<div class="m-10">
-  <!-- <Events {refresh} /> -->
-  <Logs {address} />
+<div class="flex flex-col w-full max-w-5xl p-4">
+  <div class="p-2">
+    <Events {refresh} />
+  </div>
 
-  <div class="pt-4">
-    <button class="btn" onclick={() => refresh++}>Refresh</button>
+  <div class="pt-4 text-center">
+    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
   </div>
 </div>

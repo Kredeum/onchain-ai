@@ -5,7 +5,6 @@
 </script>
 
 <div class="flex flex-col w-full max-w-lg p-4">
-<!-- <div class="flex flex-col max-w-lg p-4"> -->
   <div class="p-2">
     <Chat {refresh} />
   </div>

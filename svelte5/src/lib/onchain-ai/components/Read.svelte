@@ -3,22 +3,34 @@
   import { createReadContract } from "wagmi-svelte";
   import { createOnchainAI } from "../runes/contract.svelte";
 
-  let { functionName = "lastInteraction", refresh = 0, interaction = $bindable() } = $props();
+  type InteractionType = { requestId: string; prompt: string; response: string };
+  type ReadType = [string, string, string];
+
+  let {
+    lastInteraction = $bindable({ requestId: "", prompt: "", response: "" }),
+    functionName = "lastInteraction",
+    refresh = 0
+  }: {
+    lastInteraction: InteractionType;
+    functionName?: string;
+    refresh?: number;
+  } = $props();
 
   const { chainId, address, abi } = $derived.by(createOnchainAI);
 
   const readContract = $derived.by(
     createReadContract(() => ({
+      chainId,
       address,
       abi,
-      functionName,
-      chainId
+      functionName
     }))
   );
 
   $effect(() => {
     console.log("<Read $effect ~ reRead");
-    interaction = readContract?.data as [string, string, string];
+    [lastInteraction.requestId, lastInteraction.prompt, lastInteraction.response] =
+      readContract?.data as ReadType;
   });
 
   $effect(() => {

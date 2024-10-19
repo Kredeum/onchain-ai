@@ -1,32 +1,63 @@
 <script lang="ts">
-  import type { Address } from "viem";
-  import { createContractLogs } from "$lib/onchain-ai/runes/logs.svelte";
+  import { createPublicClient } from "wagmi-svelte";
+  import { type Address, type Log, parseAbi } from "viem";
   import { replacer } from "$lib/utils/scaffold-eth/common";
-  import { createOnchainAIEvents } from "../runes/events.svelte";
   import { createOnchainAI } from "../runes/contract.svelte";
 
+  type InteractionType = { requestId: string; prompt: string; response: string };
+  type LogWithArgs = Log & { args: InteractionType };
+
+  let {
+    interactions = $bindable([]),
+    refresh = 0
+  }: { interactions?: InteractionType[]; refresh?: number } = $props();
+
   const { address } = $derived.by(createOnchainAI);
-  $inspect("address", address);
+  const client = $derived.by(createPublicClient());
 
-  // const contractLogs = $derived.by(() => createOnchainAIEvents(address as Address));
-  const contractLogs = $derived.by(() => createContractLogs(address as Address));
+  $effect(() => {
+    console.log("$effect refresh", refresh);
 
-  let { refresh = 0 } = $props();
+    const fetchLogs = async () => {
+      if (!(client && address)) return console.error("<Events: Client or Address not found");
+      try {
+        const toBlock = await client.getBlockNumber();
+        const events = parseAbi([
+          // "event PromptLog(bytes32 indexed requestId, string prompt, address sender)",
+          "event ResponseLog(bytes32 indexed requestId, string prompt, string response)"
+        ]);
+        const fromBlock = 0n; // toBlock > 1000n ? toBlock - 1000n : 0n;
 
-  // const contractLogs = $derived.by(() => createOnchainLogs(address as Address));
+        interactions = (
+          (await client.getLogs({
+            address,
+            events,
+            fromBlock,
+            toBlock
+          })) as LogWithArgs[]
+        )
+          .sort((a, b) => Number((b.blockNumber || 0n) - (a.blockNumber || 0n)))
+          .map((log) => log.args);
 
-  // const contractLogsSorted = $derived.by(() =>
-  //   contractLogs().sort((a, b) => Number((a.blockNumber || 0n) - (b.blockNumber || 0n)))
-  // );
-  // const events = $derived.by(() => contractLogs());
+        console.log("fetchLogs:", address, fromBlock, toBlock, interactions);
+      } catch (error) {
+        console.error("Failed to fetch logs:", error);
+      }
+    };
+    fetchLogs();
+  });
+
+  $inspect("refresh:", refresh);
+  $inspect("address:", address);
+  $inspect("interactions:", interactions);
 </script>
 
-<div class="flex flex-col gap-3">
-  <div class="mockup-code max-h-[500px] overflow-auto">
-    <pre
-      class="whitespace-pre-wrap break-words px-5">{#each contractLogs as event, i (i)}<div><strong
-            >Log:</strong
-          > {JSON.stringify(event, replacer, 2)}</div>{/each}</pre>
+<div class="flex flex-col gap-3 p-4">
+  <div class="mockup-code max-h-[900px] overflow-auto">
+    {#each interactions as interaction, i (i)}
+      <pre class="whitespace-pre-wrap break-words px-5">
+{JSON.stringify(interaction, replacer, 2)}</pre>
+    {/each}
   </div>
 </div>
 

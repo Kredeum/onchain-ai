@@ -33,11 +33,11 @@
     <Explorer {tx} {address} />
   </div>
 
-  <div class="p-2 w-full max-w-lg">
-    <Chat {refresh} />
-  </div>
-
   <div class="pt-4 text-center">
     <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+  </div>
+
+  <div class="p-2 w-full max-w-lg">
+    <Chat {refresh} />
   </div>
 </div>
