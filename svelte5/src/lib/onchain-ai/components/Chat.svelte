@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createDarkMode } from "$lib/runes/darkMode.svelte.js";
   import { createOnchainAIRead } from "../runes/read.svelte.js";
+  import Explorer from "./Explorer.svelte";
   import ReadOnChainAI from "./Read.svelte";
   import { untrack } from "svelte";
 
@@ -41,7 +42,7 @@
 
 <ReadOnChainAI {refresh} bind:interaction />
 
-<div class="{bgBlue} p-4 rounded-lg shadow-md w-full max-w-lg flex flex-col">
+<div class="flex flex-col p-4 rounded-lg shadow-md {bgBlue} border border-blue-200">
   {#if interactions.length === 0}
     <div class="{bgGray} p-4 m-4 text-center rounded-lg">
       <em> No interactions yet </em>
@@ -54,6 +55,10 @@
     </div>
     <div class="{bgGray} p-2 m-2 rounded-lg inline-block max-w-xs self-start">
       {response}
+    </div>
+
+    <div class="pl-2 text-center">
+      <Explorer {requestId} />
     </div>
   {/each}
 </div>

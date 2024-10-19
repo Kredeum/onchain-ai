@@ -1,79 +1,43 @@
 <script lang="ts">
-  import { InputBase } from "$lib/components/scaffold-eth/inputs";
-  import { createDeployedContractInfo } from "$lib/runes/deployedContractInfo.svelte";
-  import { createTransactor, type TransactionFunc } from "$lib/runes/transactor.svelte";
-  import { createWriteContract } from "wagmi-svelte";
-  import { readAddresses, readConfig } from "@onchain-ai/common/lib/readJson";
-  import { createTargetNetworkId } from "$lib/runes/global.svelte";
   import Chat from "$lib/onchain-ai/components/Chat.svelte";
+  import Explorer from "$lib/onchain-ai/components/Explorer.svelte";
+  import Form from "$lib/onchain-ai/components/Form.svelte";
+  import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
+  import { untrack } from "svelte";
 
-  const prompts: string[] = [];
-  const responses: string[] = [];
+  const { address } = $derived.by(createOnchainAI);
 
-  let prompt: string = $state("");
   let refresh: number = $state(0);
-  const reRead = () => refresh++;
+  let tx: string = $state("");
 
-
-  const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
-    createDeployedContractInfo("OnChainAIv1")
-  );
-
-  let contractWrite = $derived.by(createWriteContract());
-  let writeTxn: TransactionFunc = $derived.by(createTransactor());
-
-  const handleSend = async () => {
-    try {
-      console.log("handleSend ~ deployedContractData:", deployedContractData);
-      const makeWriteWithParams = () =>
-        contractWrite!.writeContractAsync({
-          address: deployedContractData!.address,
-          abi: deployedContractData!.abi,
-          functionName: "sendRequest",
-          args: [prompt],
-          value: 10n ** 14n
-        });
-      await writeTxn?.(makeWriteWithParams);
-    } catch (e: unknown) {
-      console.error("⚡️ handleSend ~ error", e);
-    }
-    reRead();
-    responses.push();
-  };
-
-  const { targetNetworkId } = $derived.by(createTargetNetworkId);
-  const config = $derived(readConfig(targetNetworkId));
-  const onChainAI = $derived(readAddresses(targetNetworkId).OnChainAIv1);
+  $effect(() => {
+    tx;
+    untrack(() => {
+      refresh++;
+    });
+  });
 </script>
 
-<div class="flex items-center flex-col flex-grow pt-10 min-w-[320px]">
-  <div class="px-5">
-    <h1 class="text-center">
+<div class="flex flex-col items-center p-4">
+  <div class="text-center">
+    <h1>
       <span class="block text-4xl font-bold">OnChainAI</span>
     </h1>
   </div>
 
-  <div class="flex flex-col space-y-3">
-    <InputBase
-      name="Prompt"
-      placeholder="Enter your prompt"
-      onchange={(input) => (prompt = input)}
-      value={prompt}
-    />
+  <div class="pt-6 w-full max-w-md">
+    <Form bind:tx />
+  </div>
 
-    <button class="btn btn-primary btn-sm h-10 rounded-full px-2" onclick={handleSend}>
-      <span class="text-xl">Send</span>
-    </button>
+  <div class="pt-4 pb-8 text-center">
+    <Explorer {tx} {address} />
   </div>
-  <div class="p-4 text-gray-400">
-    <a href={`${config.explorer}/address/${onChainAI}`} target="_blank">
-      <em>view on etherscan</em>
-    </a>
-  </div>
-  <div class="w-full max-w-lg">
+
+  <div class="p-2 w-full max-w-lg">
     <Chat {refresh} />
   </div>
-  <div class="pt-4">
+
+  <div class="pt-4 text-center">
     <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
   </div>
 </div>

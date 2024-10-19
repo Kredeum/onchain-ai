@@ -1,13 +1,16 @@
-<script>
+<script lang="ts">
   import Chat from "$lib/onchain-ai/components/Chat.svelte";
 
-  let refresh = $state(0);
+  let refresh: number = $state(0);
 </script>
 
-<div class="m-10">
-  <Chat {refresh} />
+<div class="flex flex-col w-full max-w-lg p-4">
+<!-- <div class="flex flex-col max-w-lg p-4"> -->
+  <div class="p-2">
+    <Chat {refresh} />
+  </div>
 
-  <div class="pt-4">
-    <button class="btn" onclick={() => refresh++}>Refresh</button>
+  <div class="pt-4 text-center">
+    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
   </div>
 </div>

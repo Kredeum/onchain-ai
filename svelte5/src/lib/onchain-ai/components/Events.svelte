@@ -12,8 +12,6 @@
   const contractLogs = $derived.by(() => createContractLogs(address as Address));
 
   let { refresh = 0 } = $props();
-  // const { targetNetworkId: chainId } = $derived.by(() => createTargetNetworkId());
-  // const address = $derived.by(() => readDeployments(chainId).OnChainAIv1.address);
 
   // const contractLogs = $derived.by(() => createOnchainLogs(address as Address));
 
