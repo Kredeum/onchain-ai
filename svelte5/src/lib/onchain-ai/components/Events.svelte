@@ -10,8 +10,14 @@
   let {
     interactions = $bindable([]),
     refresh = 0,
+    limit = 3,
     display = false
-  }: { interactions?: InteractionType[]; refresh?: number; display?: boolean } = $props();
+  }: {
+    interactions?: InteractionType[];
+    refresh?: number;
+    limit?: number;
+    display?: boolean;
+  } = $props();
 
   const { address } = $derived.by(createOnchainAI);
   const client = $derived.by(createPublicClient());
@@ -38,7 +44,8 @@
           })) as LogWithArgs[]
         )
           .sort((a, b) => Number((b.blockNumber || 0n) - (a.blockNumber || 0n)))
-          .map((log) => log.args);
+          .map((log) => log.args)
+          .slice(0, limit);
 
         console.log("fetchLogs:", address, fromBlock, toBlock, interactions);
       } catch (error) {
@@ -47,10 +54,6 @@
     };
     fetchLogs();
   });
-
-  $inspect("refresh:", refresh);
-  $inspect("address:", address);
-  $inspect("interactions:", interactions);
 </script>
 
 {#if display}

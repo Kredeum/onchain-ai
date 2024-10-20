@@ -20,14 +20,11 @@
     if (!(lastRequestId && interactions.findIndex((it) => it.requestId === lastRequestId) === -1))
       return interactions;
 
-    return [lastInteraction, ...interactions];
+    return [lastInteraction as InteractionType, ...interactions];
   });
-
-  $inspect("chat lastInteraction:", lastInteraction);
-  $inspect("chat interactions:", interactions);
 </script>
 
-<div class="flex flex-col p-4 m-4 max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
+<div class="flex flex-col p-4 m-4 w-full max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
   {#if lastInteractions?.length === 0}
     <div class="{bgGray} p-4 m-4 text-center rounded-lg">
       <em> No interactions yet </em>

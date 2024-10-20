@@ -25,19 +25,19 @@
     </h1>
   </div>
 
-  <div class="pt-6 w-full max-w-md">
+  <div class="p-6 w-full max-w-md">
     <Form bind:tx />
   </div>
 
-  <div class="pt-4 pb-8 text-center">
+  <div class="text-center">
     <Explorer {tx} {address} />
   </div>
 
-  <div class="pt-4 text-center">
-    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
-  </div>
-
-  <div class="p-2 w-full max-w-lg">
+  <div class="p-4 w-full max-w-lg">
     <Chat {refresh} />
   </div>
+
+    <div class="pt-4 text-center">
+      <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+    </div>
 </div>
