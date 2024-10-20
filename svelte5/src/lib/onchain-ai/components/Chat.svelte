@@ -1,6 +1,5 @@
 <script lang="ts">
   import Explorer from "./Explorer.svelte";
-  import ReadOnChainAI from "./Read.svelte";
   import Events from "$lib/onchain-ai/components/Events.svelte";
   import { createDarkMode } from "$lib/runes/darkMode.svelte.js";
 
@@ -13,25 +12,18 @@
   let { refresh = 0 }: { refresh: number } = $props();
 
   let interactions: InteractionType[] = $state([]);
-  let lastInteraction: InteractionType | undefined = $state();
-
-  let lastInteractions: InteractionType[] = $derived.by(() => {
-    const lastRequestId = lastInteraction?.requestId;
-    if (!(lastRequestId && interactions.findIndex((it) => it.requestId === lastRequestId) === -1))
-      return interactions;
-
-    return [lastInteraction as InteractionType, ...interactions];
-  });
 </script>
 
-<div class="flex flex-col p-4 m-4 w-full max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
-  {#if lastInteractions?.length === 0}
+<div
+  class="flex flex-col p-4 m-4 w-full max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200"
+>
+  {#if interactions?.length === 0}
     <div class="{bgGray} p-4 m-4 text-center rounded-lg">
       <em> No interactions yet </em>
     </div>
   {/if}
 
-  {#each lastInteractions as interaction}
+  {#each interactions as interaction}
     <div class="{bgGreen} p-2 m-2 rounded-lg inline-block max-w-xs self-end">
       {interaction.prompt}
     </div>
@@ -46,6 +38,5 @@
 </div>
 
 <div class="max-w-4xl">
-  <ReadOnChainAI {refresh} bind:lastInteraction />
   <Events {refresh} bind:interactions />
 </div>

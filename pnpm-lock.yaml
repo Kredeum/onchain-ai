@@ -76,7 +76,7 @@ importers:
     dependencies:
       '@castlenine/svelte-qrcode':
         specifier: ^2.3.0
-        version: 2.3.0(svelte@5.0.0)
+        version: 2.3.0(svelte@5.0.3)
       '@coinbase/wallet-sdk':
         specifier: ^4.1.0
         version: 4.1.0
@@ -94,16 +94,16 @@ importers:
         version: link:../foundry
       '@sveltejs/adapter-static':
         specifier: ^3.0.5
-        version: 3.0.5(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))
+        version: 3.0.5(@sveltejs/kit@2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))
       '@sveltejs/kit':
-        specifier: ^2.7.1
-        version: 2.7.1(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
+        specifier: ^2.7.2
+        version: 2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
       '@sveltejs/vite-plugin-svelte':
         specifier: ^4.0.0
-        version: 4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
+        version: 4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
       '@tanstack/svelte-query':
         specifier: ^5.59.13
-        version: 5.59.13(svelte@5.0.0)
+        version: 5.59.13(svelte@5.0.3)
       '@types/eslint':
         specifier: ^9.6.1
         version: 9.6.1
@@ -124,13 +124,13 @@ importers:
         version: 4.6.1
       '@wagmi/connectors':
         specifier: ^5.2.2
-        version: 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+        version: 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
       '@wagmi/core':
         specifier: ^2.13.9
-        version: 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
+        version: 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
       '@web3modal/wagmi':
         specifier: ^5.1.11
-        version: 5.1.11(z6btydc5dlvkt3vvt6psrcordq)
+        version: 5.1.11(obwdgpg5xllrt3m4xraepmtzfe)
       abitype:
         specifier: ^1.0.6
         version: 1.0.6(typescript@5.6.3)(zod@3.22.4)
@@ -154,7 +154,7 @@ importers:
         version: 9.1.0(eslint@9.13.0(jiti@2.3.3))
       eslint-plugin-svelte:
         specifier: ^2.45.1
-        version: 2.45.1(eslint@9.13.0(jiti@2.3.3))(svelte@5.0.0)(ts-node@10.9.2(@types/node@22.7.7)(typescript@5.6.3))
+        version: 2.45.1(eslint@9.13.0(jiti@2.3.3))(svelte@5.0.3)(ts-node@10.9.2(@types/node@22.7.7)(typescript@5.6.3))
       postcss:
         specifier: ^8.4.47
         version: 8.4.47
@@ -166,22 +166,22 @@ importers:
         version: 3.3.3
       prettier-plugin-svelte:
         specifier: ^3.2.7
-        version: 3.2.7(prettier@3.3.3)(svelte@5.0.0)
+        version: 3.2.7(prettier@3.3.3)(svelte@5.0.3)
       prettier-plugin-tailwindcss:
         specifier: ^0.6.8
-        version: 0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0))(prettier@3.3.3)
+        version: 0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.3))(prettier@3.3.3)
       svelte:
-        specifier: ^5.0.0
-        version: 5.0.0
+        specifier: ^5.0.3
+        version: 5.0.3
       svelte-check:
         specifier: ^4.0.5
-        version: 4.0.5(svelte@5.0.0)(typescript@5.6.3)
+        version: 4.0.5(svelte@5.0.3)(typescript@5.6.3)
       svelte-french-toast:
         specifier: github:zapaz/svelte-french-toast#dev
-        version: https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.0)
+        version: https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.3)
       svelte-hero-icons:
         specifier: ^5.2.0
-        version: 5.2.0(svelte@5.0.0)
+        version: 5.2.0(svelte@5.0.3)
       tailwindcss:
         specifier: ^3.4.14
         version: 3.4.14(ts-node@10.9.2(@types/node@22.7.7)(typescript@5.6.3))
@@ -195,8 +195,8 @@ importers:
         specifier: ^5.6.3
         version: 5.6.3
       viem:
-        specifier: ^2.21.29
-        version: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+        specifier: ^2.21.30
+        version: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
       vite:
         specifier: ^5.4.9
         version: 5.4.9(@types/node@22.7.7)(terser@5.36.0)
@@ -2082,8 +2082,8 @@ packages:
     peerDependencies:
       '@sveltejs/kit': ^2.0.0
 
-  '@sveltejs/kit@2.7.1':
-    resolution: {integrity: sha512-TBVnkwgYQT3EafGQK6Eyh5FlLEBlRhCmqPTwcdOs+QdnyUc3eCAxRWtXlFxIWtmk6pqv11zdng8qTpThdTogew==}
+  '@sveltejs/kit@2.7.2':
+    resolution: {integrity: sha512-bFwrl+0bNr0/DHQZM0INwwSPNYqDjfsKRhUoa6rj9d8tDZzszBrJ3La6/HVFxWGONEigtG+SzHXa1BEa1BLdwA==}
     engines: {node: '>=18.13'}
     hasBin: true
     peerDependencies:
@@ -5715,12 +5715,12 @@ packages:
     peerDependencies:
       svelte: ^3.2.1 || ^4.0.0-next.1 || ^5.0.0-next.94
 
-  svelte@5.0.0:
-    resolution: {integrity: sha512-jv2IvTtakG58DqZMo6fY3T6HFmGV4iDQH2lSUyfmCEYaoa+aCNcF+9rERbdDvT4XDF0nQBg6TEoJn0dirED8VQ==}
-    engines: {node: '>=18'}
-
   svelte@5.0.0-next.260:
     resolution: {integrity: sha512-TGcvG71DUklf5P4UmJxOQiVxWYLPp4c6o+NUjmVMsAXKsCMXOTXw+QpnmEWw5D95Sj7SrmAGeIT+p/uvHAUZXg==}
+    engines: {node: '>=18'}
+
+  svelte@5.0.3:
+    resolution: {integrity: sha512-i8DopbAPRP9iaR3qqe++LPv4povQRshSseH3kSrzI4URZ9/7OTt3vCJPBp+5ACRQDik0S/tM1ZRA6EW/sGcKfw==}
     engines: {node: '>=18'}
 
   system-architecture@0.1.0:
@@ -6101,8 +6101,8 @@ packages:
     resolution: {integrity: sha512-BNGbWLfd0eUPabhkXUVm0j8uuvREyTh5ovRa/dyow/BqAbZJyC+5fU+IzQOzmAKzYqYRAISoRhdQr3eIZ/PXqg==}
     engines: {node: '>= 0.8'}
 
-  viem@2.21.29:
-    resolution: {integrity: sha512-n9LoCJjmI1XsE33nl+M4p3Wy5hczv7YC682RpX4Qk9cw8s9HJU+hUi5eDcNDPBcAwIHGCPKsf8yFBEYnE2XYVg==}
+  viem@2.21.30:
+    resolution: {integrity: sha512-igkuMUFmRaHNUP2jGH0w7ETB5Vrg2gtZnInKg5dO6U/V2ndq+GUL94qwGusZTMtkqmyaXFm9+ZzMWBdNIXdEqg==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -7645,9 +7645,9 @@ snapshots:
       '@babel/helper-validator-identifier': 7.25.7
       to-fast-properties: 2.0.0
 
-  '@castlenine/svelte-qrcode@2.3.0(svelte@5.0.0)':
+  '@castlenine/svelte-qrcode@2.3.0(svelte@5.0.3)':
     dependencies:
-      svelte: 5.0.0
+      svelte: 5.0.3
 
   '@chainlink/functions-toolkit@0.3.2(bufferutil@4.0.7)(utf-8-validate@5.0.10)':
     dependencies:
@@ -8877,7 +8877,7 @@ snapshots:
   '@safe-global/safe-apps-sdk@9.1.0(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)':
     dependencies:
       '@safe-global/safe-gateway-typescript-sdk': 3.22.2
-      viem: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
     transitivePeerDependencies:
       - bufferutil
       - typescript
@@ -9319,13 +9319,13 @@ snapshots:
 
   '@steeze-ui/heroicons@2.4.0': {}
 
-  '@sveltejs/adapter-static@3.0.5(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))':
+  '@sveltejs/adapter-static@3.0.5(@sveltejs/kit@2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))':
     dependencies:
-      '@sveltejs/kit': 2.7.1(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
+      '@sveltejs/kit': 2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
 
-  '@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))':
+  '@sveltejs/kit@2.7.2(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
+      '@sveltejs/vite-plugin-svelte': 4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
       '@types/cookie': 0.6.0
       cookie: 0.6.0
       devalue: 5.1.1
@@ -9337,27 +9337,27 @@ snapshots:
       sade: 1.8.1
       set-cookie-parser: 2.7.0
       sirv: 3.0.0
-      svelte: 5.0.0
+      svelte: 5.0.3
       tiny-glob: 0.2.9
       vite: 5.4.9(@types/node@22.7.7)(terser@5.36.0)
 
-  '@sveltejs/vite-plugin-svelte-inspector@3.0.0(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@3.0.0(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
+      '@sveltejs/vite-plugin-svelte': 4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
       debug: 4.3.7
-      svelte: 5.0.0
+      svelte: 5.0.3
       vite: 5.4.9(@types/node@22.7.7)(terser@5.36.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))':
+  '@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 3.0.0(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.0)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 3.0.0(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0)))(svelte@5.0.3)(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
       debug: 4.3.7
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.12
-      svelte: 5.0.0
+      svelte: 5.0.3
       vite: 5.4.9(@types/node@22.7.7)(terser@5.36.0)
       vitefu: 1.0.3(vite@5.4.9(@types/node@22.7.7)(terser@5.36.0))
     transitivePeerDependencies:
@@ -9374,15 +9374,15 @@ snapshots:
       '@tanstack/query-core': 5.59.13
       react: 18.3.1
 
-  '@tanstack/svelte-query@5.59.13(svelte@5.0.0)':
-    dependencies:
-      '@tanstack/query-core': 5.59.13
-      svelte: 5.0.0
-
   '@tanstack/svelte-query@5.59.13(svelte@5.0.0-next.260)':
     dependencies:
       '@tanstack/query-core': 5.59.13
       svelte: 5.0.0-next.260
+
+  '@tanstack/svelte-query@5.59.13(svelte@5.0.3)':
+    dependencies:
+      '@tanstack/query-core': 5.59.13
+      svelte: 5.0.3
 
   '@trufflesuite/uws-js-unofficial@20.30.0-unofficial.0':
     dependencies:
@@ -9617,17 +9617,17 @@ snapshots:
       loupe: 3.1.2
       tinyrainbow: 1.2.0
 
-  '@wagmi/connectors@5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)':
+  '@wagmi/connectors@5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)':
     dependencies:
       '@coinbase/wallet-sdk': 4.0.4
       '@metamask/sdk': 0.30.0(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(utf-8-validate@5.0.10)
       '@safe-global/safe-apps-provider': 0.18.3(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
       '@safe-global/safe-apps-sdk': 9.1.0(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
-      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
       '@walletconnect/ethereum-provider': 2.17.0(bufferutil@4.0.8)(react@18.3.1)(utf-8-validate@5.0.10)
       '@walletconnect/modal': 2.7.0(react@18.3.1)
       cbw-sdk: '@coinbase/wallet-sdk@3.9.3'
-      viem: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -9655,11 +9655,11 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))':
+  '@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))':
     dependencies:
       eventemitter3: 5.0.1
       mipd: 0.0.7(typescript@5.6.3)
-      viem: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
       zustand: 4.4.1(react@18.3.1)
     optionalDependencies:
       '@tanstack/query-core': 5.59.13
@@ -10315,10 +10315,10 @@ snapshots:
       lit: 3.1.0
       qrcode: 1.5.3
 
-  '@web3modal/wagmi@5.1.11(z6btydc5dlvkt3vvt6psrcordq)':
+  '@web3modal/wagmi@5.1.11(obwdgpg5xllrt3m4xraepmtzfe)':
     dependencies:
-      '@wagmi/connectors': 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
-      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/connectors': 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
       '@walletconnect/ethereum-provider': 2.16.1(bufferutil@4.0.8)(react@18.3.1)(utf-8-validate@5.0.10)
       '@walletconnect/utils': 2.16.1
       '@web3modal/base': 5.1.11(react@18.3.1)
@@ -10327,8 +10327,8 @@ snapshots:
       '@web3modal/scaffold-utils': 5.1.11(react@18.3.1)
       '@web3modal/siwe': 5.1.11(react@18.3.1)
       '@web3modal/wallet': 5.1.11
-      viem: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
-      wagmi: 2.12.20(@tanstack/query-core@5.59.13)(@tanstack/react-query@5.59.15(react@18.3.1))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      viem: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+      wagmi: 2.12.20(@tanstack/query-core@5.59.13)(@tanstack/react-query@5.59.15(react@18.3.1))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
     optionalDependencies:
       react: 18.3.1
     transitivePeerDependencies:
@@ -10360,10 +10360,10 @@ snapshots:
   '@zapaz/wagmi-svelte@https://codeload.github.com/zapaz/wagmi-svelte/tar.gz/835fb8651a596f5a639191bac5ff18def91e9cf1(@tanstack/query-core@5.59.13)(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)':
     dependencies:
       '@tanstack/svelte-query': 5.59.13(svelte@5.0.0-next.260)
-      '@wagmi/connectors': 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
-      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/connectors': 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
       svelte: 5.0.0-next.260
-      viem: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -11377,7 +11377,7 @@ snapshots:
       lodash: 4.17.21
       vscode-json-languageservice: 4.2.1
 
-  eslint-plugin-svelte@2.45.1(eslint@9.13.0(jiti@2.3.3))(svelte@5.0.0)(ts-node@10.9.2(@types/node@22.7.7)(typescript@5.6.3)):
+  eslint-plugin-svelte@2.45.1(eslint@9.13.0(jiti@2.3.3))(svelte@5.0.3)(ts-node@10.9.2(@types/node@22.7.7)(typescript@5.6.3)):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@9.13.0(jiti@2.3.3))
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -11390,9 +11390,9 @@ snapshots:
       postcss-safe-parser: 6.0.0(postcss@8.4.47)
       postcss-selector-parser: 6.1.2
       semver: 7.6.3
-      svelte-eslint-parser: 0.42.0(svelte@5.0.0)
+      svelte-eslint-parser: 0.42.0(svelte@5.0.3)
     optionalDependencies:
-      svelte: 5.0.0
+      svelte: 5.0.3
     transitivePeerDependencies:
       - ts-node
 
@@ -13134,16 +13134,16 @@ snapshots:
     dependencies:
       single-line-log: 1.1.2
 
-  prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0):
+  prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.3):
     dependencies:
       prettier: 3.3.3
-      svelte: 5.0.0
+      svelte: 5.0.3
 
-  prettier-plugin-tailwindcss@0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.0))(prettier@3.3.3):
+  prettier-plugin-tailwindcss@0.6.8(prettier-plugin-svelte@3.2.7(prettier@3.3.3)(svelte@5.0.3))(prettier@3.3.3):
     dependencies:
       prettier: 3.3.3
     optionalDependencies:
-      prettier-plugin-svelte: 3.2.7(prettier@3.3.3)(svelte@5.0.0)
+      prettier-plugin-svelte: 3.2.7(prettier@3.3.3)(svelte@5.0.3)
 
   prettier@2.8.8:
     optional: true
@@ -13810,19 +13810,19 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.0.5(svelte@5.0.0)(typescript@5.6.3):
+  svelte-check@4.0.5(svelte@5.0.3)(typescript@5.6.3):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.1
       fdir: 6.4.2
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.0.0
+      svelte: 5.0.3
       typescript: 5.6.3
     transitivePeerDependencies:
       - picomatch
 
-  svelte-eslint-parser@0.42.0(svelte@5.0.0):
+  svelte-eslint-parser@0.42.0(svelte@5.0.3):
     dependencies:
       eslint-scope: 7.2.2
       eslint-visitor-keys: 3.4.3
@@ -13830,23 +13830,23 @@ snapshots:
       postcss: 8.4.47
       postcss-scss: 4.0.9(postcss@8.4.47)
     optionalDependencies:
-      svelte: 5.0.0
+      svelte: 5.0.3
 
-  svelte-french-toast@https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.0):
+  svelte-french-toast@https://codeload.github.com/zapaz/svelte-french-toast/tar.gz/521c4f341f48960eec629a9af8c6d9b5980d31bb(svelte@5.0.3):
     dependencies:
-      svelte: 5.0.0
-      svelte-writable-derived: 3.1.1(svelte@5.0.0)
+      svelte: 5.0.3
+      svelte-writable-derived: 3.1.1(svelte@5.0.3)
 
-  svelte-hero-icons@5.2.0(svelte@5.0.0):
+  svelte-hero-icons@5.2.0(svelte@5.0.3):
     dependencies:
       '@steeze-ui/heroicons': 2.4.0
-      svelte: 5.0.0
+      svelte: 5.0.3
 
-  svelte-writable-derived@3.1.1(svelte@5.0.0):
+  svelte-writable-derived@3.1.1(svelte@5.0.3):
     dependencies:
-      svelte: 5.0.0
+      svelte: 5.0.3
 
-  svelte@5.0.0:
+  svelte@5.0.0-next.260:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -13862,7 +13862,7 @@ snapshots:
       magic-string: 0.30.12
       zimmerframe: 1.1.2
 
-  svelte@5.0.0-next.260:
+  svelte@5.0.3:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -14227,7 +14227,7 @@ snapshots:
 
   vary@1.1.2: {}
 
-  viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4):
+  viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4):
     dependencies:
       '@adraffy/ens-normalize': 1.11.0
       '@noble/curves': 1.6.0
@@ -14328,14 +14328,14 @@ snapshots:
 
   vscode-uri@3.0.8: {}
 
-  wagmi@2.12.20(@tanstack/query-core@5.59.13)(@tanstack/react-query@5.59.15(react@18.3.1))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4):
+  wagmi@2.12.20(@tanstack/query-core@5.59.13)(@tanstack/react-query@5.59.15(react@18.3.1))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4):
     dependencies:
       '@tanstack/react-query': 5.59.15(react@18.3.1)
-      '@wagmi/connectors': 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
-      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/connectors': 5.2.2(@wagmi/core@2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(react-native@0.75.4(@babel/core@7.25.8)(@babel/preset-env@7.25.8(@babel/core@7.25.8))(bufferutil@4.0.8)(react@18.3.1)(typescript@5.6.3)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@4.24.0)(typescript@5.6.3)(utf-8-validate@5.0.10)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      '@wagmi/core': 2.13.9(@tanstack/query-core@5.59.13)(react@18.3.1)(typescript@5.6.3)(viem@2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4))
       react: 18.3.1
       use-sync-external-store: 1.2.0(react@18.3.1)
-      viem: 2.21.29(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.21.30(bufferutil@4.0.8)(typescript@5.6.3)(utf-8-validate@5.0.10)(zod@3.22.4)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:

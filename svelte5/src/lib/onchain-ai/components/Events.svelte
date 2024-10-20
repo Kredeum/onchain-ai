@@ -3,9 +3,12 @@
   import { type Address, type Log, parseAbi } from "viem";
   import { replacer } from "$lib/utils/scaffold-eth/common";
   import { createOnchainAI } from "../runes/contract.svelte";
+  import { createAccount } from "wagmi-svelte";
 
-  type InteractionType = { requestId: string; prompt: string; response: string };
+  type InteractionType = { requestId: string; sender: Address; prompt: string; response: string };
   type LogWithArgs = Log & { args: InteractionType };
+
+  const eventName = "InteractionLog";
 
   let {
     interactions = $bindable([]),
@@ -19,26 +22,38 @@
     display?: boolean;
   } = $props();
 
-  const { address } = $derived.by(createOnchainAI);
   const client = $derived.by(createPublicClient());
+  const { address, abi } = $derived.by(createOnchainAI);
+  const { address: sender } = $derived.by(createAccount());
 
   $effect(() => {
+    if (!(client && address && abi && sender)) return;
+
+    client.watchContractEvent({
+      address,
+      abi,
+      eventName,
+      args: { sender },
+      onLogs: (logs) => console.info(logs)
+    });
+  });
+
+  $effect(() => {
+    if (!(client && address && abi && sender)) return;
+
     console.log("$effect refresh", refresh);
 
     const fetchLogs = async () => {
-      if (!(client && address)) return console.error("<Events: Client or Address not found");
       try {
         const toBlock = await client.getBlockNumber();
-        const events = parseAbi([
-          // "event PromptLog(bytes32 indexed requestId, string prompt, address sender)",
-          "event ResponseLog(bytes32 indexed requestId, string prompt, string response)"
-        ]);
         const fromBlock = 0n; // toBlock > 1000n ? toBlock - 1000n : 0n;
 
         interactions = (
-          (await client.getLogs({
+          (await client.getContractEvents({
             address,
-            events,
+            abi,
+            eventName,
+            args: { sender },
             fromBlock,
             toBlock
           })) as LogWithArgs[]
@@ -66,14 +81,3 @@
     </div>
   </div>
 {/if}
-
-<!-- {#if events?.length > 0}
-  {events.length} Events
-  {#each events as event, i (i)}
-    <pre>{JSON.stringify(event, replacer, 2)}</pre>
-  {/each}
-{:else}
-  <div class="bg-gray-100 p-4 m-4 rounded-lg">
-    <em> No contract Events yet </em>
-  </div>
-{/if} -->

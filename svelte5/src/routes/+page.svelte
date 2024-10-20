@@ -21,8 +21,15 @@
 <div class="flex flex-col items-center p-4">
   <div class="text-center">
     <h1>
-      <span class="block text-4xl font-bold">OnChainAI</span>
+      <span class="block text-4xl font-bold">Ask OnChainAI</span>
     </h1>
+
+    <div class="text-gray-300">
+      <em>
+        Keep your question simple and don't ask <br />
+        for a long response unless Chainlink consensus will fail
+      </em>
+    </div>
   </div>
 
   <div class="p-6 w-full max-w-md">
@@ -37,7 +44,7 @@
     <Chat {refresh} />
   </div>
 
-    <div class="pt-4 text-center">
-      <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
-    </div>
+  <div class="pt-4 text-center">
+    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+  </div>
 </div>

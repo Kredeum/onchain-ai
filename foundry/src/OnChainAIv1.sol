@@ -15,19 +15,20 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     error UnexpectedFullfillRequest(bytes32 expected, string response, string err);
 
     event JavascriptLog(string javascript);
-    event PromptLog(bytes32 indexed requestId, string prompt, address sender);
-    event ResponseLog(bytes32 indexed requestId, string prompt, string response);
     event PriceLog(uint256 indexed price);
+    event InteractionLog(
+        bytes32 indexed requestId, address indexed sender, bool indexed isResponse, string prompt, string response
+    );
 
     struct Interaction {
         bytes32 requestId;
+        address sender;
         string prompt;
         string response;
     }
 
-    Interaction public lastInteraction;
-
-    mapping(bytes32 => string) public prompts;
+    mapping(address => bytes32) public _lastRequestId;
+    mapping(bytes32 => Interaction) public interactions;
 
     bytes32 internal _donId;
     uint32 internal _gasLimit;
@@ -50,6 +51,10 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
         setGasLimit(gasLimit_);
         setDonID(donId_);
         setPrice(price_);
+    }
+
+    function lastInteraction() external view returns (Interaction memory) {
+        return interactions[_lastRequestId[msg.sender]];
     }
 
     function setJavascript(string memory javascript_) public onlyOwner {
@@ -93,27 +98,26 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
 
         requestId = _sendRequest(req.encodeCBOR(), _subscriptionId, _gasLimit, _donId);
 
-        prompts[requestId] = userPrompt;
+        delete( interactions[_lastRequestId[msg.sender]]);
+        _lastRequestId[msg.sender] = requestId;
+        interactions[requestId] = Interaction(requestId, msg.sender, userPrompt, "");
 
-        lastInteraction = Interaction(requestId, userPrompt, "");
-
-        emit PromptLog(requestId, userPrompt, msg.sender);
+        emit InteractionLog(requestId, msg.sender, false, userPrompt, "");
     }
 
     function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) internal override {
-        string memory prompt = prompts[requestId];
-        require(bytes(prompt).length > 0, UnexpectedFullfillRequest(requestId, string(response), string(err)));
+        Interaction memory interaction = interactions[requestId];
+
+        require(interaction.requestId == requestId, UnexpectedFullfillRequest(requestId, string(response), string(err)));
 
         // concat response or/and error
         string memory responseError = (err.length == 0)
             ? (response.length == 0) ? "Empty response" : string(response)
             : string.concat("Error: ", string(err), " | ", string(response));
 
-        delete prompts[requestId];
+        interactions[requestId].response = responseError;
 
-        lastInteraction = Interaction(requestId, prompt, responseError);
-
-        emit ResponseLog(requestId, prompt, responseError);
+        emit InteractionLog(requestId, interaction.sender, true, interaction.prompt, responseError);
     }
 
     function withdraw(address receiver) external onlyOwner {

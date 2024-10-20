@@ -36,7 +36,7 @@
 
   export const menuLinks: HeaderMenuLink[] = [
     {
-      label: "OnChainAI",
+      label: "Ask OnChainAI",
       href: "/",
       icon: ChatBubbleLeftRight
     },
@@ -44,16 +44,16 @@
       label: "Debug Contracts",
       href: "/debug",
       icon: BugAnt
-    },
-    {
-      label: "Chat",
-      href: "/chat",
-      icon: EllipsisHorizontalCircle
-    },
-    {
-      label: "Events",
-      href: "/events",
-      icon: Bars3
+      },
+      {
+        label: "Chat",
+        href: "/chat",
+        icon: EllipsisHorizontalCircle
+      },
+      {
+        label: "Events",
+        href: "/events",
+        icon: Bars3
     }
   ];
 
