@@ -1,7 +1,7 @@
 {
   "11155420": {
     "OnChainAI": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
-    "OnChainAIv1": "0x50d377994e4C95919843d3b40C81Edf88c37e298",
+    "OnChainAIv1": "0xc3C05919D182b568D18ef7658999b99b606D84c5",
     "chainName": "optimism-sepolia"
   },
   "31337": {
@@ -16,7 +16,7 @@
   },
   "84532": {
     "OnChainAI": "0xCB60F4a4e578CDDBe89e4a27B2126f54BaeF3500",
-    "OnChainAIv1": "0xb3e223624044cedDedd79859e74a5A8b2ecD2fC7",
+    "OnChainAIv1": "0x299E0125Fa1754813FE0564355454E1B7b3F7010",
     "chainName": "base-sepolia"
   }
 }

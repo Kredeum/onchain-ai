@@ -1,41 +1,43 @@
 <script lang="ts">
-	import { Address } from "$lib/components/scaffold-eth";
-	import { createAccount } from "wagmi-svelte";
+  import Chat from "$lib/onchain-ai/components/Chat.svelte";
+  import Explorer from "$lib/onchain-ai/components/Explorer.svelte";
+  import Form from "$lib/onchain-ai/components/Form.svelte";
+  import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
+  import { untrack } from "svelte";
 
-	const { address } = $derived.by(createAccount());
+  const { address } = $derived.by(createOnchainAI);
+
+  let refresh: number = $state(0);
+  let tx: string = $state("");
+
+  $effect(() => {
+    tx;
+    untrack(() => {
+      refresh++;
+    });
+  });
 </script>
 
-<div class="flex flex-grow flex-col items-center pt-10">
-	<div class="px-5">
-		<h1 class="text-center">
-			<span class="mb-2 block text-2xl">Welcome to</span>
-			<span class="block text-4xl font-bold">Scaffold-ETH Alt</span>
-		</h1>
-		<div class="flex items-center justify-center space-x-2">
-			<p class="my-2 font-medium">Connected Address:</p>
-			<Address {address} />
-		</div>
-		<p class="text-center text-lg">
-			Get started by editing
-			<code
-				class="bg-base-300 inline-block max-w-full break-words break-all text-base font-bold italic"
-			>
-				svelte5/src/routes/+page.svelte
-			</code>
-		</p>
-		<p class="text-center text-lg">
-			Edit your smart contract
-			<code
-				class="bg-base-300 inline-block max-w-full break-words break-all text-base font-bold italic"
-			>
-				YourContract.sol
-			</code>
-			in
-			<code
-				class="bg-base-300 inline-block max-w-full break-words break-all text-base font-bold italic"
-			>
-				foundry/src
-			</code>
-		</p>
-	</div>
+<div class="flex flex-col items-center p-4">
+  <div class="text-center">
+    <h1>
+      <span class="block text-4xl font-bold">OnChainAI</span>
+    </h1>
+  </div>
+
+  <div class="pt-6 w-full max-w-md">
+    <Form bind:tx />
+  </div>
+
+  <div class="pt-4 pb-8 text-center">
+    <Explorer {tx} {address} />
+  </div>
+
+  <div class="pt-4 text-center">
+    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+  </div>
+
+  <div class="p-2 w-full max-w-lg">
+    <Chat {refresh} />
+  </div>
 </div>

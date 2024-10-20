@@ -14,9 +14,9 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     error PaymentRequired(uint256 expected, uint256 actual);
     error UnexpectedFullfillRequest(bytes32 expected, string response, string err);
 
-    event JavascriptLog(string indexed javascript);
-    event PromptLog(bytes32 indexed requestId, string indexed prompt, address indexed sender);
-    event ResponseLog(bytes32 indexed requestId, string indexed prompt, string indexed response);
+    event JavascriptLog(string javascript);
+    event PromptLog(bytes32 indexed requestId, string prompt, address sender);
+    event ResponseLog(bytes32 indexed requestId, string prompt, string response);
     event PriceLog(uint256 indexed price);
 
     struct Interaction {

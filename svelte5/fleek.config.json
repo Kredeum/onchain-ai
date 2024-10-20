@@ -1,8 +1,8 @@
 {
-	"sites": [
-		{
-			"slug": "onchain-ai",
-			"distDir": "build"
-		}
-	]
+  "sites": [
+    {
+      "slug": "slow-winter-thousands",
+      "distDir": "build "
+    }
+  ]
 }

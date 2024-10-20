@@ -6,7 +6,7 @@ import { type Wallet } from "ethers";
 const uploadSecrets = async (
   chainId: number,
   expiration: number,
-  signer?: Wallet,
+  signer?: Wallet
 ): Promise<number> => {
   signer ||= await getWallet(chainId);
 
@@ -19,7 +19,7 @@ const uploadSecrets = async (
   const secretsManager = new SecretsManager({
     signer: signer,
     functionsRouterAddress: router,
-    donId: donId,
+    donId: donId
   });
   await secretsManager.initialize();
   const encryptedSecretsObj = await secretsManager.encryptSecrets(secrets);
@@ -31,7 +31,7 @@ const uploadSecrets = async (
     encryptedSecretsHexstring: encryptedSecretsObj.encryptedSecrets,
     gatewayUrls: gatewayUrls,
     slotId: slotIdNumber,
-    minutesUntilExpiration: expiration,
+    minutesUntilExpiration: expiration
   });
   // console.log(JSON.stringify(result, null, 2));
 

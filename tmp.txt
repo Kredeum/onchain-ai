@@ -1,0 +1,39 @@
+<script lang="ts">
+  import Read from "./Read.svelte";
+
+	let interaction = $state();
+	let refresh = $state(0);
+</script>
+
+{interaction}
+
+<Read {refresh} bind:data={interaction} />
+
+<br/>
+
+<button onclick={() => refresh++}>Refresh {refresh}</button>
+
+
+
+<script lang="ts">
+	let {name0="Nom" , refresh = 0, data= $bindable() } = $props();
+
+	const createName1 = (nom) => (nom + "_" + "name1");
+	const createName2 = (nom) => (nom + "_" + "name2");
+
+	const name1 = $derived.by(() => createName1(name0))
+	const name2 = $derived.by(() => createName2(name1))
+	// const name2 = $derived.by(() => {
+	//	return (name1 + "_" + "name2")
+	// })
+
+	$effect( () => {
+		data = name2 + "_" + refresh;
+	})
+
+	$inspect("name0", name0);
+	$inspect("name1", name1);
+	$inspect("name2", name2);
+	$inspect("data", data);
+</script>
+

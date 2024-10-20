@@ -8,12 +8,7 @@ import { setVersion, uploadSecrets } from "../lib";
 
 onChainScope
   .task("secrets", "Upload OnChainAI secrets to Chainlink")
-  .addOptionalParam(
-    "expiration",
-    "Expiration time in minutes of uploaded secrets ",
-    60,
-    types.int,
-  )
+  .addOptionalParam("expiration", "Expiration time in minutes of uploaded secrets ", 60, types.int)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .setAction(async (taskArgs: any, hre: any) => {
     const chainId = await hre.getChainId();

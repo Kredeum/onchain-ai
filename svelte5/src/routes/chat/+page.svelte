@@ -1,11 +1,11 @@
-<script>
-	import Chat from "$lib/onchain-ai/Chat.svelte";
+<script lang="ts">
+  import Chat from "$lib/onchain-ai/components/Chat.svelte";
 
-	let refresh = $state(0);
+  let refresh: number = $state(0);
 </script>
 
-<Chat {refresh} />
+<div class="flex flex-col w-full p-4 items-center">
+  <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
 
-<div class="mx-8">
-  <button class="btn" onclick={() => refresh++}>Refresh</button>
+  <Chat {refresh} />
 </div>

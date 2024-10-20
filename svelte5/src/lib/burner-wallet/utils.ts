@@ -7,7 +7,7 @@ const burnerStorageKey = "scaffoldEth2.burnerWallet.sk";
  * Checks if the private key is valid
  */
 const isValidSk = (pk: Hex | string | undefined | null): boolean => {
-	return pk?.length === 64 || pk?.length === 66;
+  return pk?.length === 64 || pk?.length === 66;
 };
 
 /**
@@ -19,25 +19,25 @@ const newDefaultPrivateKey = generatePrivateKey();
  * Save the current burner private key to local storage
  */
 export const saveBurnerSK = (privateKey: Hex): void => {
-	if (typeof window != "undefined" && window != null) {
-		window?.localStorage?.setItem(burnerStorageKey, privateKey);
-	}
+  if (typeof window != "undefined" && window != null) {
+    window?.localStorage?.setItem(burnerStorageKey, privateKey);
+  }
 };
 
 /**
  * Gets the current burner private key from local storage
  */
 export const loadBurnerSK = (): Hex => {
-	let currentSk: Hex = "0x";
-	if (typeof window != "undefined" && window != null) {
-		currentSk = (window?.localStorage?.getItem?.(burnerStorageKey)?.replaceAll('"', "") ??
-			"0x") as Hex;
-	}
+  let currentSk: Hex = "0x";
+  if (typeof window != "undefined" && window != null) {
+    currentSk = (window?.localStorage?.getItem?.(burnerStorageKey)?.replaceAll('"', "") ??
+      "0x") as Hex;
+  }
 
-	if (!!currentSk && isValidSk(currentSk)) {
-		return currentSk;
-	} else {
-		saveBurnerSK(newDefaultPrivateKey);
-		return newDefaultPrivateKey;
-	}
+  if (!!currentSk && isValidSk(currentSk)) {
+    return currentSk;
+  } else {
+    saveBurnerSK(newDefaultPrivateKey);
+    return newDefaultPrivateKey;
+  }
 };

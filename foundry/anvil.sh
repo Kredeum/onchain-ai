@@ -20,26 +20,29 @@ fi
 # Kill anvil: `anvil.sh --kill`
 if [ "$1" = "-k" ] || [ "$1" = "--kill" ]; then
   pkill -f anvil
+  echo "❌ Anvil killed"
   exit 0
 fi
 
 # Restart anvil: `anvil.sh --restart`
 if [ "$1" = "-r" ] || [ "$1" = "--restart" ]; then
   pkill -f anvil
+  echo "Anvil restarting..."
 fi
 
 # Test anvil port
 if nc -z localhost 8545; then
   # Echo only
-  echo "Anvil already running."
+  echo "✅ Anvil already running."
 else
   # Start anvil
-  echo "Starting Anvil..." `pwd`
+  echo "Anvil starting"
   anvil > ./anvil.log &
 
   # Wait for: `Listening`...
   while ! grep -q "Listening" < anvil.log; do
     sleep 1
   done
+  echo "✅ Anvil started"
 fi
 
