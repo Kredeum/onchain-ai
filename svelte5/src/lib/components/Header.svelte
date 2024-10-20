@@ -37,7 +37,7 @@
   export const menuLinks: HeaderMenuLink[] = [
     {
       label: "OnChainAI",
-      href: "/onchain-ai",
+      href: "/",
       icon: ChatBubbleLeftRight
     },
     {

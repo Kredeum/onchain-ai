@@ -9,8 +9,9 @@
 
   let {
     interactions = $bindable([]),
-    refresh = 0
-  }: { interactions?: InteractionType[]; refresh?: number } = $props();
+    refresh = 0,
+    display = false
+  }: { interactions?: InteractionType[]; refresh?: number; display?: boolean } = $props();
 
   const { address } = $derived.by(createOnchainAI);
   const client = $derived.by(createPublicClient());
@@ -52,14 +53,16 @@
   $inspect("interactions:", interactions);
 </script>
 
-<div class="flex flex-col gap-3 p-4">
-  <div class="mockup-code max-h-[900px] overflow-auto">
-    {#each interactions as interaction, i (i)}
-      <pre class="whitespace-pre-wrap break-words px-5">
+{#if display}
+  <div class="flex flex-col gap-3 p-4">
+    <div class="mockup-code max-h-[900px] overflow-auto">
+      {#each interactions as interaction, i (i)}
+        <pre class="whitespace-pre-wrap break-words px-5">
 {JSON.stringify(interaction, replacer, 2)}</pre>
-    {/each}
+      {/each}
+    </div>
   </div>
-</div>
+{/if}
 
 <!-- {#if events?.length > 0}
   {events.length} Events

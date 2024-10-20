@@ -19,9 +19,7 @@
   $inspect("chat interactions:", interactions);
 </script>
 
-<ReadOnChainAI {refresh} bind:lastInteraction />
-
-<div class="flex flex-col p-4 rounded-lg shadow-md {bgBlue} border border-blue-200">
+<div class="flex flex-col p-4 m-4 max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
   {#if interactions?.length === 0}
     <div class="{bgGray} p-4 m-4 text-center rounded-lg">
       <em> No interactions yet </em>
@@ -42,6 +40,7 @@
   {/each}
 </div>
 
-<div class="p-2">
+<div class="max-w-4xl">
+  <ReadOnChainAI {refresh} bind:lastInteraction />
   <Events {refresh} bind:interactions />
 </div>
