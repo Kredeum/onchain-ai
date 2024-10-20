@@ -12,7 +12,7 @@
     refresh = 0,
     display = false
   }: {
-    lastInteraction: InteractionType;
+    lastInteraction?: InteractionType;
     functionName?: string;
     refresh?: number;
     display?: boolean;

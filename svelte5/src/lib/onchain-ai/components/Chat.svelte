@@ -13,20 +13,28 @@
   let { refresh = 0 }: { refresh: number } = $props();
 
   let interactions: InteractionType[] = $state([]);
-  let lastInteraction: InteractionType = $state({ requestId: "", prompt: "", response: "" });
+  let lastInteraction: InteractionType | undefined = $state();
+
+  let lastInteractions: InteractionType[] = $derived.by(() => {
+    const lastRequestId = lastInteraction?.requestId;
+    if (!(lastRequestId && interactions.findIndex((it) => it.requestId === lastRequestId) === -1))
+      return interactions;
+
+    return [lastInteraction, ...interactions];
+  });
 
   $inspect("chat lastInteraction:", lastInteraction);
   $inspect("chat interactions:", interactions);
 </script>
 
 <div class="flex flex-col p-4 m-4 max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
-  {#if interactions?.length === 0}
+  {#if lastInteractions?.length === 0}
     <div class="{bgGray} p-4 m-4 text-center rounded-lg">
       <em> No interactions yet </em>
     </div>
   {/if}
 
-  {#each interactions as interaction}
+  {#each lastInteractions as interaction}
     <div class="{bgGreen} p-2 m-2 rounded-lg inline-block max-w-xs self-end">
       {interaction.prompt}
     </div>
