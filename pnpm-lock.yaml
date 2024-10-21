@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       turbo:
-        specifier: ^2.2.1
+        specifier: ^2.2.3
         version: 2.2.3
 
   chainlink:
