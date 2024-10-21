@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.28;
 
-import {FunctionsClient} from "@chainlink/contracts/src/v0.8/functions/v1_0_0/FunctionsClient.sol";
-import {ConfirmedOwner} from "@chainlink/contracts/src/v0.8/shared/access/ConfirmedOwner.sol";
-import {FunctionsRequest} from "@chainlink/contracts/src/v0.8/functions/v1_0_0/libraries/FunctionsRequest.sol";
+import {FunctionsClient} from "@chainlink/functions/v1_0_0/FunctionsClient.sol";
+import {ConfirmedOwner} from "@chainlink/shared/access/ConfirmedOwner.sol";
+import {FunctionsRequest} from "@chainlink/functions/v1_0_0/libraries/FunctionsRequest.sol";
 
 contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     using FunctionsRequest for FunctionsRequest.Request;
@@ -27,7 +27,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
         string response;
     }
 
-    mapping(address => bytes32) public _lastRequestId;
+    mapping(address => bytes32) internal _lastRequestId;
     mapping(bytes32 => Interaction) public interactions;
 
     bytes32 internal _donId;
@@ -36,7 +36,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     uint64 internal _subscriptionId;
     uint64 internal _donHostedSecretsVersion;
 
-    uint256 public price = 0.0001 ether;
+    uint256 public price;
 
     constructor(
         address router,
@@ -120,9 +120,9 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
         emit InteractionLog(requestId, interaction.sender, true, interaction.prompt, responseError);
     }
 
-    function withdraw(address receiver) external onlyOwner {
+    function withdraw() external onlyOwner {
         uint256 bal = address(this).balance;
-        (bool success,) = payable(receiver).call{value: bal}("");
-        require(success, WithdrawFailed(receiver, bal));
+        (bool success,) = payable(msg.sender).call{value: bal}("");
+        require(success, WithdrawFailed(msg.sender, bal));
     }
 }

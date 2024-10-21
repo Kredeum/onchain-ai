@@ -1,12 +1,8 @@
 <script lang="ts">
-  import { createPublicClient } from "wagmi-svelte";
   import { type Address, type Log, parseAbi } from "viem";
   import { replacer } from "$lib/utils/scaffold-eth/common";
   import { createOnchainAI } from "../runes/contract.svelte";
-  import { createAccount } from "wagmi-svelte";
-
-  type InteractionType = { requestId: string; sender: Address; prompt: string; response: string };
-  type LogWithArgs = Log & { args: InteractionType };
+  import type { InteractionType, LogWithArgs } from "../types";
 
   const eventName = "InteractionLog";
 
@@ -22,21 +18,9 @@
     display?: boolean;
   } = $props();
 
-  const client = $derived.by(createPublicClient());
-  const { address, abi } = $derived.by(createOnchainAI);
-  const { address: sender } = $derived.by(createAccount());
+  const { client, address, abi, account: sender } = $derived.by(createOnchainAI);
 
-  $effect(() => {
-    if (!(client && address && abi && sender)) return;
-
-    client.watchContractEvent({
-      address,
-      abi,
-      eventName,
-      args: { sender },
-      onLogs: (logs) => console.info(logs)
-    });
-  });
+  const logsMap = new Map();
 
   $effect(() => {
     if (!(client && address && abi && sender)) return;
@@ -48,7 +32,7 @@
         const toBlock = await client.getBlockNumber();
         const fromBlock = 0n; // toBlock > 1000n ? toBlock - 1000n : 0n;
 
-        interactions = (
+        (
           (await client.getContractEvents({
             address,
             abi,
@@ -58,8 +42,20 @@
             toBlock
           })) as LogWithArgs[]
         )
-          .sort((a, b) => Number((b.blockNumber || 0n) - (a.blockNumber || 0n)))
+          .sort((a, b) => {
+            const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);
+            const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
+            return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
+          })
           .map((log) => log.args)
+          .forEach((log) => {
+            logsMap.set(log.requestId, log);
+          });
+
+        console.log("fetchLogs:", logsMap);
+
+        interactions = ([...logsMap.values()] as InteractionType[]) //
+          .reverse()
           .slice(0, limit);
 
         console.log("fetchLogs:", address, fromBlock, toBlock, interactions);
@@ -68,6 +64,28 @@
       }
     };
     fetchLogs();
+  });
+
+  $effect(() => {
+    if (!(client && address && abi && sender)) return;
+
+    client.watchContractEvent({
+      address,
+      abi,
+      eventName,
+      args: { sender },
+      // onLogs: (logs) => (interactions = [(logs[0] as LogWithArgs).args, ...interactions])
+      onLogs: (logs) => {
+        const log = logs[0] as LogWithArgs;
+        logsMap.set(log.args.requestId, log.args);
+
+        interactions = ([...logsMap.values()] as InteractionType[]) //
+          .reverse()
+          .slice(0, limit);
+
+        console.log("onLogs:", interactions);
+      }
+    });
   });
 </script>
 

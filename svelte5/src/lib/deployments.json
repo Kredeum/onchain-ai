@@ -41,25 +41,6 @@
         },
         {
           "type": "function",
-          "name": "_lastRequestId",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
           "name": "acceptOwnership",
           "inputs": [],
           "outputs": [],
@@ -296,13 +277,7 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
@@ -321,6 +296,12 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
             },
             {
               "name": "prompt",
@@ -555,25 +536,6 @@
         },
         {
           "type": "function",
-          "name": "_lastRequestId",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
           "name": "acceptOwnership",
           "inputs": [],
           "outputs": [],
@@ -810,13 +772,7 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
@@ -835,6 +791,12 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
             },
             {
               "name": "prompt",
@@ -1029,7 +991,7 @@
   },
   "84532": {
     "OnChainAIv1": {
-      "address": "0x2C9e85af6EF902D241E570E611EeA8dbF619432a",
+      "address": "0x93EB497b305D2cC4Fa3AC62009258EaE951043dB",
       "abi": [
         {
           "type": "constructor",
@@ -1066,25 +1028,6 @@
             }
           ],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "_lastRequestId",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1324,13 +1267,7 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
@@ -1349,6 +1286,12 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
             },
             {
               "name": "prompt",
@@ -1583,25 +1526,6 @@
         },
         {
           "type": "function",
-          "name": "_lastRequestId",
-          "inputs": [
-            {
-              "name": "",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
           "name": "acceptOwnership",
           "inputs": [],
           "outputs": [],
@@ -1838,13 +1762,7 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
@@ -1863,6 +1781,12 @@
               "type": "address",
               "indexed": true,
               "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
             },
             {
               "name": "prompt",

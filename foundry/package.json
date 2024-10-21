@@ -27,5 +27,5 @@
     "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
     "test": "forge test"
   },
-  "version": "1.0.0"
+  "version": "1.0.1"
 }

@@ -16,9 +16,12 @@
     "chainName": "local",
     "donId": "fun-local-1",
     "explorer": "explorer42",
-    "gatewayUrls": ["42", "4242"],
+    "gatewayUrls": [
+      "42",
+      "4242"
+    ],
+    "router": "0x0000000000000000000000000000000000000000",
     "price": "100000000000000",
-    "router": "0xf9B8fc078197181C841c296C876945aaa425B278",
     "rpc": "rpc42",
     "subscriptionId": "1"
   },
