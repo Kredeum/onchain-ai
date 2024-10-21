@@ -1,7 +1,7 @@
 {
   "8453": {
     "OnChainAIv1": {
-      "address": "0x6adA42826f85fcDd769dd912709D0dE44e0f26C3",
+      "address": "0x1F4666E268Ec7F1Fc46C467A8CdAF6b01f88B935",
       "abi": [
         {
           "type": "constructor",
@@ -71,13 +71,24 @@
         },
         {
           "type": "function",
-          "name": "lastInteraction",
-          "inputs": [],
+          "name": "interactions",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
           "outputs": [
             {
               "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
             },
             {
               "name": "prompt",
@@ -88,6 +99,41 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "tuple",
+              "internalType": "struct OnChainAIv1.Interaction",
+              "components": [
+                {
+                  "name": "requestId",
+                  "type": "bytes32",
+                  "internalType": "bytes32"
+                },
+                {
+                  "name": "sender",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "prompt",
+                  "type": "string",
+                  "internalType": "string"
+                },
+                {
+                  "name": "response",
+                  "type": "string",
+                  "internalType": "string"
+                }
+              ]
             }
           ],
           "stateMutability": "view"
@@ -114,25 +160,6 @@
               "name": "",
               "type": "uint256",
               "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "prompts",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -250,15 +277,46 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "InteractionLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
         },
         {
           "type": "event",
@@ -326,31 +384,6 @@
         },
         {
           "type": "event",
-          "name": "PromptLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "indexed": false,
-              "internalType": "address"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
           "name": "RequestFulfilled",
           "inputs": [
             {
@@ -371,31 +404,6 @@
               "type": "bytes32",
               "indexed": true,
               "internalType": "bytes32"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
-          "name": "ResponseLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
             }
           ],
           "anonymous": false
@@ -558,13 +566,24 @@
         },
         {
           "type": "function",
-          "name": "lastInteraction",
-          "inputs": [],
+          "name": "interactions",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
           "outputs": [
             {
               "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
             },
             {
               "name": "prompt",
@@ -575,6 +594,41 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "tuple",
+              "internalType": "struct OnChainAIv1.Interaction",
+              "components": [
+                {
+                  "name": "requestId",
+                  "type": "bytes32",
+                  "internalType": "bytes32"
+                },
+                {
+                  "name": "sender",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "prompt",
+                  "type": "string",
+                  "internalType": "string"
+                },
+                {
+                  "name": "response",
+                  "type": "string",
+                  "internalType": "string"
+                }
+              ]
             }
           ],
           "stateMutability": "view"
@@ -601,25 +655,6 @@
               "name": "",
               "type": "uint256",
               "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "prompts",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -737,15 +772,46 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "InteractionLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
         },
         {
           "type": "event",
@@ -813,31 +879,6 @@
         },
         {
           "type": "event",
-          "name": "PromptLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "indexed": false,
-              "internalType": "address"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
           "name": "RequestFulfilled",
           "inputs": [
             {
@@ -858,31 +899,6 @@
               "type": "bytes32",
               "indexed": true,
               "internalType": "bytes32"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
-          "name": "ResponseLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
             }
           ],
           "anonymous": false
@@ -975,7 +991,7 @@
   },
   "84532": {
     "OnChainAIv1": {
-      "address": "0x299E0125Fa1754813FE0564355454E1B7b3F7010",
+      "address": "0x93EB497b305D2cC4Fa3AC62009258EaE951043dB",
       "abi": [
         {
           "type": "constructor",
@@ -1045,13 +1061,24 @@
         },
         {
           "type": "function",
-          "name": "lastInteraction",
-          "inputs": [],
+          "name": "interactions",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
           "outputs": [
             {
               "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
             },
             {
               "name": "prompt",
@@ -1062,6 +1089,41 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "tuple",
+              "internalType": "struct OnChainAIv1.Interaction",
+              "components": [
+                {
+                  "name": "requestId",
+                  "type": "bytes32",
+                  "internalType": "bytes32"
+                },
+                {
+                  "name": "sender",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "prompt",
+                  "type": "string",
+                  "internalType": "string"
+                },
+                {
+                  "name": "response",
+                  "type": "string",
+                  "internalType": "string"
+                }
+              ]
             }
           ],
           "stateMutability": "view"
@@ -1088,25 +1150,6 @@
               "name": "",
               "type": "uint256",
               "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "prompts",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -1224,15 +1267,46 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "InteractionLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
         },
         {
           "type": "event",
@@ -1300,31 +1374,6 @@
         },
         {
           "type": "event",
-          "name": "PromptLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "indexed": false,
-              "internalType": "address"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
           "name": "RequestFulfilled",
           "inputs": [
             {
@@ -1345,31 +1394,6 @@
               "type": "bytes32",
               "indexed": true,
               "internalType": "bytes32"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
-          "name": "ResponseLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
             }
           ],
           "anonymous": false
@@ -1462,7 +1486,7 @@
   },
   "11155420": {
     "OnChainAIv1": {
-      "address": "0xc3C05919D182b568D18ef7658999b99b606D84c5",
+      "address": "0x9ee2948E17b4C25434c7D0D252E71201A2D87B05",
       "abi": [
         {
           "type": "constructor",
@@ -1532,13 +1556,24 @@
         },
         {
           "type": "function",
-          "name": "lastInteraction",
-          "inputs": [],
+          "name": "interactions",
+          "inputs": [
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
           "outputs": [
             {
               "name": "requestId",
               "type": "bytes32",
               "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
             },
             {
               "name": "prompt",
@@ -1549,6 +1584,41 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "lastInteraction",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "tuple",
+              "internalType": "struct OnChainAIv1.Interaction",
+              "components": [
+                {
+                  "name": "requestId",
+                  "type": "bytes32",
+                  "internalType": "bytes32"
+                },
+                {
+                  "name": "sender",
+                  "type": "address",
+                  "internalType": "address"
+                },
+                {
+                  "name": "prompt",
+                  "type": "string",
+                  "internalType": "string"
+                },
+                {
+                  "name": "response",
+                  "type": "string",
+                  "internalType": "string"
+                }
+              ]
             }
           ],
           "stateMutability": "view"
@@ -1575,25 +1645,6 @@
               "name": "",
               "type": "uint256",
               "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "prompts",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "string",
-              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -1711,15 +1762,46 @@
         {
           "type": "function",
           "name": "withdraw",
-          "inputs": [
-            {
-              "name": "receiver",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "InteractionLog",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "isResponse",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "indexed": false,
+              "internalType": "string"
+            }
+          ],
+          "anonymous": false
         },
         {
           "type": "event",
@@ -1787,31 +1869,6 @@
         },
         {
           "type": "event",
-          "name": "PromptLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "indexed": false,
-              "internalType": "address"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
           "name": "RequestFulfilled",
           "inputs": [
             {
@@ -1832,31 +1889,6 @@
               "type": "bytes32",
               "indexed": true,
               "internalType": "bytes32"
-            }
-          ],
-          "anonymous": false
-        },
-        {
-          "type": "event",
-          "name": "ResponseLog",
-          "inputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "indexed": true,
-              "internalType": "bytes32"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "indexed": false,
-              "internalType": "string"
             }
           ],
           "anonymous": false

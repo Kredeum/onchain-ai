@@ -45,6 +45,6 @@
   </div>
 
   <button class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>
-    <span class="text-xl">Send</span>
+    <span class="text-lg">Send</span>
   </button>
 </div>

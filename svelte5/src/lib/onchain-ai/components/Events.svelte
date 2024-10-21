@@ -1,44 +1,62 @@
 <script lang="ts">
-  import { createPublicClient } from "wagmi-svelte";
   import { type Address, type Log, parseAbi } from "viem";
   import { replacer } from "$lib/utils/scaffold-eth/common";
   import { createOnchainAI } from "../runes/contract.svelte";
+  import type { InteractionType, LogWithArgs } from "../types";
 
-  type InteractionType = { requestId: string; prompt: string; response: string };
-  type LogWithArgs = Log & { args: InteractionType };
+  const eventName = "InteractionLog";
 
   let {
     interactions = $bindable([]),
     refresh = 0,
+    limit = 3,
     display = false
-  }: { interactions?: InteractionType[]; refresh?: number; display?: boolean } = $props();
+  }: {
+    interactions?: InteractionType[];
+    refresh?: number;
+    limit?: number;
+    display?: boolean;
+  } = $props();
 
-  const { address } = $derived.by(createOnchainAI);
-  const client = $derived.by(createPublicClient());
+  const { client, address, abi, account: sender } = $derived.by(createOnchainAI);
+
+  const logsMap = new Map();
 
   $effect(() => {
+    if (!(client && address && abi && sender)) return;
+
     console.log("$effect refresh", refresh);
 
     const fetchLogs = async () => {
-      if (!(client && address)) return console.error("<Events: Client or Address not found");
       try {
         const toBlock = await client.getBlockNumber();
-        const events = parseAbi([
-          // "event PromptLog(bytes32 indexed requestId, string prompt, address sender)",
-          "event ResponseLog(bytes32 indexed requestId, string prompt, string response)"
-        ]);
         const fromBlock = 0n; // toBlock > 1000n ? toBlock - 1000n : 0n;
 
-        interactions = (
-          (await client.getLogs({
+        (
+          (await client.getContractEvents({
             address,
-            events,
+            abi,
+            eventName,
+            args: { sender },
             fromBlock,
             toBlock
           })) as LogWithArgs[]
         )
-          .sort((a, b) => Number((b.blockNumber || 0n) - (a.blockNumber || 0n)))
-          .map((log) => log.args);
+          .sort((a, b) => {
+            const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);
+            const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
+            return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
+          })
+          .map((log) => log.args)
+          .forEach((log) => {
+            logsMap.set(log.requestId, log);
+          });
+
+        console.log("fetchLogs:", logsMap);
+
+        interactions = ([...logsMap.values()] as InteractionType[]) //
+          .reverse()
+          .slice(0, limit);
 
         console.log("fetchLogs:", address, fromBlock, toBlock, interactions);
       } catch (error) {
@@ -48,9 +66,27 @@
     fetchLogs();
   });
 
-  $inspect("refresh:", refresh);
-  $inspect("address:", address);
-  $inspect("interactions:", interactions);
+  $effect(() => {
+    if (!(client && address && abi && sender)) return;
+
+    client.watchContractEvent({
+      address,
+      abi,
+      eventName,
+      args: { sender },
+      // onLogs: (logs) => (interactions = [(logs[0] as LogWithArgs).args, ...interactions])
+      onLogs: (logs) => {
+        const log = logs[0] as LogWithArgs;
+        logsMap.set(log.args.requestId, log.args);
+
+        interactions = ([...logsMap.values()] as InteractionType[]) //
+          .reverse()
+          .slice(0, limit);
+
+        console.log("onLogs:", interactions);
+      }
+    });
+  });
 </script>
 
 {#if display}
@@ -63,14 +99,3 @@
     </div>
   </div>
 {/if}
-
-<!-- {#if events?.length > 0}
-  {events.length} Events
-  {#each events as event, i (i)}
-    <pre>{JSON.stringify(event, replacer, 2)}</pre>
-  {/each}
-{:else}
-  <div class="bg-gray-100 p-4 m-4 rounded-lg">
-    <em> No contract Events yet </em>
-  </div>
-{/if} -->

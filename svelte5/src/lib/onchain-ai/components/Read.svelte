@@ -2,9 +2,7 @@
   import { untrack } from "svelte";
   import { createReadContract } from "wagmi-svelte";
   import { createOnchainAI } from "../runes/contract.svelte";
-
-  type InteractionType = { requestId: string; prompt?: string; response: string };
-  type ReadType = [string, string, string];
+  import type { InteractionType, ReadType } from "../types";
 
   let {
     lastInteraction = $bindable(),
@@ -12,7 +10,7 @@
     refresh = 0,
     display = false
   }: {
-    lastInteraction: InteractionType;
+    lastInteraction?: InteractionType;
     functionName?: string;
     refresh?: number;
     display?: boolean;
@@ -33,8 +31,8 @@
     if (!(readContract && readContract.data)) return;
 
     console.log("<Read $effect ~ reRead");
-    const [requestId, prompt, response] = readContract.data as ReadType;
-    lastInteraction = { requestId, prompt, response };
+    const [requestId, sender, isResponse, prompt, response] = readContract.data as ReadType;
+    lastInteraction = { requestId, sender, isResponse, prompt, response };
   });
 
   $effect(() => {
