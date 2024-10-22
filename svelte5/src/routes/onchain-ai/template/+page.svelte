@@ -2,7 +2,6 @@
 
 </script>
 
-
-Description générale
+Description
 <br />
-Sommaire
+Lien vers repo
