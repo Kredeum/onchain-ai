@@ -66,12 +66,7 @@
         </div>
         <span>·</span>
         <div class="text-center">
-          <a
-            href="discord.gg/Vz5AyU2Nfx"
-            target="_blank"
-            rel="noreferrer"
-            class="link"
-          >
+          <a href="discord.gg/Vz5AyU2Nfx" target="_blank" rel="noreferrer" class="link">
             Support
           </a>
         </div>

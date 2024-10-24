@@ -1,6 +1,5 @@
 {
   "dependencies": {
-
     "@castlenine/svelte-qrcode": "^2.3.0",
     "@coinbase/wallet-sdk": "^4.1.0",
     "@fleek-platform/cli": "^2.10.1",

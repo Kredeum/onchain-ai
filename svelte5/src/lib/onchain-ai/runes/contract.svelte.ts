@@ -1,4 +1,4 @@
-import { type Address } from "viem";
+import { type Address, type Abi } from "viem";
 import { createTargetNetworkId } from "$lib/runes/global.svelte";
 import { readDeployments } from "@onchain-ai/common/lib/readJson";
 import { readConfig } from "@onchain-ai/common/lib/readJson";
@@ -29,7 +29,7 @@ const createOnchainAI = () => {
       return config;
     },
     get abi() {
-      return abi;
+      return abi as Abi;
     }
   };
 };

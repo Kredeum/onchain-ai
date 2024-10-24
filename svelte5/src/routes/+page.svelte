@@ -46,7 +46,8 @@
       <div class="flex flex-col bg-base-100 px-10 py-10 items-center max-w-md rounded-3xl">
         <div class="text-gray-300">
           <em>
-            Costs 0.0001 Eth (~$0.30) per question, in order to cover Chainlink LINK and OpenAI API costs
+            Costs 0.0001 Eth (~$0.30) per question, in order to cover Chainlink LINK and OpenAI API
+            costs
           </em>
         </div>
       </div>

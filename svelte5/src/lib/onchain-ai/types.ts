@@ -9,6 +9,13 @@ type InteractionType = {
 };
 type ReadType = [string, Address, boolean, string, string];
 
-type LogWithArgs = Log & { args: InteractionType, index: number };
+type LogWithArgs = Log & { args: InteractionType; index: number };
 
-export type { InteractionType, LogWithArgs, ReadType };
+type LogsParamsType = {
+  address: Address;
+  abi: any;
+  eventName: string;
+  args?: { sender: Address };
+};
+
+export type { InteractionType, LogWithArgs, LogsParamsType, ReadType };
