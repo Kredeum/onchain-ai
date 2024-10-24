@@ -35,10 +35,10 @@
 </script>
 
 <div class="flex justify-center">
-  <div class="w-full">
+  <div class="w-full max-w-xl">
     <InputBase
       name="Prompt"
-      placeholder="Enter your prompt"
+      placeholder="Enter your question"
       onchange={(input) => (prompt = input)}
       value={prompt}
     />

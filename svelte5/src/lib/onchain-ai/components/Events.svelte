@@ -1,47 +1,54 @@
 <script lang="ts">
-  import { type Address, type Log, parseAbi } from "viem";
   import { replacer } from "$lib/utils/scaffold-eth/common";
   import { createOnchainAI } from "../runes/contract.svelte";
-  import type { InteractionType, LogWithArgs } from "../types";
-
-  const eventName = "InteractionLog";
+  import type { InteractionType, LogWithArgs, LogsParamsType } from "../types";
+  import { SvelteMap } from "svelte/reactivity";
 
   let {
     interactions = $bindable([]),
     refresh = 0,
+    count = $bindable(0),
     limit = 3,
+    all = false,
     display = false
   }: {
     interactions?: InteractionType[];
     refresh?: number;
+    count?: number;
     limit?: number;
+    all?: boolean;
     display?: boolean;
   } = $props();
 
+  const eventName = "InteractionLog";
   const { client, address, abi, account: sender } = $derived.by(createOnchainAI);
 
-  const logsMap = new Map();
+  const paramsAll: LogsParamsType = $derived({ address, abi, eventName });
+  const params: LogsParamsType | undefined = $derived.by(() => {
+    if (!(address && abi && sender)) return;
+
+    return all ? paramsAll : { ...paramsAll, args: { sender } };
+  });
+
+  let logsMap = $state(new SvelteMap());
+  $effect(() => {
+    count = logsMap.size;
+  });
 
   $effect(() => {
-    if (!(client && address && abi && sender)) return;
+    if (!(client && params)) return;
 
-    console.log("$effect refresh", refresh);
+    refresh;
+    logsMap = new SvelteMap();
+
+    console.log("$effect fetchLogs", params);
 
     const fetchLogs = async () => {
       try {
         const toBlock = await client.getBlockNumber();
-        const fromBlock = 0n; // toBlock > 1000n ? toBlock - 1000n : 0n;
+        const fromBlock = 0n;
 
-        (
-          (await client.getContractEvents({
-            address,
-            abi,
-            eventName,
-            args: { sender },
-            fromBlock,
-            toBlock
-          })) as LogWithArgs[]
-        )
+        ((await client.getContractEvents({ ...params, fromBlock, toBlock })) as LogWithArgs[])
           .sort((a, b) => {
             const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);
             const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
@@ -52,7 +59,7 @@
             logsMap.set(log.requestId, log);
           });
 
-        console.log("fetchLogs:", logsMap);
+        // console.log("fetchLogs:", logsMap);
 
         interactions = ([...logsMap.values()] as InteractionType[]) //
           .reverse()
@@ -64,17 +71,11 @@
       }
     };
     fetchLogs();
-  });
 
-  $effect(() => {
-    if (!(client && address && abi && sender)) return;
+    console.log("$effect watchLogs", params);
 
     client.watchContractEvent({
-      address,
-      abi,
-      eventName,
-      args: { sender },
-      // onLogs: (logs) => (interactions = [(logs[0] as LogWithArgs).args, ...interactions])
+      ...params,
       onLogs: (logs) => {
         const log = logs[0] as LogWithArgs;
         logsMap.set(log.args.requestId, log.args);
@@ -90,7 +91,11 @@
 </script>
 
 {#if display}
-  <div class="flex flex-col gap-3 p-4">
+  <div class="font-bold">
+    {#if all}All{:else}My{/if}
+    {interactions.length}/{logsMap.size} events
+  </div>
+  <div class="flex flex-col max-w-6xl gap-3 p-4">
     <div class="mockup-code max-h-[900px] overflow-auto">
       {#each interactions as interaction, i (i)}
         <pre class="whitespace-pre-wrap break-words px-5">

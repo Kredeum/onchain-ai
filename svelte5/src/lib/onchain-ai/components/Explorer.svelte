@@ -23,7 +23,7 @@
   {/if}
   {#if etherscanLinkTx}
     <a href={etherscanLinkTx} target="_blank">
-      <em>transaction</em>
+      <em>last transaction</em>
     </a>,
   {/if}
   <a href={chainlinkLink} target="_blank"> <em>chainlink</em></a>

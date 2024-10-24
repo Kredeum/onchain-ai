@@ -41,7 +41,7 @@
       <div class="flex w-full items-center justify-center gap-2 text-sm">
         <div class="text-center">
           <a
-            href="https://github.com/scaffold-eth/se-2"
+            href="https://github.com/kredeum/onchain-ai"
             target="_blank"
             rel="noreferrer"
             class="link"
@@ -56,22 +56,17 @@
           </p>
           <a
             class="flex items-center justify-center gap-1"
-            href="https://buidlguidl.com/"
+            href="https://kredeum.com/"
             target="_blank"
             rel="noreferrer"
           >
             <BuidlGuidlLogo class="h-5 w-3 pb-1" />
-            <span class="link">BuidlGuidl</span>
+            <span class="link">Kredeum Labs</span>
           </a>
         </div>
         <span>·</span>
         <div class="text-center">
-          <a
-            href="https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA"
-            target="_blank"
-            rel="noreferrer"
-            class="link"
-          >
+          <a href="discord.gg/Vz5AyU2Nfx" target="_blank" rel="noreferrer" class="link">
             Support
           </a>
         </div>

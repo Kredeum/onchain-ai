@@ -18,21 +18,12 @@
   });
 </script>
 
-<div class="flex flex-col items-center p-4">
-  <div class="text-center">
-    <h1>
-      <span class="block text-4xl font-bold">Ask OnChainAI</span>
-    </h1>
+<div class="flex flex-col items-center">
+  <h1>
+    <span class="block text-4xl font-bold p-4">Ask OnChainAI</span>
+  </h1>
 
-    <div class="text-gray-300">
-      <em>
-        Keep your question simple and don't ask <br />
-        for a long response unless Chainlink consensus will fail
-      </em>
-    </div>
-  </div>
-
-  <div class="p-6 w-full max-w-md">
+  <div class="p-2 w-full max-w-lg">
     <Form bind:tx />
   </div>
 
@@ -40,11 +31,26 @@
     <Explorer {tx} {address} />
   </div>
 
-  <div class="p-4 w-full max-w-lg">
+  <div class="pt-4 w-full max-w-lg">
     <Chat {refresh} />
   </div>
 
-  <div class="pt-4 text-center">
-    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+  <div class="flex-grow bg-base-300 w-full mt-12 px-8 py-12">
+    <div class="flex justify-center gap-12 flex-col sm:flex-row">
+      <div class="flex flex-col bg-base-100 px-10 py-10 text-gray-300 max-w-md rounded-3xl">
+        <em>
+          Keep your question simple and request for short answers unless Chainlink consensus will
+          fail
+        </em>
+      </div>
+      <div class="flex flex-col bg-base-100 px-10 py-10 items-center max-w-md rounded-3xl">
+        <div class="text-gray-300">
+          <em>
+            Costs 0.0001 Eth (~$0.30) per question, in order to cover Chainlink LINK and OpenAI API
+            costs
+          </em>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

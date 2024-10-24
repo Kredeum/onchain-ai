@@ -9,6 +9,14 @@
     {
       "filePath": "svelte5/src/routes/onchain-ai/+page.svelte",
       "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/lib/onchain-ai/components/Chat.svelte",
+      "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/lib/onchain-ai/components/Events.svelte",
+      "group": "Default"
     }
   ]
 }
