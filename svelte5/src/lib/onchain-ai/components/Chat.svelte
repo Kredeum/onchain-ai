@@ -12,37 +12,36 @@
   let { refresh = 0 }: { refresh: number } = $props();
 
   let interactions: InteractionType[] = $state([]);
+  let interactionsCount = $derived(interactions.length);
 </script>
 
-<div
-  class="flex flex-col p-4 m-4 w-full max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200"
->
-  {#if interactions?.length === 0}
-    <div class="{bgGray} p-4 m-4 text-center rounded-lg">
-      <em> No interactions yet </em>
-    </div>
-  {/if}
+{#if interactionsCount != 0}
+  <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
+    {#each interactions as interaction}
+      <div class="{bgGreen} p-2 m-2 rounded-lg inline-block max-w-xs self-end">
+        {interaction.prompt}
+      </div>
+      <div class="{bgGray} p-2 m-2 rounded-lg inline-block max-w-xs self-start">
+        {#if interaction.response}
+          {interaction.response}
+        {:else}
+          <div class="loader">...</div>
+        {/if}
+      </div>
 
-  {#each interactions as interaction}
-    <div class="{bgGreen} p-2 m-2 rounded-lg inline-block max-w-xs self-end">
-      {interaction.prompt}
-    </div>
-    <div class="{bgGray} p-2 m-2 rounded-lg inline-block max-w-xs self-start">
-      {#if interaction.response}
-        {interaction.response}
-      {:else}
-        <div class="loader">...</div>
-      {/if}
-    </div>
+      <div class="pl-4 pb-4 text-left">
+        <Explorer requestId={interaction.requestId} />
+      </div>
+    {/each}
+  </div>
 
-    <div class="pl-2 text-center">
-      <Explorer requestId={interaction.requestId} />
-    </div>
-  {/each}
-</div>
+  <div class="pt-4 text-center">
+    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
+  </div>
+{/if}
 
 <div class="max-w-4xl">
-  <Events {refresh} bind:interactions  />
+  <Events {refresh} bind:interactions />
 </div>
 
 <style>

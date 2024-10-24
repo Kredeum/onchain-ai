@@ -1,12 +1,15 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import logo from "$lib/assets/logo.svg";
+  import logo from "$lib/assets/AI.png";
   import {
+    type IconSource,
     Bars3,
     BugAnt,
     Icon,
-    EllipsisHorizontalCircle,
-    type IconSource,
+    HomeModern,
+    ClipboardDocument,
+    ClipboardDocumentCheck,
+    CheckBadge,
     ChatBubbleLeftRight
   } from "svelte-hero-icons";
   import ConnectButton from "$lib/components/scaffold-eth/connect-button/ConnectButton.svelte";
@@ -36,7 +39,7 @@
 
   export const menuLinks: HeaderMenuLink[] = [
     {
-      label: "Ask OnChainAI",
+      label: "Ask?",
       href: "/",
       icon: ChatBubbleLeftRight
     },
@@ -44,17 +47,21 @@
       label: "Debug Contracts",
       href: "/debug",
       icon: BugAnt
+    },
+    {
+      label: "Debug Events",
+      href: "/events",
+      icon: Bars3
+    }
+    // {
+    //   label: "Home",
+    //   href: "/",
+    //   icon: HomeModern
     // },
     // {
     //   label: "Chat",
     //   href: "/chat",
     //   icon: EllipsisHorizontalCircle
-    // },
-    // {
-    //   label: "Events",
-    //   href: "/events",
-    //   icon: Bars3
-    }
   ];
 
   const isCurrentPage = derived4(page, ($page) => (href: string) => {
@@ -113,8 +120,8 @@
         <img alt="SE2 logo" class="cursor-pointer" src={logo} />
       </div>
       <div class="flex flex-col">
-        <span class="font-bold leading-tight">Scaffold-ETH</span>
-        <span class="text-xs">Ethereum dev stack</span>
+        <span class="font-bold leading-tight">OnChainAI</span>
+        <span class="text-xs">AI for SmartContract </span>
       </div>
     </a>
     <ul class="menu menu-horizontal hidden gap-2 px-1 lg:flex lg:flex-nowrap">

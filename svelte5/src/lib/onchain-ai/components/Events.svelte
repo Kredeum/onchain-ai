@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { type Address, type Log, parseAbi } from "viem";
   import { replacer } from "$lib/utils/scaffold-eth/common";
   import { createOnchainAI } from "../runes/contract.svelte";
   import type { InteractionType, LogWithArgs } from "../types";
