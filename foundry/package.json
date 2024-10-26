@@ -22,10 +22,10 @@
     "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
     "deploy:base-sepolia": "CHAIN=base-sepolia pnpm deploy:testnet",
     "deploy:optimism-sepolia": "CHAIN=optimism-sepolia pnpm deploy:testnet",
-    "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify --etherscan-api-key $CHAIN && pnpm run deploy:validate",
-    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify --etherscan-api-key $CHAIN && pnpm run deploy:validate",
+    "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
     "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
     "test": "forge test"
   },
-  "version": "1.0.1"
+  "version": "1.0.2"
 }
