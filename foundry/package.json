@@ -2,30 +2,33 @@
   "author": "",
   "description": "",
   "dependencies": {
-    "eslint-plugin-json": "^4.0.1",
-    "solhint": "^5.0.3"
+    "eslint-plugin-json": "^4.0.1"
   },
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
   "name": "@onchain-ai/foundry",
   "scripts": {
+    "all": "pnpm run clean && pnpm run format && pnpm run check && pnpm run build && pnpm run test  && pnpm run deploy:anvil",
     "clean": "rm -rf node_modules .turbo out broadcast cache",
     "format": "forge fmt",
-    "check": "solhint src/**/*.sol",
+    "check": "pnpx solhint src/**/*.sol",
     "build": "forge compile",
     "chain": "./anvil.sh",
     "deploy:all": "forge script script/DeployAll.s.sol",
-    "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm run chain && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",
+    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
+    "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm run chain && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:base": "CHAIN=base pnpm deploy:mainnet",
     "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
     "deploy:base-sepolia": "CHAIN=base-sepolia pnpm deploy:testnet",
     "deploy:optimism-sepolia": "CHAIN=optimism-sepolia pnpm deploy:testnet",
-    "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
-    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
-    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
     "test": "forge test"
   },
-  "version": "1.0.2"
+  "version": "1.0.2",
+  "devDependencies": {
+    "solhint": "^5.0.3"
+  }
 }

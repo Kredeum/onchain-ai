@@ -11,7 +11,7 @@
   const baseUrl = $derived(data.url || "");
 
   const metadata = $derived({
-    title: "Scaffold-ETH Alt App",
+    title: "OnChainAI",
     description: "Built with 🏗 Scaffold-ETH Alt",
     thumbnail: `${baseUrl}/thumbnail.jpg`,
     favicon: "/favicon.png"
