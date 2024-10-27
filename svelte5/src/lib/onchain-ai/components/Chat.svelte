@@ -1,8 +1,7 @@
 <script lang="ts">
   import Explorer from "./Explorer.svelte";
-  import Events from "$lib/onchain-ai/components/Events.svelte";
+  import { createInteractions } from "$lib/onchain-ai/runes/events.svelte";
   import { createDarkMode } from "$lib/runes/darkMode.svelte.js";
-  import type { InteractionType } from "../types";
 
   const { isDarkMode } = $derived.by(createDarkMode());
   const bgBlue = $derived(isDarkMode ? "dark:bg-blue-800" : "bg-blue-100");
@@ -11,7 +10,7 @@
 
   let { refresh = 0 }: { refresh: number } = $props();
 
-  let interactions: InteractionType[] = $state([]);
+  const { interactions } = $derived.by(createInteractions);
   let interactionsCount = $derived(interactions.length);
 </script>
 
@@ -39,10 +38,6 @@
     <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
   </div>
 {/if}
-
-<div class="max-w-4xl">
-  <Events {refresh} bind:interactions />
-</div>
 
 <style>
   .loader {
