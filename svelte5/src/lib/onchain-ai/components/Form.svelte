@@ -1,36 +1,19 @@
 <script lang="ts">
   import { InputBase } from "$lib/components/scaffold-eth/inputs";
-  import { createDeployedContractInfo } from "$lib/runes/deployedContractInfo.svelte";
-  import { createTransactor, type TransactionFunc } from "$lib/runes/transactor.svelte";
-  import { createWriteContract } from "wagmi-svelte";
+  import { createOnchainAIWrite } from "$lib/onchain-ai/runes/write.svelte";
 
-  let { tx = $bindable("") } = $props();
-
-  const responses: string[] = [];
+  let { tx = $bindable() } = $props();
 
   let prompt: string = $state("");
 
-  const { data: deployedContractData } = $derived.by(createDeployedContractInfo("OnChainAIv1"));
-
-  let contractWrite = $derived.by(createWriteContract());
-  let writeTxn: TransactionFunc = $derived.by(createTransactor());
+  const writeContract = $derived(
+    createOnchainAIWrite({ functionName: "sendRequest", args: [prompt], value: 10n ** 14n })
+  );
 
   const handleSend = async () => {
-    try {
-      console.log("handleSend ~ deployedContractData:", deployedContractData);
-      const makeWriteWithParams = () =>
-        contractWrite!.writeContractAsync({
-          address: deployedContractData!.address,
-          abi: deployedContractData!.abi,
-          functionName: "sendRequest",
-          args: [prompt],
-          value: 10n ** 14n
-        });
-      tx = await writeTxn?.(makeWriteWithParams);
-    } catch (e: unknown) {
-      console.error("⚡️ handleSend ~ error", e);
-    }
-    responses.push();
+    if (!writeContract) return;
+
+    tx = await writeContract.send();
   };
 </script>
 

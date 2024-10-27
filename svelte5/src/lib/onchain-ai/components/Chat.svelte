@@ -1,6 +1,6 @@
 <script lang="ts">
   import Explorer from "./Explorer.svelte";
-  import { createInteractions } from "$lib/onchain-ai/runes/events.svelte";
+  import { createInteractions } from "$lib/onchain-ai/runes/interactions.svelte";
   import { createDarkMode } from "$lib/runes/darkMode.svelte.js";
 
   const { isDarkMode } = $derived.by(createDarkMode());

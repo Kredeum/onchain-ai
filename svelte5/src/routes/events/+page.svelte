@@ -1,6 +1,6 @@
 <script lang="ts">
   import { replacer } from "$lib/utils/scaffold-eth/common";
-  import { createInteractions } from "$lib/onchain-ai/runes/events.svelte";
+  import { createInteractions } from "$lib/onchain-ai/runes/interactions.svelte";
 
   let all: boolean = $state(false);
   let limit: number = $state(3);

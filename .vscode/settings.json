@@ -17,6 +17,14 @@
     {
       "filePath": "svelte5/src/lib/onchain-ai/components/Events.svelte",
       "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/lib/onchain-ai",
+      "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/routes/+page.svelte",
+      "group": "Default"
     }
   ]
 }
