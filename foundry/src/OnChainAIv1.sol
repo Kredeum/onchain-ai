@@ -53,8 +53,8 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
         setPrice(price_);
     }
 
-    function lastInteraction() external view returns (Interaction memory) {
-        return interactions[_lastRequestId[msg.sender]];
+    function lastInteraction(address sender) external view returns (Interaction memory) {
+        return interactions[_lastRequestId[sender]];
     }
 
     function setJavascript(string memory javascript_) public onlyOwner {

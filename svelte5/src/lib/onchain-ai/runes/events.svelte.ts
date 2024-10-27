@@ -1,24 +1,11 @@
-<script lang="ts">
-  import { replacer } from "$lib/utils/scaffold-eth/common";
-  import { createOnchainAI } from "../runes/contract.svelte";
-  import type { InteractionType, LogWithArgs, LogsParamsType } from "../types";
-  import { SvelteMap } from "svelte/reactivity";
+import type { InteractionType, LogWithArgs, LogsParamsType } from "../types";
+import { createOnchainAI } from "./contract.svelte";
+import { SvelteMap } from "svelte/reactivity";
 
-  let {
-    interactions = $bindable([]),
-    refresh = 0,
-    count = $bindable(0),
-    limit = 3,
-    all = false,
-    display = false
-  }: {
-    interactions?: InteractionType[];
-    refresh?: number;
-    count?: number;
-    limit?: number;
-    all?: boolean;
-    display?: boolean;
-  } = $props();
+const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
+  let interactions: InteractionType[] = $state([]);
+  let logsMap = $state(new SvelteMap());
+  let interactionsMax: number = $derived(logsMap.size);
 
   const eventName = "InteractionLog";
   const { client, address, abi, account: sender } = $derived.by(createOnchainAI);
@@ -28,11 +15,6 @@
     if (!(address && abi && sender)) return;
 
     return all ? paramsAll : { ...paramsAll, args: { sender } };
-  });
-
-  let logsMap = $state(new SvelteMap());
-  $effect(() => {
-    count = logsMap.size;
   });
 
   $effect(() => {
@@ -88,19 +70,15 @@
       }
     });
   });
-</script>
 
-{#if display}
-  <div class="font-bold">
-    {#if all}All{:else}My{/if}
-    {interactions.length}/{logsMap.size} events
-  </div>
-  <div class="flex flex-col max-w-6xl gap-3 p-4">
-    <div class="mockup-code max-h-[900px] overflow-auto">
-      {#each interactions as interaction, i (i)}
-        <pre class="whitespace-pre-wrap break-words px-5">
-{JSON.stringify(interaction, replacer, 2)}</pre>
-      {/each}
-    </div>
-  </div>
-{/if}
+  return {
+    get interactions() {
+      return interactions;
+    },
+    get interactionsMax() {
+      return interactionsMax;
+    }
+  };
+};
+
+export { createInteractions };

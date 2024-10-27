@@ -56,7 +56,7 @@
           </p>
           <a
             class="flex items-center justify-center gap-1"
-            href="https://kredeum.com/"
+            href="https://www.kredeum.com/"
             target="_blank"
             rel="noreferrer"
           >
@@ -66,7 +66,7 @@
         </div>
         <span>·</span>
         <div class="text-center">
-          <a href="discord.gg/Vz5AyU2Nfx" target="_blank" rel="noreferrer" class="link">
+          <a href="https://discord.gg/Vz5AyU2Nfx" target="_blank" rel="noreferrer" class="link">
             Support
           </a>
         </div>
