@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { type EIP1193Provider } from "viem";
 
 type GetContractReturnGenericType = {

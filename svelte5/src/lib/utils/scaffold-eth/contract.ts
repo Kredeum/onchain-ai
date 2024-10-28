@@ -20,13 +20,14 @@ import type {
 } from "viem";
 import deploymentsJson from "$lib/deployments.json";
 import scaffoldConfig from "$lib/scaffold.config";
-import type { Config, CreateReadContractParameters } from "wagmi-svelte";
+import type { Config } from "@wagmi/core";
+import type { WriteContractVariables } from "@wagmi/core/query";
+import type { CreateReadContractParameters } from "wagmi-svelte";
 import type {
   WriteContractErrorType,
   WriteContractParameters,
   WriteContractReturnType
 } from "@wagmi/core/actions";
-import type { WriteContractVariables } from "@wagmi/core/query";
 import type { MutateOptions } from "@tanstack/svelte-query";
 
 type AddExternalFlag<T> = {

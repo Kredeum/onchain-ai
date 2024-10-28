@@ -9,7 +9,6 @@
 
   let {
     chainId: chainIdOverride,
-    // eslint-disable-next-line no-undef
     token: currentToken = $bindable(),
     suggestedTokens: suggestedTokenAddresses,
     onchange,

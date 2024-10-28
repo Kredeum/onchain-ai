@@ -5,9 +5,9 @@
 
   const { account } = $derived.by(createOnchainAI) as { account: string };
 
-  const { value: lastInteraction } = $derived(
+  const { data: lastInteraction } = $derived(
     createOnchainAIRead({ functionName: "lastInteraction", args: [account] })
-  ) as { value: InteractionType };
+  ) as { data: InteractionType };
 </script>
 
 <div class="p-4">

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createOnchainAIRead } from "$lib/onchain-ai/runes/read.svelte";
 
-  let { value: owner } = $derived(createOnchainAIRead({ functionName: "owner" }));
+  let { data: owner } = $derived(createOnchainAIRead({ functionName: "owner" }));
 
   $inspect({ owner });
 </script>

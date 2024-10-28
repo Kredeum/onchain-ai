@@ -8,8 +8,8 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
   let interactionsMax: number = $derived(logsMap.size);
 
   const eventName = "InteractionLog";
-  const { client, address, abi, account: sender } = $derived.by(createOnchainAI);
-  $inspect("createInteractions", client, address, abi, sender);
+  const { chainId, client, address, abi, account: sender } = $derived.by(createOnchainAI);
+  $inspect("createInteractions", chainId, address, sender);
 
   const paramsAll: LogsParamsType = $derived({ address, abi, eventName });
   const params = $derived.by(() => {
@@ -23,8 +23,6 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
 
     refresh;
     logsMap = new SvelteMap();
-
-    console.log("$effect fetchLogs", params);
 
     const fetchLogs = async () => {
       try {
@@ -42,20 +40,15 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
             logsMap.set(log.requestId, log);
           });
 
-        // console.log("fetchLogs:", logsMap);
-
         interactions = ([...logsMap.values()] as InteractionType[]) //
           .reverse()
           .slice(0, limit);
-
-        console.log("fetchLogs:", address, fromBlock, toBlock, interactions);
       } catch (error) {
         console.error("Failed to fetch logs:", error);
       }
     };
     fetchLogs();
 
-    console.log("$effect watchLogs", params);
 
     client.watchContractEvent({
       ...params,
@@ -66,11 +59,11 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
         interactions = ([...logsMap.values()] as InteractionType[]) //
           .reverse()
           .slice(0, limit);
-
-        console.log("onLogs:", interactions);
       }
     });
   });
+
+  $inspect("interactions", interactions);
 
   return {
     get interactions() {
@@ -80,6 +73,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
       return interactionsMax;
     }
   };
+
 };
 
 export { createInteractions };

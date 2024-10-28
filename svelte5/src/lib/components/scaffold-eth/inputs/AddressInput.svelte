@@ -7,9 +7,7 @@
   import { normalize } from "viem/ens";
 
   let {
-    // eslint-disable-next-line no-undef
     value = $bindable(),
-    // eslint-disable-next-line no-undef
     address = $bindable(),
     name,
     placeholder,

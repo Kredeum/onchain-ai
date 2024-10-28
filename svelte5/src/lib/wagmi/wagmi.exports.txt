@@ -1,0 +1,28 @@
+# wagmi-core
+Config
+createWagmiConfig
+createWagmiConnector
+BaseError
+mainnet
+createConfig
+createAccount
+WagmiProvider
+
+
+# wagmi-svelte only
+
+createEnsAddress
+createEnsName
+createEnsAvatar
+createReadContract
+createWriteContract
+
+
+CreateReadContractParameters => types, to redefine
+CreateWaitForTransactionReceiptReturnType => types, to redefine
+
+createBlockNumber => to re-write, like interactions runes
+createWaitForTransactionReceipt => idem `createBlockNumber`
+
+createDisconnect (wagmi-svelte) => to rewrite with only `disconnectMutationOptions` from wagmi-core
+createSwitchChain => idem `createDisconnect`
