@@ -1,5 +1,7 @@
 {
-  "dependencies": {
+  "author": "Kredeum",
+  "description": "OnChainAI Svelte5 package",
+  "devDependencies": {
     "@castlenine/svelte-qrcode": "^2.3.0",
     "@coinbase/wallet-sdk": "^4.1.0",
     "@fleek-platform/cli": "^2.10.1",
@@ -48,17 +50,17 @@
   "name": "@onchain-ai/svelte5",
   "private": true,
   "scripts": {
-    "clean": "rm -rf node_modules .turbo build .svelte-kit",
-    "format": "prettier --write --list-different .",
-    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "build": "vite build",
-    "dev": "vite dev",
-    "start": "vite dev",
-    "preview": "vite preview",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "clean": "rm -rf node_modules .turbo build .svelte-kit",
     "deploy:fleek": "pnpm run build && fleek sites deploy",
+    "dev": "vite dev",
     "fleek:login": "fleek login",
+    "format": "prettier --write --list-different .",
     "lint": "prettier --check . && eslint .",
+    "preview": "vite preview",
+    "start": "vite dev",
     "vercel": "vercel"
   },
   "type": "module",

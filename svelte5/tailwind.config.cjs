@@ -43,6 +43,10 @@ const config = {
           },
           ".link:hover": {
             opacity: "80%"
+          },
+
+          ".bg-green-ai": {
+            "background-color": "#DDFAE4",
           }
         }
       },
@@ -76,6 +80,10 @@ const config = {
           },
           ".link:hover": {
             opacity: "80%"
+          },
+
+          ".bg-green-ai": {
+            "background-color": "#7ACA7A",
           }
         }
       }

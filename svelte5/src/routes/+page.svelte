@@ -3,19 +3,9 @@
   import Explorer from "$lib/onchain-ai/components/Explorer.svelte";
   import Form from "$lib/onchain-ai/components/Form.svelte";
   import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
-  import { untrack } from "svelte";
 
   const { address } = $derived.by(createOnchainAI);
-
-  let refresh: number = $state(0);
   let tx: string = $state("");
-
-  $effect(() => {
-    tx;
-    untrack(() => {
-      refresh++;
-    });
-  });
 </script>
 
 <div class="flex flex-col items-center">
@@ -32,7 +22,7 @@
   </div>
 
   <div class="pt-4 w-full max-w-lg">
-    <Chat {refresh} />
+    <Chat />
   </div>
 
   <div class="flex-grow bg-base-300 w-full mt-12 px-8 py-12">

@@ -1,6 +1,7 @@
 {
-  "author": "",
-  "dependencies": {
+  "author": "Kredeum",
+  "description": "OnChainAI Chainlink package",
+  "devDependencies": {
     "@chainlink/functions-toolkit": "^0.3.2",
     "@types/prompt-sync": "^4.2.3",
     "@typescript-eslint/eslint-plugin": "^8.11.0",
@@ -13,15 +14,14 @@
     "typescript-eslint": "^8.11.0",
     "utf-8-validate": "^5.0.10"
   },
-  "description": "",
   "keywords": [],
   "license": "ISC",
   "main": "index.js",
   "name": "@onchain-ai/chainlink",
   "scripts": {
+    "check": "prettier --check . && eslint **/*.ts",
     "clean": "rm -rf node_modules .turbo",
     "format": "prettier --write --list-different .",
-    "check": "prettier --check . && eslint **/*.ts",
     "secrets": "ts-node scripts/upload-secrets.ts"
   },
   "version": "1.0.0"

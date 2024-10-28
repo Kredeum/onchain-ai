@@ -2,8 +2,7 @@ import { type Address, type Abi } from "viem";
 import { createTargetNetworkId } from "$lib/runes/global.svelte";
 import { readDeployments } from "@onchain-ai/common/lib/readJson";
 import { readConfig } from "@onchain-ai/common/lib/readJson";
-import { createAccount } from "wagmi-svelte";
-import { createPublicClient } from "wagmi-svelte";
+import { createAccount, createPublicClient } from "wagmi-svelte";
 
 const createOnchainAI = () => {
   const client = $derived.by(createPublicClient());

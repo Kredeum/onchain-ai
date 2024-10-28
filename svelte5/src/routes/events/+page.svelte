@@ -26,20 +26,20 @@
 
   <div class="flex py-4 w-2/3 justify-center">
     <button
-      class="btn btn-sm h-10 rounded-full mx-4"
+      class="btn btn-primary btn-sm h-10 rounded-full mx-4"
       onclick={() => {
         all = false;
       }}>My events</button
     >
 
     <button
-      class="btn btn-sm h-10 rounded-full mx-4"
+      class="btn btn-primary btn-sm h-10 rounded-full mx-4"
       onclick={() => {
         all = true;
       }}>All events</button
     >
     <button
-      class="btn btn-sm h-10 rounded-full mx-24"
+      class="btn btn-secondary btn-sm h-10 rounded-full mx-24"
       disabled={noMore}
       onclick={() => {
         limit += 1;

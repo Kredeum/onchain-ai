@@ -4,23 +4,20 @@
   import { createDarkMode } from "$lib/runes/darkMode.svelte.js";
 
   const { isDarkMode } = $derived.by(createDarkMode());
-  const bgBlue = $derived(isDarkMode ? "dark:bg-blue-800" : "bg-blue-100");
-  const bgGray = $derived(isDarkMode ? "dark:bg-gray-500" : "bg-gray-100");
-  const bgGreen = $derived(isDarkMode ? "dark:bg-green-600" : "bg-green-100");
-
-  let { refresh = 0 }: { refresh: number } = $props();
 
   const { interactions } = $derived.by(createInteractions);
   let interactionsCount = $derived(interactions.length);
 </script>
 
 {#if interactionsCount != 0}
-  <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
+  <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">
     {#each interactions as interaction}
-      <div class="{bgGreen} p-2 m-2 rounded-lg inline-block max-w-xs self-end">
+      <div
+        class="p-2 m-2 rounded-lg inline-block max-w-xs self-end bg-green-ai"
+      >
         {interaction.prompt}
       </div>
-      <div class="{bgGray} p-2 m-2 rounded-lg inline-block max-w-xs self-start">
+      <div class="p-2 m-2 rounded-lg inline-block max-w-xs self-start bg-base-100">
         {#if interaction.response}
           {interaction.response}
         {:else}
@@ -32,10 +29,6 @@
         <Explorer requestId={interaction.requestId} />
       </div>
     {/each}
-  </div>
-
-  <div class="pt-4 text-center">
-    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
   </div>
 {/if}
 
