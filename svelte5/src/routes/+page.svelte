@@ -10,7 +10,7 @@
 
 <div class="flex flex-col items-center">
   <h1>
-    <span class="block text-4xl font-bold p-4">Ask OnChainAI</span>
+    <span class="block text-4xl font-bold p-4">Ask? OnChainAI</span>
   </h1>
 
   <div class="p-2 w-full max-w-lg">

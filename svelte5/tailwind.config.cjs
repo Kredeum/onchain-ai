@@ -46,7 +46,7 @@ const config = {
           },
 
           ".bg-green-ai": {
-            "background-color": "#DDFAE4",
+            "background-color": "#DDFAE4"
           }
         }
       },
@@ -83,7 +83,7 @@ const config = {
           },
 
           ".bg-green-ai": {
-            "background-color": "#7ACA7A",
+            "background-color": "#7ACA7A"
           }
         }
       }

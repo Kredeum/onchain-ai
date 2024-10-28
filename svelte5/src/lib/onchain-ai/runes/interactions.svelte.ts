@@ -9,10 +9,11 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
 
   const eventName = "InteractionLog";
   const { client, address, abi, account: sender } = $derived.by(createOnchainAI);
+  $inspect("createInteractions", client, address, abi, sender);
 
   const paramsAll: LogsParamsType = $derived({ address, abi, eventName });
-  const params: LogsParamsType | undefined = $derived.by(() => {
-    if (!(address && abi && sender)) return;
+  const params = $derived.by(() => {
+    if (!(address && abi)) return;
 
     return all ? paramsAll : { ...paramsAll, args: { sender } };
   });

@@ -11,10 +11,6 @@
 </script>
 
 <div class="flex flex-col w-full p-4 items-center">
-  <div class="font-bold">
-    {#if all}All{:else}My{/if}
-    {interactions.length}/{interactionsMax} events
-  </div>
   <div class="flex flex-col max-w-6xl gap-3 p-4">
     <div class="mockup-code max-h-[900px] overflow-auto">
       {#each interactions as interaction, i (i)}
@@ -27,6 +23,7 @@
   <div class="flex py-4 w-2/3 justify-center">
     <button
       class="btn btn-primary btn-sm h-10 rounded-full mx-4"
+      disabled={!all}
       onclick={() => {
         all = false;
       }}>My events</button
@@ -34,6 +31,7 @@
 
     <button
       class="btn btn-primary btn-sm h-10 rounded-full mx-4"
+      disabled={all}
       onclick={() => {
         all = true;
       }}>All events</button
@@ -43,7 +41,10 @@
       disabled={noMore}
       onclick={() => {
         limit += 1;
-      }}>More events</button
+      }}
     >
+      More events
+      <div>{interactions.length}/{interactionsMax}</div>
+    </button>
   </div>
 </div>
