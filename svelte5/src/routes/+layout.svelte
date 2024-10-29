@@ -2,7 +2,7 @@
   import WagmiProvider from "$lib/wagmi/components/WagmiProvider.svelte";
   import "../app.pcss";
   import ScaffoldEthApp from "$lib/components/ScaffoldEthApp.svelte";
-  import { wagmiConfig } from "$lib/wagmi";
+  import { wagmiConfig } from "$lib/wagmi/wagmi";
   import { Toaster } from "svelte-french-toast";
   import type { Snippet } from "svelte";
 

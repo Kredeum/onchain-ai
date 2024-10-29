@@ -49,7 +49,6 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
     };
     fetchLogs();
 
-
     client.watchContractEvent({
       ...params,
       onLogs: (logs) => {
@@ -73,7 +72,6 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
       return interactionsMax;
     }
   };
-
 };
 
 export { createInteractions };

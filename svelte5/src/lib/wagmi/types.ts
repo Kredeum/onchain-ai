@@ -20,11 +20,11 @@ export type QueryParameter<
   queryKey extends QueryKey = QueryKey
 > = {
   query?:
-  | Omit<
-    CreateQueryParameters<queryFnData, error, data, queryKey>,
-    "queryFn" | "queryHash" | "queryKey" | "queryKeyHashFn" | "throwOnError"
-  >
-  | undefined;
+    | Omit<
+        CreateQueryParameters<queryFnData, error, data, queryKey>,
+        "queryFn" | "queryHash" | "queryKey" | "queryKeyHashFn" | "throwOnError"
+      >
+    | undefined;
 };
 
 export type InfiniteQueryParameter<
@@ -50,5 +50,3 @@ export type RuneReturnType<T> = () => T;
 export type RuneReturnTypeToStore<T> = T extends RuneReturnType<infer U> ? Readable<U> : never;
 
 export type Evaluate<type> = { [key in keyof type]: type[key] } & unknown;
-
-

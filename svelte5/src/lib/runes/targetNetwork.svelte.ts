@@ -1,10 +1,11 @@
 import { setTargetNetwork, targetNetwork } from "./global.svelte";
-import { createAccount } from "wagmi-svelte";
+import { createAccount } from "$lib/wagmi/runes/account.svelte";
 import scaffoldConfig from "$lib/scaffold.config";
 import { NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/utils/scaffold-eth/networks";
 
 export const createTargetNetwork = (): (() => ChainWithAttributes) => {
-  const { chain } = $derived.by(createAccount());
+  const { account } = $derived(createAccount());
+  const { chain } = $derived(account);
 
   $effect(() => {
     const newSelectedNetwork = scaffoldConfig.targetNetworks.find(

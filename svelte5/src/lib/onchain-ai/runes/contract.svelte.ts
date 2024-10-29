@@ -2,13 +2,15 @@ import { type Address, type Abi } from "viem";
 import { createTargetNetworkId } from "$lib/runes/global.svelte";
 import { readDeployments } from "@onchain-ai/common/lib/readJson";
 import { readConfig } from "@onchain-ai/common/lib/readJson";
-import { createAccount, createPublicClient } from "wagmi-svelte";
+import { createPublicClient } from "wagmi-svelte";
+import { createAccount } from "$lib/wagmi/runes/account.svelte";
 
 const createOnchainAI = () => {
   const client = $derived.by(createPublicClient());
   const { targetNetworkId } = $derived.by(createTargetNetworkId);
   const { address, abi } = $derived(readDeployments(targetNetworkId).OnChainAIv1);
-  const { address: account } = $derived.by(createAccount());
+  const { account } = $derived(createAccount());
+  const { address: acountAddress } = $derived(account);
   const config = $derived(readConfig(targetNetworkId));
 
   return {
@@ -22,7 +24,7 @@ const createOnchainAI = () => {
       return address as Address;
     },
     get account() {
-      return account;
+      return acountAddress;
     },
     get config() {
       return config;

@@ -7,7 +7,7 @@
     children,
     config,
     initialState,
-    reconnectOnMount = true,
+    reconnectOnMount = true
   } = $props<{
     children: Snippet;
     config: ResolvedRegister["config"];

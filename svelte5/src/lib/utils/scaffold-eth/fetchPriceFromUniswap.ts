@@ -1,4 +1,4 @@
-import { mainnet } from "@wagmi/core/chains";
+import { mainnet } from "viem/chains";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
 import { type Address, createPublicClient, http, parseAbi } from "viem";

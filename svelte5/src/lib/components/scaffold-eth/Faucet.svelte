@@ -4,7 +4,7 @@
   import Address from "./Address.svelte";
   import Balance from "./Balance.svelte";
   import AddressInput from "./inputs/AddressInput.svelte";
-  import { createAccount } from "wagmi-svelte";
+  import { createAccount } from "$lib/wagmi/runes/account.svelte";
   import { createTransactor } from "$lib/runes/transactor.svelte";
   import { anvil } from "viem/chains";
   import { notification } from "$lib/utils/scaffold-eth/notification";
@@ -24,7 +24,8 @@
   let faucetAddress = $state<AddressType>();
   let sendValue = $state("");
 
-  const { chain } = $derived.by(createAccount());
+  const { account } = $derived(createAccount());
+  const { chain } = $derived(account);
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 

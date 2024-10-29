@@ -1,6 +1,8 @@
 <script lang="ts">
   import { createTransactor } from "$lib/runes/transactor.svelte";
-  import { createAccount, createBalance } from "wagmi-svelte";
+  import { createBalance } from "wagmi-svelte";
+  import { createAccount } from "$lib/wagmi/runes/account.svelte";
+
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";
   import { anvil } from "viem/chains";
@@ -8,7 +10,9 @@
   const AMOUNT_TO_SEND = "1";
   const FAUCET_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
-  const { address, chain } = $derived.by(createAccount());
+  const { account } = $derived(createAccount());
+  const { address, chain } = $derived(account);
+
   const localWalletClient = createWalletClient({
     chain: anvil,
     transport: http()

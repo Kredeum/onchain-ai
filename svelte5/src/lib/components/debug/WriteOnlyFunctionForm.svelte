@@ -1,6 +1,6 @@
 <script lang="ts">
+  import { createAccount } from "$lib/wagmi/runes/account.svelte";
   import {
-    createAccount,
     createWaitForTransactionReceipt,
     type CreateWaitForTransactionReceiptReturnType,
     createWriteContract
@@ -35,7 +35,10 @@
 
   let form = $state(getInitialFormState(abiFunction));
   let txValue = $state<bigint | string>("");
-  const { chain } = $derived.by(createAccount());
+
+  const { account } = $derived(createAccount());
+  const { chain } = $derived(account);
+
   const targetNetwork = $derived.by(createTargetNetwork());
   const writeDisabled = $derived(!chain || chain?.id !== targetNetwork.id);
   let writeTxn = $derived.by(createTransactor());

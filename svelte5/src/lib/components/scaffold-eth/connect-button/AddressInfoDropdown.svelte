@@ -139,7 +139,7 @@
       <button
         class="menu-item btn-sm flex gap-3 !rounded-xl py-3 text-error"
         type="button"
-        onclick={disconnect}
+        onclick={() => disconnect()}
       >
         <Icon src={ArrowLeftOnRectangle} class="ml-2 h-6 w-4 sm:ml-0" /> <span>Disconnect</span>
       </button>

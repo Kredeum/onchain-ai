@@ -4,7 +4,7 @@ import type { Hash, SendTransactionParameters, TransactionReceipt, WalletClient 
 import { getParsedError } from "$lib/utils/scaffold-eth/getParsedError";
 import { getBlockExplorerTxLink } from "$lib/utils/scaffold-eth/networks";
 import { notification } from "$lib/utils/scaffold-eth/notification";
-import { wagmiConfig } from "$lib/wagmi";
+import { wagmiConfig } from "$lib/wagmi/wagmi";
 import type { Renderable } from "svelte-french-toast";
 
 export type TransactionFunc = (

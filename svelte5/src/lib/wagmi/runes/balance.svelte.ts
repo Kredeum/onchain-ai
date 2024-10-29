@@ -1,0 +1,32 @@
+import { getBalance } from "@wagmi/core";
+import { createConfig } from "./config.svelte";
+import { createTargetNetworkId } from "$lib/runes/global.svelte";
+import { type Address, zeroAddress } from "viem";
+
+const createBalance = (params: { chainId?: number; address?: Address }) => {
+  let { chainId, address } = params;
+  address ||= zeroAddress;
+
+  const config = $derived.by(createConfig());
+  if (!chainId) {
+    const { targetNetworkId } = $derived.by(createTargetNetworkId);
+    chainId = targetNetworkId;
+  }
+
+  let balance = $state();
+  (async () => {
+    balance = await getBalance(config, { chainId, address });
+  })();
+
+  $inspect("RUNE chainId", chainId);
+  $inspect("RUNE address", address);
+  $inspect("RUNE balance", balance);
+
+  return {
+    get balance() {
+      return balance;
+    }
+  };
+};
+
+export { createBalance };

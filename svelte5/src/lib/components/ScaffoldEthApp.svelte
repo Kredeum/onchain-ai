@@ -4,7 +4,7 @@
   import Header from "./Header.svelte";
   import Footer from "./Footer.svelte";
   import { reconnect } from "@wagmi/core";
-  import { wagmiConfig } from "$lib/wagmi";
+  import { wagmiConfig } from "$lib/wagmi/wagmi";
   import { untrack, type Snippet } from "svelte";
   import { createDarkMode } from "$lib/runes/darkMode.svelte";
   import { modal } from "$lib/modal";

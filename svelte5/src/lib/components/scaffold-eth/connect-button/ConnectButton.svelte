@@ -1,7 +1,8 @@
 <script lang="ts">
   import { modal } from "$lib/modal";
   import scaffoldConfig from "$lib/scaffold.config";
-  import { createAccount, createEnsName, createEnsAvatar } from "wagmi-svelte";
+  import { createAccount } from "$lib/wagmi/runes/account.svelte";
+  import { createEnsName, createEnsAvatar } from "wagmi-svelte";
   import WrongNetworkDropdown from "./WrongNetworkDropdown.svelte";
   import { Balance } from "$lib/components/scaffold-eth";
   import type { Address } from "viem/accounts";
@@ -13,7 +14,10 @@
   import AddressQRCodeModal from "./AddressQRCodeModal.svelte";
 
   const targetNetwork = $derived.by(createTargetNetwork());
-  const { address, chain, isConnected } = $derived.by(createAccount());
+
+  const { account } = $derived(createAccount());
+  const { address, chain, isConnected } = $derived(account);
+
   const connected = $derived(isConnected);
   const isChainUnsupported = $derived(
     chain?.id && !scaffoldConfig.targetNetworks.map((it) => it.id as number).includes(chain.id)

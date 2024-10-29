@@ -13,7 +13,7 @@ const createOnchainAIRead = ({
   const readContract = $derived.by(
     createReadContract({ chainId, address, abi, functionName, args })
   );
- 
+
   return {
     get data() {
       return readContract?.data;

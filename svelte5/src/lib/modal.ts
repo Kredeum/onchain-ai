@@ -1,4 +1,4 @@
-import { wagmiConfig } from "./wagmi";
+import { wagmiConfig } from "./wagmi/wagmi";
 import { createWeb3Modal } from "@web3modal/wagmi";
 import scaffoldConfig from "$lib/scaffold.config";
 
