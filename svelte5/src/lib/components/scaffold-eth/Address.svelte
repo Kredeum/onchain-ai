@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEnsAvatar, createEnsName } from "wagmi-svelte";
+  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes/ens.svelte";
   import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
   import { getAddress, isAddress } from "viem";
   import { anvil } from "viem/chains";
@@ -31,29 +31,13 @@
     "3xl": 15
   };
 
-  let { data: ens } = $derived.by(
-    createEnsName(() => ({
-      address: checkSumAddress,
-      query: {
-        enabled: isAddress(checkSumAddress ?? "")
-      },
-      chainId: 1
-    }))
-  );
-  let { data: ensAvatar } = $derived.by(
-    createEnsAvatar(() => ({
-      name: ens ?? undefined,
-      query: {
-        enabled: Boolean(ens)
-      },
-      chainId: 1
-    }))
-  );
+  let { ensName } = $derived(createEnsName({ address: checkSumAddress }));
+  let { ensAvatar } = $derived(createEnsAvatar({ name: ensName }));
   let addressCopied = $state(false);
 
   let displayAddress = $derived.by(() => {
-    if (ens) {
-      return ens;
+    if (ensName) {
+      return ensName;
     } else if (format === "long") {
       return checkSumAddress;
     }
@@ -84,8 +68,8 @@
     <div class="flex-shrink-0">
       <BlockieAvatar
         address={checkSumAddress}
-        ensImage={ensAvatar}
         size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
+        ensImage={ensAvatar}
       />
     </div>
     {#if disableAddressLink}

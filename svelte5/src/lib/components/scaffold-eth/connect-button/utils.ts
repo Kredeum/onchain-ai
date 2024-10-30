@@ -1,7 +1,7 @@
 import type { GetEnsNameReturnType } from "viem";
 
 // format functions from RainbowKit
-export function formatENS(name: GetEnsNameReturnType): string {
+export function formatENS(name: string): string {
   if (!name) return "";
 
   const parts = name.split(".");

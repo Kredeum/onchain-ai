@@ -8,12 +8,12 @@ createConfig
 createAccount
 WagmiProvider
 createBalance
-
-
-# wagmi-svelte only
 createEnsAddress
 createEnsName
 createEnsAvatar
+
+
+# wagmi-svelte only
 
 createPublicClient
 createReadContract

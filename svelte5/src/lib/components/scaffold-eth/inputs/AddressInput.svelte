@@ -2,7 +2,7 @@
   import { isAddress, type Address } from "viem";
   import { isENS, type CommonInputProps } from "./utils";
   import InputBase from "./InputBase.svelte";
-  import { createEnsAddress, createEnsName, createEnsAvatar } from "wagmi-svelte";
+  import { createEnsAddress, createEnsName, createEnsAvatar } from "$lib/wagmi/runes";
   import { blo } from "blo";
   import { normalize } from "viem/ens";
 
@@ -50,37 +50,8 @@
 
   let enteredEnsName = $state<string>();
 
-  const {
-    isLoading: isEnsAddressLoading,
-    isError: isEnsAddressError,
-    isSuccess: isEnsAddressSuccess,
-    data: ensAddress
-  } = $derived.by(
-    createEnsAddress(() => ({
-      name: settledValue,
-      chainId: 1,
-      query: {
-        gcTime: 30_000,
-        enabled: isDebouncedValueLive && isENS(debouncedValue)
-      }
-    }))
-  );
-
-  let {
-    isLoading: isEnsNameLoading,
-    isError: isEnsNameError,
-    isSuccess: isEnsNameSuccess,
-    data: ensName
-  } = $derived.by(
-    createEnsName(() => ({
-      address: settledValue,
-      chainId: 1,
-      query: {
-        gcTime: 30_000,
-        enabled: debouncedValue && isAddress(debouncedValue)
-      }
-    }))
-  );
+  const { ensAddress } = $derived(createEnsAddress({ name: settledValue || "0x" }));
+  const { ensName } = $derived(createEnsName({ address: settledValue }));
 
   $effect(() => {
     if (!ensAddress) return;
@@ -91,16 +62,7 @@
     onchange?.(ensAddress);
   });
 
-  const ensAvatar = $derived.by(
-    createEnsAvatar(() => ({
-      name: ensName ? normalize(ensName) : undefined,
-      chainId: 1,
-      query: {
-        enabled: Boolean(ensName),
-        gcTime: 30_000
-      }
-    }))
-  );
+  const { ensAvatar } = $derived(createEnsAvatar({ name: ensName }));
 
   const handleChange = (newValue: Address) => {
     enteredEnsName = undefined;
@@ -108,14 +70,7 @@
     onchange?.(newValue);
   };
 
-  const reFocus = $derived(
-    isEnsAddressError ||
-      isEnsNameError ||
-      isEnsNameSuccess ||
-      isEnsAddressSuccess ||
-      ensName === null ||
-      ensAddress === null
-  );
+  const reFocus = $derived(ensName === null || ensAddress === null);
 </script>
 
 <InputBase
@@ -124,19 +79,18 @@
   {placeholder}
   error={ensAddress === null}
   onchange={handleChange}
-  disabled={isEnsAddressLoading || isEnsNameLoading || disabled}
+  {disabled}
   {reFocus}
 >
   {#snippet prefix()}
     {#if ensName}
       <div class="flex items-center rounded-l-full bg-base-300">
-        {#if ensAvatar?.isLoading}
-          <div class="skeleton h-[35px] w-[35px] shrink-0 rounded-full bg-base-200"></div>
-        {/if}
-        {#if ensAvatar?.data}
+        {#if ensAvatar}
           <span class="w-[35px]">
-            <img class="w-full rounded-full" src={ensAvatar?.data} alt="{ensAddress} avatar" />
+            <img class="w-full rounded-full" src={ensAvatar} alt="{ensAddress} avatar" />
           </span>
+        {:else}
+          <div class="skeleton h-[35px] w-[35px] shrink-0 rounded-full bg-base-200"></div>
         {/if}
         <span class="px-2 text-accent">{enteredEnsName ?? ensName}</span>
       </div>

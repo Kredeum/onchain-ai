@@ -18,9 +18,9 @@ const createBalance = (params: { chainId?: number; address?: Address }) => {
     balance = await getBalance(config, { chainId, address });
   })();
 
-  $inspect("RUNE chainId", chainId);
-  $inspect("RUNE address", address);
-  $inspect("RUNE balance", balance);
+  $inspect("RUNE createBalance chainId", chainId);
+  $inspect("RUNE createBalance address", address);
+  $inspect("RUNE createBalance balance", balance);
 
   return {
     get balance() {

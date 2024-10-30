@@ -1,11 +1,10 @@
 <script lang="ts">
   import { modal } from "$lib/modal";
   import scaffoldConfig from "$lib/scaffold.config";
-  import { createAccount } from "$lib/wagmi/runes/account.svelte";
-  import { createEnsName, createEnsAvatar } from "wagmi-svelte";
+  import { createEnsAvatar, createAccount, createEnsName } from "$lib/wagmi/runes";
   import WrongNetworkDropdown from "./WrongNetworkDropdown.svelte";
   import { Balance } from "$lib/components/scaffold-eth";
-  import type { Address } from "viem/accounts";
+  import type { Address } from "viem";
   import { createNetworkColor } from "$lib/runes/networkColor.svelte";
   import AddressInfoDropdown from "./AddressInfoDropdown.svelte";
   import { formatENS, formatAddress } from "./utils";
@@ -24,8 +23,10 @@
   );
   const networkColor = $derived.by(createNetworkColor());
 
-  const ensName = $derived.by(createEnsName(() => ({ address })));
-  const ensAvatar = $derived.by(createEnsAvatar(() => ({ name: ensName.data ?? undefined })));
+  const { ensName: name } = $derived(createEnsName({ address }));
+  const { ensAvatar } = $derived(createEnsAvatar({ name }));
+
+  $inspect("RUNE connect-button name:", name);
 
   const blockExplorerAddressLink = $derived(
     address ? getBlockExplorerAddressLink(targetNetwork, address) : undefined
@@ -48,8 +49,8 @@
   {#if address}
     <AddressInfoDropdown
       {address}
-      displayName={ensName.data ? formatENS(ensName.data) : formatAddress(address)}
-      ensAvatar={ensAvatar.data ?? undefined}
+      displayName={name ? formatENS(name) : formatAddress(address)}
+      {ensAvatar}
       {blockExplorerAddressLink}
     />
     <AddressQRCodeModal {address} modalId="qrcode-modal" />
