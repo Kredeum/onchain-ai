@@ -12,9 +12,9 @@
   const { chainId, address } = $derived(account);
 
   const { balance } = $derived(createBalance({ chainId, address }));
-  const { ensName } = $derived(createEnsName({ address }));
-  const { ensAvatar } = $derived(createEnsAvatar({ name: ensName }));
-  const { ensAddress } = $derived(createEnsAddress({ name: ensName }));
+  const { ensName } = $derived(createEnsName(address));
+  const { ensAvatar } = $derived(createEnsAvatar(ensName));
+  const { ensAddress } = $derived(createEnsAddress(ensName));
 
   $inspect("PAGE account", account);
   $inspect("PAGE balance", balance);

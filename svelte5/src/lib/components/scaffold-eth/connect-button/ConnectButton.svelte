@@ -23,8 +23,8 @@
   );
   const networkColor = $derived.by(createNetworkColor());
 
-  const { ensName: name } = $derived(createEnsName({ address }));
-  const { ensAvatar } = $derived(createEnsAvatar({ name }));
+  const { ensName: name } = $derived(createEnsName(address));
+  const { ensAvatar } = $derived(createEnsAvatar(name));
 
   $inspect("RUNE connect-button name:", name);
 

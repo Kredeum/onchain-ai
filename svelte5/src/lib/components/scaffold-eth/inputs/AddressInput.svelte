@@ -1,6 +1,6 @@
 <script lang="ts">
   import { isAddress, type Address } from "viem";
-  import { isENS, type CommonInputProps } from "./utils";
+  import { isEns, type CommonInputProps } from "./utils";
   import InputBase from "./InputBase.svelte";
   import { createEnsAddress, createEnsName, createEnsAvatar } from "$lib/wagmi/runes";
   import { blo } from "blo";
@@ -18,59 +18,36 @@
     ens?: string | undefined;
   } = $props();
 
-  let rawDebouncedValue: string | undefined = $state(undefined);
-  let debouncedTimeout: number | undefined;
+  const { ensAddress } = $derived(
+    isEns(value) ? createEnsAddress(value) : { ensAddress: "0x" } //
+  );
+
+  const { ensName } = $derived(
+    isAddress(value)
+      ? createEnsName(value)
+      : isAddress(ensAddress)
+        ? createEnsName(ensAddress)
+        : { ensName: "" }
+  );
+  const { ensAvatar } = $derived(
+    ensName ? createEnsAvatar(ensName) : { ensAvatar: "" } //
+  );
 
   $effect(() => {
-    if (debouncedTimeout) {
-      clearTimeout(debouncedTimeout);
-    }
-
-    value;
-
-    debouncedTimeout = window.setTimeout(() => {
-      rawDebouncedValue = value as string;
-    }, 500);
+    address = isAddress(value) ? value : isAddress(ensAddress) ? ensAddress : undefined;
+    if (address && isAddress(address)) value = address;
   });
 
-  $effect(() => {
-    if (value && isAddress(value)) address = value;
-    else address = undefined;
-  });
-
-  $effect(() => {
-    if (address) value = address;
-  });
-
-  // If the user enters an address, don't delay
-  const debouncedValue = $derived(isAddress(value) ? value : rawDebouncedValue);
-  const isDebouncedValueLive = $derived(debouncedValue === value);
-
-  const settledValue = $derived(isDebouncedValueLive ? debouncedValue : undefined);
-
-  let enteredEnsName = $state<string>();
-
-  const { ensAddress } = $derived(createEnsAddress({ name: settledValue || "0x" }));
-  const { ensName } = $derived(createEnsName({ address: settledValue }));
-
-  $effect(() => {
-    if (!ensAddress) return;
-
-    enteredEnsName = debouncedValue;
-
-    value = ensAddress;
-    onchange?.(ensAddress);
-  });
-
-  const { ensAvatar } = $derived(createEnsAvatar({ name: ensName }));
-
-  const handleChange = (newValue: Address) => {
-    enteredEnsName = undefined;
-
+  const handleChange = (newValue: Address | string) => {
     onchange?.(newValue);
   };
 
-  const reFocus = $derived(ensName === null || ensAddress === null);
+  const reFocus = $derived(!(isAddress(value) || isAddress(ensAddress)));
+
+  $inspect("$effect ~ value:", value);
+  $inspect("ensName:", ensName);
+  $inspect("ensAvatar:", ensAvatar);
+  $inspect("ensAddress:", ensAddress);
 </script>
 
 <InputBase
@@ -92,13 +69,13 @@
         {:else}
           <div class="skeleton h-[35px] w-[35px] shrink-0 rounded-full bg-base-200"></div>
         {/if}
-        <span class="px-2 text-accent">{enteredEnsName ?? ensName}</span>
+        <span class="px-2 text-accent">{ensName}</span>
       </div>
     {/if}
   {/snippet}
   {#snippet suffix()}
     {#if value}
-      <img alt="" class="!rounded-full" src={blo(value as `0x${string}`)} width="35" height="35" />
+      <img alt="" class="!rounded-full" src={blo(value as Address)} width="35" height="35" />
     {/if}
   {/snippet}
 </InputBase>

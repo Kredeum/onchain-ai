@@ -1,6 +1,6 @@
 <script lang="ts">
   import { BlockieAvatar } from "$lib/components/scaffold-eth";
-  import { isENS } from "$lib/components/scaffold-eth/inputs";
+  import { isEns } from "$lib/components/scaffold-eth/inputs";
   import { getAddress, type Address } from "viem";
   import {
     Icon,
@@ -65,7 +65,7 @@
   >
     <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
-      {isENS(displayName)
+      {isEns(displayName)
         ? displayName
         : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
     </span>

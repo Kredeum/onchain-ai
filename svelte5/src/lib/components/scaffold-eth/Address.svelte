@@ -31,8 +31,8 @@
     "3xl": 15
   };
 
-  let { ensName } = $derived(createEnsName({ address: checkSumAddress }));
-  let { ensAvatar } = $derived(createEnsAvatar({ name: ensName }));
+  let { ensName } = $derived(createEnsName(checkSumAddress));
+  let { ensAvatar } = $derived(createEnsAvatar(ensName));
   let addressCopied = $state(false);
 
   let displayAddress = $derived.by(() => {

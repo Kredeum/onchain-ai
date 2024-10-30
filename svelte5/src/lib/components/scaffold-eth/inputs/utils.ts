@@ -114,4 +114,4 @@ export const isValidInteger = (dataType: IntegerVariant, value: bigint | string,
 
 // Treat any dot-separated string as a potential ENS name
 const ensRegex = /.+\..+/;
-export const isENS = (address = "") => ensRegex.test(address);
+export const isEns = (address = "") => ensRegex.test(address);

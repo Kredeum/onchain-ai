@@ -6,11 +6,8 @@
     Bars3,
     BugAnt,
     Icon,
-    HomeModern,
-    ClipboardDocument,
-    ClipboardDocumentCheck,
-    CheckBadge,
-    ChatBubbleLeftRight
+    ChatBubbleLeftRight,
+    Beaker
   } from "svelte-hero-icons";
   import ConnectButton from "$lib/components/scaffold-eth/connect-button/ConnectButton.svelte";
   import { FaucetButton } from "$lib/components/scaffold-eth";
@@ -52,6 +49,11 @@
       label: "Debug Events",
       href: "/events",
       icon: Bars3
+    },
+    {
+      label: "Tests",
+      href: "/tests",
+      icon: Beaker
     }
     // {
     //   label: "Home",
