@@ -1,5 +1,5 @@
 import { targetNetwork } from "./global.svelte";
-import { createPublicClient } from "wagmi-svelte";
+import { createPublicClient } from "$lib/wagmi/runes";
 import {
   ContractCodeStatus,
   contracts,
@@ -24,9 +24,7 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(
         status = ContractCodeStatus.NOT_FOUND;
         return;
       }
-      const publicClient = $derived.by(
-        createPublicClient({ chainId: targetNetwork.targetNetwork.id })
-      );
+      const publicClient = $derived.by(createPublicClient());
 
       const code = await publicClient?.getBytecode({
         address: deployedContract.address as Address

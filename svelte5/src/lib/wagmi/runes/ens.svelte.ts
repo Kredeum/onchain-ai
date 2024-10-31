@@ -3,8 +3,7 @@ import { type Address } from "viem";
 import { isAddress } from "$lib/components/scaffold-eth/inputs/utils";
 
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes/config.svelte";
-import { createAccount } from "$lib/wagmi/runes/account.svelte";
+import { createConfig, createAccount } from "$lib/wagmi/runes";
 import { isEns } from "$lib/components/scaffold-eth/inputs";
 
 const createEnsName = (address?: Address | string | null | undefined): { ensName: string } => {

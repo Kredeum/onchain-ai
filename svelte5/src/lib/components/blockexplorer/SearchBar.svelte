@@ -1,12 +1,11 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { createPublicClient } from "wagmi-svelte";
+  import { createPublicClient } from "$lib/wagmi/runes";
   import { isAddress, isHex } from "viem";
-  import { hardhat } from "viem/chains";
 
   let searchInput = $state("");
 
-  const client = $derived.by(createPublicClient({ chainId: hardhat.id }));
+  const client = $derived.by(createPublicClient());
 
   const handleSearch = async (event: Event) => {
     event.preventDefault();

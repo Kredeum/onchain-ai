@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes/ens.svelte";
+  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes";
   import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
   import { getAddress, isAddress } from "viem";
   import { anvil } from "viem/chains";

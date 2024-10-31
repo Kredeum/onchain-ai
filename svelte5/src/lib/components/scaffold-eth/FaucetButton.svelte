@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createTransactor } from "$lib/runes/transactor.svelte";
   import { createBalance } from "wagmi-svelte";
-  import { createAccount } from "$lib/wagmi/runes/account.svelte";
+  import { createAccount } from "$lib/wagmi/runes";
 
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";

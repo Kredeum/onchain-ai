@@ -11,13 +11,13 @@ createBalance
 createEnsAddress
 createEnsName
 createEnsAvatar
+createPublicClient
+createReadContract
 
 
 # wagmi-svelte only
 
-createPublicClient
-createReadContract
-createWriteContract
+createWriteContract: reprendre déjà fait pour onchain-ai
 
 createBlockNumber => to re-write, like interactions runes
 createWaitForTransactionReceipt => idem `createBlockNumber`
@@ -25,6 +25,6 @@ createWaitForTransactionReceipt => idem `createBlockNumber`
 createDisconnect (wagmi-svelte) => to rewrite with only `disconnectMutationOptions` from wagmi-core
 createSwitchChain => idem `createDisconnect`
 
-# not necessary ?
+# types: not necessary ?
 CreateReadContractParameters => types, to redefine
 CreateWaitForTransactionReceiptReturnType => types, to redefine

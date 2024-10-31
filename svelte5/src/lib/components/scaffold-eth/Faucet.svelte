@@ -4,7 +4,7 @@
   import Address from "./Address.svelte";
   import Balance from "./Balance.svelte";
   import AddressInput from "./inputs/AddressInput.svelte";
-  import { createAccount } from "$lib/wagmi/runes/account.svelte";
+  import { createAccount } from "$lib/wagmi/runes";
   import { createTransactor } from "$lib/runes/transactor.svelte";
   import { anvil } from "viem/chains";
   import { notification } from "$lib/utils/scaffold-eth/notification";

@@ -1,4 +1,4 @@
-import { createPublicClient } from "wagmi-svelte";
+import { createPublicClient } from "$lib/wagmi/runes";
 import type { Address, Log } from "viem";
 
 export const createContractLogs = (address: Address) => {

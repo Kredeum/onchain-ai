@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createAccount } from "$lib/wagmi/runes/account.svelte";
+  import { createAccount } from "$lib/wagmi/runes";
   import {
     createWaitForTransactionReceipt,
     type CreateWaitForTransactionReceiptReturnType,

@@ -118,11 +118,11 @@ export const isEns = (ensName: string | null | undefined) => {
   if (!ensName) return false;
 
   // Treat any dot-separated string as a potential ENS name
-  return /.+\..+/.test(ensName)
+  return /.+\..+/.test(ensName);
 };
 
 export const isAddress = (address: Address | string | null | undefined) => {
   if (!address) return false;
 
   return isAddressViem(address as string);
-}
+};

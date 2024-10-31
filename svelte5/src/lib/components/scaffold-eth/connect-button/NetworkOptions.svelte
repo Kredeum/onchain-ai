@@ -2,7 +2,7 @@
   import { getNetworkColor } from "$lib/runes/networkColor.svelte";
   import { getTargetNetworks, type ChainWithAttributes } from "$lib/utils/scaffold-eth/networks";
   import { createSwitchChain } from "wagmi-svelte";
-  import { createAccount } from "$lib/wagmi/runes/account.svelte";
+  import { createAccount } from "$lib/wagmi/runes";
   import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
   import { createDarkMode } from "$lib/runes/darkMode.svelte";
 

@@ -5,9 +5,11 @@
 
   const { account } = $derived.by(createOnchainAI) as { account: string };
 
-  const { data: lastInteraction } = $derived(
-    createOnchainAIRead({ functionName: "lastInteraction", args: [account] })
-  ) as { data: InteractionType };
+  let { data: lastInteraction } = $derived(
+    account
+      ? createOnchainAIRead({ functionName: "lastInteraction", args: [account] })
+      : { data: null }
+  ) as unknown as { data: InteractionType | null };
 </script>
 
 <div class="p-4">
