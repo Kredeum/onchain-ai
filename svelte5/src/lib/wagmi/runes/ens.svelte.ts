@@ -1,15 +1,20 @@
 import { createTargetNetworkId } from "$lib/runes/global.svelte";
-import { zeroAddress, type Address } from "viem";
+import { type Address } from "viem";
+import { isAddress } from "$lib/components/scaffold-eth/inputs/utils";
+
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
 import { createAccount } from "$lib/wagmi/runes/account.svelte";
+import { isEns } from "$lib/components/scaffold-eth/inputs";
 
-const createEnsName = (address: Address = "0x"): { ensName: string } => {
+const createEnsName = (address?: Address | string | null | undefined): { ensName: string } => {
   const config = $derived.by(createConfig());
   let ensName: string = $state("");
 
   (async () => {
-    ensName = (await getEnsName(config, { chainId: 1, address })) || "";
+    if (!address) return;
+    if (!isAddress(address)) return;
+    ensName = (await getEnsName(config, { chainId: 1, address: address as Address })) || "";
   })();
 
   return {
@@ -34,12 +39,12 @@ const createEnsAvatar = (ensName: string = ""): { ensAvatar: string } => {
   };
 };
 
-const createEnsAddress = (ensName: string = ""): { ensAddress: Address } => {
+const createEnsAddress = (ensName: string = ""): { ensAddress: Address | null } => {
   const config = $derived.by(createConfig());
-  let ensAddress: Address = $state("0x");
+  let ensAddress: Address | null = $state(null);
 
   (async () => {
-    ensAddress = (await getEnsAddress(config, { chainId: 1, name: ensName })) || "0x";
+    ensAddress = await getEnsAddress(config, { chainId: 1, name: ensName });
   })();
 
   return {

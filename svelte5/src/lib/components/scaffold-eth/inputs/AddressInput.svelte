@@ -1,6 +1,10 @@
 <script lang="ts">
-  import { isAddress, type Address } from "viem";
-  import { isEns, type CommonInputProps } from "./utils";
+  import { type Address } from "viem";
+  import {
+    isAddress,
+    isEns,
+    type CommonInputProps
+  } from "$lib/components/scaffold-eth/inputs/utils";
   import InputBase from "./InputBase.svelte";
   import { createEnsAddress, createEnsName, createEnsAvatar } from "$lib/wagmi/runes";
   import { blo } from "blo";
@@ -14,40 +18,28 @@
     onchange,
     disabled
   }: CommonInputProps<Address | string> & {
-    address?: string | undefined;
+    address?: string | null | undefined;
     ens?: string | undefined;
   } = $props();
 
-  const { ensAddress } = $derived(
-    isEns(value) ? createEnsAddress(value) : { ensAddress: "0x" } //
-  );
+  const { ensName: ensNameFromValue } = $derived(createEnsName(value));
+  const { ensAddress: ensAddressFromValue } = $derived(createEnsAddress(value));
+  const validEnsNameFromValue = $derived(isEns(ensNameFromValue));
+  const validEnsAddressFromValue = $derived(isAddress(ensAddressFromValue));
 
-  const { ensName } = $derived(
-    isAddress(value)
-      ? createEnsName(value)
-      : isAddress(ensAddress)
-        ? createEnsName(ensAddress)
-        : { ensName: "" }
-  );
-  const { ensAvatar } = $derived(
-    ensName ? createEnsAvatar(ensName) : { ensAvatar: "" } //
-  );
+  const ensName = $derived(validEnsAddressFromValue ? value : ensNameFromValue);
+  const ensAddress = $derived(validEnsNameFromValue ? ensAddressFromValue : null);
+  const { ensAvatar } = $derived(ensName ? createEnsAvatar(ensName) : { ensAvatar: null });
 
   $effect(() => {
-    address = isAddress(value) ? value : isAddress(ensAddress) ? ensAddress : undefined;
-    if (address && isAddress(address)) value = address;
+    if (validEnsAddressFromValue) value = ensAddressFromValue!;
   });
 
   const handleChange = (newValue: Address | string) => {
     onchange?.(newValue);
   };
 
-  const reFocus = $derived(!(isAddress(value) || isAddress(ensAddress)));
-
-  $inspect("$effect ~ value:", value);
-  $inspect("ensName:", ensName);
-  $inspect("ensAvatar:", ensAvatar);
-  $inspect("ensAddress:", ensAddress);
+  const reFocus = $derived(isAddress(value));
 </script>
 
 <InputBase
