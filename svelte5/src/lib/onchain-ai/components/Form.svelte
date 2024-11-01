@@ -1,13 +1,14 @@
 <script lang="ts">
   import { InputBase } from "$lib/components/scaffold-eth/inputs";
-  import { createOnchainAIWrite } from "$lib/onchain-ai/runes/write.svelte";
+  import { createOnchainAI, createWriteOnchainAI } from "$lib/onchain-ai/runes";
+  import { createConfig, createWriteContract } from "$lib/wagmi/runes";
 
   let { tx = $bindable() } = $props();
 
   let prompt: string = $state("");
 
   const writeContract = $derived(
-    createOnchainAIWrite({ functionName: "sendRequest", args: [prompt], value: 10n ** 14n })
+    createWriteOnchainAI({ functionName: "sendRequest", args: [prompt], value: 10n ** 14n })
   );
 
   const handleSend = async () => {

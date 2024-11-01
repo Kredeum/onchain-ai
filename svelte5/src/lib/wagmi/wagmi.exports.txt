@@ -13,11 +13,11 @@ createEnsName
 createEnsAvatar
 createPublicClient
 createReadContract
+createWriteContract
 
 
 # wagmi-svelte only
-
-createWriteContract: reprendre déjà fait pour onchain-ai
+createWriteContract : todo popups tx send / confirmed
 
 createBlockNumber => to re-write, like interactions runes
 createWaitForTransactionReceipt => idem `createBlockNumber`

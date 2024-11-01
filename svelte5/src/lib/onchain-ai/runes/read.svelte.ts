@@ -1,7 +1,7 @@
 import { createReadContract } from "$lib/wagmi/runes/";
-import { createOnchainAI } from "../runes/contract.svelte";
+import { createOnchainAI } from "$lib/onchain-ai/runes";
 
-const createOnchainAIRead = ({
+const createReadOnchainAI = ({
   functionName,
   args = []
 }: {
@@ -10,14 +10,7 @@ const createOnchainAIRead = ({
 }) => {
   const { address, abi } = $derived.by(createOnchainAI);
 
-  const result = createReadContract({ address, abi, functionName, args });
-
-  $inspect("{ address, abi, functionName, args }:", { address, abi, functionName, args });
-  return {
-    get data() {
-      return result?.data;
-    }
-  };
+  return createReadContract({ address, abi, functionName, args });
 };
 
-export { createOnchainAIRead };
+export { createReadOnchainAI };

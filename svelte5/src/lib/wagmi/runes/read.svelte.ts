@@ -13,18 +13,20 @@ const createReadContract = ({
   address: Address;
   abi: Abi;
   functionName: string;
-  args?: string[];
+  args?: unknown[];
 }) => {
   const config = $derived.by(createConfig());
 
   let data: ReadContractReturnType = $state();
   (async () => {
-    console.log("createReadContract BEFORE", config);
-    data = await readContract(config, { address, abi, functionName, args });
-    console.log("createReadContract  AFTER", config);
+    try {
+      data = await readContract(config, { address, abi, functionName, args });
+    } catch (e: unknown) {
+      console.error("readContract ~ error", e);
+    }
   })();
 
-  $inspect("createReadContract config", config);
+  $inspect("createReadContract", { address, abi, functionName, args });
   return {
     get data() {
       return data;
