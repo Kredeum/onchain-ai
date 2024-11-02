@@ -1,28 +1,24 @@
 <script lang="ts">
-  import { createAccount } from "$lib/wagmi/runes";
-  import {
-    createWaitForTransactionReceipt,
-    type CreateWaitForTransactionReceiptReturnType,
-    createWriteContract
-  } from "wagmi-svelte";
   import type { Abi, AbiFunction } from "abitype";
-  import type { TransactionReceipt, Address } from "viem";
+  import type { Address } from "viem";
   import {
     getFunctionInputKey,
     getInitialFormState,
     getParsedContractFunctionArgs,
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
-  import InheritanceTooltip from "./InheritanceTooltip.svelte";
-  import ContractInput from "./ContractInput.svelte";
-  import { IntegerInput } from "$lib/scaffold-eth/components";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
-  import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
+  import { createTargetNetwork, createTransactor } from "$lib/scaffold-eth/runes";
+  import {
+    IntegerInput,
+    InheritanceTooltip,
+    ContractInput,
+    DisplayTxResult
+  } from "$lib/scaffold-eth/components";
+  import { createAccount, createWriteContract } from "$lib/wagmi/runes";
 
   const {
     abi,
     abiFunction,
-    onchange,
     contractAddress,
     inheritedFrom
   }: {
@@ -35,6 +31,7 @@
 
   let form = $state(getInitialFormState(abiFunction));
   let txValue = $state<bigint | string>("");
+  let txResult = $state();
 
   const { account } = $derived(createAccount());
   const { chain } = $derived(account);
@@ -43,32 +40,20 @@
   const writeDisabled = $derived(!chain || chain?.id !== targetNetwork.id);
   let writeTxn = $derived.by(createTransactor());
 
-  let contractWrite = $derived.by(createWriteContract());
+  let { send, waitingTxHash, waitingTxReceipt } = $derived(
+    createWriteContract({
+      address: contractAddress,
+      abi,
+      functionName: abiFunction.name,
+      args: getParsedContractFunctionArgs(form),
+      value: BigInt(txValue)
+    })
+  );
 
+  let tx = $state();
   const handleWrite = async () => {
-    try {
-      const makeWriteWithParams = () =>
-        contractWrite!.writeContractAsync({
-          address: contractAddress,
-          functionName: abiFunction.name,
-          abi: abi,
-          args: getParsedContractFunctionArgs(form),
-          value: BigInt(txValue)
-        });
-      await writeTxn?.(makeWriteWithParams);
-      onchange();
-    } catch (e: unknown) {
-      console.error("⚡️ ~ file: WriteOnlyFunctionForm.tsx:handleWrite ~ error", e);
-    }
+    txResult = await send();
   };
-
-  let displayedTxResult = $state<TransactionReceipt | undefined>();
-  let txResult = $state<CreateWaitForTransactionReceiptReturnType | undefined>();
-  $effect(() => {
-    txResult = createWaitForTransactionReceipt({
-      hash: contractWrite?.data
-    });
-  });
 
   const transformedFunction = transformAbiFunction(abiFunction);
   const zeroInputs =
@@ -84,7 +69,7 @@
     {#each transformedFunction.inputs as input, i (getFunctionInputKey(abiFunction.name, input, i))}
       <ContractInput
         setForm={(updatedFormValue) => {
-          displayedTxResult = undefined;
+          tx = undefined;
           form = updatedFormValue;
         }}
         {form}
@@ -101,7 +86,7 @@
         <IntegerInput
           bind:value={txValue}
           onchange={() => {
-            displayedTxResult = undefined;
+            tx = undefined;
           }}
           placeholder="value (wei)"
         />
@@ -110,9 +95,8 @@
     <div class="flex justify-between gap-2">
       {#if !zeroInputs}
         <div class="flex-grow basis-0">
-          {#if displayedTxResult}
-            TxReceipt
-            <!-- <TxReceipt txResult={displayedTxResult} /> -->
+          {#if tx}
+            <DisplayTxResult content={txResult} />
           {/if}
         </div>
       {/if}
@@ -123,10 +107,10 @@
       >
         <button
           class="btn btn-secondary btn-sm"
-          disabled={writeDisabled || contractWrite?.isPending}
+          disabled={writeDisabled || !send}
           onclick={handleWrite}
         >
-          {#if contractWrite?.isPending}
+          {#if !waitingTxReceipt}
             <span class="loading loading-spinner loading-xs"></span>
           {/if}
           Send 💸
@@ -134,9 +118,9 @@
       </div>
     </div>
   </div>
-  {#if zeroInputs && txResult}
+  {#if zeroInputs && tx}
     <div class="flex-grow basis-0">
-      <!-- <TxReceipt {txResult} /> -->
+      <DisplayTxResult content={txResult} />
     </div>
   {/if}
 </div>

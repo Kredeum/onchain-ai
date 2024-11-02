@@ -37,7 +37,7 @@
 {:else}
   {#each functionsToDisplay as { fn, inheritedFrom } (fn.name)}
     <ReadOnlyFunctionForm
-      abi={deployedContractData.abi as Abi}
+      abi={deployedContractData.abi}
       contractAddress={deployedContractData.address as Address}
       abiFunction={fn}
       {inheritedFrom}

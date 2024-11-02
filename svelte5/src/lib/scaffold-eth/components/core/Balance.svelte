@@ -1,11 +1,8 @@
 <script lang="ts">
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
-  import { createBlockNumber } from "wagmi-svelte";
-  import { useQueryClient } from "@tanstack/svelte-query";
   import { formatEther, type Address } from "viem";
-  import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes/global.svelte";
-  import { untrack } from "svelte";
-  import { createBalance } from "wagmi-svelte";
+  import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes";
+  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { createBalance } from "$lib/wagmi/runes";
 
   const {
     address,
@@ -14,24 +11,9 @@
   }: { address?: Address; class?: string; usdMode?: boolean } = $props();
 
   const targetNetwork = $derived.by(createTargetNetwork());
-  const queryClient = useQueryClient();
-  const blockNumber = $derived.by(
-    createBlockNumber(() => ({ watch: true, chainId: targetNetwork.id }))
-  );
+  const { balance } = $derived(createBalance({ address }));
 
-  const balance = $derived.by(createBalance(() => ({ address })));
-
-  $effect(() => {
-    blockNumber.data;
-    queryClient;
-
-    untrack(() => {
-      balance.refetch();
-    });
-  });
-
-  const formattedBalance = $derived(balance.data ? Number(formatEther(balance.data.value)) : 0);
-
+  const formattedBalance = $derived(balance ? Number(formatEther(balance.value)) : 0);
   let displayUsdMode = $state(nativeCurrencyPrice.price > 0 ? Boolean(usdMode) : false);
 
   const toggleBalanceMode = () => {
@@ -41,20 +23,7 @@
   };
 </script>
 
-{#if balance.isLoading}
-  <div class="flex animate-pulse space-x-4">
-    <div class="h-6 w-6 rounded-md bg-slate-300"></div>
-    <div class="flex items-center space-y-6">
-      <div class="h-2 w-28 rounded bg-slate-300"></div>
-    </div>
-  </div>
-{:else if balance.isError}
-  <div
-    class="flex max-w-fit cursor-pointer flex-col items-center rounded-md border-2 border-gray-400 px-2"
-  >
-    <div class="text-warning">Error</div>
-  </div>
-{:else}
+{#if balance}
   <button
     class="btn btn-ghost btn-sm flex flex-col items-center font-normal hover:bg-transparent {className}"
     onclick={toggleBalanceMode}
@@ -69,4 +38,11 @@
       {/if}
     </div>
   </button>
+{:else}
+  <div class="flex animate-pulse space-x-4">
+    <div class="h-6 w-6 rounded-md bg-slate-300"></div>
+    <div class="flex items-center space-y-6">
+      <div class="h-2 w-28 rounded bg-slate-300"></div>
+    </div>
+  </div>
 {/if}

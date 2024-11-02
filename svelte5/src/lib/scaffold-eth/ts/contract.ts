@@ -22,7 +22,6 @@ import deploymentsJson from "$lib/deployments.json";
 import scaffoldConfig from "$lib/scaffold.config";
 import type { Config } from "@wagmi/core";
 import type { WriteContractVariables } from "@wagmi/core/query";
-import type { CreateReadContractParameters } from "wagmi-svelte";
 import type {
   WriteContractErrorType,
   WriteContractParameters,
@@ -196,21 +195,6 @@ type UseScaffoldArgsParam<
         args?: never;
         value?: never;
       };
-
-export type CreateScaffoldReadConfig<
-  TContractName extends ContractName,
-  TFunctionName extends ExtractAbiFunctionNames<ContractAbi<TContractName>, ReadAbiStateMutability>
-> = FuncOrValue<
-  {
-    contractName: TContractName;
-  } & IsContractDeclarationMissing<
-    Partial<CreateReadContractParameters>,
-    {
-      functionName: TFunctionName;
-    } & UseScaffoldArgsParam<TContractName, TFunctionName> &
-      Omit<CreateReadContractParameters, "chainId" | "abi" | "address" | "functionName" | "args">
-  >
->;
 
 export type scaffoldWriteContractVariables<
   TContractName extends ContractName,

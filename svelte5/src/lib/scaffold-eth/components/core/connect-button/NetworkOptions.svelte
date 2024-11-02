@@ -1,10 +1,8 @@
 <script lang="ts">
-  import { getNetworkColor } from "$lib/scaffold-eth/runes/networkColor.svelte";
-  import { getTargetNetworks, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
-  import { createSwitchChain } from "wagmi-svelte";
-  import { createAccount } from "$lib/wagmi/runes";
   import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
-  import { createDarkMode } from "$lib/scaffold-eth/runes/darkMode.svelte";
+  import { getTargetNetworks, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
+  import { getNetworkColor, createDarkMode } from "$lib/scaffold-eth/runes";
+  import { createSwitchChain, createAccount } from "$lib/wagmi/runes";
 
   const { hidden = false } = $props();
 
@@ -13,7 +11,7 @@
   const { account } = $derived(createAccount());
   const { chain } = $derived(account);
 
-  const switchChain = $derived.by(createSwitchChain());
+  const { switchChain } = $derived(createSwitchChain());
   const { isDarkMode } = $derived.by(createDarkMode());
 
   const items = $derived(allowedNetworks.filter((network) => network.id !== chain?.id));
@@ -25,7 +23,7 @@
       class="menu-item btn-sm flex gap-3 whitespace-nowrap !rounded-xl py-3"
       type="button"
       onclick={() => {
-        switchChain.switchChain?.({ chainId: network.id });
+        switchChain?.(network.id);
       }}
     >
       <Icon src={ArrowsRightLeft} class="ml-2 h-6 w-4 sm:ml-0" />

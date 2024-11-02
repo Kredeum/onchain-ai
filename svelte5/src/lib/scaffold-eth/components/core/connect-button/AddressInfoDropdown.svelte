@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { BlockieAvatar } from "$lib/scaffold-eth/components";
-  import { isEns } from "$lib/scaffold-eth/ts";
+  import { anvil } from "viem/chains";
   import { getAddress, type Address } from "viem";
   import {
     Icon,
@@ -12,13 +11,11 @@
     ArrowLeftOnRectangle,
     ArrowsRightLeft
   } from "svelte-hero-icons";
-  import NetworkOptions from "./NetworkOptions.svelte";
-  import { getTargetNetworks } from "$lib/scaffold-eth/ts";
-  import { createDisconnect } from "wagmi-svelte";
-  import { createOutsideClick } from "$lib/scaffold-eth/runes/outsideClick.svelte";
   import { goto } from "$app/navigation";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
-  import { anvil } from "viem/chains";
+  import { isEns, getTargetNetworks } from "$lib/scaffold-eth/ts";
+  import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { createDisconnect } from "$lib/wagmi/runes";
+  import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
 
   const {
     address,
@@ -45,7 +42,7 @@
   );
 
   const allowedNetworks = getTargetNetworks();
-  const { disconnect } = $derived.by(createDisconnect());
+  const { disconnect } = $derived(createDisconnect());
 
   const checkSumAddress = $derived(getAddress(address));
 

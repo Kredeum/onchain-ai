@@ -1,0 +1,10 @@
+{
+  "extends": ["//"],
+  "tasks": {
+    "dev": {
+      "dependsOn": ["@onchain-ai/foundry#deploy", "@onchain-ai/common#build"],
+      "inputs": ["src/**"],
+      "outputLogs": "new-only"
+    }
+  }
+}

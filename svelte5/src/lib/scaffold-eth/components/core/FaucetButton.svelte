@@ -1,7 +1,6 @@
 <script lang="ts">
   import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
-  import { createBalance } from "wagmi-svelte";
-  import { createAccount } from "$lib/wagmi/runes";
+  import { createBalance, createAccount } from "$lib/wagmi/runes";
 
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";
@@ -20,9 +19,9 @@
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 
-  let balance = $derived.by(createBalance(() => ({ address: FAUCET_ADDRESS })));
+  let { balance } = $derived(createBalance({ address: FAUCET_ADDRESS }));
 
-  const isBalanceZero = $derived(balance.data?.value === 0n);
+  const isBalanceZero = $derived(balance?.value === 0n);
 
   let loading = $state(false);
 

@@ -1,4 +1,5 @@
-import { type Address, type Abi } from "abitype";
+import { type Abi } from "abitype";
+import type { Address } from "viem";
 import {
   type WriteContractReturnType,
   readContract,
@@ -21,11 +22,15 @@ const createWriteContract = ({
   args?: unknown[];
   value?: bigint;
 }) => {
-  let lastHash: `0x${string}` | undefined = $state();
+  let lastTxHash: `0x${string}` | undefined = $state();
+  let waitingTxHash = $state(false);
+  let waitingTxReceipt = $state(false);
 
   const config = $derived.by(createConfig());
 
   const send = async () => {
+    waitingTxHash = true;
+
     let hash: `0x${string}` | undefined;
 
     try {
@@ -36,21 +41,33 @@ const createWriteContract = ({
         args,
         value
       });
-      lastHash = hash;
+      lastTxHash = hash;
     } catch (e: unknown) {
       console.error("⚡️ send ~ error", e);
     }
+    waitingTxHash = false;
 
-    if (!hash) throw Error("writeContract error: no hash");
+    if (!hash) {
+      throw Error("writeContract error: no hash");
+    }
 
+    waitingTxReceipt = true;
     let receipt = await waitForTransactionReceipt(config, { hash });
+
+    waitingTxReceipt = false;
     return receipt;
   };
 
   return {
     send,
-    get lastHash() {
-      return lastHash;
+    get lastTxHash() {
+      return lastTxHash;
+    },
+    get waitingTxHash() {
+      return waitingTxHash;
+    },
+    get waitingTxReceipt() {
+      return waitingTxReceipt;
     }
   };
 };

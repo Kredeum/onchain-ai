@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { createDisconnect } from "wagmi-svelte";
   import { ArrowLeftOnRectangle, ChevronDown, Icon } from "svelte-hero-icons";
-  import NetworkOptions from "./NetworkOptions.svelte";
+  import { NetworkOptions } from "$lib/scaffold-eth/components";
+  import { createDisconnect } from "$lib/wagmi/runes";
 
-  const { disconnect } = $derived.by(createDisconnect());
+  const { disconnect } = $derived(createDisconnect());
 </script>
 
 <div class="dropdown dropdown-end mr-2">

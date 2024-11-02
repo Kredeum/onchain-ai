@@ -1,17 +1,14 @@
 <script lang="ts">
   import type { AbiFunction, Abi } from "abitype";
   import type { Address } from "viem";
-  import InheritanceTooltip from "./InheritanceTooltip.svelte";
-  import DisplayTxResult from "./DisplayTxResult.svelte";
   import {
     getFunctionInputKey,
     getInitialFormState,
     getParsedContractFunctionArgs,
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
-  import ContractInput from "./ContractInput.svelte";
-  import { createReadContract } from "wagmi-svelte";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { ContractInput, DisplayTxResult, InheritanceTooltip } from "$lib/scaffold-eth/components";
+  import { createReadContract } from "$lib/wagmi/runes";
 
   const {
     contractAddress,
@@ -25,25 +22,17 @@
     abi: Abi;
   } = $props();
 
-  const targetNetwork = $derived.by(createTargetNetwork());
-
   let form = $state<Record<string, any>>(getInitialFormState(abiFunction));
-  let result = $state<unknown>();
 
-  let readContract = $derived.by(
-    createReadContract(() => ({
+  let { data, fetch, isFetching } = $derived(
+    createReadContract({
       address: contractAddress,
       functionName: abiFunction.name,
-      abi: abi,
+      abi,
       args: getParsedContractFunctionArgs(form),
-      chainId: targetNetwork.id,
-      query: {
-        enabled: false,
-        retry: false
-      }
-    }))
+      onStart: false
+    })
   );
-
   const transformedFunction = $derived(transformAbiFunction(abiFunction));
 </script>
 
@@ -55,7 +44,6 @@
   {#each transformedFunction.inputs as input, i (getFunctionInputKey(abiFunction.name, input, i))}
     <ContractInput
       setForm={(updatedFormValue) => {
-        result = undefined;
         form = updatedFormValue;
       }}
       {form}
@@ -65,22 +53,15 @@
   {/each}
   <div class="flex flex-wrap justify-between gap-2">
     <div class="w-4/5 flex-grow">
-      {#if result !== null && result !== undefined}
+      {#if data && !isFetching}
         <div class="break-words rounded-3xl bg-secondary px-4 py-1.5 text-sm">
           <p class="m-0 mb-1 font-bold">Result:</p>
-          <pre class="whitespace-pre-wrap break-words"><DisplayTxResult content={result} /></pre>
+          <pre class="whitespace-pre-wrap break-words"><DisplayTxResult content={data} /></pre>
         </div>
       {/if}
     </div>
-    <button
-      class="btn btn-secondary btn-sm"
-      onclick={async () => {
-        const { data } = await readContract!.refetch();
-        result = data;
-      }}
-      disabled={readContract?.isFetching}
-    >
-      {#if readContract?.isFetching}
+    <button class="btn btn-secondary btn-sm" onclick={fetch} disabled={isFetching}>
+      {#if isFetching}
         <span class="loading loading-spinner loading-xs"></span>
       {/if}
       Read 📡

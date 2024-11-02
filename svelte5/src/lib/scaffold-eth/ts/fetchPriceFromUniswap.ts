@@ -1,7 +1,8 @@
 import { mainnet } from "viem/chains";
 import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
-import { type Address, createPublicClient, http, parseAbi } from "viem";
+import { parseAbi } from "abitype";
+import { type Address, createPublicClient, http } from "viem";
 import scaffoldConfig from "$lib/scaffold.config";
 import type { ChainWithAttributes } from "$lib/scaffold-eth/ts";
 

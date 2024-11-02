@@ -1,4 +1,8 @@
-import type { InteractionType, LogWithArgs, LogsParamsType } from "../ts/types";
+import {
+  type InteractionLogsParamsType,
+  type InteractionLogWithArgs,
+  type InteractionType
+} from "$lib/onchain-ai/ts";
 import { createOnchainAI } from "./contract.svelte";
 import { SvelteMap } from "svelte/reactivity";
 
@@ -11,7 +15,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
   const { chainId, client, address, abi, account: sender } = $derived.by(createOnchainAI);
   $inspect("createInteractions", chainId, address, sender);
 
-  const paramsAll: LogsParamsType = $derived({ address, abi, eventName });
+  const paramsAll: InteractionLogsParamsType = $derived({ address, abi, eventName });
   const params = $derived.by(() => {
     if (!(address && abi)) return;
 
@@ -29,7 +33,13 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
         const toBlock = await client.getBlockNumber();
         const fromBlock = 0n;
 
-        ((await client.getContractEvents({ ...params, fromBlock, toBlock })) as LogWithArgs[])
+        (
+          (await client.getContractEvents({
+            ...params,
+            fromBlock,
+            toBlock
+          })) as InteractionLogWithArgs[]
+        )
           .sort((a, b) => {
             const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);
             const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
@@ -52,7 +62,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
     client.watchContractEvent({
       ...params,
       onLogs: (logs) => {
-        const log = logs[0] as LogWithArgs;
+        const log = logs[0] as InteractionLogWithArgs;
         logsMap.set(log.args.requestId, log.args);
 
         interactions = ([...logsMap.values()] as InteractionType[]) //

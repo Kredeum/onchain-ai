@@ -1,4 +1,5 @@
-import { type Address, type Abi } from "viem";
+import { type Abi } from "abitype";
+import { type Address } from "viem";
 import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 import { readDeployments } from "@onchain-ai/common/lib/readJson";
 import { readConfig } from "@onchain-ai/common/lib/readJson";

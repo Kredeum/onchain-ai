@@ -28,7 +28,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     }
 
     mapping(address => bytes32) internal _lastRequestId;
-    mapping(bytes32 => Interaction) public interactions;
+    mapping(bytes32 => Interaction) internal _interactions;
 
     bytes32 internal _donId;
     uint32 internal _gasLimit;
@@ -54,7 +54,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     }
 
     function lastInteraction(address sender) external view returns (Interaction memory) {
-        return interactions[_lastRequestId[sender]];
+        return _interactions[_lastRequestId[sender]];
     }
 
     function setJavascript(string memory javascript_) public onlyOwner {
@@ -98,15 +98,15 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
 
         requestId = _sendRequest(req.encodeCBOR(), _subscriptionId, _gasLimit, _donId);
 
-        delete( interactions[_lastRequestId[msg.sender]]);
+        delete( _interactions[_lastRequestId[msg.sender]]);
         _lastRequestId[msg.sender] = requestId;
-        interactions[requestId] = Interaction(requestId, msg.sender, userPrompt, "");
+        _interactions[requestId] = Interaction(requestId, msg.sender, userPrompt, "");
 
         emit InteractionLog(requestId, msg.sender, false, userPrompt, "");
     }
 
     function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) internal override {
-        Interaction memory interaction = interactions[requestId];
+        Interaction memory interaction = _interactions[requestId];
 
         require(interaction.requestId == requestId, UnexpectedFullfillRequest(requestId, string(response), string(err)));
 
@@ -115,7 +115,7 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
             ? (response.length == 0) ? "Empty response" : string(response)
             : string.concat("Error: ", string(err), " | ", string(response));
 
-        interactions[requestId].response = responseError;
+        _interactions[requestId].response = responseError;
 
         emit InteractionLog(requestId, interaction.sender, true, interaction.prompt, responseError);
     }

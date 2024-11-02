@@ -1,12 +1,12 @@
 # wagmi-core
+mainnet
+WagmiProvider
+BaseError
 Config
 createWagmiConfig
 createWagmiConnector
-BaseError
-mainnet
 createConfig
 createAccount
-WagmiProvider
 createBalance
 createEnsAddress
 createEnsName
@@ -14,17 +14,14 @@ createEnsAvatar
 createPublicClient
 createReadContract
 createWriteContract
+createBlockNumber
+createDisconnect
+createSwitchChain
 
-
-# wagmi-svelte only
+# todo
 createWriteContract : todo popups tx send / confirmed
 
-createBlockNumber => to re-write, like interactions runes
-createWaitForTransactionReceipt => idem `createBlockNumber`
-
-createDisconnect (wagmi-svelte) => to rewrite with only `disconnectMutationOptions` from wagmi-core
-createSwitchChain => idem `createDisconnect`
-
-# types: not necessary ?
-CreateReadContractParameters => types, to redefine
-CreateWaitForTransactionReceiptReturnType => types, to redefine
+# types:
+createWaitForTransactionReceipt => not necessary
+CreateReadContractParameters => not necessary
+CreateWaitForTransactionReceiptReturnType => not necessary

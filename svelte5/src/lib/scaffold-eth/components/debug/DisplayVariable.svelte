@@ -1,13 +1,12 @@
 <script lang="ts">
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
-  import { createReadContract } from "wagmi-svelte";
-  import type { AbiFunction, Abi } from "abitype";
   import { ArrowPath, Icon } from "svelte-hero-icons";
-  import type { Address } from "viem";
-  import InheritanceTooltip from "./InheritanceTooltip.svelte";
-  import DisplayTxResult from "./DisplayTxResult.svelte";
   import { untrack } from "svelte";
-  import { createAnimationConfig } from "$lib/scaffold-eth/runes/animationConfig.svelte";
+  import type { Address } from "viem";
+  import type { AbiFunction, Abi } from "abitype";
+
+  import { InheritanceTooltip, DisplayTxResult } from "$lib/scaffold-eth/components";
+  import { createTargetNetwork, createAnimationConfig } from "$lib/scaffold-eth/runes";
+  import { createReadContract } from "$lib/wagmi/runes";
 
   const {
     contractAddress,
@@ -23,25 +22,19 @@
     abi: Abi;
   } = $props();
 
-  const targetNetwork = $derived.by(createTargetNetwork());
-
-  let contractRead = $derived.by(
-    createReadContract(() => ({
+  let contractRead = $derived(
+    createReadContract({
       address: contractAddress,
       functionName: abiFunction.name,
-      abi: abi,
-      chainId: targetNetwork.id,
-      query: {
-        retry: false
-      }
-    }))
+      abi
+    })
   );
 
   $effect(() => {
     refreshDisplayVariables;
 
     untrack(() => {
-      contractRead?.refetch();
+      contractRead.fetch();
     });
   });
 
@@ -51,8 +44,8 @@
 <div class="space-y-1 pb-2">
   <div class="flex items-center">
     <h3 class="mb-0 break-all text-lg font-medium">{abiFunction.name}</h3>
-    <button class="btn btn-ghost btn-xs" onclick={async () => await contractRead?.refetch()}>
-      {#if contractRead?.isFetching}
+    <button class="btn btn-ghost btn-xs" onclick={async () => await contractRead?.fetch()}>
+      {#if !contractRead}
         <span class="loading loading-spinner loading-xs"></span>
       {:else}
         <Icon src={ArrowPath} class="h-3 w-3 cursor-pointer" aria-hidden="true" />

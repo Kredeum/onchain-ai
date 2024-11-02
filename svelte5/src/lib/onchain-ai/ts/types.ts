@@ -20,13 +20,18 @@ type InteractionTypeOrdered = [
 type InteractionType = EntriesToObject<InteractionTypeOrdered>;
 type InteractionTypeTuple = EntriesToTuple<InteractionTypeOrdered>;
 
-type LogWithArgs = Log & { args: InteractionType; index: number };
+type InteractionLogWithArgs = Log & { args: InteractionType; index: number };
 
-type LogsParamsType = {
+type InteractionLogsParamsType = {
   address: Address;
   abi: any;
   eventName: string;
   args?: { sender: Address };
 };
 
-export type { InteractionType, InteractionTypeTuple, LogWithArgs, LogsParamsType };
+export type {
+  InteractionType,
+  InteractionTypeTuple,
+  InteractionLogWithArgs,
+  InteractionLogsParamsType
+};

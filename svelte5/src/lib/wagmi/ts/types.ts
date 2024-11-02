@@ -2,8 +2,16 @@ import type { DefaultError, QueryKey } from "@tanstack/svelte-query";
 import type { Config } from "@wagmi/core";
 import type { CreateInfiniteQueryParameters, CreateQueryParameters } from "./query";
 import type { Readable } from "svelte/store";
-import type { ResolvedRegister, State } from "@wagmi/core";
-import type { Snippet } from "svelte";
+import type { Address, Log } from "viem";
+
+export type LogWithArgs = Log & { args: []; index: number };
+
+export type LogsParamsType = {
+  address: Address;
+  abi: any;
+  eventName?: string;
+  args?: unknown[];
+};
 
 export type ConfigParameter<config extends Config = Config> = {
   config?: Config | config | undefined;

@@ -71,40 +71,6 @@
         },
         {
           "type": "function",
-          "name": "interactions",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
           "name": "lastInteraction",
           "inputs": [
             {
@@ -607,40 +573,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "interactions",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -1149,40 +1081,6 @@
         },
         {
           "type": "function",
-          "name": "interactions",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
           "name": "lastInteraction",
           "inputs": [
             {
@@ -1685,40 +1583,6 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "interactions",
-          "inputs": [
-            {
-              "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "requestId",
-              "type": "bytes32",
-              "internalType": "bytes32"
-            },
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            },
-            {
-              "name": "prompt",
-              "type": "string",
-              "internalType": "string"
-            },
-            {
-              "name": "response",
-              "type": "string",
-              "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
         },
         {
           "type": "function",
