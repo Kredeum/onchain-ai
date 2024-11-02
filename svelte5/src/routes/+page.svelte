@@ -5,7 +5,7 @@
   import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
 
   const { address } = $derived.by(createOnchainAI);
-  let tx: string = $state("");
+  let txHash: `0x${string}` | undefined = $state();
 </script>
 
 <div class="flex flex-col items-center">
@@ -14,11 +14,11 @@
   </h1>
 
   <div class="p-2 w-full max-w-lg">
-    <Form bind:tx />
+    <Form bind:txHash />
   </div>
 
   <div class="text-center">
-    <Explorer {tx} {address} />
+    <Explorer {txHash} {address} />
   </div>
 
   <div class="pt-4 w-full max-w-lg">

@@ -2,19 +2,24 @@
   import { InputBase } from "$lib/scaffold-eth/components";
   import { createWriteOnchainAI } from "$lib/onchain-ai/runes";
 
-  let { tx = $bindable() } = $props();
+  let { txHash = $bindable() }: { txHash?: `0x${string}` } = $props();
 
+  let txReceipt = $state();
   let prompt: string = $state("");
 
-  const writeContract = $derived(
+  const { send, wait, lastTxHash } = $derived(
     createWriteOnchainAI({ functionName: "sendRequest", args: [prompt], value: 10n ** 14n })
   );
 
   const handleSend = async () => {
-    if (!writeContract) return;
+    txHash = await send();
+    if (!txHash) return;
 
-    tx = await writeContract.send();
+    txReceipt = await wait(txHash);
   };
+
+  $inspect("txHash:", txHash);
+  $inspect("txReceipt:", txReceipt);
 </script>
 
 <div class="flex justify-center">

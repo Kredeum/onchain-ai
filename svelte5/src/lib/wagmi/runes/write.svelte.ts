@@ -50,7 +50,9 @@ const createWriteContract = ({
     if (!hash) {
       throw Error("writeContract error: no hash");
     }
-
+    return hash;
+  };
+  const wait = async (hash: `0x${string}`) => {
     waitingTxReceipt = true;
     let receipt = await waitForTransactionReceipt(config, { hash });
 
@@ -60,6 +62,7 @@ const createWriteContract = ({
 
   return {
     send,
+    wait,
     get lastTxHash() {
       return lastTxHash;
     },

@@ -31,7 +31,8 @@
 
   let form = $state(getInitialFormState(abiFunction));
   let txValue = $state<bigint | string>("");
-  let txResult = $state();
+  let txHash: `0x${string}` | undefined = $state();
+  let txReceipt = $state();
 
   const { account } = $derived(createAccount());
   const { chain } = $derived(account);
@@ -40,7 +41,7 @@
   const writeDisabled = $derived(!chain || chain?.id !== targetNetwork.id);
   let writeTxn = $derived.by(createTransactor());
 
-  let { send, waitingTxHash, waitingTxReceipt } = $derived(
+  let { send, wait, waitingTxHash, waitingTxReceipt } = $derived(
     createWriteContract({
       address: contractAddress,
       abi,
@@ -52,12 +53,16 @@
 
   let tx = $state();
   const handleWrite = async () => {
-    txResult = await send();
+    txHash = await send();
+    if (txHash) txReceipt = await wait(txHash);
   };
 
   const transformedFunction = transformAbiFunction(abiFunction);
   const zeroInputs =
     transformedFunction.inputs.length === 0 && abiFunction.stateMutability !== "payable";
+
+  $inspect("txHash:", txHash);
+  $inspect("txReceipt:", txReceipt);
 </script>
 
 <div class="space-y-3 py-5 first:pt-0 last:pb-1">
@@ -96,7 +101,7 @@
       {#if !zeroInputs}
         <div class="flex-grow basis-0">
           {#if tx}
-            <DisplayTxResult content={txResult} />
+            <DisplayTxResult content={txReceipt} />
           {/if}
         </div>
       {/if}
@@ -110,7 +115,7 @@
           disabled={writeDisabled || !send}
           onclick={handleWrite}
         >
-          {#if !waitingTxReceipt}
+          {#if waitingTxReceipt}
             <span class="loading loading-spinner loading-xs"></span>
           {/if}
           Send 💸
@@ -120,7 +125,7 @@
   </div>
   {#if zeroInputs && tx}
     <div class="flex-grow basis-0">
-      <DisplayTxResult content={txResult} />
+      <DisplayTxResult content={txReceipt} />
     </div>
   {/if}
 </div>

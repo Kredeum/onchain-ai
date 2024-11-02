@@ -4,16 +4,15 @@
   import { isAddress, isEns, type CommonInputProps } from "$lib/scaffold-eth/ts";
   import { createEnsAddress, createEnsName, createEnsAvatar } from "$lib/wagmi/runes";
   import InputBase from "./InputBase.svelte";
+  import { untrack } from "svelte";
 
   let {
     value = $bindable(),
-    address = $bindable(),
     name,
     placeholder,
     onchange,
     disabled
   }: CommonInputProps<Address | string> & {
-    address?: string | null | undefined;
     ens?: string | undefined;
   } = $props();
 
@@ -30,11 +29,13 @@
     if (validEnsAddressFromValue) value = ensAddressFromValue!;
   });
 
-  const handleChange = (newValue: Address | string) => {
-    onchange?.(newValue);
-  };
+  $effect(() => {
+    if (isAddress(value)) onchange?.(value);
+  });
 
   const reFocus = $derived(isAddress(value));
+
+  $inspect("AddressInput ~ value:", value);
 </script>
 
 <InputBase
@@ -42,7 +43,6 @@
   {name}
   {placeholder}
   error={ensAddress === null}
-  onchange={handleChange}
   {disabled}
   {reFocus}
 >
