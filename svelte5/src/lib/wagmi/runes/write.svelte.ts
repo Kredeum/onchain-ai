@@ -5,7 +5,7 @@ import {
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { createTransactor, type TransactionFunc } from "$lib/runes/transactor.svelte";
+import { createTransactor, type TransactionFunc } from "$lib/scaffold-eth/runes/transactor.svelte";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
 
 const createWriteContract = ({

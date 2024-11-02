@@ -42,12 +42,15 @@
     </div>
     <div class="flex justify-center gap-12 flex-col sm:flex-row pt-6">
       <div class="flex flex-col bg-base-100 px-6 py-6 text-gray-400 max-w-md rounded-3xl">
-        <em> OpenAI key needed to make OnChainAI working is stored securely on Chainlink. </em>
+        <em>
+          OpenAI key needed to make OnChainAI working is stored securely on Chainlink Decentralized
+          Oracle Network (DON).
+        </em>
       </div>
       <div class="flex flex-col bg-base-100 px-6 py-6 text-gray-400 max-w-md rounded-3xl">
         <em>
           Use mainnet BASE network to get valid OpenAI key. On testnets availability is not
-          garanted.
+          garanted, so OnChainAI may not work.
         </em>
       </div>
     </div>

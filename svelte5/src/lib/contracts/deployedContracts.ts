@@ -1,4 +1,4 @@
-import type { GenericContractsDeclaration } from "$lib/utils/scaffold-eth/contract";
+import type { GenericContractsDeclaration } from "$lib/scaffold-eth/ts";
 
 import deployedContractsJson from "$lib/deployments.json";
 

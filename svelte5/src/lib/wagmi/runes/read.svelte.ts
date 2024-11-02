@@ -1,4 +1,4 @@
-import { createTargetNetworkId } from "$lib/runes/global.svelte";
+import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 import type { Address, Abi } from "abitype";
 import { createConfig } from "./config.svelte";
 import { readContract } from "@wagmi/core";

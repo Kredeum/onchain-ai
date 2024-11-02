@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { InputBase } from "$lib/components/scaffold-eth/inputs";
+  import { InputBase } from "$lib/scaffold-eth/components";
   import { createOnchainAI, createWriteOnchainAI } from "$lib/onchain-ai/runes";
   import { createConfig, createWriteContract } from "$lib/wagmi/runes";
 

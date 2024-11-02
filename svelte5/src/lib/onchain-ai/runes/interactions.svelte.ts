@@ -1,4 +1,4 @@
-import type { InteractionType, LogWithArgs, LogsParamsType } from "../types";
+import type { InteractionType, LogWithArgs, LogsParamsType } from "../ts/types";
 import { createOnchainAI } from "./contract.svelte";
 import { SvelteMap } from "svelte/reactivity";
 

@@ -1,6 +1,6 @@
 import { createWriteContract } from "$lib/wagmi/runes";
 import { createOnchainAI } from "./contract.svelte";
-import { createTransactor, type TransactionFunc } from "$lib/runes/transactor.svelte";
+import { createTransactor, type TransactionFunc } from "$lib/scaffold-eth/runes/transactor.svelte";
 
 const createWriteOnchainAI = ({
   functionName,

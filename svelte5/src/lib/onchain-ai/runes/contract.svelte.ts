@@ -1,5 +1,5 @@
 import { type Address, type Abi } from "viem";
-import { createTargetNetworkId } from "$lib/runes/global.svelte";
+import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 import { readDeployments } from "@onchain-ai/common/lib/readJson";
 import { readConfig } from "@onchain-ai/common/lib/readJson";
 import { createPublicClient, createAccount } from "$lib/wagmi/runes";

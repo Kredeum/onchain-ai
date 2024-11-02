@@ -1,6 +1,6 @@
 import { getBalance } from "@wagmi/core";
 import { createConfig } from "./config.svelte";
-import { createTargetNetworkId } from "$lib/runes/global.svelte";
+import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 import { type Address, zeroAddress } from "viem";
 
 const createBalance = (params: { chainId?: number; address?: Address }) => {

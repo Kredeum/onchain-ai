@@ -1,9 +1,8 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { Address } from "$lib/components/scaffold-eth";
-  import { createTargetNetwork } from "$lib/runes/targetNetwork.svelte";
-  import { replacer } from "$lib/utils/scaffold-eth/common";
-  import { decodeTransactionData, getFunctionDetails } from "$lib/utils/scaffold-eth/decodeTxData";
+  import { replacer, decodeTransactionData, getFunctionDetails } from "$lib/scaffold-eth/ts";
+  import { Address } from "$lib/scaffold-eth/components";
+  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
   import { createPublicClient } from "$lib/wagmi/runes";
   import {
     type Transaction,
@@ -12,7 +11,6 @@
     formatEther,
     formatUnits
   } from "viem";
-  import { anvil } from "viem/chains";
 
   let txHash = $state("0x0" as Hash);
   $effect(() => {

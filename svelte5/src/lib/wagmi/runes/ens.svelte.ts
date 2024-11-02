@@ -1,10 +1,8 @@
-import { createTargetNetworkId } from "$lib/runes/global.svelte";
 import { type Address } from "viem";
-import { isAddress } from "$lib/components/scaffold-eth/inputs/utils";
+import { isAddress } from "$lib/scaffold-eth/ts";
 
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { createConfig, createAccount } from "$lib/wagmi/runes";
-import { isEns } from "$lib/components/scaffold-eth/inputs";
 
 const createEnsName = (address?: Address | string | null | undefined): { ensName: string } => {
   const config = $derived.by(createConfig());

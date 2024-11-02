@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { replacer } from "$lib/utils/scaffold-eth/common";
+  import { replacer } from "$lib/scaffold-eth/ts";
   import { createInteractions } from "$lib/onchain-ai/runes/interactions.svelte";
 
   let all: boolean = $state(false);

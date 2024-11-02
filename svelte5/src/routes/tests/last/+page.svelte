@@ -1,7 +1,7 @@
 <script lang="ts">
   import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
   import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
-  import type { InteractionType } from "$lib/onchain-ai/types";
+  import type { InteractionType } from "$lib/onchain-ai/ts/types";
 
   const { account } = $derived.by(createOnchainAI) as { account: string };
 
