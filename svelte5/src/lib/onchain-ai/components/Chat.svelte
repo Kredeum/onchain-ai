@@ -49,5 +49,3 @@
     <div>{interactionsCount}/{interactionsMax}</div>
   </button>
 </div>
-
-

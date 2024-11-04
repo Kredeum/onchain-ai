@@ -2,7 +2,7 @@
   "11155420": {
     "Counter": "0x8354Ef7b78012151c276f51F8d19147FF8C47288",
     "OnChainAI": "0xd1ca741de2d2975822ADf4646Cf0A8AE3Df51c78",
-    "OnChainAIv1": "0xa043949B6984D8704501EC64519E2b6e00a4329A",
+    "OnChainAIv1": "0x879ae6BC9a6173A14111FE204ec0E14DCB619e9E",
     "chainName": "optimism-sepolia"
   },
   "31337": {
@@ -13,7 +13,7 @@
   },
   "8453": {
     "OnChainAI": "0xd798E6E526d7893e4F7aCED9F56DF69643bCf1B6",
-    "OnChainAIv1": "0x1F4666E268Ec7F1Fc46C467A8CdAF6b01f88B935",
+    "OnChainAIv1": "0x5095f726C40D0AE7360c6307B7cE57620ae8594c",
     "chainName": "base"
   },
   "84532": {

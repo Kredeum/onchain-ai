@@ -8,7 +8,7 @@ const createLastInteraction = (account: Address) => {
   $effect(() => {
     blockNumber;
     fetch && fetch();
-  })
+  });
 
   const { data: interactionTuple, fetch } = $derived.by(() => {
     if (!account) return { data: null, fetch: null };
@@ -16,18 +16,17 @@ const createLastInteraction = (account: Address) => {
     return createReadOnchainAI({ functionName: "lastInteraction", args: [account] });
   });
 
-
   const lastInteraction = $derived.by(() => {
     if (!interactionTuple) return null;
 
-
     const [requestId, sender, prompt, response] = interactionTuple as InteractionTypeTuple;
     return { requestId, sender, prompt, response };
-
   }) as InteractionType | null;
 
   return {
-    get lastInteraction() { return lastInteraction; }
+    get lastInteraction() {
+      return lastInteraction;
+    }
   };
 };
 

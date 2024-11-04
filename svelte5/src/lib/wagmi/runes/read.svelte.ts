@@ -1,6 +1,6 @@
 import type { Abi, AbiFunction, AbiParameter } from "abitype";
 import type { Address } from "viem";
-import { type ReadContractReturnType, readContract } from "@wagmi/core";
+import { type ReadContractReturnType, readContract, deepEqual } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes";
 
 const createReadContract = ({
@@ -37,8 +37,7 @@ const createReadContract = ({
 
     try {
       const newData = await readContract(config, { address, abi, functionName, args });
-      if (JSON.stringify($state.snapshot(data)) == JSON.stringify(newData)) return;
-      data = newData;
+      if (!deepEqual($state.snapshot(data), newData)) data = newData;
     } catch (e: unknown) {
       console.error("createReadContract ERROR", e);
     }

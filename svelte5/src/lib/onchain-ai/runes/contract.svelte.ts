@@ -14,7 +14,7 @@ const createOnchainAI = () => {
   const config = $derived(readConfig(chainId));
 
   // $inspect("createOnchainAI chainId", chainId)
-  
+
   return {
     get client() {
       return client;

@@ -1,7 +1,7 @@
 {
   "8453": {
     "OnChainAIv1": {
-      "address": "0x1F4666E268Ec7F1Fc46C467A8CdAF6b01f88B935",
+      "address": "0x5095f726C40D0AE7360c6307B7cE57620ae8594c",
       "abi": [
         {
           "type": "constructor",
@@ -1495,7 +1495,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0xa043949B6984D8704501EC64519E2b6e00a4329A",
+      "address": "0x879ae6BC9a6173A14111FE204ec0E14DCB619e9E",
       "abi": [
         {
           "type": "constructor",
