@@ -1,27 +1,15 @@
 import type { Address, Log } from "viem";
 
-type EntriesToObject<E extends [PropertyKey, any][]> = {
-  [K in E[number] as K[0]]: K[1];
+type InteractionTypeTuple = [string, Address, string, string]
+type InteractionType = {
+  requestId: string,
+  sender: Address,
+  prompt: string,
+  response: string,
+  isResponse?: boolean
 };
 
-type EntriesToTuple<E extends [PropertyKey, any][]> = {
-  [I in keyof E]: E[I][1];
-} extends infer U
-  ? { [K in keyof U]: U[K] }
-  : never;
-
-type InteractionTypeOrdered = [
-  ["requestId", string],
-  ["sender", Address],
-  ["isResponse", boolean],
-  ["prompt", string],
-  ["response", string]
-];
-type InteractionType = EntriesToObject<InteractionTypeOrdered>;
-type InteractionTypeTuple = EntriesToTuple<InteractionTypeOrdered>;
-
 type InteractionLogWithArgs = Log & { args: InteractionType; index: number };
-
 type InteractionLogsParamsType = {
   address: Address;
   abi: any;

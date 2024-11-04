@@ -2,8 +2,8 @@ import { getBlockNumber, watchBlockNumber } from "@wagmi/core";
 import { createConfig } from "./config.svelte";
 import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 
-const createBlockNumber = (params: { chainId?: number; watch?: boolean }) => {
-  let { chainId, watch } = params;
+const createBlockNumber = (params?: { chainId?: number; watch?: boolean }) => {
+  let { chainId, watch } = params || {}
   watch ??= true;
 
   const config = $derived.by(createConfig());
@@ -20,7 +20,7 @@ const createBlockNumber = (params: { chainId?: number; watch?: boolean }) => {
   };
   fetch();
 
-  let unwatch = (): void => {};
+  let unwatch = (): void => { };
   $effect(() => {
     unwatch();
     unwatch = watchBlockNumber(config, {

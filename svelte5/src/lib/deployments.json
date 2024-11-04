@@ -74,38 +74,31 @@
           "name": "lastInteraction",
           "inputs": [
             {
-              "name": "sender",
+              "name": "",
               "type": "address",
               "internalType": "address"
             }
           ],
           "outputs": [
             {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -579,38 +572,31 @@
           "name": "lastInteraction",
           "inputs": [
             {
-              "name": "sender",
+              "name": "",
               "type": "address",
               "internalType": "address"
             }
           ],
           "outputs": [
             {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -1011,7 +997,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0xBf196B3732880a51Eaa6Cfc38d82De1A61582B06",
+      "address": "0xc308300b222bf2C6B0C81D8C1a64909D0a32b5Ec",
       "abi": [
         {
           "type": "constructor",
@@ -1084,38 +1070,31 @@
           "name": "lastInteraction",
           "inputs": [
             {
-              "name": "sender",
+              "name": "",
               "type": "address",
               "internalType": "address"
             }
           ],
           "outputs": [
             {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
             }
           ],
           "stateMutability": "view"
@@ -1516,7 +1495,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0x432beBA9B2Fc71180FF9ba3fA93E1Ae88beDF402",
+      "address": "0xa043949B6984D8704501EC64519E2b6e00a4329A",
       "abi": [
         {
           "type": "constructor",
@@ -1589,38 +1568,31 @@
           "name": "lastInteraction",
           "inputs": [
             {
-              "name": "sender",
+              "name": "",
               "type": "address",
               "internalType": "address"
             }
           ],
           "outputs": [
             {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "prompt",
+              "type": "string",
+              "internalType": "string"
+            },
+            {
+              "name": "response",
+              "type": "string",
+              "internalType": "string"
             }
           ],
           "stateMutability": "view"

@@ -7,18 +7,20 @@ import { createPublicClient, createAccount } from "$lib/wagmi/runes";
 
 const createOnchainAI = () => {
   const client = $derived.by(createPublicClient());
-  const { targetNetworkId } = $derived.by(createTargetNetworkId);
-  const { address, abi } = $derived(readDeployments(targetNetworkId)?.OnChainAIv1);
+  const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
+  const { address, abi } = $derived(readDeployments(chainId)?.OnChainAIv1);
   const { account } = $derived(createAccount());
   const { address: acountAddress } = $derived(account);
-  const config = $derived(readConfig(targetNetworkId));
+  const config = $derived(readConfig(chainId));
 
+  // $inspect("createOnchainAI chainId", chainId)
+  
   return {
     get client() {
       return client;
     },
     get chainId() {
-      return targetNetworkId;
+      return chainId;
     },
     get address() {
       return address as Address;

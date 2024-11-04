@@ -59,8 +59,10 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
         string response;
     }
 
-    mapping(address => bytes32) internal _lastRequestId;
-    mapping(bytes32 => Interaction) internal _interactions;
+    /// @notice lastInteraction mapping of each sender.
+    mapping(address => Interaction) public lastInteraction;
+    /// @notice interaction mapping of each requestId.
+    mapping(bytes32 => Interaction) internal _interactionRequests;
 
     bytes32 internal _donId;
     uint32 internal _gasLimit;
@@ -91,13 +93,6 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
         setGasLimit(gasLimit_);
         setDonID(donId_);
         setPrice(price_);
-    }
-
-    /// @notice Retrieves the last interaction for a given sender address.
-    /// @param sender The address of the sender.
-    /// @return The last Interaction struct associated with the sender.
-    function lastInteraction(address sender) external view returns (Interaction memory) {
-        return _interactions[_lastRequestId[sender]];
     }
 
     /// @notice Sets the JavaScript code to be used in the Chainlink Function request.
@@ -162,9 +157,9 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
 
         requestId = _sendRequest(req.encodeCBOR(), _subscriptionId, _gasLimit, _donId);
 
-        delete( _interactions[_lastRequestId[msg.sender]]);
-        _lastRequestId[msg.sender] = requestId;
-        _interactions[requestId] = Interaction(requestId, msg.sender, userPrompt, "");
+        Interaction memory interactionRequest = Interaction(requestId, msg.sender, userPrompt, "");
+        _interactionRequests[requestId] = interactionRequest;
+        lastInteraction[msg.sender] = interactionRequest;
 
         emit InteractionLog(requestId, msg.sender, false, userPrompt, "");
     }
@@ -175,21 +170,22 @@ contract OnChainAIv1 is FunctionsClient, ConfirmedOwner {
     /// @param response The response data from the Chainlink Function.
     /// @param err Any error messages from the Chainlink Function.
     function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) internal override {
-        Interaction memory interaction = _interactions[requestId];
-
+        Interaction memory interactionResponse = _interactionRequests[requestId];
         require(
-            (requestId != 0) && (requestId == interaction.requestId),
+            (requestId != 0) && (requestId == interactionResponse.requestId),
             UnexpectedFullfillRequest(requestId, string(response), string(err))
         );
+        delete _interactionRequests[requestId];
 
-        // Concatenate response and/or error
+        /// @dev Concatenate response and/or error
         string memory responseError = (err.length == 0)
             ? (response.length == 0) ? "Empty response" : string(response)
             : string.concat("Error: ", string(err), " | ", string(response));
 
-        _interactions[requestId].response = responseError;
+        interactionResponse.response = responseError;
+        lastInteraction[interactionResponse.sender] = interactionResponse;
 
-        emit InteractionLog(requestId, interaction.sender, true, interaction.prompt, responseError);
+        emit InteractionLog(requestId, interactionResponse.sender, true, interactionResponse.prompt, responseError);
     }
 
     /// @notice Withdraws the contract's balance to the owner's address.

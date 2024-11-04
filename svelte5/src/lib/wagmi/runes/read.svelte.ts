@@ -36,7 +36,9 @@ const createReadContract = ({
     isFetching = true;
 
     try {
-      data = await readContract(config, { address, abi, functionName, args });
+      const newData = await readContract(config, { address, abi, functionName, args });
+      if (JSON.stringify($state.snapshot(data)) == JSON.stringify(newData)) return;
+      data = newData;
     } catch (e: unknown) {
       console.error("createReadContract ERROR", e);
     }
@@ -46,7 +48,7 @@ const createReadContract = ({
   };
   if (onStart) fetch();
 
-  $inspect("createReadContract", { address, abi, functionName, args });
+  // $inspect("createReadContract data", data);
   return {
     fetch,
     get isFetching() {
