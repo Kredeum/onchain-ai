@@ -1,7 +1,7 @@
 {
   "8453": {
     "OnChainAIv1": {
-      "address": "0x1F4666E268Ec7F1Fc46C467A8CdAF6b01f88B935",
+      "address": "0x5095f726C40D0AE7360c6307B7cE57620ae8594c",
       "abi": [
         {
           "type": "constructor",
@@ -71,12 +71,12 @@
         },
         {
           "type": "function",
-          "name": "interactions",
+          "name": "lastInteraction",
           "inputs": [
             {
               "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
+              "type": "address",
+              "internalType": "address"
             }
           ],
           "outputs": [
@@ -99,47 +99,6 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastInteraction",
-          "inputs": [
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
             }
           ],
           "stateMutability": "view"
@@ -610,12 +569,12 @@
         },
         {
           "type": "function",
-          "name": "interactions",
+          "name": "lastInteraction",
           "inputs": [
             {
               "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
+              "type": "address",
+              "internalType": "address"
             }
           ],
           "outputs": [
@@ -638,47 +597,6 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastInteraction",
-          "inputs": [
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
             }
           ],
           "stateMutability": "view"
@@ -1079,7 +997,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0xBf196B3732880a51Eaa6Cfc38d82De1A61582B06",
+      "address": "0xc308300b222bf2C6B0C81D8C1a64909D0a32b5Ec",
       "abi": [
         {
           "type": "constructor",
@@ -1149,12 +1067,12 @@
         },
         {
           "type": "function",
-          "name": "interactions",
+          "name": "lastInteraction",
           "inputs": [
             {
               "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
+              "type": "address",
+              "internalType": "address"
             }
           ],
           "outputs": [
@@ -1177,47 +1095,6 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastInteraction",
-          "inputs": [
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
             }
           ],
           "stateMutability": "view"
@@ -1618,7 +1495,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0x432beBA9B2Fc71180FF9ba3fA93E1Ae88beDF402",
+      "address": "0x879ae6BC9a6173A14111FE204ec0E14DCB619e9E",
       "abi": [
         {
           "type": "constructor",
@@ -1688,12 +1565,12 @@
         },
         {
           "type": "function",
-          "name": "interactions",
+          "name": "lastInteraction",
           "inputs": [
             {
               "name": "",
-              "type": "bytes32",
-              "internalType": "bytes32"
+              "type": "address",
+              "internalType": "address"
             }
           ],
           "outputs": [
@@ -1716,47 +1593,6 @@
               "name": "response",
               "type": "string",
               "internalType": "string"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "lastInteraction",
-          "inputs": [
-            {
-              "name": "sender",
-              "type": "address",
-              "internalType": "address"
-            }
-          ],
-          "outputs": [
-            {
-              "name": "",
-              "type": "tuple",
-              "internalType": "struct OnChainAIv1.Interaction",
-              "components": [
-                {
-                  "name": "requestId",
-                  "type": "bytes32",
-                  "internalType": "bytes32"
-                },
-                {
-                  "name": "sender",
-                  "type": "address",
-                  "internalType": "address"
-                },
-                {
-                  "name": "prompt",
-                  "type": "string",
-                  "internalType": "string"
-                },
-                {
-                  "name": "response",
-                  "type": "string",
-                  "internalType": "string"
-                }
-              ]
             }
           ],
           "stateMutability": "view"

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import AddressComponent from "../../../lib/components/blockexplorer/AddressComponent.svelte";
+  import { AddressComponent } from "$lib/scaffold-eth/components";
 
   const { data }: { data: { contractData: { bytecode: string; assembly: string } } } = $props();
 

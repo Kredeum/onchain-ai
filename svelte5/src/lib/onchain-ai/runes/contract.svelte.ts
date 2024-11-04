@@ -1,29 +1,32 @@
-import { type Address, type Abi } from "viem";
-import { createTargetNetworkId } from "$lib/runes/global.svelte";
+import { type Abi } from "abitype";
+import { type Address } from "viem";
+import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 import { readDeployments } from "@onchain-ai/common/lib/readJson";
 import { readConfig } from "@onchain-ai/common/lib/readJson";
-import { createAccount } from "wagmi-svelte";
-import { createPublicClient } from "wagmi-svelte";
+import { createPublicClient, createAccount } from "$lib/wagmi/runes";
 
 const createOnchainAI = () => {
   const client = $derived.by(createPublicClient());
-  const { targetNetworkId } = $derived.by(createTargetNetworkId);
-  const { address, abi } = $derived(readDeployments(targetNetworkId).OnChainAIv1);
-  const { address: account } = $derived.by(createAccount());
-  const config = $derived(readConfig(targetNetworkId));
+  const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
+  const { address, abi } = $derived(readDeployments(chainId)?.OnChainAIv1);
+  const { account } = $derived(createAccount());
+  const { address: acountAddress } = $derived(account);
+  const config = $derived(readConfig(chainId));
+
+  // $inspect("createOnchainAI chainId", chainId)
 
   return {
     get client() {
       return client;
     },
     get chainId() {
-      return targetNetworkId;
+      return chainId;
     },
     get address() {
       return address as Address;
     },
     get account() {
-      return account;
+      return acountAddress;
     },
     get config() {
       return config;

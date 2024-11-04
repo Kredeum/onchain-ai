@@ -1,12 +1,12 @@
 <script lang="ts">
   import { createOnchainAI } from "../runes/contract.svelte";
 
-  const { tx = "", address = "", requestId = "" } = $props();
+  const { txHash = "", address = "", requestId = "" } = $props();
 
   const { config } = $derived.by(createOnchainAI);
 
   const etherscanLinkAddress = $derived(address ? `${config.explorer}/address/${address}` : "");
-  const etherscanLinkTx = $derived(tx ? `${config.explorer}/tx/${tx}` : "");
+  const etherscanLinkTx = $derived(txHash ? `${config.explorer}/tx/${txHash}` : "");
 
   const chainlinkLink = $derived(
     `https://functions.chain.link/${config.chainName}/${config.subscriptionId}` +

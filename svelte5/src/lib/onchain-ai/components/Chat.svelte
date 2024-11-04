@@ -1,58 +1,51 @@
 <script lang="ts">
-  import Explorer from "./Explorer.svelte";
-  import { createInteractions } from "$lib/onchain-ai/runes/events.svelte";
-  import { createDarkMode } from "$lib/runes/darkMode.svelte.js";
+  import { createOnchainAI, createInteractions } from "$lib/onchain-ai/runes";
+  import { Interaction } from "$lib/onchain-ai/components";
 
-  const { isDarkMode } = $derived.by(createDarkMode());
-  const bgBlue = $derived(isDarkMode ? "dark:bg-blue-800" : "bg-blue-100");
-  const bgGray = $derived(isDarkMode ? "dark:bg-gray-500" : "bg-gray-100");
-  const bgGreen = $derived(isDarkMode ? "dark:bg-green-600" : "bg-green-100");
+  const lim = 3;
+  let all: boolean = $state(true);
+  let limit: number = $state(lim);
 
-  let { refresh = 0 }: { refresh: number } = $props();
+  const { account } = $derived.by(createOnchainAI);
+  const { interactions, interactionsMax } = $derived(createInteractions({ all, limit }));
 
-  const { interactions } = $derived.by(createInteractions);
+  let noMore = $derived(limit >= interactionsMax);
   let interactionsCount = $derived(interactions.length);
+
+  let disabled = $derived(all && !account);
 </script>
 
-{#if interactionsCount != 0}
-  <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md {bgBlue} border border-blue-200">
-    {#each interactions as interaction}
-      <div class="{bgGreen} p-2 m-2 rounded-lg inline-block max-w-xs self-end">
-        {interaction.prompt}
-      </div>
-      <div class="{bgGray} p-2 m-2 rounded-lg inline-block max-w-xs self-start">
-        {#if interaction.response}
-          {interaction.response}
-        {:else}
-          <div class="loader">...</div>
-        {/if}
-      </div>
+<div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">
+  {#if interactionsCount === 0}
+    <div class="p-6 m-12 text-center rounded-lg bg-base-200">
+      <em> No questions yet </em>
+    </div>
+  {/if}
 
-      <div class="pl-4 pb-4 text-left">
-        <Explorer requestId={interaction.requestId} />
-      </div>
-    {/each}
-  </div>
+  {#each interactions as interaction}
+    <Interaction {interaction} />
+  {/each}
+</div>
 
-  <div class="pt-4 text-center">
-    <button class="btn btn-sm h-10 rounded-full" onclick={() => refresh++}>Refresh</button>
-  </div>
-{/if}
+<div class="flex py-4 justify-center">
+  <button
+    class="btn btn-sm h-10 rounded-full mx-4"
+    {disabled}
+    onclick={() => {
+      all = !all;
+    }}
+  >
+    {all ? "My" : "All"} questions
+  </button>
 
-<style>
-  .loader {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    border: 2px solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.75s linear infinite;
-  }
-
-  @keyframes spin {
-    to {
-      transform: rotate(360deg);
-    }
-  }
-</style>
+  <button
+    class="btn btn-sm h-10 rounded-full mx-4"
+    disabled={noMore}
+    onclick={() => {
+      limit += lim;
+    }}
+  >
+    More questions
+    <div>{interactionsCount}/{interactionsMax}</div>
+  </button>
+</div>

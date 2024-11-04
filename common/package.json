@@ -1,8 +1,8 @@
 {
-  "author": "",
-  "description": "",
-  "dependencies": {
-    "@types/node": "^22.8.1",
+  "author": "Kredeum",
+  "description": "OnChainAI Common package",
+  "devDependencies": {
+    "@types/node": "^22.8.7",
     "eslint-plugin-json": "^4.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3"
@@ -12,10 +12,10 @@
   "main": "index.js",
   "name": "@onchain-ai/common",
   "scripts": {
-    "clean": "rm -rf node_modules .turbo",
-    "format": "prettier --write --list-different .",
+    "build": "ts-node script/mergeAbis.ts",
     "check": "prettier --check . && eslint **/*.ts",
-    "build": "ts-node script/mergeAbis.ts"
+    "clean": "rm -rf node_modules .turbo",
+    "format": "prettier --write --list-different ."
   },
   "version": "1.0.1"
 }

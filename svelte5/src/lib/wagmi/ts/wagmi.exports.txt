@@ -1,0 +1,27 @@
+# wagmi-core
+mainnet
+WagmiProvider
+BaseError
+Config
+createWagmiConfig
+createWagmiConnector
+createConfig
+createAccount
+createBalance
+createEnsAddress
+createEnsName
+createEnsAvatar
+createPublicClient
+createReadContract
+createWriteContract
+createBlockNumber
+createDisconnect
+createSwitchChain
+
+# todo
+createWriteContract : todo popups tx send / confirmed
+
+# types:
+createWaitForTransactionReceipt => not necessary
+CreateReadContractParameters => not necessary
+CreateWaitForTransactionReceiptReturnType => not necessary

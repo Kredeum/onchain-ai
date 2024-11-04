@@ -1,8 +1,9 @@
 {
-  "author": "",
-  "description": "",
-  "dependencies": {
-    "eslint-plugin-json": "^4.0.1"
+  "author": "Kredeum",
+  "description": "OnChainAI Foundry package",
+  "devDependencies": {
+    "eslint-plugin-json": "^4.0.1",
+    "solhint": "^5.0.3"
   },
   "keywords": [],
   "license": "ISC",
@@ -10,25 +11,22 @@
   "name": "@onchain-ai/foundry",
   "scripts": {
     "all": "pnpm run clean && pnpm run format && pnpm run check && pnpm run build && pnpm run test  && pnpm run deploy:anvil",
-    "clean": "rm -rf node_modules .turbo out broadcast cache",
-    "format": "forge fmt",
-    "check": "pnpx solhint src/**/*.sol",
     "build": "forge compile",
     "chain": "./anvil.sh",
+    "check": "pnpx solhint src/**/*.sol",
+    "clean": "rm -rf node_modules .turbo out broadcast cache",
     "deploy:all": "forge script script/DeployAll.s.sol",
-    "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",
-    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
-    "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
-    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
     "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm run chain && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:base": "CHAIN=base pnpm deploy:mainnet",
-    "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
     "deploy:base-sepolia": "CHAIN=base-sepolia pnpm deploy:testnet",
+    "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",
+    "deploy:mainnet": "ACCOUNT=mainnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
     "deploy:optimism-sepolia": "CHAIN=optimism-sepolia pnpm deploy:testnet",
+    "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
+    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
+    "format": "forge fmt",
     "test": "forge test"
   },
-  "version": "1.0.2",
-  "devDependencies": {
-    "solhint": "^5.0.3"
-  }
+  "version": "1.0.2"
 }

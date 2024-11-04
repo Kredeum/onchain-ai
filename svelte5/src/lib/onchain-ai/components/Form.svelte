@@ -1,37 +1,25 @@
 <script lang="ts">
-  import { InputBase } from "$lib/components/scaffold-eth/inputs";
-  import { createDeployedContractInfo } from "$lib/runes/deployedContractInfo.svelte";
-  import { createTransactor, type TransactionFunc } from "$lib/runes/transactor.svelte";
-  import { createWriteContract } from "wagmi-svelte";
+  import { InputBase } from "$lib/scaffold-eth/components";
+  import { createWriteOnchainAI } from "$lib/onchain-ai/runes";
 
-  let { tx = $bindable("") } = $props();
+  let { txHash = $bindable() }: { txHash?: `0x${string}` } = $props();
 
-  const responses: string[] = [];
-
+  let txReceipt = $state();
   let prompt: string = $state("");
 
-  const { data: deployedContractData } = $derived.by(createDeployedContractInfo("OnChainAIv1"));
-
-  let contractWrite = $derived.by(createWriteContract());
-  let writeTxn: TransactionFunc = $derived.by(createTransactor());
+  const { send, wait, lastTxHash } = $derived(
+    createWriteOnchainAI({ functionName: "sendRequest", args: [prompt], value: 10n ** 14n })
+  );
 
   const handleSend = async () => {
-    try {
-      console.log("handleSend ~ deployedContractData:", deployedContractData);
-      const makeWriteWithParams = () =>
-        contractWrite!.writeContractAsync({
-          address: deployedContractData!.address,
-          abi: deployedContractData!.abi,
-          functionName: "sendRequest",
-          args: [prompt],
-          value: 10n ** 14n
-        });
-      tx = await writeTxn?.(makeWriteWithParams);
-    } catch (e: unknown) {
-      console.error("⚡️ handleSend ~ error", e);
-    }
-    responses.push();
+    txHash = await send();
+    if (!txHash) return;
+
+    txReceipt = await wait(txHash);
   };
+
+  $inspect("txHash:", txHash);
+  $inspect("txReceipt:", txReceipt);
 </script>
 
 <div class="flex justify-center">

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { createOnchainAIRead } from "$lib/onchain-ai/runes/read.svelte";
+  import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
 
-  let { value: owner } = $derived(createOnchainAIRead({ functionName: "owner" }));
+  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
 
-  $inspect({ owner });
+  $inspect("owner", JSON.stringify(owner, null, 2));
 </script>
 
 <div class="p-4">

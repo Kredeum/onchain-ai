@@ -1,8 +1,6 @@
 <script lang="ts">
-  import { createFetchBlocks } from "$lib/runes/fetchBlocks.svelte";
-  import PaginationButton from "../../lib/components/blockexplorer/PaginationButton.svelte";
-  import SearchBar from "../../lib/components/blockexplorer/SearchBar.svelte";
-  import TransactionsTable from "../../lib/components/blockexplorer/TransactionsTable.svelte";
+  import { createFetchBlocks } from "$lib/scaffold-eth/runes/fetchBlocks.svelte";
+  import { PaginationButton, SearchBar, TransactionsTable } from "$lib/scaffold-eth/components";
 
   const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } =
     $derived.by(createFetchBlocks());
