@@ -1,6 +1,6 @@
 <script lang="ts">
   import InputBase from "./InputBase.svelte";
-  import { IntegerVariant, type CommonInputProps, isValidInteger } from "../../../ts/utils";
+  import { IntegerVariant, type CommonInputProps, isValidInteger } from "$lib/scaffold-eth/ts";
 
   let {
     value = $bindable(),

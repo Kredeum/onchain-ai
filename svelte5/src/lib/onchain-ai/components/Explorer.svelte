@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createOnchainAI } from "../runes/contract.svelte";
+  import { createOnchainAI } from "$lib/onchain-ai/runes";
 
   const { txHash = "", address = "", requestId = "" } = $props();
 

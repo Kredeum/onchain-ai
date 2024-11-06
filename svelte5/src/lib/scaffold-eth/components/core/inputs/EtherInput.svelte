@@ -1,9 +1,9 @@
 <script lang="ts">
   import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes/global.svelte";
-  import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
-  import InputBase from "./InputBase.svelte";
-  import { SIGNED_NUMBER_REGEX, type CommonInputProps } from "../../../ts/utils";
   import { untrack } from "svelte";
+  import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
+  import { InputBase } from "$lib/scaffold-eth/components";
+  import { SIGNED_NUMBER_REGEX, type CommonInputProps } from "$lib/scaffold-eth/ts";
 
   const MAX_DECIMALS_USD = 2;
 

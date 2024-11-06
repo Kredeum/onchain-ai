@@ -1,5 +1,4 @@
-import type { ConfigParameter, FuncOrVal, RuneReturnType } from "../ts/types";
-import { getAccount, watchAccount, type Config, type GetAccountReturnType } from "@wagmi/core";
+import { getAccount, watchAccount } from "@wagmi/core";
 import { createConfig } from "./config.svelte";
 
 const createAccount = () => {

@@ -1,5 +1,5 @@
 import { getWallet, setVersion, uploadSecrets } from "../lib";
-import { readAddresses } from "../../common/lib/readJson";
+import { readAddresses } from "@onchain-ai/common";
 
 const uploadSecretsAndSetVersion = async (chainId: number, expiration: number) => {
   console.log("uploadSecretsAndSetVersion chainId:", chainId, "expiration:", expiration);

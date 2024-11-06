@@ -1,5 +1,5 @@
 import { ethers, type Wallet } from "ethers";
-import { readConfig } from "../../common/lib/readJson";
+import { readConfig } from "@onchain-ai/common";
 import { getWallet } from "./getWallet";
 
 const setVersion = async (

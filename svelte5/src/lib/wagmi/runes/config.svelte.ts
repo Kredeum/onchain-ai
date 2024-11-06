@@ -1,6 +1,6 @@
 import type { Config, ResolvedRegister } from "@wagmi/core";
 import { getContext } from "svelte";
-import { resolveVal, type ConfigParameter, type FuncOrVal, type RuneReturnType } from "../ts/types";
+import {  type ConfigParameter, type FuncOrVal, type RuneReturnType, resolveVal } from "$lib/wagmi/ts/types";
 
 type CreateConfigParameters<config extends Config = Config> = FuncOrVal<ConfigParameter<config>>;
 type CreateConfigReturnType<config extends Config = Config> = RuneReturnType<config>;
