@@ -13,9 +13,7 @@
 
 <div class="mb-11 min-h-0 px-1 py-5 lg:mb-0">
   <div>
-    <div
-      class="pointer-events-none fixed bottom-0 left-0 z-10 flex w-full items-center justify-between p-4"
-    >
+    <div class="pointer-events-none fixed bottom-0 left-0 z-10 flex w-full items-center justify-between p-4">
       <div class="pointer-events-auto flex flex-col gap-2 md:flex-row">
         {#if nativeCurrencyPrice.price > 0}
           <div>
@@ -40,14 +38,7 @@
     <ul class="menu menu-horizontal w-full">
       <div class="flex w-full items-center justify-center gap-2 text-sm">
         <div class="text-center">
-          <a
-            href="https://github.com/kredeum/onchain-ai"
-            target="_blank"
-            rel="noreferrer"
-            class="link"
-          >
-            Fork me
-          </a>
+          <a href="https://github.com/kredeum/onchain-ai" target="_blank" rel="noreferrer" class="link"> Fork me </a>
         </div>
         <span>·</span>
         <div class="flex items-center justify-center gap-2">
@@ -66,9 +57,7 @@
         </div>
         <span>·</span>
         <div class="text-center">
-          <a href="https://discord.gg/Vz5AyU2Nfx" target="_blank" rel="noreferrer" class="link">
-            Support
-          </a>
+          <a href="https://discord.gg/Vz5AyU2Nfx" target="_blank" rel="noreferrer" class="link"> Support </a>
         </div>
       </div>
     </ul>

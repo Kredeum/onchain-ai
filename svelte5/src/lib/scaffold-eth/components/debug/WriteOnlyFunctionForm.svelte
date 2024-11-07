@@ -8,12 +8,7 @@
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
   import { createTargetNetwork, createTransactor } from "$lib/scaffold-eth/runes";
-  import {
-    IntegerInput,
-    InheritanceTooltip,
-    ContractInput,
-    DisplayTxResult
-  } from "$lib/scaffold-eth/components";
+  import { IntegerInput, InheritanceTooltip, ContractInput, DisplayTxResult } from "$lib/scaffold-eth/components";
   import { createAccount, createWriteContract } from "$lib/wagmi/runes";
 
   const {
@@ -58,8 +53,7 @@
   };
 
   const transformedFunction = transformAbiFunction(abiFunction);
-  const zeroInputs =
-    transformedFunction.inputs.length === 0 && abiFunction.stateMutability !== "payable";
+  const zeroInputs = transformedFunction.inputs.length === 0 && abiFunction.stateMutability !== "payable";
 
   $inspect("txHash:", txHash);
   $inspect("txReceipt:", txReceipt);
@@ -110,11 +104,7 @@
           'tooltip before:left-auto before:right-[-10px] before:transform-none before:content-[attr(data-tip)]'}"
         data-tip={`${writeDisabled && "Wallet not connected or in the wrong network"}`}
       >
-        <button
-          class="btn btn-secondary btn-sm"
-          disabled={writeDisabled || !send}
-          onclick={handleWrite}
-        >
+        <button class="btn btn-secondary btn-sm" disabled={writeDisabled || !send} onclick={handleWrite}>
           {#if waitingTxReceipt}
             <span class="loading loading-spinner loading-xs"></span>
           {/if}

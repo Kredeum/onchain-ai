@@ -26,13 +26,13 @@ const createEvents = (
         const toBlock = await client.getBlockNumber();
         const fromBlock = 0n;
 
-        eventsAll = (
-          (await client.getContractEvents({ ...params, fromBlock, toBlock })) as LogWithArgs[]
-        ).sort((a, b) => {
-          const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);
-          const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
-          return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
-        });
+        eventsAll = ((await client.getContractEvents({ ...params, fromBlock, toBlock })) as LogWithArgs[]).sort(
+          (a, b) => {
+            const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);
+            const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
+            return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
+          }
+        );
 
         events = eventsAll.reverse().slice(0, options.limit);
       } catch (error) {

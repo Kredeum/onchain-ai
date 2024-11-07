@@ -8,13 +8,10 @@
   import AddressStorageTab from "./AddressStorageTab.svelte";
   import AddressLogsTab from "./AddressLogsTab.svelte";
 
-  const {
-    address,
-    contractData
-  }: { address: string; contractData: { bytecode: string; assembly: string } | null } = $props();
+  const { address, contractData }: { address: string; contractData: { bytecode: string; assembly: string } | null } =
+    $props();
 
-  const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } =
-    $derived.by(createFetchBlocks());
+  const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } = $derived.by(createFetchBlocks());
   const publicClient = createPublicClient({
     chain: hardhat,
     transport: http()
@@ -38,10 +35,7 @@
         if (typeof tx === "string") {
           return false;
         }
-        return (
-          tx.from.toLowerCase() === address.toLowerCase() ||
-          tx.to?.toLowerCase() === address.toLowerCase()
-        );
+        return tx.from.toLowerCase() === address.toLowerCase() || tx.to?.toLowerCase() === address.toLowerCase();
       })
     )
   );
@@ -49,34 +43,14 @@
 
 {#if isContract}
   <div class="tabs tabs-lifted w-min">
-    <button
-      class="tab"
-      class:tab-active={activeTab === "transactions"}
-      onclick={() => (activeTab = "transactions")}
-    >
+    <button class="tab" class:tab-active={activeTab === "transactions"} onclick={() => (activeTab = "transactions")}>
       Transactions
     </button>
-    <button
-      class="tab"
-      class:tab-active={activeTab === "code"}
-      onclick={() => (activeTab = "code")}
-    >
-      Code
-    </button>
-    <button
-      class="tab"
-      class:tab-active={activeTab === "storage"}
-      onclick={() => (activeTab = "storage")}
-    >
+    <button class="tab" class:tab-active={activeTab === "code"} onclick={() => (activeTab = "code")}> Code </button>
+    <button class="tab" class:tab-active={activeTab === "storage"} onclick={() => (activeTab = "storage")}>
       Storage
     </button>
-    <button
-      class="tab"
-      class:tab-active={activeTab === "logs"}
-      onclick={() => (activeTab = "logs")}
-    >
-      Logs
-    </button>
+    <button class="tab" class:tab-active={activeTab === "logs"} onclick={() => (activeTab = "logs")}> Logs </button>
   </div>
 {/if}
 

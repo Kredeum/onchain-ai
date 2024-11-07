@@ -4,13 +4,7 @@
   import { Address } from "$lib/scaffold-eth/components";
   import { createTargetNetwork } from "$lib/scaffold-eth/runes";
   import { createPublicClient } from "$lib/wagmi/runes";
-  import {
-    type Transaction,
-    type TransactionReceipt,
-    type Hash,
-    formatEther,
-    formatUnits
-  } from "viem";
+  import { type Transaction, type TransactionReceipt, type Hash, formatEther, formatUnits } from "viem";
 
   let txHash = $state("0x0" as Hash);
   $effect(() => {
@@ -101,9 +95,7 @@
               <strong>Function called:</strong>
             </td>
             <td>
-              <div
-                class="w-full overflow-x-auto whitespace-nowrap md:max-w-[600px] lg:max-w-[800px]"
-              >
+              <div class="w-full overflow-x-auto whitespace-nowrap md:max-w-[600px] lg:max-w-[800px]">
                 {#if functionCalled === "0x"}
                   This transaction did not call any function.
                 {:else}
@@ -124,11 +116,7 @@
               <strong>Data:</strong>
             </td>
             <td class="form-control">
-              <textarea
-                readOnly
-                value={transaction.input}
-                class="textarea-primary h-[150px] bg-inherit p-0"
-              ></textarea>
+              <textarea readOnly value={transaction.input} class="textarea-primary h-[150px] bg-inherit p-0"></textarea>
             </td>
           </tr>
           <tr>

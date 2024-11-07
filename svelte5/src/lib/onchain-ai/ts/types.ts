@@ -17,9 +17,4 @@ type InteractionLogsParamsType = {
   args?: { sender: Address };
 };
 
-export type {
-  InteractionType,
-  InteractionTypeTuple,
-  InteractionLogWithArgs,
-  InteractionLogsParamsType
-};
+export type { InteractionType, InteractionTypeTuple, InteractionLogWithArgs, InteractionLogsParamsType };

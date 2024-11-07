@@ -8,9 +8,7 @@ export const createTargetNetwork = (): (() => ChainWithAttributes) => {
   const { chain } = $derived(account);
 
   $effect(() => {
-    const newSelectedNetwork = scaffoldConfig.targetNetworks.find(
-      (targetNetwork) => targetNetwork.id === chain?.id
-    );
+    const newSelectedNetwork = scaffoldConfig.targetNetworks.find((targetNetwork) => targetNetwork.id === chain?.id);
     if (newSelectedNetwork && newSelectedNetwork.id !== targetNetwork.targetNetwork.id) {
       setTargetNetwork(newSelectedNetwork);
     }

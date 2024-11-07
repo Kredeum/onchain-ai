@@ -24,12 +24,7 @@
 
 <div class="flex justify-center">
   <div class="w-full max-w-xl">
-    <InputBase
-      name="Prompt"
-      placeholder="Enter your question"
-      onchange={(input) => (prompt = input)}
-      value={prompt}
-    />
+    <InputBase name="Prompt" placeholder="Enter your question" onchange={(input) => (prompt = input)} value={prompt} />
   </div>
 
   <button class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>

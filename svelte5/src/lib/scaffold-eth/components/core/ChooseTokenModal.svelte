@@ -48,9 +48,7 @@
 
   const suggestedTokens = $derived<Token[]>(
     (suggestedTokenAddresses
-      ?.map((address) =>
-        allTokens.find((token) => token.address.toLowerCase() === address.toLowerCase())
-      )
+      ?.map((address) => allTokens.find((token) => token.address.toLowerCase() === address.toLowerCase()))
       ?.filter((token) => token) as Token[]) ?? []
   );
 
@@ -90,9 +88,7 @@
 
       <div class="mb-4 px-6">
         <h3 class="mb-3 text-xl font-bold">Select a Token</h3>
-        <label for="token-modal" class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3">
-          ✕
-        </label>
+        <label for="token-modal" class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3"> ✕ </label>
 
         <div class="divider"></div>
 
@@ -137,8 +133,7 @@
                 <span class="text-slate-400">{token.name}</span>
               </div>
               <Icon
-                class="ml-auto h-6 w-6 transition-transform {!isChosen &&
-                  'group-hover:translate-x-2'}"
+                class="ml-auto h-6 w-6 transition-transform {!isChosen && 'group-hover:translate-x-2'}"
                 src={ArrowRight}
               />
             </button>

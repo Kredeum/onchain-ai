@@ -1,11 +1,6 @@
 import { type Abi } from "abitype";
 import type { Address } from "viem";
-import {
-  type WriteContractReturnType,
-  readContract,
-  waitForTransactionReceipt,
-  writeContract
-} from "@wagmi/core";
+import { type WriteContractReturnType, readContract, waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { createTransactor, type TransactionFunc } from "$lib/scaffold-eth/runes/transactor.svelte";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
 

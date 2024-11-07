@@ -11,8 +11,7 @@
 <div class="flex flex-col gap-3 p-4">
   Bytecode
   <div class="mockup-code max-h-[500px] overflow-y-auto -indent-5">
-    <pre class="px-5"><code class="overflow-auto whitespace-pre-wrap break-words">{bytecode}</code
-      ></pre>
+    <pre class="px-5"><code class="overflow-auto whitespace-pre-wrap break-words">{bytecode}</code></pre>
   </div>
   Opcodes
   <div class="mockup-code max-h-[500px] overflow-y-auto -indent-5">

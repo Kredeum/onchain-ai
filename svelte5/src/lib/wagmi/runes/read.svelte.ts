@@ -21,9 +21,7 @@ const createReadContract = ({
   let data: ReadContractReturnType = $state();
   let isFetching = $state(false);
 
-  const abiFunction = (abi as unknown as AbiFunction[]).find(
-    (f) => f.type === "function" && f.name === functionName
-  );
+  const abiFunction = (abi as unknown as AbiFunction[]).find((f) => f.type === "function" && f.name === functionName);
   const abiFunctionInputsLength = abiFunction?.inputs?.length || 0;
 
   const fetch = async () => {

@@ -27,15 +27,11 @@
 
   $inspect("RUNE connect-button name:", name);
 
-  const blockExplorerAddressLink = $derived(
-    address ? getBlockExplorerAddressLink(targetNetwork, address) : undefined
-  );
+  const blockExplorerAddressLink = $derived(address ? getBlockExplorerAddressLink(targetNetwork, address) : undefined);
 </script>
 
 {#if !connected}
-  <button class="btn btn-primary btn-sm" onclick={() => modal.open()} type="button">
-    Connect Wallet
-  </button>
+  <button class="btn btn-primary btn-sm" onclick={() => modal.open()} type="button"> Connect Wallet </button>
 {:else if isChainUnsupported}
   <WrongNetworkDropdown />
 {:else}

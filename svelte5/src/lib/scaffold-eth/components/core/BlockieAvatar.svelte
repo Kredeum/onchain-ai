@@ -1,8 +1,7 @@
 <script lang="ts">
   import { blo } from "blo";
 
-  const { address, ensImage, size }: { address: string; ensImage?: string | null; size: number } =
-    $props();
+  const { address, ensImage, size }: { address: string; ensImage?: string | null; size: number } = $props();
 </script>
 
 <img

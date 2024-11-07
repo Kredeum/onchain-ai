@@ -77,9 +77,7 @@
       <label class="modal-box relative">
         <input class="absolute left-0 top-0 h-0 w-0" />
         <h3 class="mb-3 text-xl font-bold">Local Faucet</h3>
-        <label for="faucet-modal" class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3">
-          ✕
-        </label>
+        <label for="faucet-modal" class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3"> ✕ </label>
         <div class="space-y-3">
           <div class="flex space-x-4">
             <div>
@@ -93,16 +91,8 @@
           </div>
           <div class="flex flex-col space-y-3">
             <AddressInput placeholder="Destination Address" bind:value={inputAddress} />
-            <EtherInput
-              placeholder="Amount to send"
-              value={sendValue}
-              onchange={(value) => (sendValue = value)}
-            />
-            <button
-              class="btn btn-primary btn-sm h-10 rounded-full px-2"
-              onclick={sendETH}
-              disabled={loading}
-            >
+            <EtherInput placeholder="Amount to send" value={sendValue} onchange={(value) => (sendValue = value)} />
+            <button class="btn btn-primary btn-sm h-10 rounded-full px-2" onclick={sendETH} disabled={loading}>
               {#if loading}
                 <span class="loading loading-spinner loading-sm"></span>
               {:else}

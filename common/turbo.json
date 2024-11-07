@@ -1,13 +1,8 @@
 {
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "check",
-        "@onchain-ai/foundry#deploy"
-      ],
+      "dependsOn": ["check", "@onchain-ai/foundry#deploy"],
       "inputs": [
         "lib/**",
         "../chainlink/config.json",

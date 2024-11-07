@@ -1,17 +1,9 @@
 {
-  "extends": [
-    "//"
-  ],
+  "extends": ["//"],
   "tasks": {
     "build": {
-      "dependsOn": [
-        "check",
-        "@onchain-ai/common#build"
-      ],
-      "inputs": [
-        "src/**",
-        "**/*.json"
-      ],
+      "dependsOn": ["check", "@onchain-ai/common#build"],
+      "inputs": ["src/**", "**/*.json"],
       "outputLogs": "new-only"
     }
   }

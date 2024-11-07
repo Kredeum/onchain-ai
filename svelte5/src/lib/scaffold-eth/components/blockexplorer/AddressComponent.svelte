@@ -3,10 +3,8 @@
   import { Address, Balance } from "$lib/scaffold-eth/components";
   import ContractTabs from "./ContractTabs.svelte";
 
-  const {
-    address,
-    contractData
-  }: { address: string; contractData: { bytecode: string; assembly: string } | null } = $props();
+  const { address, contractData }: { address: string; contractData: { bytecode: string; assembly: string } | null } =
+    $props();
 </script>
 
 <div class="m-10 mb-20">

@@ -1,20 +1,11 @@
 import { targetNetwork } from "./global.svelte";
 import { createPublicClient } from "$lib/wagmi/runes";
-import {
-  ContractCodeStatus,
-  contracts,
-  type Contract,
-  type ContractName
-} from "$lib/scaffold-eth/ts";
+import { ContractCodeStatus, contracts, type Contract, type ContractName } from "$lib/scaffold-eth/ts";
 import type { Address } from "viem";
 
-export const createDeployedContractInfo = <TContractName extends ContractName>(
-  contractName: TContractName
-) => {
+export const createDeployedContractInfo = <TContractName extends ContractName>(contractName: TContractName) => {
   const deployedContract = $derived(
-    contracts?.[targetNetwork.targetNetwork.id]?.[
-      contractName as ContractName
-    ] as Contract<TContractName>
+    contracts?.[targetNetwork.targetNetwork.id]?.[contractName as ContractName] as Contract<TContractName>
   );
   let status = $state(ContractCodeStatus.LOADING);
 

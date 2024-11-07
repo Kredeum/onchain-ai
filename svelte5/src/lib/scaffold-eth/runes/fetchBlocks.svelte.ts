@@ -40,9 +40,7 @@ export const createFetchBlocks = () => {
       const startingBlock = blockNumber - BigInt(currentPage * BLOCKS_PER_PAGE);
       const blockNumbersToFetch = Array.from(
         {
-          length: Number(
-            BLOCKS_PER_PAGE < startingBlock + 1n ? BLOCKS_PER_PAGE : startingBlock + 1n
-          )
+          length: Number(BLOCKS_PER_PAGE < startingBlock + 1n ? BLOCKS_PER_PAGE : startingBlock + 1n)
         },
         (_, i) => startingBlock - BigInt(i)
       );
@@ -97,16 +95,12 @@ export const createFetchBlocks = () => {
         if (currentPage === 0) {
           if (newBlock.transactions.length > 0) {
             const transactionsDetails = await Promise.all(
-              newBlock.transactions.map((txHash: string) =>
-                testClient.getTransaction({ hash: txHash as Hash })
-              )
+              newBlock.transactions.map((txHash: string) => testClient.getTransaction({ hash: txHash as Hash }))
             );
             newBlock.transactions = transactionsDetails;
           }
 
-          newBlock.transactions.forEach((tx: Transaction) =>
-            decodeTransactionData(tx as Transaction)
-          );
+          newBlock.transactions.forEach((tx: Transaction) => decodeTransactionData(tx as Transaction));
 
           const receipts = await Promise.all(
             newBlock.transactions.map(async (tx: Transaction) => {
@@ -116,8 +110,7 @@ export const createFetchBlocks = () => {
                 });
                 return { [(tx as Transaction).hash]: receipt };
               } catch (err) {
-                error =
-                  err instanceof Error ? err : new Error("An error occurred fetching receipt.");
+                error = err instanceof Error ? err : new Error("An error occurred fetching receipt.");
                 throw err;
               }
             })

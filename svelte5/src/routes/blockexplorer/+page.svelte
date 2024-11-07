@@ -2,8 +2,7 @@
   import { createFetchBlocks } from "$lib/scaffold-eth/runes/fetchBlocks.svelte";
   import { PaginationButton, SearchBar, TransactionsTable } from "$lib/scaffold-eth/components";
 
-  const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } =
-    $derived.by(createFetchBlocks());
+  const { blocks, transactionReceipts, currentPage, totalBlocks, setCurrentPage } = $derived.by(createFetchBlocks());
 </script>
 
 <div class="container mx-auto my-10">

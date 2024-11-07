@@ -11,11 +11,7 @@
     {hash?.substring(0, 6)}...{hash?.substring(hash.length - 4)}
   </a>
   {#if addressCopied}
-    <Icon
-      src={CheckCircle}
-      class="ml-1.5 h-5 w-5 cursor-pointer text-xl font-normal text-sky-600"
-      aria-hidden="true"
-    />
+    <Icon src={CheckCircle} class="ml-1.5 h-5 w-5 cursor-pointer text-xl font-normal text-sky-600" aria-hidden="true" />
   {:else}
     <Icon
       src={DocumentDuplicate}
