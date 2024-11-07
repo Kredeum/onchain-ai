@@ -1,15 +1,16 @@
 <script lang="ts">
-  import { createLastInteraction } from "$lib/onchain-ai/runes";
+  import { isAddress, type Address } from "viem";
+  import { type InteractionType } from "$lib/onchain-ai/ts";
   import { Interaction } from "$lib/onchain-ai/components";
-  import type { Address } from "viem";
+  import { LastInteraction } from "$lib/onchain-ai/runes/lastInteraction.svelte";
 
   const { account }: { account: Address } = $props();
 
-  let { lastInteraction: interaction } = $derived(createLastInteraction(account));
+  let data = $derived(new LastInteraction(account));
 
-  // $inspect("LastInteraction interaction", interaction);
+  // $inspect("<LastInteraction", data.lastInteraction);
 </script>
 
 <div class="flex flex-col p-4 m-12 max-w-lg rounded-lg shadow-md bg-base-300">
-  <Interaction {interaction} />
+  <Interaction interaction={data.lastInteraction} />
 </div>

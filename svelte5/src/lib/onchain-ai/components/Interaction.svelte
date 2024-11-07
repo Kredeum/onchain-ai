@@ -2,9 +2,9 @@
   import type { InteractionType } from "$lib/onchain-ai/ts";
   import { Explorer } from "$lib/onchain-ai/components";
 
-  let { interaction }: { interaction: InteractionType | null } = $props();
+  let { interaction }: { interaction?: InteractionType } = $props();
 
-  // $inspect("Interaction interaction", interaction);
+  // $inspect("<Interaction", interaction);
 </script>
 
 {#if interaction}

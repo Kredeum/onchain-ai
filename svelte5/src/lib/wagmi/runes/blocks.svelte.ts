@@ -2,15 +2,11 @@ import { getBlockNumber, watchBlockNumber } from "@wagmi/core";
 import { createConfig } from "./config.svelte";
 import { createTargetNetworkId } from "$lib/scaffold-eth/runes/global.svelte";
 
-const createBlockNumber = (params?: { chainId?: number; watch?: boolean }) => {
-  let { chainId, watch } = params || {};
-  watch ??= true;
-
+const createLatestBlock = ({ chainId: paramChainId, watch = true }: { chainId?: number; watch?: boolean } = {}) => {
   const config = $derived.by(createConfig());
-  if (!chainId) {
-    const { targetNetworkId } = $derived.by(createTargetNetworkId);
-    chainId = targetNetworkId;
-  }
+
+  const { targetNetworkId } = $derived.by(createTargetNetworkId);
+  const chainId = $derived(paramChainId || targetNetworkId);
 
   let blockNumber = $state();
   const fetch = async () => {
@@ -20,8 +16,10 @@ const createBlockNumber = (params?: { chainId?: number; watch?: boolean }) => {
   };
   fetch();
 
-  let unwatch = (): void => {};
+  let unwatch = (): void => { };
   $effect(() => {
+    if (!watch) return;
+
     unwatch();
     unwatch = watchBlockNumber(config, {
       onBlockNumber(newBlockNumber) {
@@ -38,4 +36,4 @@ const createBlockNumber = (params?: { chainId?: number; watch?: boolean }) => {
   };
 };
 
-export { createBlockNumber };
+export { createLatestBlock };

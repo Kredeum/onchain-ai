@@ -34,7 +34,6 @@
     },
     "chain": {
       "cache": false,
-      "persistent": true,
       "outputLogs": "new-only"
     },
     "deploy": {
