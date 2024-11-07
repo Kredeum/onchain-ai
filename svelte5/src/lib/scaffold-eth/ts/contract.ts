@@ -22,11 +22,7 @@ import deploymentsJson from "$lib/deployments.json";
 import scaffoldConfig from "$lib/scaffold.config";
 import type { Config } from "@wagmi/core";
 import type { WriteContractVariables } from "@wagmi/core/query";
-import type {
-  WriteContractErrorType,
-  WriteContractParameters,
-  WriteContractReturnType
-} from "@wagmi/core/actions";
+import type { WriteContractErrorType, WriteContractParameters, WriteContractReturnType } from "@wagmi/core/actions";
 import type { MutateOptions } from "@tanstack/svelte-query";
 
 type AddExternalFlag<T> = {
@@ -47,17 +43,14 @@ const deepMergeContracts = <L extends Record<PropertyKey, any>, E extends Record
       continue;
     }
     const amendedExternal = Object.fromEntries(
-      Object.entries(external[key] as Record<string, Record<string, unknown>>).map(
-        ([contractName, declaration]) => [contractName, { ...declaration, external: true }]
-      )
+      Object.entries(external[key] as Record<string, Record<string, unknown>>).map(([contractName, declaration]) => [
+        contractName,
+        { ...declaration, external: true }
+      ])
     );
     result[key] = { ...local[key], ...amendedExternal };
   }
-  return result as MergeDeepRecord<
-    AddExternalFlag<L>,
-    AddExternalFlag<E>,
-    { arrayMergeMode: "replace" }
-  >;
+  return result as MergeDeepRecord<AddExternalFlag<L>, AddExternalFlag<E>, { arrayMergeMode: "replace" }>;
 };
 
 export type InheritedFunctions = { readonly [key: string]: string };
@@ -86,10 +79,7 @@ type IsContractDeclarationMissing<TYes, TNo> = typeof deploymentsJson extends {
   ? TNo
   : TYes;
 
-type ContractsDeclaration = IsContractDeclarationMissing<
-  GenericContractsDeclaration,
-  typeof deploymentsJson
->;
+type ContractsDeclaration = IsContractDeclarationMissing<GenericContractsDeclaration, typeof deploymentsJson>;
 
 type Contracts = ContractsDeclaration[ConfiguredChainId];
 
@@ -99,39 +89,33 @@ export type Contract<TContractName extends ContractName> = Contracts[TContractNa
 
 type InferContractAbi<TContract> = TContract extends { abi: infer TAbi } ? TAbi : never;
 
-export type ContractAbi<TContractName extends ContractName = ContractName> = InferContractAbi<
-  Contract<TContractName>
->;
+export type ContractAbi<TContractName extends ContractName = ContractName> = InferContractAbi<Contract<TContractName>>;
 
 export type AbiFunctionInputs<TAbi extends Abi, TFunctionName extends string> = ExtractAbiFunction<
   TAbi,
   TFunctionName
 >["inputs"];
 
-export type AbiFunctionArguments<
-  TAbi extends Abi,
-  TFunctionName extends string
-> = AbiParametersToPrimitiveTypes<AbiFunctionInputs<TAbi, TFunctionName>>;
+export type AbiFunctionArguments<TAbi extends Abi, TFunctionName extends string> = AbiParametersToPrimitiveTypes<
+  AbiFunctionInputs<TAbi, TFunctionName>
+>;
 
 export type AbiFunctionOutputs<TAbi extends Abi, TFunctionName extends string> = ExtractAbiFunction<
   TAbi,
   TFunctionName
 >["outputs"];
 
-export type AbiFunctionReturnType<
-  TAbi extends Abi,
-  TFunctionName extends string
-> = IsContractDeclarationMissing<
+export type AbiFunctionReturnType<TAbi extends Abi, TFunctionName extends string> = IsContractDeclarationMissing<
   any,
   AbiParametersToPrimitiveTypes<AbiFunctionOutputs<TAbi, TFunctionName>> extends readonly [any]
     ? AbiParametersToPrimitiveTypes<AbiFunctionOutputs<TAbi, TFunctionName>>[0]
     : AbiParametersToPrimitiveTypes<AbiFunctionOutputs<TAbi, TFunctionName>>
 >;
 
-export type AbiEventInputs<
-  TAbi extends Abi,
-  TEventName extends ExtractAbiEventNames<TAbi>
-> = ExtractAbiEvent<TAbi, TEventName>["inputs"];
+export type AbiEventInputs<TAbi extends Abi, TEventName extends ExtractAbiEventNames<TAbi>> = ExtractAbiEvent<
+  TAbi,
+  TEventName
+>["inputs"];
 
 export enum ContractCodeStatus {
   "LOADING",
@@ -163,13 +147,9 @@ type FuncOrValue<T> = () => T | T;
 
 type Expand<T> = T extends object ? (T extends infer O ? { [K in keyof O]: O[K] } : never) : T;
 
-type UnionToIntersection<U> = Expand<
-  (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never
->;
+type UnionToIntersection<U> = Expand<(U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never>;
 
-type OptionalTupple<T> = T extends readonly [infer H, ...infer R]
-  ? readonly [H | undefined, ...OptionalTupple<R>]
-  : T;
+type OptionalTupple<T> = T extends readonly [infer H, ...infer R] ? readonly [H | undefined, ...OptionalTupple<R>] : T;
 
 type UseScaffoldArgsParam<
   TContractName extends ContractName,
@@ -178,15 +158,10 @@ type UseScaffoldArgsParam<
   TFunctionName extends FunctionNamesWithInputs<TContractName>
     ? {
         args: FuncOrValue<
-          OptionalTupple<
-            UnionToIntersection<AbiFunctionArguments<ContractAbi<TContractName>, TFunctionName>>
-          >
+          OptionalTupple<UnionToIntersection<AbiFunctionArguments<ContractAbi<TContractName>, TFunctionName>>>
         >;
         value?: FuncOrValue<
-          ExtractAbiFunction<
-            ContractAbi<TContractName>,
-            TFunctionName
-          >["stateMutability"] extends "payable"
+          ExtractAbiFunction<ContractAbi<TContractName>, TFunctionName>["stateMutability"] extends "payable"
             ? bigint | undefined
             : undefined
         >;
@@ -238,9 +213,7 @@ export type EventFilters<
         [Key in IsContractDeclarationMissing<
           any,
           IndexedEventInputs<TContractName, TEventName>["name"]
-        >]?: AbiParameterToPrimitiveType<
-          Extract<IndexedEventInputs<TContractName, TEventName>, { name: Key }>
-        >;
+        >]?: AbiParameterToPrimitiveType<Extract<IndexedEventInputs<TContractName, TEventName>, { name: Key }>>;
       }
 >;
 

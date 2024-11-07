@@ -1,18 +1,16 @@
 import { type GetBalanceReturnType, getBalance } from "@wagmi/core";
 import { createConfig } from "./config.svelte";
 import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
-import { type Address, zeroAddress } from "viem";
-import { createBlockNumber } from "$lib/wagmi/runes";
+import { type Address, zeroAddress, isAddress } from "viem";
+import { createLatestBlock } from "$lib/wagmi/runes";
 
-const createBalance = (params: { chainId?: number; address?: Address }) => {
-  let { chainId, address } = params;
-  address ||= zeroAddress;
+const createBalance = ({ chainId: paramChainId, address }: { chainId?: number; address?: Address }) => {
+  const { targetNetworkId } = $derived.by(createTargetNetworkId);
+  const chainId = $derived(paramChainId || targetNetworkId);
+
+  address = (address && isAddress(address)) ? address : zeroAddress;
 
   const config = $derived.by(createConfig());
-  if (!chainId) {
-    const { targetNetworkId } = $derived.by(createTargetNetworkId);
-    chainId = targetNetworkId;
-  }
 
   let balance: GetBalanceReturnType | undefined = $state();
   const fetch = async () => {
@@ -20,7 +18,7 @@ const createBalance = (params: { chainId?: number; address?: Address }) => {
     return balance;
   };
 
-  const { blockNumber } = $derived(createBlockNumber({ chainId }));
+  const { blockNumber } = $derived(createLatestBlock({ chainId }));
   $effect(() => {
     blockNumber;
     fetch();

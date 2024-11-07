@@ -9,9 +9,7 @@
     stateObjectKey,
     paramType
   }: {
-    setForm: (
-      newFormValue: Record<string, any> | ((prevState: Record<string, any>) => Record<string, any>)
-    ) => void;
+    setForm: (newFormValue: Record<string, any> | ((prevState: Record<string, any>) => Record<string, any>)) => void;
     form: Record<string, any> | undefined;
     stateObjectKey: string;
     paramType: AbiParameter;

@@ -11,10 +11,7 @@
     <span>Wrong network</span>
     <Icon src={ChevronDown} class="ml-2 h-6 w-4 sm:ml-0" />
   </button>
-  <ul
-    tabIndex={0}
-    class="menu dropdown-content mt-1 gap-1 rounded-box bg-base-200 p-2 shadow-center shadow-accent"
-  >
+  <ul tabIndex={0} class="menu dropdown-content mt-1 gap-1 rounded-box bg-base-200 p-2 shadow-center shadow-accent">
     <NetworkOptions />
     <li>
       <button

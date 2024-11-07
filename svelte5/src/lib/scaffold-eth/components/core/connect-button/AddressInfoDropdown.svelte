@@ -56,15 +56,10 @@
 </script>
 
 <details class="dropdown dropdown-end leading-3" bind:this={dropdown}>
-  <summary
-    tabIndex={0}
-    class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md"
-  >
+  <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
     <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
-      {isEns(displayName)
-        ? displayName
-        : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
+      {isEns(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
     </span>
     <Icon src={ChevronDown} class="ml-2 h-6 w-4 sm:ml-0" />
   </summary>
@@ -88,11 +83,7 @@
         class="btn-sm flex gap-3 !rounded-xl py-3"
       >
         {#if addressCopied}
-          <Icon
-            src={CheckCircle}
-            class="ml-2 h-6 w-4 cursor-pointer text-xl font-normal sm:ml-0"
-            aria-hidden="true"
-          />
+          <Icon src={CheckCircle} class="ml-2 h-6 w-4 cursor-pointer text-xl font-normal sm:ml-0" aria-hidden="true" />
         {:else}
           <Icon
             src={DocumentDuplicate}
@@ -110,10 +101,7 @@
       </label>
     </li>
     <li class={selectingNetwork ? "hidden" : ""}>
-      <button
-        onclick={gotoExplorer}
-        class="menu-item btn-sm flex gap-3 whitespace-nowrap !rounded-xl py-3"
-      >
+      <button onclick={gotoExplorer} class="menu-item btn-sm flex gap-3 whitespace-nowrap !rounded-xl py-3">
         <Icon src={ArrowTopRightOnSquare} class="ml-2 h-6 w-4 sm:ml-0" />
         View on Block Explorer
       </button>

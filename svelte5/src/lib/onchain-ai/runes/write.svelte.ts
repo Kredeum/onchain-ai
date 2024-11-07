@@ -11,9 +11,9 @@ const createWriteOnchainAI = ({
   args?: string[];
   value?: bigint;
 }) => {
-  const { address, abi } = $derived.by(createOnchainAI);
+  const { chainId, address, abi } = $derived.by(createOnchainAI);
 
-  return createWriteContract({ address, abi, functionName, args, value });
+  return createWriteContract({ chainId, address, abi, functionName, args, value });
 };
 
 export { createWriteOnchainAI };

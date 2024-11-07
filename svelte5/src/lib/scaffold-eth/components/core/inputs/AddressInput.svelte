@@ -38,14 +38,7 @@
   $inspect("AddressInput ~ value:", value);
 </script>
 
-<InputBase
-  bind:value={value as Address}
-  {name}
-  {placeholder}
-  error={ensAddress === null}
-  {disabled}
-  {reFocus}
->
+<InputBase bind:value={value as Address} {name} {placeholder} error={ensAddress === null} {disabled} {reFocus}>
   {#snippet prefix()}
     {#if ensName}
       <div class="flex items-center rounded-l-full bg-base-300">

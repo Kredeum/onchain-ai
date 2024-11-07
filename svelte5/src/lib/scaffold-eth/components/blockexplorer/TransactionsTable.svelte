@@ -56,9 +56,7 @@
                   </div>
                 {/if}
               </td>
-              <td class="text-right md:py-4"
-                >{formatEther(tx.value)} {targetNetwork.nativeCurrency.symbol}</td
-              >
+              <td class="text-right md:py-4">{formatEther(tx.value)} {targetNetwork.nativeCurrency.symbol}</td>
             </tr>
           {/each}
         {/each}

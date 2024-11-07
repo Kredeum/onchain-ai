@@ -28,10 +28,4 @@ const setNativeCurrencyPrice = (price: number) => {
   nativeCurrencyPrice.price = price;
 };
 
-export {
-  createTargetNetworkId,
-  targetNetwork,
-  nativeCurrencyPrice,
-  setTargetNetwork,
-  setNativeCurrencyPrice
-};
+export { createTargetNetworkId, targetNetwork, nativeCurrencyPrice, setTargetNetwork, setNativeCurrencyPrice };

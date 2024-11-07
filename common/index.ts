@@ -1,1 +1,1 @@
-export * from "./lib/readJson";
+export * from "./src/readJson";

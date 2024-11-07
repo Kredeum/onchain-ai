@@ -5,7 +5,7 @@
     createEnsName,
     createEnsAvatar,
     createEnsAddress,
-    createBlockNumber
+    createLatestBlock
   } from "$lib/wagmi/runes";
   import { Balance } from "$lib/scaffold-eth/components";
 
@@ -18,7 +18,7 @@
   const { ensName } = $derived(createEnsName(address));
   const { ensAvatar } = $derived(createEnsAvatar(ensName));
   const { ensAddress } = $derived(createEnsAddress(ensName));
-  const { blockNumber } = $derived(createBlockNumber({ chainId, watch: true }));
+  const { blockNumber } = $derived(createLatestBlock({ chainId, watch: true }));
 
   $inspect("PAGE account", account);
   $inspect("PAGE balance", balance);

@@ -38,8 +38,7 @@ export function createDarkMode(defaultValue?: boolean): CreateDarkModeOutput {
   const isDarkOS = createMediaQuery(COLOR_SCHEME_QUERY);
   const prevIsDarkOs = $state({ matches: isDarkOS.matches });
 
-  const initialStorageValue: boolean | null =
-    localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === "true";
+  const initialStorageValue: boolean | null = localStorage.getItem(LOCAL_STORAGE_THEME_KEY) === "true";
   let isDarkMode = $state(Boolean(defaultValue ?? initialStorageValue));
 
   $effect(() => {

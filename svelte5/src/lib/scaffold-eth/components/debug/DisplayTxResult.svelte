@@ -13,21 +13,11 @@
     | undefined
     | unknown;
 
-  type Display =
-    | string
-    | number
-    | { type: "address"; address: string }
-    | { type: "span"; content: string };
+  type Display = string | number | { type: "address"; address: string } | { type: "span"; content: string };
 
-  const {
-    content,
-    asText = false
-  }: { content: DisplayContent | DisplayContent[]; asText?: boolean } = $props();
+  const { content, asText = false }: { content: DisplayContent | DisplayContent[]; asText?: boolean } = $props();
 
-  const display = (
-    content: DisplayContent | DisplayContent[],
-    asTextOverride?: boolean
-  ): Display => {
+  const display = (content: DisplayContent | DisplayContent[], asTextOverride?: boolean): Display => {
     const displayAsText = asTextOverride ?? asText;
     if (content === null) return "";
 
@@ -53,13 +43,10 @@
     }
 
     if (Array.isArray(content)) {
-      const mostReadable = (v: DisplayContent) =>
-        ["number", "boolean"].includes(typeof v) ? v : display(v, true);
+      const mostReadable = (v: DisplayContent) => (["number", "boolean"].includes(typeof v) ? v : display(v, true));
       const displayable = JSON.stringify(content.map(mostReadable), replacer);
 
-      return displayAsText
-        ? displayable
-        : { type: "span", content: displayable.replaceAll(",", ",\n") };
+      return displayAsText ? displayable : { type: "span", content: displayable.replaceAll(",", ",\n") };
     }
 
     return JSON.stringify(content, replacer, 2);

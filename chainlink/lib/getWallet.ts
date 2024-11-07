@@ -1,5 +1,5 @@
 import { type Wallet, ethers } from "ethers";
-import { readConfig } from "../../common/lib/readJson";
+import { readConfig } from "@onchain-ai/common";
 import promptSync from "prompt-sync";
 import fs from "fs";
 

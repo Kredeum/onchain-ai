@@ -1,7 +1,7 @@
 <script lang="ts" generics="T extends { toString: () => string | undefined } = string">
   import type { Snippet } from "svelte";
 
-  import type { CommonInputProps } from "../../../ts/utils";
+  import type { CommonInputProps } from "$lib/scaffold-eth/ts";
 
   let {
     value = $bindable(),

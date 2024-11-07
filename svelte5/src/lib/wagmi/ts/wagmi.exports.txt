@@ -14,7 +14,7 @@ createEnsAvatar
 createPublicClient
 createReadContract
 createWriteContract
-createBlockNumber
+createLatestBlock
 createDisconnect
 createSwitchChain
 

@@ -1,14 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import logo from "$lib/assets/AI.png";
-  import {
-    type IconSource,
-    Bars3,
-    BugAnt,
-    Icon,
-    ChatBubbleLeftRight,
-    Beaker
-  } from "svelte-hero-icons";
+  import { type IconSource, Bars3, BugAnt, Icon, ChatBubbleLeftRight, Beaker } from "svelte-hero-icons";
   import { ConnectButton } from "$lib/scaffold-eth/components";
   import { FaucetButton } from "$lib/scaffold-eth/components";
   import { createOutsideClick } from "$lib/scaffold-eth/runes/outsideClick.svelte";
@@ -109,10 +102,7 @@
         <Icon src={Bars3} class="h-1/2" />
       </button>
       {#if isDrawerOpen}
-        <ul
-          tabIndex={0}
-          class="menu-compact menu dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow"
-        >
+        <ul tabIndex={0} class="menu-compact menu dropdown-content mt-3 w-52 rounded-box bg-base-100 p-2 shadow">
           {@render menuLinksSnippet()}
         </ul>
       {/if}

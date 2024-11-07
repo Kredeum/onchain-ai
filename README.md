@@ -14,16 +14,27 @@ Here is main screenshot;
 
 
 
-## Install 🛠️
+## Install 🚀
 
 Install via these commands:
+
 ```sh
 git clone https://github.com/Kredeum/onchain-ai.git
-cd onchaini-ai
+cd onchain-ai
 pnpm install
 ```
 
-To run the Dapp on local network just run this command:
+## Setup 🛠️ (user mode)
+
+Set these values in your ENV variables :
+```sh
+export PUBLIC_ALCHEMY_API_KEY=<YOUR_ALCHEMY_KEY>
+export PUBLIC_WALLET_CONNECT_PROJECT_ID=<YOUR_WALLET_CONNECT_PROJECT_ID>
+```
+
+## Run 🏃
+
+Run the Dapp on local network with this command:
 ```sh
 turbo start
 ```
@@ -44,8 +55,26 @@ turbo start
 Note that `OnChainAI` will not fully work on `anvil` network (no `Chainlink` there...), so rather use a tesnet like `base-sepolia` or `optimism-sepolia` for your tests (avoid `sepolia` that is slower).
 
 
-# Details 📝 TO BE UPDATED
 
+## Setup 🛠️ (advanced mode)
+
+If you want to redeploy smartcontract (as an dev), you will also need to set these values:
+- `ETHERSCAN_API_KEY=<YOUR_ETHERSCAN_API_KEY>` : etherscan api key
+- `VERIFIER_URL=https://api.etherscan.io/api` : url associated with etherscan api key "
+- `OPENAI_API_KEY=<YOUR_OPENAI_API_KEY>` : openai api key
+
+`OPENAI_API_KEY` will be uploaded in a secure way to `Chainlink DON`  (don't use centralized S3 solutions also proposed by `Chainlink`)
+
+Recommanded way is to use `direnv` command.
+After [`direnv` setup](https://direnv.net/) you only have to move `example.env` with your own values to `.envrc`file
+
+Other possible ways inludes :
+- simplest way, run `source your.env`
+- classic way, use `dotenv`
+- chainlink secure way, use `env-enc` packages
+
+
+# Details 📝 TO BE UPDATED
 
 ## Description 📗
 - `OnChainAI extension` is a Scaffold-eth-alt extension, allowing you to develop Dapps using `OpenAI GPT`
@@ -97,16 +126,6 @@ Config file can be found at [chainlink/config.json](chainlink/config.json)
 
 A specific `system prompt` is used for each OpenAI request, you can view it inside the javascript code run by `Chainlink DON` : [chainlink/source/onChainAI.js](chainlink/source/onChainAI.js)
 
-
-## Security 🛡️
-
-Same ENV values are needed for both :
-- `DEPLOYER_PRIVATE_KEY` : private key of the deployer
-- `PUBLIC_ALCHEMY_API_KEY` : alchemy api key
-- `ETHERSCAN_API_KEY` : etherscan api key
- - `OPENAI_API_KEY` : openai api key
-
-`OPENAI_API_KEY` will be uploaded in a secure way to `Chainlink DON`  (don't use centralized S3 solutions also proposed by `Chainlink`)
 
 ## Limitations 🚧
 

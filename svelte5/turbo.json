@@ -1,14 +1,9 @@
 {
   "extends": ["//"],
   "tasks": {
-    "format": {
-      "dependsOn": ["@onchain-ai/common#build"],
+    "build": {
+      "dependsOn": ["check", "@onchain-ai/common#build"],
       "inputs": ["src/**", "**/*.json"],
-      "outputLogs": "new-only"
-    },
-    "dev": {
-      "dependsOn": ["@onchain-ai/foundry#deploy", "@onchain-ai/common#build"],
-      "inputs": ["src/**"],
       "outputLogs": "new-only"
     }
   }

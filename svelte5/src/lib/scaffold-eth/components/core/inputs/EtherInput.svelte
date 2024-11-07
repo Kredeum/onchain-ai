@@ -1,17 +1,13 @@
 <script lang="ts">
   import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes/global.svelte";
-  import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
-  import InputBase from "./InputBase.svelte";
-  import { SIGNED_NUMBER_REGEX, type CommonInputProps } from "../../../ts/utils";
   import { untrack } from "svelte";
+  import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
+  import { InputBase } from "$lib/scaffold-eth/components";
+  import { SIGNED_NUMBER_REGEX, type CommonInputProps } from "$lib/scaffold-eth/ts";
 
   const MAX_DECIMALS_USD = 2;
 
-  function etherValueToDisplayValue(
-    usdMode: boolean,
-    etherValue: string,
-    nativeCurrencyPrice: number
-  ) {
+  function etherValueToDisplayValue(usdMode: boolean, etherValue: string, nativeCurrencyPrice: number) {
     if (usdMode && nativeCurrencyPrice) {
       const parsedEthValue = parseFloat(etherValue);
       if (Number.isNaN(parsedEthValue)) {
@@ -29,11 +25,7 @@
     }
   }
 
-  function displayValueToEtherValue(
-    usdMode: boolean,
-    displayValue: string,
-    nativeCurrencyPrice: number
-  ) {
+  function displayValueToEtherValue(usdMode: boolean, displayValue: string, nativeCurrencyPrice: number) {
     if (usdMode && nativeCurrencyPrice) {
       const parsedDisplayValue = parseFloat(displayValue);
       if (Number.isNaN(parsedDisplayValue)) {
@@ -61,15 +53,8 @@
   let transitoryDisplayValue = $state<string | undefined>();
 
   const displayValue = $derived.by(() => {
-    const newDisplayValue = etherValueToDisplayValue(
-      internalUsdMode,
-      value,
-      nativeCurrencyPrice.price
-    );
-    if (
-      transitoryDisplayValue &&
-      parseFloat(newDisplayValue) === parseFloat(transitoryDisplayValue)
-    ) {
+    const newDisplayValue = etherValueToDisplayValue(internalUsdMode, value, nativeCurrencyPrice.price);
+    if (transitoryDisplayValue && parseFloat(newDisplayValue) === parseFloat(transitoryDisplayValue)) {
       return transitoryDisplayValue;
     }
 
@@ -103,11 +88,7 @@
       transitoryDisplayValue = undefined;
     }
 
-    const newEthValue = displayValueToEtherValue(
-      internalUsdMode,
-      newValue,
-      nativeCurrencyPrice.price
-    );
+    const newEthValue = displayValueToEtherValue(internalUsdMode, newValue, nativeCurrencyPrice.price);
     value = newEthValue;
     onchange?.(newEthValue);
   };

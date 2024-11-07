@@ -19,23 +19,21 @@
       ],
       "outputLogs": "new-only"
     },
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "inputs": [
-        "src/**"
-      ],
-      "outputLogs": "new-only"
-    },
     "build": {
       "dependsOn": [
         "check"
       ],
       "outputLogs": "new-only"
     },
+    "test": {
+      "dependsOn": [
+        "deploy"
+      ],
+      "cache": false,
+      "outputLogs": "new-only"
+    },
     "chain": {
       "cache": false,
-      "persistent": true,
       "outputLogs": "new-only"
     },
     "deploy": {
@@ -44,7 +42,8 @@
       ],
       "cache": false,
       "dependsOn": [
-        "build"
+        "build",
+        "chain"
       ],
       "outputLogs": "new-only"
     },
@@ -59,11 +58,12 @@
       ],
       "outputLogs": "new-only"
     },
-    "test": {
-      "dependsOn": [
-        "deploy"
-      ],
+    "dev": {
       "cache": false,
+      "persistent": true,
+      "inputs": [
+        "src/**"
+      ],
       "outputLogs": "new-only"
     }
   }

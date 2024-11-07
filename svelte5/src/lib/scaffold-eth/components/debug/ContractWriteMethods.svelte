@@ -1,18 +1,11 @@
 <script lang="ts">
-  import type {
-    Contract,
-    ContractName,
-    GenericContract,
-    InheritedFunctions
-  } from "$lib/scaffold-eth/ts";
+  import type { Contract, ContractName, GenericContract, InheritedFunctions } from "$lib/scaffold-eth/ts";
   import type { Abi, AbiFunction } from "abitype";
   import WriteOnlyFunctionForm from "./WriteOnlyFunctionForm.svelte";
   import type { Address } from "viem";
 
-  const {
-    onchange,
-    deployedContractData
-  }: { onchange: () => void; deployedContractData: Contract<ContractName> } = $props();
+  const { onchange, deployedContractData }: { onchange: () => void; deployedContractData: Contract<ContractName> } =
+    $props();
 
   const functionsToDisplay = (
     (deployedContractData.abi as Abi).filter((part) => part.type === "function") as AbiFunction[]
@@ -24,9 +17,7 @@
     .map((fn) => {
       return {
         fn,
-        inheritedFrom: (
-          (deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions
-        )?.[fn.name]
+        inheritedFrom: ((deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions)?.[fn.name]
       };
     })
     .sort((a, b) => (b.inheritedFrom ? b.inheritedFrom.localeCompare(a.inheritedFrom) : 1));

@@ -4,11 +4,7 @@ import { type AbiParameterTuple } from "$lib/scaffold-eth/ts";
 /**
  * Generates a key based on function metadata
  */
-const getFunctionInputKey = (
-  functionName: string,
-  input: AbiParameter,
-  inputIndex: number
-): string => {
+const getFunctionInputKey = (functionName: string, input: AbiParameter, inputIndex: number): string => {
   const name = input?.name || `input_${inputIndex}_`;
   return functionName + "_" + name + "_" + input.internalType + "_" + input.type;
 };
@@ -44,21 +40,9 @@ const deepParseValues = (value: any): any => {
   }
 
   // Handle boolean values represented as strings
-  if (
-    value === "true" ||
-    value === "1" ||
-    value === "0x1" ||
-    value === "0x01" ||
-    value === "0x0001"
-  ) {
+  if (value === "true" || value === "1" || value === "0x1" || value === "0x01" || value === "0x0001") {
     return true;
-  } else if (
-    value === "false" ||
-    value === "0" ||
-    value === "0x0" ||
-    value === "0x00" ||
-    value === "0x0000"
-  ) {
+  } else if (value === "false" || value === "0" || value === "0x0" || value === "0x00" || value === "0x0000") {
     return false;
   }
 
@@ -102,11 +86,7 @@ const getInitalTupleArrayFormState = (abiTupleParameter: AbiParameterTuple) => {
   const initialForm: Record<string, any> = {};
   if (abiTupleParameter.components.length === 0) return initialForm;
   abiTupleParameter.components.forEach((component, componentIndex) => {
-    const key = getFunctionInputKey(
-      "0_" + abiTupleParameter.name || "tuple",
-      component,
-      componentIndex
-    );
+    const key = getFunctionInputKey("0_" + abiTupleParameter.name || "tuple", component, componentIndex);
     initialForm[key] = "";
   });
   return initialForm;
@@ -143,9 +123,7 @@ const transformComponents = (
 
   // Recursive case: wrap components in an additional tuple layer
   const wrappedComponents: AbiParameter = {
-    internalType:
-      `${parentComponentData.internalType || "struct"}`.replace(/\[\]/g, "") +
-      "[]".repeat(depth - 1),
+    internalType: `${parentComponentData.internalType || "struct"}`.replace(/\[\]/g, "") + "[]".repeat(depth - 1),
     name: `${parentComponentData.name || "tuple"}`,
     type: `tuple${"[]".repeat(depth - 1)}`,
     components: transformComponents(components, depth - 1, parentComponentData)

@@ -1,8 +1,4 @@
-import {
-  type InteractionLogsParamsType,
-  type InteractionLogWithArgs,
-  type InteractionType
-} from "$lib/onchain-ai/ts";
+import { type InteractionLogsParamsType, type InteractionLogWithArgs, type InteractionType } from "$lib/onchain-ai/ts";
 import { createOnchainAI } from "./contract.svelte";
 import { SvelteMap } from "svelte/reactivity";
 

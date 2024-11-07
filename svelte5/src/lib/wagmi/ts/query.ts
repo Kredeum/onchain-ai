@@ -18,12 +18,7 @@ import { derived, get, type Readable } from "svelte/store";
 
 type LooseOmit<type, keys extends string> = Pick<type, Exclude<keyof type, keys>>;
 
-export type CreateMutationParameters<
-  data = unknown,
-  error = Error,
-  variables = void,
-  context = unknown
-> =
+export type CreateMutationParameters<data = unknown, error = Error, variables = void, context = unknown> =
   CreateMutationOptions<data, error, Compute<variables>, context> extends Readable<infer T>
     ? Readable<LooseOmit<T, "mutationFn" | "mutationKey" | "throwOnError">>
     : Omit<
@@ -31,12 +26,9 @@ export type CreateMutationParameters<
         "mutationFn" | "mutationKey" | "throwOnError"
       >;
 
-export type CreateMutationReturnType<
-  data = unknown,
-  error = Error,
-  variables = void,
-  context = unknown
-> = Compute<Omit<MutationObserverResult<data, error, variables, context>, "mutate">>;
+export type CreateMutationReturnType<data = unknown, error = Error, variables = void, context = unknown> = Compute<
+  Omit<MutationObserverResult<data, error, variables, context>, "mutate">
+>;
 
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -107,21 +99,16 @@ export type CreateInfiniteQueryParameters<
   queryKey extends QueryKey = QueryKey,
   pageParam = unknown
 > = Compute<
-  Omit<
-    CreateInfiniteQueryOptions<queryFnData, error, data, queryData, queryKey, pageParam>,
-    "initialData"
-  > & {
+  Omit<CreateInfiniteQueryOptions<queryFnData, error, data, queryData, queryKey, pageParam>, "initialData"> & {
     // Fix `initialData` type
-    initialData?:
-      | CreateInfiniteQueryOptions<queryFnData, error, data, queryKey>["initialData"]
-      | undefined;
+    initialData?: CreateInfiniteQueryOptions<queryFnData, error, data, queryKey>["initialData"] | undefined;
   }
 >;
 
-export type CreateInfiniteQueryReturnType<
-  data = unknown,
-  error = DefaultError
-> = CreateInfiniteQueryResult<data, error> & {
+export type CreateInfiniteQueryReturnType<data = unknown, error = DefaultError> = CreateInfiniteQueryResult<
+  data,
+  error
+> & {
   queryKey: QueryKey;
 };
 

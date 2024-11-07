@@ -28,29 +28,23 @@
   <div class="flex-grow bg-base-300 w-full mt-12 px-8 py-12">
     <div class="flex justify-center gap-12 flex-col sm:flex-row">
       <div class="flex flex-col bg-base-100 px-6 py-6 text-gray-400 max-w-md rounded-3xl">
-        <em>
-          Keep your question simple and request for short answers unless Chainlink consensus will
-          fail
-        </em>
+        <em> Keep your question simple and request for short answers unless Chainlink consensus will fail </em>
       </div>
       <div class="flex flex-col bg-base-100 px-6 py-6 text-gray-400 max-w-md rounded-3xl">
-        <em>
-          Costs 0.0001 Eth (~$0.30) per question, in order to cover Chainlink LINK and OpenAI API
-          costs
-        </em>
+        <em> Costs 0.0001 Eth (~$0.30) per question, in order to cover Chainlink LINK and OpenAI API costs </em>
       </div>
     </div>
     <div class="flex justify-center gap-12 flex-col sm:flex-row pt-6">
       <div class="flex flex-col bg-base-100 px-6 py-6 text-gray-400 max-w-md rounded-3xl">
         <em>
-          OpenAI key needed to make OnChainAI working is stored securely on Chainlink Decentralized
-          Oracle Network (DON).
+          OpenAI key needed to make OnChainAI working is stored securely on Chainlink Decentralized Oracle Network
+          (DON).
         </em>
       </div>
       <div class="flex flex-col bg-base-100 px-6 py-6 text-gray-400 max-w-md rounded-3xl">
         <em>
-          Use mainnet BASE network to get valid OpenAI key. On testnets availability is not
-          garanted, so OnChainAI may not work.
+          Use mainnet BASE network to get valid OpenAI key. On testnets availability is not garanted, so OnChainAI may
+          not work.
         </em>
       </div>
     </div>

@@ -47,9 +47,7 @@ export class ChainNotConfiguredError extends BaseError {
   }
 }
 
-type Provider = ReturnType<
-  Transport<"custom", Record<any, any>, EIP1193RequestFn<WalletRpcSchema>>
->;
+type Provider = ReturnType<Transport<"custom", Record<any, any>, EIP1193RequestFn<WalletRpcSchema>>>;
 
 export const createBurnerConnector = () => {
   let connected = true;
@@ -87,9 +85,7 @@ export const createBurnerConnector = () => {
       const request: EIP1193RequestFn = async ({ method, params }) => {
         if (method === "eth_sendTransaction") {
           const actualParams = (params as SendTransactionParameters[])[0];
-          const value = actualParams.value
-            ? hexToBigInt(actualParams.value as unknown as Hex)
-            : undefined;
+          const value = actualParams.value ? hexToBigInt(actualParams.value as unknown as Hex) : undefined;
           const hash = await client.sendTransaction({
             ...(params as SendTransactionParameters[])[0],
             value

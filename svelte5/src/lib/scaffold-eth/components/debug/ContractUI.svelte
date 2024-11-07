@@ -1,11 +1,7 @@
 <script lang="ts">
   import { type Address as AddressType } from "viem";
   import { type ContractName } from "$lib/scaffold-eth/ts";
-  import {
-    createDeployedContractInfo,
-    createTargetNetwork,
-    createNetworkColor
-  } from "$lib/scaffold-eth/runes";
+  import { createDeployedContractInfo, createTargetNetwork, createNetworkColor } from "$lib/scaffold-eth/runes";
   import {
     Address,
     Balance,
@@ -35,10 +31,7 @@
     No contract found by the name of "{contractName}" on chain "{targetNetwork.name}"!
   </p>
 {:else}
-  <div
-    class="my-0 grid w-full max-w-7xl grid-cols-1 px-6 lg:grid-cols-6 lg:gap-12 lg:px-10"
-    class:hidden
-  >
+  <div class="my-0 grid w-full max-w-7xl grid-cols-1 px-6 lg:grid-cols-6 lg:gap-12 lg:px-10" class:hidden>
     <div class="col-span-5 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
       <div class="col-span-1 flex flex-col">
         <div
@@ -50,10 +43,7 @@
               <Address address={deployedContractData.address} />
               <div class="flex items-center gap-1">
                 <span class="text-sm font-bold">Balance:</span>
-                <Balance
-                  address={deployedContractData.address as AddressType}
-                  class="h-1.5 min-h-[0.375rem] px-0"
-                />
+                <Balance address={deployedContractData.address as AddressType} class="h-1.5 min-h-[0.375rem] px-0" />
               </div>
             </div>
           </div>

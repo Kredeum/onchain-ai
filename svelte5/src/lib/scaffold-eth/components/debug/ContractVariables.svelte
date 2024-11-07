@@ -1,10 +1,5 @@
 <script lang="ts">
-  import type {
-    Contract,
-    ContractName,
-    GenericContract,
-    InheritedFunctions
-  } from "$lib/scaffold-eth/ts";
+  import type { Contract, ContractName, GenericContract, InheritedFunctions } from "$lib/scaffold-eth/ts";
   import type { Abi, AbiFunction } from "abitype";
   import DisplayVariable from "./DisplayVariable.svelte";
   import type { Address } from "viem";
@@ -25,9 +20,7 @@
     .map((fn) => {
       return {
         fn,
-        inheritedFrom: (
-          (deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions
-        )?.[fn.name]
+        inheritedFrom: ((deployedContractData as GenericContract)?.inheritedFunctions as InheritedFunctions)?.[fn.name]
       };
     })
     .sort((a, b) => (b.inheritedFrom ? b.inheritedFrom.localeCompare(a.inheritedFrom) : 1));
