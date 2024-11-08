@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { createOnchainAI } from "$lib/onchain-ai/runes";
+  import { createContract } from "$lib/wagmi/runes/";
 
   const { txHash = "", address = "", requestId = "" } = $props();
 
-  const { config } = $derived.by(createOnchainAI);
+  const { config } = $derived.by(() => createContract("OnChainAIv1"));
 
   const etherscanLinkAddress = $derived(address ? `${config.explorer}/address/${address}` : "");
   const etherscanLinkTx = $derived(txHash ? `${config.explorer}/tx/${txHash}` : "");

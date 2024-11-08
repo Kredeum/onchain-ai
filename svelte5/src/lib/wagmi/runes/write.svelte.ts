@@ -41,7 +41,7 @@ const createWriteContract = ({
     waitingTxHash = false;
 
     if (!hash) {
-      throw Error("writeContract error: no hash");
+      throw new Error("writeContract error: no hash");
     }
     return hash;
   };

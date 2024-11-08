@@ -2,9 +2,9 @@
   import Chat from "$lib/onchain-ai/components/Chat.svelte";
   import Explorer from "$lib/onchain-ai/components/Explorer.svelte";
   import Form from "$lib/onchain-ai/components/Form.svelte";
-  import { createOnchainAI } from "$lib/onchain-ai/runes/contract.svelte";
+  import { createContract } from "$lib/wagmi/runes/";
 
-  const { address } = $derived.by(createOnchainAI);
+  const { address } = $derived.by(() => createContract("OnChainAIv1"));
   let txHash: `0x${string}` | undefined = $state();
 </script>
 

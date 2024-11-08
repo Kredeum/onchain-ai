@@ -1,12 +1,13 @@
 <script lang="ts">
-  import { createOnchainAI, createInteractions } from "$lib/onchain-ai/runes";
+  import { createInteractions } from "$lib/onchain-ai/runes";
+  import { createContract } from "$lib/wagmi/runes";
   import { Interaction } from "$lib/onchain-ai/components";
 
   const lim = 3;
   let all: boolean = $state(true);
   let limit: number = $state(lim);
 
-  const { account } = $derived.by(createOnchainAI);
+  const { account } = $derived.by(() => createContract("OnChainAIv1"));
   const { interactions, interactionsMax } = $derived(createInteractions({ all, limit }));
 
   let noMore = $derived(limit >= interactionsMax);

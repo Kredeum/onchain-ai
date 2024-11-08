@@ -17,7 +17,7 @@ const getWallet = async (chainId: number): Promise<Wallet> => {
   if (!rpcApiKey) throw new Error("❌ rpcApiKey not provided - check your ENV variables");
 
   if (!(privateKey || keystoreDir))
-    throw Error("❌ No DEPLOYER_PRIVATE_KEY nor KEYSTORE_DIR found in your ENV variables");
+    throw new Error("❌ No DEPLOYER_PRIVATE_KEY nor KEYSTORE_DIR found in your ENV variables");
 
   const rpcUrl = `${rpc}/${process.env.ALCHEMY_API_KEY}`;
   const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
