@@ -1,5 +1,5 @@
 <script lang="ts">
-  import WagmiProvider from "$lib/wagmi/components/WagmiProvider.svelte";
+  import { WagmiProvider } from "$lib/wagmi/components";
   import "../app.pcss";
   import ScaffoldEthApp from "$lib/scaffold-eth/components/ScaffoldEthApp.svelte";
   import { wagmiConfig } from "$lib/wagmi/ts/wagmi";

@@ -1,13 +1,9 @@
 <script lang="ts">
-  import { setNativeCurrencyPrice } from "$lib/scaffold-eth/runes/global.svelte";
-  import { createNativeCurrencyPrice } from "$lib/scaffold-eth/runes/nativeCurrencyPrice.svelte";
-  import Header from "./Header.svelte";
-  import Footer from "./Footer.svelte";
   import { reconnect } from "@wagmi/core";
-  import { wagmiConfig } from "$lib/wagmi/ts/wagmi";
   import { untrack, type Snippet } from "svelte";
-  import { createDarkMode } from "$lib/scaffold-eth/runes/darkMode.svelte";
-  import { modal } from "$lib/modal";
+  import { wagmiConfig } from "$lib/wagmi/ts";
+  import { setNativeCurrencyPrice, createNativeCurrencyPrice, createDarkMode } from "$lib/scaffold-eth/runes";
+  import { Header, Footer } from "$lib/scaffold-eth/components";
 
   let { children }: { children: Snippet } = $props();
 
@@ -24,10 +20,6 @@
   });
 
   const { isDarkMode } = $derived.by(createDarkMode());
-
-  $effect(() => {
-    modal.setThemeMode(isDarkMode ? "dark" : "light");
-  });
 </script>
 
 <div class="flex min-h-screen flex-col">

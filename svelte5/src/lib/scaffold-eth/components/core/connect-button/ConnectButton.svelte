@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { Address } from "viem";
-  import { modal } from "$lib/modal";
   import scaffoldConfig from "$lib/scaffold.config";
   import { createNetworkColor } from "$lib/scaffold-eth/runes";
   import { formatENS, formatAddress, getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
@@ -10,6 +9,7 @@
   import AddressInfoDropdown from "./AddressInfoDropdown.svelte";
   import WrongNetworkDropdown from "./WrongNetworkDropdown.svelte";
   import AddressQRCodeModal from "./AddressQRCodeModal.svelte";
+  import { Connect } from "$lib/wagmi/components";
 
   const targetNetwork = $derived.by(createTargetNetwork());
 
@@ -31,7 +31,7 @@
 </script>
 
 {#if !connected}
-  <button class="btn btn-primary btn-sm" onclick={() => modal.open()} type="button"> Connect Wallet </button>
+  <Connect />
 {:else if isChainUnsupported}
   <WrongNetworkDropdown />
 {:else}

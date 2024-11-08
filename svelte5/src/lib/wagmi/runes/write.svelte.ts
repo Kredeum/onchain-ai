@@ -4,7 +4,8 @@ import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
 import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
 
-const createWriteContract = ({ chainId: paramChainId,
+const createWriteContract = ({
+  chainId: paramChainId,
   address,
   functionName,
   args = [],
