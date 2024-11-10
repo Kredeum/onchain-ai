@@ -50,24 +50,17 @@
     <h3 class="mb-3 text-xl font-bold text-center">Connect Wallet</h3>
     <label for="connect-modal" class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3 text-xl"> &times; </label>
     <ul class="space-y-4 text-center">
-      <li class="flex align-center">
-        <img src="/rabby.svg" alt="metaMask" class="w-8 h-8 mr-2" />
-        <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(injected)}> Injected Wallet </button>
-      </li>
-      <li class="flex content-center">
-        <img src="/metaMask.svg" alt="metaMask" class="w-8 h-8 mr-2" />
-        <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(metaMask)}>Metamask</button>
-      </li>
-      <li class="flex content-center">
-        <img src="/coinbase.svg" alt="metaMask" class="w-8 h-8 mr-2" />
-        <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(coinbaseWallet)}
-          >Coinbase Wallet</button
-        >
-      </li>
-      <li class="flex content-center">
-        <img src="/walletConnect.svg" alt="metaMask" class="w-8 h-8 mr-2" />
-        <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(walletConnect)}>WalletConnect</button>
-      </li>
+      {@render connectBlock(injected, "rabby", "Injected Wallet")}
+      {@render connectBlock(metaMask, "metaMask", "Metamask")}
+      {@render connectBlock(coinbaseWallet, "coinbase", "Coinbase Wallet")}
+      {@render connectBlock(walletConnect, "walletConnect", "WalletConnect")}
     </ul>
   </label>
 </label>
+
+{#snippet connectBlock(connectFunc: () => Connector, connectName: string, connectTitle: string)}
+  <li class="flex align-center">
+    <img src="/{connectName}.svg" alt={connectTitle} class="w-8 h-8 mr-2" />
+    <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(connectFunc)}> {connectTitle} </button>
+  </li>
+{/snippet}
