@@ -7,7 +7,7 @@ const prompt = promptSync({ sigint: true });
 
 const getWallet = async (chainId: number): Promise<Wallet> => {
   let wallet: Wallet;
-  const rpcApiKey = process.env.ALCHEMY_API_KEY;
+  const rpcApiKey = process.env.PUBLIC_ALCHEMY_API_KEY;
   const privateKey = process.env.DEPLOYER_PRIVATE_KEY;
   const keystoreDir = process.env.KEYSTORE_DIR;
 
@@ -19,7 +19,7 @@ const getWallet = async (chainId: number): Promise<Wallet> => {
   if (!(privateKey || keystoreDir))
     throw new Error("❌ No DEPLOYER_PRIVATE_KEY nor KEYSTORE_DIR found in your ENV variables");
 
-  const rpcUrl = `${rpc}/${process.env.ALCHEMY_API_KEY}`;
+  const rpcUrl = `${rpc}/${process.env.PUBLIC_ALCHEMY_API_KEY}`;
   const provider = new ethers.providers.JsonRpcProvider(rpcUrl);
 
   if (privateKey) wallet = new ethers.Wallet(privateKey);

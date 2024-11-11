@@ -9,7 +9,6 @@
   },
   "keywords": [],
   "license": "ISC",
-  "main": "index.js",
   "name": "@onchain-ai/common",
   "scripts": {
     "build": "ts-node script/mergeAbis.ts",

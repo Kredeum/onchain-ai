@@ -1,0 +1,19 @@
+{
+  "extends": [
+    "//"
+  ],
+  "tasks": {
+    "chain": {
+      "cache": false,
+      "outputLogs": "new-only"
+    },
+    "deploy": {
+      "cache": false,
+      "dependsOn": [
+        "build",
+        "chain"
+      ],
+      "outputLogs": "new-only"
+    }
+  }
+}

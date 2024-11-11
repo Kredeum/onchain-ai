@@ -7,7 +7,6 @@
   import { Balance } from "$lib/scaffold-eth/components";
   import { createTargetNetwork } from "$lib/scaffold-eth/runes";
   import AddressInfoDropdown from "./AddressInfoDropdown.svelte";
-  import WrongNetworkDropdown from "./WrongNetworkDropdown.svelte";
   import AddressQRCodeModal from "./AddressQRCodeModal.svelte";
   import { Connect } from "$lib/wagmi/components";
 
@@ -17,9 +16,6 @@
   const { address, chain, isConnected } = $derived(account);
 
   const connected = $derived(isConnected);
-  const isChainUnsupported = $derived(
-    chain?.id && !scaffoldConfig.targetNetworks.map((it) => it.id as number).includes(chain.id)
-  );
   const networkColor = $derived.by(createNetworkColor());
 
   const { ensName: name } = $derived(createEnsName(address));
@@ -32,8 +28,6 @@
 
 {#if !connected}
   <Connect />
-{:else if isChainUnsupported}
-  <WrongNetworkDropdown />
 {:else}
   <div class="mr-1 flex flex-col items-center">
     <Balance address={address as Address} class="h-auto min-h-0" />

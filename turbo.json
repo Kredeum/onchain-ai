@@ -8,8 +8,7 @@
   "tasks": {
     "format": {
       "inputs": [
-        "src/**",
-        "**/*.json"
+        "src/**"
       ],
       "outputLogs": "new-only"
     },
@@ -25,45 +24,18 @@
       ],
       "outputLogs": "new-only"
     },
+    "deploy": {
+      "cache": false,
+      "dependsOn": [
+        "build"
+      ],
+      "outputLogs": "new-only"
+    },
     "test": {
       "dependsOn": [
         "deploy"
       ],
       "cache": false,
-      "outputLogs": "new-only"
-    },
-    "chain": {
-      "cache": false,
-      "outputLogs": "new-only"
-    },
-    "deploy": {
-      "env": [
-        "ETHERSCAN_API_KEY*"
-      ],
-      "cache": false,
-      "dependsOn": [
-        "build",
-        "chain"
-      ],
-      "outputLogs": "new-only"
-    },
-    "start": {
-      "dependsOn": [
-        "deploy"
-      ],
-      "cache": false,
-      "persistent": true,
-      "inputs": [
-        "src/**"
-      ],
-      "outputLogs": "new-only"
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "inputs": [
-        "src/**"
-      ],
       "outputLogs": "new-only"
     }
   }
