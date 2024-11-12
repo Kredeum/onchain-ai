@@ -9,6 +9,7 @@
 
   <ul class="list-disc pl-5 space-y-2">
     {@render pageTest("account")}
+    {@render pageTest("connect")}
     {@render pageTest("deployed")}
     {@render pageTest("last")}
     {@render pageTest("owner")}

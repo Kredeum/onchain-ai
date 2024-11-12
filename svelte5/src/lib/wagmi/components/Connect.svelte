@@ -1,34 +1,23 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { type Address, type HttpTransport } from "viem";
-  import { mainnet, baseSepolia, optimismSepolia, base, optimism } from "viem/chains";
-  import { type Config, createConfig, connect, http } from "@wagmi/core";
-
+  import { type Account, type Address, type HttpTransport } from "viem";
+  import { baseSepolia, optimismSepolia, base, anvil } from "viem/chains";
+  import { type Config, connect, http, switchChain } from "@wagmi/core";
   import { injected, metaMask, coinbaseWallet, safe, walletConnect } from "@wagmi/connectors";
-  import scaffoldConfig from "$lib/scaffold.config";
-  import { SvelteMap } from "svelte/reactivity";
 
-  let {
-    chainId = $bindable(),
-    address = $bindable(),
-    name = $bindable()
-  }: { chainId?: number; address?: Address; name?: string } = $props();
+  import scaffoldConfig from "$lib/scaffold.config";
+  import { createConfig } from "$lib/wagmi/runes";
+  import { SvelteMap } from "svelte/reactivity";
 
   type Connector = () => any;
   type ConnectorMap = { connector: Connector; name: string; title: string };
 
-  let connectorsMap: Map<string, ConnectorMap> = new SvelteMap();
-  let connectModal: HTMLInputElement | undefined = $state();
+  let { chainId = $bindable(), address = $bindable() }: { chainId?: number; address?: Address } = $props();
 
-  const chains = [mainnet, baseSepolia, optimismSepolia] as const;
-  const transports = {
-    [mainnet.id]: http(),
-    [baseSepolia.id]: http(),
-    [optimismSepolia.id]: http(),
-    [base.id]: http(),
-    [optimism.id]: http()
-  };
-  let config: Config<typeof chains, typeof transports>;
+  const config = $derived.by(createConfig());
+  let walletName = $state<string>();
+
+  let connectorsMap: Map<string, ConnectorMap> = new SvelteMap();
 
   onMount(() => {
     const provider = window.ethereum;
@@ -62,34 +51,34 @@
       title: "WalletConnect"
     });
 
-    // connectorsMap.set("safe", {
-    //   connector: () => safe({ allowedDomains: [/gnosis-safe.io$/, /app.safe.global$/], debug: true }),
-    //   name: "safe",
-    //   title: "Safe"
-    // });
-
-    console.log("onMount ~ connectorsMap:", connectorsMap);
-
-    const connectors = [...connectorsMap].map(([, item]) => item.connector);
-    config = createConfig({ chains, connectors, transports });
-
-    connectModal = document.getElementById("connect-modal") as HTMLInputElement;
+    const isIframe = typeof window !== "undefined" && window?.parent !== window;
+    if (isIframe) {
+      connectorsMap.set("safe", {
+        connector: () => safe({ allowedDomains: [/gnosis-safe.io$/, /app.safe.global$/], debug: true }),
+        name: "safe",
+        title: "Safe"
+      });
+    }
   });
 
   const connectWallet = async (connectorMap: ConnectorMap) => {
-    console.log("connectWallet ~ connectorMap:", connectorMap);
+    if (!config) return;
     modalDisplay = false;
 
-    if (connectModal) connectModal.checked = false;
-
-    name = connectorMap.name;
+    walletName = connectorMap.name;
     chainId = undefined;
     address = undefined;
 
-    const wallet = await connect(config, { connector: connectorMap.connector() });
+    const connector = connectorMap.connector();
+    const wallet = await connect(config, { connector });
 
     chainId = wallet.chainId;
     address = wallet.accounts[0];
+
+    if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === chainId)) {
+      console.log("connectWallet ~ switchChain:", scaffoldConfig.targetNetworks[0].id);
+      switchChain(config, { chainId: scaffoldConfig.targetNetworks[0].id });
+    }
   };
 
   let modalDisplay = $state(false);
@@ -113,7 +102,7 @@
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
         {@render connectSnippet("injected")}
-        <!-- {@render connectSnippet(safe, "Safe Wallet")} -->
+        {@render connectSnippet("safe")}
       </ul>
     </div>
   </div>
@@ -125,7 +114,7 @@
     <li class="flex align-center">
       <img src="/{connectorMap.name}.svg" alt={connectorMap.title} class="w-8 h-8 mr-2" />
       <button
-        class="btn btn-default btn-sm w-40 {name === connectorMap.name ? 'btn-accent' : ''}"
+        class="btn btn-default btn-sm w-40 {walletName === connectorMap.name ? 'btn-accent' : ''}"
         onclick={() => connectWallet(connectorMap)}
       >
         {connectorMap.title}

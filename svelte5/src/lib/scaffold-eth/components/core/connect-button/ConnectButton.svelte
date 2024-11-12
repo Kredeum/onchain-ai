@@ -13,7 +13,7 @@
   const targetNetwork = $derived.by(createTargetNetwork());
 
   const { account } = $derived(createAccount());
-  const { address, chain, isConnected } = $derived(account);
+  const { address, chain, chainId, isConnected } = $derived(account);
 
   const connected = $derived(isConnected);
   const networkColor = $derived.by(createNetworkColor());
@@ -21,9 +21,9 @@
   const { ensName: name } = $derived(createEnsName(address));
   const { ensAvatar } = $derived(createEnsAvatar(name));
 
-  $inspect("RUNE connect-button name:", name);
-
   const blockExplorerAddressLink = $derived(address ? getBlockExplorerAddressLink(targetNetwork, address) : undefined);
+
+  $inspect("<ConnectButton", address, chainId);
 </script>
 
 {#if !connected}

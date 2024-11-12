@@ -11,19 +11,15 @@
       "group": "Default"
     },
     {
-      "filePath": "svelte5/src/lib/onchain-ai/components/Chat.svelte",
-      "group": "Default"
-    },
-    {
       "filePath": "svelte5/src/lib/onchain-ai/components/Events.svelte",
       "group": "Default"
     },
     {
-      "filePath": "svelte5/src/lib/onchain-ai",
+      "filePath": "svelte5/src/lib",
       "group": "Default"
     },
     {
-      "filePath": "svelte5/src/routes/+page.svelte",
+      "filePath": "svelte5/src/routes",
       "group": "Default"
     }
   ]
