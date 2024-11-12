@@ -16,5 +16,5 @@
     "clean": "rm -rf node_modules .turbo",
     "format": "prettier --write --list-different ."
   },
-  "version": "1.0.1"
+  "version": "1.0.3"
 }
