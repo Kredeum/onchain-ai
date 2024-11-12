@@ -1,4 +1,4 @@
-if (!secrets.openaiApiKey) throw Error("Need OPENAI_API_KEY environment variable");
+if (!secrets.openaiApiKey) throw new Error("Need OPENAI_API_KEY environment variable");
 
 const data = {
   model: "gpt-4o-mini",

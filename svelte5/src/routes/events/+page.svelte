@@ -1,9 +1,8 @@
 <script lang="ts">
-  import { createOnchainAI } from "$lib/onchain-ai/runes";
   import { replacer } from "$lib/scaffold-eth/ts";
-  import { createEvents } from "$lib/wagmi/runes";
+  import { createContract, createEvents } from "$lib/wagmi/runes";
 
-  const { address, abi } = $derived.by(createOnchainAI);
+  const { address, abi } = $derived.by(() => createContract("OnChainAIv1"));
 
   const { events, eventsMax } = $derived(createEvents(address, abi));
 

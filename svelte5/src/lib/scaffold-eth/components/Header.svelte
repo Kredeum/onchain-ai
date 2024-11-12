@@ -39,7 +39,7 @@
       icon: BugAnt
     },
     {
-      label: "Debug Events",
+      label: "View Events",
       href: "/events",
       icon: Bars3
     },

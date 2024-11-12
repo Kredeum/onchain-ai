@@ -1,6 +1,6 @@
-import { type InteractionLogsParamsType, type InteractionLogWithArgs, type InteractionType } from "$lib/onchain-ai/ts";
-import { createOnchainAI } from "./contract.svelte";
 import { SvelteMap } from "svelte/reactivity";
+import { type InteractionLogsParamsType, type InteractionLogWithArgs, type InteractionType } from "$lib/onchain-ai/ts";
+import { createContract } from "$lib/wagmi/runes/";
 
 const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
   let interactions: InteractionType[] = $state([]);
@@ -8,7 +8,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
   let interactionsMax: number = $derived(logsMap.size);
 
   const eventName = "InteractionLog";
-  const { chainId, client, address, abi, account: sender } = $derived.by(createOnchainAI);
+  const { chainId, client, address, abi, account: sender } = $derived.by(() => createContract("OnChainAIv1"));
   $inspect("createInteractions", chainId, address, sender);
 
   const paramsAll: InteractionLogsParamsType = $derived({ address, abi, eventName });

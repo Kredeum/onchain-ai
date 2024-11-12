@@ -1,6 +1,5 @@
 import { createWriteContract } from "$lib/wagmi/runes";
-import { createOnchainAI } from "./contract.svelte";
-import { createTransactor, type TransactionFunc } from "$lib/scaffold-eth/runes/transactor.svelte";
+import { createContract } from "$lib/wagmi/runes";
 
 const createWriteOnchainAI = ({
   functionName,
@@ -11,7 +10,7 @@ const createWriteOnchainAI = ({
   args?: string[];
   value?: bigint;
 }) => {
-  const { chainId, address, abi } = $derived.by(createOnchainAI);
+  const { chainId, address, abi } = $derived.by(() => createContract("OnChainAIv1"));
 
   return createWriteContract({ chainId, address, abi, functionName, args, value });
 };

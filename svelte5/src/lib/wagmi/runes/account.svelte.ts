@@ -1,5 +1,5 @@
 import { getAccount, watchAccount } from "@wagmi/core";
-import { createConfig } from "./config.svelte";
+import { createConfig } from "$lib/wagmi/runes";
 
 const createAccount = () => {
   const config = $derived.by(createConfig());
@@ -14,6 +14,8 @@ const createAccount = () => {
       }
     });
   });
+
+  // $inspect("createAccount account", account);
 
   return {
     get account() {

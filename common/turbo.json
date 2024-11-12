@@ -3,12 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["check", "@onchain-ai/foundry#deploy"],
-      "inputs": [
-        "lib/**",
-        "../chainlink/config.json",
-        "../foundry/addresses.json",
-        "../foundry/out"
-      ],
+      "inputs": ["lib/**", "../chainlink/config.json", "../foundry/addresses.json"],
       "outputLogs": "new-only"
     }
   }

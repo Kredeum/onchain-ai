@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { createOnchainAI } from "$lib/onchain-ai/runes";
-
+  import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
+  import { readConfig } from "@onchain-ai/common";
   const { txHash = "", address = "", requestId = "" } = $props();
 
-  const { config } = $derived.by(createOnchainAI);
+  const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
+  const config = $derived(readConfig(chainId));
 
   const etherscanLinkAddress = $derived(address ? `${config.explorer}/address/${address}` : "");
   const etherscanLinkTx = $derived(txHash ? `${config.explorer}/tx/${txHash}` : "");

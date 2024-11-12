@@ -499,7 +499,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+      "address": "0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a",
       "abi": [
         {
           "type": "constructor",

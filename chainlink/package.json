@@ -5,19 +5,18 @@
     "@chainlink/functions-toolkit": "^0.3.2",
     "@onchain-ai/common": "workspace:^",
     "@types/prompt-sync": "^4.2.3",
-    "@typescript-eslint/eslint-plugin": "^8.13.0",
-    "@typescript-eslint/parser": "^8.13.0",
+    "@typescript-eslint/eslint-plugin": "^8.14.0",
+    "@typescript-eslint/parser": "^8.14.0",
     "eslint": "^9.14.0",
     "ethers": "^5.7.2",
     "prettier": "^3.3.3",
     "prompt-sync": "^4.2.0",
     "ts-node": "^10.9.2",
-    "typescript-eslint": "^8.13.0",
+    "typescript-eslint": "^8.14.0",
     "utf-8-validate": "^5.0.10"
   },
   "keywords": [],
   "license": "ISC",
-  "main": "index.js",
   "name": "@onchain-ai/chainlink",
   "scripts": {
     "check": "prettier --check . && eslint **/*.ts",
@@ -25,5 +24,5 @@
     "format": "prettier --write --list-different .",
     "secrets": "ts-node scripts/upload-secrets.ts"
   },
-  "version": "1.0.0"
+  "version": "1.0.3"
 }

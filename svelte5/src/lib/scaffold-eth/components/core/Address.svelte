@@ -1,11 +1,12 @@
 <script lang="ts">
-  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
   import { getAddress, isAddress } from "viem";
   import { anvil } from "viem/chains";
-  import { getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
-  import BlockieAvatar from "./BlockieAvatar.svelte";
   import { CheckCircle, DocumentDuplicate, Icon } from "svelte-hero-icons";
+
+  import { getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
+  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { BlockieAvatar } from "$lib/scaffold-eth/components";
+  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes";
 
   const {
     address,

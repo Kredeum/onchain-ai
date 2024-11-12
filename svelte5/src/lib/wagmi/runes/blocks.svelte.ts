@@ -16,7 +16,7 @@ const createLatestBlock = ({ chainId: paramChainId, watch = true }: { chainId?: 
   };
   fetch();
 
-  let unwatch = (): void => { };
+  let unwatch = (): void => {};
   $effect(() => {
     if (!watch) return;
 

@@ -4,7 +4,8 @@ import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
 import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
 
-const createWriteContract = ({ chainId: paramChainId,
+const createWriteContract = ({
+  chainId: paramChainId,
   address,
   functionName,
   args = [],
@@ -40,7 +41,7 @@ const createWriteContract = ({ chainId: paramChainId,
     waitingTxHash = false;
 
     if (!hash) {
-      throw Error("writeContract error: no hash");
+      throw new Error("writeContract error: no hash");
     }
     return hash;
   };

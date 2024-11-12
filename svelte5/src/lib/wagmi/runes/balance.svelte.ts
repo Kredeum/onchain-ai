@@ -8,7 +8,7 @@ const createBalance = ({ chainId: paramChainId, address }: { chainId?: number; a
   const { targetNetworkId } = $derived.by(createTargetNetworkId);
   const chainId = $derived(paramChainId || targetNetworkId);
 
-  address = (address && isAddress(address)) ? address : zeroAddress;
+  address = address && isAddress(address) ? address : zeroAddress;
 
   const config = $derived.by(createConfig());
 

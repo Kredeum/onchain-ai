@@ -1,8 +1,7 @@
-import { createReadContract } from "$lib/wagmi/runes/";
-import { createOnchainAI } from "$lib/onchain-ai/runes";
+import { createContract, createReadContract } from "$lib/wagmi/runes/";
 
 const createReadOnchainAI = ({ functionName, args = [] }: { functionName: string; args?: string[] }) => {
-  const { chainId, address, abi } = $derived.by(createOnchainAI);
+  const { chainId, address, abi } = $derived.by(() => createContract("OnChainAIv1"));
 
   return createReadContract({ chainId, address, abi, functionName, args });
 };

@@ -2,43 +2,71 @@ import jsonConfig from "../../chainlink/config.json";
 import jsonAddresses from "../../foundry/addresses.json";
 import jsonDeployments from "../../svelte5/src/lib/deployments.json";
 
-type ConfigChain = typeof jsonConfig;
-type ConfigChainKey = keyof ConfigChain;
-type ConfigChainValue = ConfigChain[ConfigChainKey];
+type ConfigChains = typeof jsonConfig;
+type ConfigChainKey = keyof ConfigChains;
+type ConfigChain = ConfigChains[ConfigChainKey];
 
-const readConfig = (chainId: number | string): ConfigChainValue => {
+const readConfig = (chainId: number | string): ConfigChain => {
   const chainIds = Object.keys(jsonConfig);
   const chainKey = String(chainId) as ConfigChainKey;
 
-  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainKey)) throw new Error(`No config for chainId ${chainId}!`);
 
   return jsonConfig[chainKey];
 };
 
-type AddressesChain = typeof jsonAddresses;
-type AddressesChainKey = keyof AddressesChain;
-type AddressesChainValue = AddressesChain[AddressesChainKey];
+type AddressesChains = typeof jsonAddresses;
+type AddressesChainKey = keyof AddressesChains;
+type AddressesChain = AddressesChains[AddressesChainKey];
 
-const readAddresses = (chainId: number | string): AddressesChainValue => {
+const readAddresses = (chainId: number | string): AddressesChain => {
   const chainIds = Object.keys(jsonAddresses);
   const chainKey = String(chainId) as AddressesChainKey;
 
-  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainKey)) throw new Error(`No config for chainId ${chainId}!`);
 
   return jsonAddresses[chainKey];
 };
 
-type DeploymentsChain = typeof jsonDeployments;
-type DeploymentsChainKey = keyof DeploymentsChain;
-type DeploymentsChainValue = DeploymentsChain[DeploymentsChainKey];
+type DeploymentsChains = typeof jsonDeployments;
+type DeploymentsChainKey = keyof DeploymentsChains;
+type DeploymentsChain = DeploymentsChains[DeploymentsChainKey];
 
-const readDeployments = (chainId: number | string): DeploymentsChainValue => {
+const readDeploymentsChain = (chainId: number | string): DeploymentsChain => {
   const chainIds = Object.keys(jsonDeployments);
   const chainKey = String(chainId) as DeploymentsChainKey;
 
-  if (!chainIds.includes(chainKey)) throw Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainKey)) throw new Error(`No config for chainId ${chainId}!`);
 
   return jsonDeployments[chainKey];
 };
 
-export { readConfig, readAddresses, readDeployments };
+type DeploymentContractName = keyof DeploymentsChain;
+type DeploymentContract = DeploymentsChain[DeploymentContractName];
+
+const readDeploymentContract = (
+  chainId: number | string,
+  contractName: DeploymentContractName
+): DeploymentContract => {
+  const chainDeployments = readDeploymentsChain(chainId);
+
+  if (!chainDeployments[contractName])
+    throw new Error(`No deployment found for ${contractName} for chainId ${chainId}!`);
+
+  return chainDeployments[contractName];
+};
+
+export { readConfig, readAddresses, readDeploymentsChain, readDeploymentContract };
+export type {
+  ConfigChains,
+  ConfigChain,
+  ConfigChainKey,
+  AddressesChains,
+  AddressesChain,
+  AddressesChainKey,
+  DeploymentsChains,
+  DeploymentsChain,
+  DeploymentsChainKey,
+  DeploymentContract,
+  DeploymentContractName
+};

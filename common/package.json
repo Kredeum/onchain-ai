@@ -9,7 +9,6 @@
   },
   "keywords": [],
   "license": "ISC",
-  "main": "index.js",
   "name": "@onchain-ai/common",
   "scripts": {
     "build": "ts-node script/mergeAbis.ts",
@@ -17,5 +16,5 @@
     "clean": "rm -rf node_modules .turbo",
     "format": "prettier --write --list-different ."
   },
-  "version": "1.0.1"
+  "version": "1.0.3"
 }
