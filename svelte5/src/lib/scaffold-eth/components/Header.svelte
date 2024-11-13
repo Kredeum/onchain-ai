@@ -1,12 +1,11 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import logo from "$lib/assets/AI.png";
-  import { type IconSource, Bars3, BugAnt, Icon, ChatBubbleLeftRight, Beaker } from "svelte-hero-icons";
-  import { ConnectButton } from "$lib/scaffold-eth/components";
-  import { FaucetButton } from "$lib/scaffold-eth/components";
-  import { createOutsideClick } from "$lib/scaffold-eth/runes/outsideClick.svelte";
+  import logo from "$lib/assets/logo.svg";
+
+  import { Bars3, BugAnt, Beaker, Icon, ChatBubbleLeftRight, type IconSource } from "svelte-hero-icons";
+  import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
   import { derived as derived4 } from "svelte/store";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
   import { anvil } from "viem/chains";
 
   const targetNetwork = $derived.by(createTargetNetwork());
@@ -48,15 +47,6 @@
       href: "/tests",
       icon: Beaker
     }
-    // {
-    //   label: "Home",
-    //   href: "/",
-    //   icon: HomeModern
-    // },
-    // {
-    //   label: "Chat",
-    //   href: "/chat",
-    //   icon: EllipsisHorizontalCircle
   ];
 
   const isCurrentPage = derived4(page, ($page) => (href: string) => {
@@ -112,8 +102,8 @@
         <img alt="SE2 logo" class="cursor-pointer" src={logo} />
       </div>
       <div class="flex flex-col">
-        <span class="font-bold leading-tight">OnChainAI</span>
-        <span class="text-xs">AI for SmartContract </span>
+        <span class="font-bold leading-tight">Scaffold-ETH</span>
+        <span class="text-xs">Ethereum dev stack</span>
       </div>
     </a>
     <ul class="menu menu-horizontal hidden gap-2 px-1 lg:flex lg:flex-nowrap">

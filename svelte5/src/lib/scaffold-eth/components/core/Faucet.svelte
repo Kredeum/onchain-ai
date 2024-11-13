@@ -1,16 +1,13 @@
 <script lang="ts">
-  import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, type Address as AddressType, http, parseEther } from "viem";
-  import Address from "./Address.svelte";
-  import Balance from "./Balance.svelte";
-  import AddressInput from "./inputs/AddressInput.svelte";
-  import { createAccount } from "$lib/wagmi/runes";
-  import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
   import { anvil } from "viem/chains";
-  import { notification } from "$lib/scaffold-eth/ts";
-  import FaucetNotification from "./FaucetNotification.svelte";
+  import { Banknotes, Icon } from "svelte-hero-icons";
   import { untrack } from "svelte";
-  import EtherInput from "./inputs/EtherInput.svelte";
+
+  import { createAccount } from "$lib/wagmi/runes";
+  import { notification } from "$lib/scaffold-eth/ts";
+  import { createTransactor } from "$lib/scaffold-eth/runes";
+  import { Address, Balance, AddressInput, FaucetNotification, EtherInput } from "$lib/scaffold-eth/components";
 
   const FAUCET_ACCOUNT_INDEX = 0;
 

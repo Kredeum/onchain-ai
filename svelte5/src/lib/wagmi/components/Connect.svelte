@@ -8,6 +8,7 @@
   import scaffoldConfig from "$lib/scaffold.config";
   import { createConfig } from "$lib/wagmi/runes";
   import { SvelteMap } from "svelte/reactivity";
+  import { createBurnerConnector } from "$lib/burner-wallet";
 
   type Connector = () => any;
   type ConnectorMap = { connector: Connector; name: string; title: string };
@@ -59,6 +60,16 @@
         title: "Safe"
       });
     }
+
+    const configHasOnlyLocalNetworks = !scaffoldConfig.targetNetworks.some((network) => network.id !== anvil.id);
+    const burnerWalletOnAllNetworks = !scaffoldConfig.onlyLocalBurnerWallet;
+    if (configHasOnlyLocalNetworks || burnerWalletOnAllNetworks) {
+      connectorsMap.set("burner", {
+        connector: () => createBurnerConnector(),
+        name: "burner",
+        title: "Burner Wallet"
+      });
+    }
   });
 
   const connectWallet = async (connectorMap: ConnectorMap) => {
@@ -69,12 +80,12 @@
     chainId = undefined;
     address = undefined;
 
-    const connector = connectorMap.connector();
-    const wallet = await connect(config, { connector });
+    const wallet = await connect(config, { connector: connectorMap.connector() });
 
     chainId = wallet.chainId;
     address = wallet.accounts[0];
 
+    // if not on an existing configurated network, switch to first one
     if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === chainId)) {
       console.log("connectWallet ~ switchChain:", scaffoldConfig.targetNetworks[0].id);
       switchChain(config, { chainId: scaffoldConfig.targetNetworks[0].id });
@@ -103,6 +114,7 @@
         {@render connectSnippet("walletConnect")}
         {@render connectSnippet("injected")}
         {@render connectSnippet("safe")}
+        {@render connectSnippet("burner")}
       </ul>
     </div>
   </div>

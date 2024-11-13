@@ -9,6 +9,9 @@
     },
     "deploy": {
       "cache": false,
+      "inputs": [
+        "script/**"
+      ],
       "dependsOn": [
         "build",
         "chain"
