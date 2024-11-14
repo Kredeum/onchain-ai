@@ -1,19 +1,22 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { type Account, type Address, type HttpTransport } from "viem";
-  import { baseSepolia, optimismSepolia, base, anvil } from "viem/chains";
-  import { type Config, connect, http, switchChain } from "@wagmi/core";
+  import {  type Address,  } from "viem";
+  import {  anvil } from "viem/chains";
+  import {  connect,  switchChain } from "@wagmi/core";
   import { injected, metaMask, coinbaseWallet, safe, walletConnect } from "@wagmi/connectors";
 
   import scaffoldConfig from "$lib/scaffold.config";
   import { createConfig } from "$lib/wagmi/runes";
   import { SvelteMap } from "svelte/reactivity";
   import { createBurnerConnector } from "$lib/burner-wallet";
+  import { createChainId } from "$lib/scaffold-eth/runes";
 
   type Connector = () => any;
   type ConnectorMap = { connector: Connector; name: string; title: string };
 
   let { chainId = $bindable(), address = $bindable() }: { chainId?: number; address?: Address } = $props();
+
+  const { chainIdCurrent, chainIdDefault, chainIdLocal } = $derived.by(createChainId);
 
   const config = $derived.by(createConfig());
   let walletName = $state<string>();
@@ -61,15 +64,11 @@
       });
     }
 
-    const configHasOnlyLocalNetworks = !scaffoldConfig.targetNetworks.some((network) => network.id !== anvil.id);
-    const burnerWalletOnAllNetworks = !scaffoldConfig.onlyLocalBurnerWallet;
-    if (configHasOnlyLocalNetworks || burnerWalletOnAllNetworks) {
-      connectorsMap.set("burner", {
-        connector: () => createBurnerConnector(),
-        name: "burner",
-        title: "Burner Wallet"
-      });
-    }
+    connectorsMap.set("burner", {
+      connector: () => createBurnerConnector(),
+      name: "burner",
+      title: "Burner Wallet"
+    });
   });
 
   const connectWallet = async (connectorMap: ConnectorMap) => {
@@ -77,7 +76,6 @@
     modalDisplay = false;
 
     walletName = connectorMap.name;
-    chainId = undefined;
     address = undefined;
 
     const wallet = await connect(config, { connector: connectorMap.connector() });
@@ -85,12 +83,21 @@
     chainId = wallet.chainId;
     address = wallet.accounts[0];
 
-    // if not on an existing configurated network, switch to first one
+    // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
+    if (walletName === "burner" && scaffoldConfig.onlyLocalBurnerWallet) {
+      console.log("connect Burner Wallet => switch to local Chain");
+      switchChain(config, { chainId: chainIdLocal });
+    }
+
+    // if not on an existing configurated network, switch to default one
     if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === chainId)) {
-      console.log("connectWallet ~ switchChain:", scaffoldConfig.targetNetworks[0].id);
-      switchChain(config, { chainId: scaffoldConfig.targetNetworks[0].id });
+      console.log("connect Wallet ~ switch default Chain:", chainIdDefault);
+      switchChain(config, { chainId: chainIdDefault });
     }
   };
+
+  const displayBurnerWallet = $derived(!chainId || chainId === anvil.id || !scaffoldConfig.onlyLocalBurnerWallet);
+  $inspect("displayBurnerWallet:", displayBurnerWallet, chainIdCurrent, chainId);
 
   let modalDisplay = $state(false);
 </script>

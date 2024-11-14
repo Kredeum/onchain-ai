@@ -14,8 +14,9 @@
   import { goto } from "$app/navigation";
   import { isEns, getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
-  import { createDisconnect } from "$lib/wagmi/runes";
+  import { createAccount, createDisconnect } from "$lib/wagmi/runes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
+  import scaffoldConfig from "$lib/scaffold.config";
 
   const {
     address,
@@ -32,6 +33,12 @@
   const targetNetwork = $derived.by(createTargetNetwork());
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 
+  const { account } = $derived.by(createAccount);
+  const switchEnabled = $derived(
+    getTargetNetworks().length > 1 &&
+      !(account?.connector?.id === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet)
+  );
+
   let dropdown: HTMLElement | undefined = undefined;
   createOutsideClick(
     () => dropdown,
@@ -41,7 +48,6 @@
     }
   );
 
-  const allowedNetworks = getTargetNetworks();
   const { disconnect } = $derived(createDisconnect());
 
   const checkSumAddress = $derived(getAddress(address));
@@ -106,7 +112,7 @@
         View on Block Explorer
       </button>
     </li>
-    {#if allowedNetworks.length > 1}
+    {#if switchEnabled}
       <li class={selectingNetwork ? "hidden" : ""}>
         <button
           class="btn-sm flex gap-3 !rounded-xl py-3"
