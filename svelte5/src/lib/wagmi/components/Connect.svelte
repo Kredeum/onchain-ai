@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import {  type Address,  } from "viem";
-  import {  anvil } from "viem/chains";
-  import {  connect,  switchChain } from "@wagmi/core";
+  import { type Address } from "viem";
+  import { anvil } from "viem/chains";
+  import { connect, switchChain } from "@wagmi/core";
   import { injected, metaMask, coinbaseWallet, safe, walletConnect } from "@wagmi/connectors";
 
   import scaffoldConfig from "$lib/scaffold.config";
@@ -97,7 +97,6 @@
   };
 
   const displayBurnerWallet = $derived(!chainId || chainId === anvil.id || !scaffoldConfig.onlyLocalBurnerWallet);
-  $inspect("displayBurnerWallet:", displayBurnerWallet, chainIdCurrent, chainId);
 
   let modalDisplay = $state(false);
 </script>

@@ -27,6 +27,9 @@
 </script>
 
 {#if !connected}
+  <span class="text-xs p-4" style:color={networkColor}>
+    {targetNetwork.name}
+  </span>
   <Connect />
 {:else}
   <div class="mr-1 flex flex-col items-center">

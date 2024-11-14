@@ -24,8 +24,7 @@
 
   $effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
 
-  $inspect("<DebugContracts ~ contractsData:", contractsData);
-  $inspect("<DebugContracts ~ contractNames:", contractNames);
+  // $inspect("<DebugContracts ~ contractNames:", contractNames);
 </script>
 
 <div class="flex flex-col items-center justify-center gap-y-6 py-8 lg:gap-y-8 lg:py-12">

@@ -12,7 +12,7 @@ const createChainId = () => ({
     return _chainIdDefault;
   },
   get chainIdLocal() {
-    return 31337
+    return 31337;
   }
 });
 
