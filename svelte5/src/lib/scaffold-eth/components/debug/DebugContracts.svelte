@@ -1,11 +1,13 @@
 <script lang="ts">
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
   import ContractUI from "./ContractUI.svelte";
-  import { getAllContracts } from "$lib/scaffold-eth/ts";
+  import { contracts, getAllContracts } from "$lib/scaffold-eth/ts";
+  import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
 
   const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 
-  const contractsData = $derived.by(getAllContracts);
+  const { targetNetworkId } = $derived.by(createTargetNetworkId);
+  const contractsData = $derived(contracts?.[targetNetworkId] || {});
   const contractNames = $derived(Object.keys(contractsData));
 
   let clickedContractName = $state("");
@@ -21,6 +23,9 @@
   });
 
   $effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
+
+  $inspect("<DebugContracts ~ contractsData:", contractsData);
+  $inspect("<DebugContracts ~ contractNames:", contractNames);
 </script>
 
 <div class="flex flex-col items-center justify-center gap-y-6 py-8 lg:gap-y-8 lg:py-12">

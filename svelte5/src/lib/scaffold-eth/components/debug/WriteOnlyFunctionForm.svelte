@@ -49,14 +49,15 @@
   let tx = $state();
   const handleWrite = async () => {
     txHash = await send();
-    if (txHash) txReceipt = await wait(txHash);
+    if (!txHash) return;
+    console.log("handleWrite ~ txHash:", txHash);
+
+    txReceipt = await wait(txHash);
+    console.log("handleWrite ~ txReceipt:", txReceipt);
   };
 
   const transformedFunction = transformAbiFunction(abiFunction);
   const zeroInputs = transformedFunction.inputs.length === 0 && abiFunction.stateMutability !== "payable";
-
-  $inspect("txHash:", txHash);
-  $inspect("txReceipt:", txReceipt);
 </script>
 
 <div class="space-y-3 py-5 first:pt-0 last:pb-1">

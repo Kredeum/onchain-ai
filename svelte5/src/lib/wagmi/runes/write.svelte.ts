@@ -36,7 +36,7 @@ const createWriteContract = ({
       hash = await writeContract(config, { chainId, address, functionName, args, value, abi });
       lastTxHash = hash;
     } catch (e: unknown) {
-      console.error("⚡️ send ~ error", e);
+      console.error("⚡️ send ~ error\n", e);
     }
     waitingTxHash = false;
 

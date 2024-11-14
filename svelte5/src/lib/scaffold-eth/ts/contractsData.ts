@@ -1,9 +1,11 @@
-import scaffoldConfig from "$lib/scaffold.config";
 import { contracts } from "$lib/scaffold-eth/ts";
+import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
 
-export function getAllContracts() {
-  const chainId = scaffoldConfig.targetNetworks[0].id;
+const getAllContracts = () => {
+  const { targetNetworkId: chainId } = $derived.by(createTargetNetworkId);
   const contractsData = contracts?.[chainId];
 
   return contractsData ? contractsData : {};
 }
+
+export { getAllContracts }

@@ -14,12 +14,11 @@
   const handleSend = async () => {
     txHash = await send();
     if (!txHash) return;
+    console.log("handleSend ~ txHash:", txHash);
 
     txReceipt = await wait(txHash);
+    console.log("handleSend ~ txReceipt:", txReceipt);
   };
-
-  $inspect("txHash:", txHash);
-  $inspect("txReceipt:", txReceipt);
 </script>
 
 <div class="flex justify-center">

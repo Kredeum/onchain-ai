@@ -4,7 +4,7 @@
   "description": "OnChainAI - AI for smartcontracts",
   "main": "index.js",
   "scripts": {
-    "all": "pnpm run clean && pnpm install && pnpm run chain && pnpm run deploy && turbo start",
+    "all": "pnpm run clean && pnpm install && pnpm run chain && turbo start",
     "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
     "deploy": "pnpm run --filter foundry deploy:anvil",
