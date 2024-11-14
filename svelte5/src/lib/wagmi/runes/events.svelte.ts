@@ -24,7 +24,8 @@ const createEvents = (
     const fetchLogs = async () => {
       try {
         const toBlock = await client.getBlockNumber();
-        const fromBlock = 0n;
+        const maxBlock = 10_000n;
+        const fromBlock = toBlock > maxBlock ? toBlock - maxBlock : 0n;
 
         eventsAll = ((await client.getContractEvents({ ...params, fromBlock, toBlock })) as LogWithArgs[]).sort(
           (a, b) => {

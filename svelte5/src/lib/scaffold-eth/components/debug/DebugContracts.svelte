@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
   import ContractUI from "./ContractUI.svelte";
-  import { contracts, getAllContracts } from "$lib/scaffold-eth/ts";
+  import { contracts } from "$lib/scaffold-eth/ts";
   import { createChainId } from "$lib/scaffold-eth/runes";
 
   const selectedContractStorageKey = "scaffoldEth2.selectedContract";

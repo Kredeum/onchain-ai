@@ -36,12 +36,13 @@ const createWriteContract = ({
       hash = await writeContract(config, { chainId, address, functionName, args, value, abi });
       lastTxHash = hash;
     } catch (e: unknown) {
-      console.error("⚡️ send ~ error\n", e);
+      console.error("writeContract error:", e);
+      throw new Error("\nwriteContract call failed");
     }
     waitingTxHash = false;
 
     if (!hash) {
-      throw new Error("writeContract error: no hash");
+      throw new Error("\nwriteContract no hash");
     }
     return hash;
   };

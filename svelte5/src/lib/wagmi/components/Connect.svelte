@@ -104,16 +104,16 @@
 <button class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}> Connect Wallet </button>
 
 {#if modalDisplay}
-  <div class="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center">
-    <div class="flex flex-col items-center bg-secondary px-6 pt-4 pb-6 rounded-3xl relative">
-      <h3 class="mb-4 text-xl font-bold">Connect Wallet</h3>
+  <div class="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-start">
+    <div class="flex flex-col items-center bg-secondary px-8 pt-4 pb-8 rounded-3xl relative mt-20">
+      <h3 class="mb-6 text-xl font-bold">Connect Wallet</h3>
       <button
         class="btn btn-circle btn-ghost btn-sm absolute right-3 top-3 text-xl"
         onclick={() => (modalDisplay = false)}
       >
         &times;
       </button>
-      <ul class="space-y-4 text-center">
+      <ul class="space-y-6 text-center">
         {@render connectSnippet("wallet")}
         {@render connectSnippet("metaMask")}
         {@render connectSnippet("coinbaseWallet")}

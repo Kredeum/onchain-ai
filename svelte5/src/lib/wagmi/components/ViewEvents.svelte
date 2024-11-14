@@ -1,11 +1,13 @@
 <script lang="ts">
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
-  import { getAllContracts } from "$lib/scaffold-eth/ts";
   import { Events } from "$lib/wagmi/components";
+  import { contracts } from "$lib/scaffold-eth/ts";
+  import { createChainId } from "$lib/scaffold-eth/runes";
 
   const selectedContractStorageKey = "scaffoldEth2.selectedContract";
 
-  const contractsData = $derived.by(getAllContracts);
+  const { chainIdCurrent } = $derived.by(createChainId);
+  const contractsData = $derived(contracts?.[chainIdCurrent] || {});
   const contractNames = $derived(Object.keys(contractsData));
 
   let clickedContractName = $state("");
