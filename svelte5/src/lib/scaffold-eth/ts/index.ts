@@ -1,7 +1,6 @@
 export * from "./block";
 export * from "./common";
 export * from "./contract";
-export * from "./contractsData";
 export * from "./decodeTxData";
 export * from "./fetchPriceFromUniswap";
 export * from "./getParsedError";

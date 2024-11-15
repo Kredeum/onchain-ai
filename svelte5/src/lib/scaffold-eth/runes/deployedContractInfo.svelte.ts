@@ -17,7 +17,6 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(c
 
   $effect(() => {
     const checkContractDeployment = async () => {
-
       if (!(deployedContract && publicClient)) {
         status = ContractCodeStatus.NOT_FOUND;
         return;

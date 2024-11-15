@@ -51,6 +51,7 @@
   const { disconnect } = $derived(createDisconnect());
 
   const checkSumAddress = $derived(getAddress(address));
+  console.log("checkSumAddress:", checkSumAddress)
 
   let addressCopied = $state(false);
   let selectingNetwork = $state(false);
@@ -64,7 +65,7 @@
 <details class="dropdown dropdown-end leading-3" bind:this={dropdown}>
   <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
     <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
-    <span class="ml-2 mr-1">
+    <span id="ethAdress" class="ml-2 mr-1">
       {isEns(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
     </span>
     <Icon src={ChevronDown} class="ml-2 h-6 w-4 sm:ml-0" />

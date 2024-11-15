@@ -63,11 +63,11 @@
     "preview": "vite preview",
     "start": "vite dev",
     "vercel": "vercel",
-    "test:chromium": "playwright install chromium",
-    "test": "playwright test",
-    "test:debug": "playwright test --debug",
-    "test:headed": "playwright test --headed",
-    "test:report": "playwright show-report"
+    "e2e:chromium": "playwright install chromium",
+    "e2e": "playwright test",
+    "e2e:debug": "playwright test --debug",
+    "e2e:headed": "playwright test --headed",
+    "e2e:report": "playwright show-report"
   },
   "type": "module",
   "version": "1.0.4"
