@@ -9,7 +9,8 @@
     "chain": "pnpm run --filter foundry chain",
     "deploy": "pnpm run --filter foundry deploy:anvil",
     "deploy:fleek": "pnpm run --filter svelte5 deploy:fleek",
-    "e2e": "pnpm run --filter svelte5 e2e"
+    "e2e": "pnpm run --filter svelte5 e2e",
+    "e2e:headed": "pnpm run --filter svelte5 e2e:headed"
   },
   "keywords": [],
   "author": "",
