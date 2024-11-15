@@ -1,9 +1,9 @@
 {
   "extends": ["//"],
   "tasks": {
-    "build": {
-      "dependsOn": ["check", "@onchain-ai/foundry#deploy"],
-      "inputs": ["lib/**", "../chainlink/config.json", "../foundry/addresses.json"],
+    "format": {
+      "dependsOn": ["@onchain-ai/foundry#deploy"],
+      "inputs": ["src/**", "../chainlink/config.json", "../foundry/addresses.json"],
       "outputLogs": "new-only"
     }
   }

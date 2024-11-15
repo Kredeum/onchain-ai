@@ -1,26 +1,31 @@
 {
-  "extends": ["//"],
+  "extends": [
+    "//"
+  ],
   "tasks": {
-    "format": {
-      "dependsOn": ["@onchain-ai/common#build"],
-      "inputs": ["src/**"],
-      "outputLogs": "new-only"
-    },
     "start": {
-      "dependsOn": ["@onchain-ai/foundry#deploy", "build"],
+      "dependsOn": [
+        "check"
+      ],
       "cache": false,
       "persistent": true,
-      "inputs": ["src/**"],
+      "inputs": [
+        "src/**"
+      ],
       "outputLogs": "new-only"
     },
     "dev": {
       "cache": false,
       "persistent": true,
-      "inputs": ["src/**"],
+      "inputs": [
+        "src/**"
+      ],
       "outputLogs": "new-only"
     },
     "preview": {
-      "dependsOn": ["build"],
+      "dependsOn": [
+        "build"
+      ],
       "cache": false,
       "persistent": true,
       "outputLogs": "new-only"

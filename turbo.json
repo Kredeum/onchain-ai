@@ -26,7 +26,7 @@
     },
     "test": {
       "dependsOn": [
-        "@onchain-ai/foundry#deploy"
+        "build"
       ],
       "cache": false,
       "outputLogs": "new-only"
