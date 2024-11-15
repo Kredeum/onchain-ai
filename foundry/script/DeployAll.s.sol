@@ -11,6 +11,6 @@ contract DeployAll is DeployOnChainAI, DeployCounter {
         console.log("chainId %s", block.chainid);
 
         deployOnChainAI();
-        // deployCounter();
+        if (block.chainid == 31337) deployCounter();
     }
 }

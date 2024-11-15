@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
-  import ContractUI from "./ContractUI.svelte";
+  import { Events } from "$lib/wagmi/components";
   import { contracts } from "$lib/scaffold-eth/ts";
   import { createChainId } from "$lib/scaffold-eth/runes";
 
@@ -23,8 +23,6 @@
   });
 
   $effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
-
-  // $inspect("<DebugContracts ~ contractNames:", contractNames);
 </script>
 
 <div class="flex flex-col items-center justify-center gap-y-6 py-8 lg:gap-y-8 lg:py-12">
@@ -51,7 +49,7 @@
       </div>
     {/if}
     {#each contractNames as contractName}
-      <ContractUI {contractName} hidden={contractName !== selectedContract} />
+      <Events {contractName} hidden={contractName !== selectedContract} />
     {/each}
   {/if}
 </div>

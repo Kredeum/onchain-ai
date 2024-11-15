@@ -24,16 +24,9 @@
       ],
       "outputLogs": "new-only"
     },
-    "deploy": {
-      "cache": false,
-      "dependsOn": [
-        "build"
-      ],
-      "outputLogs": "new-only"
-    },
     "test": {
       "dependsOn": [
-        "deploy"
+        "@onchain-ai/foundry#deploy"
       ],
       "cache": false,
       "outputLogs": "new-only"

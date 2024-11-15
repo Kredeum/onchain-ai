@@ -2,10 +2,10 @@ import { type Abi } from "abitype";
 import type { Address } from "viem";
 import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
-import { createTargetNetworkId } from "$lib/scaffold-eth/runes";
+import { createChainId } from "$lib/scaffold-eth/runes";
 
 const createWriteContract = ({
-  chainId: paramChainId,
+  chainId: chainIdParam,
   address,
   functionName,
   args = [],
@@ -25,8 +25,8 @@ const createWriteContract = ({
 
   const config = $derived.by(createConfig());
 
-  const { targetNetworkId } = $derived.by(createTargetNetworkId);
-  const chainId = $derived(paramChainId || targetNetworkId);
+  const { chainIdCurrent } = $derived.by(createChainId);
+  const chainId = $derived(chainIdParam || chainIdCurrent);
 
   const send = async () => {
     waitingTxHash = true;
@@ -36,12 +36,13 @@ const createWriteContract = ({
       hash = await writeContract(config, { chainId, address, functionName, args, value, abi });
       lastTxHash = hash;
     } catch (e: unknown) {
-      console.error("⚡️ send ~ error", e);
+      console.error("writeContract error:", e);
+      throw new Error("\nwriteContract call failed");
     }
     waitingTxHash = false;
 
     if (!hash) {
-      throw new Error("writeContract error: no hash");
+      throw new Error("\nwriteContract no hash");
     }
     return hash;
   };

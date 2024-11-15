@@ -58,10 +58,9 @@
 {#if typeof res !== "object"}
   {res}
 {:else if res.type === "address"}
-  <Address address={res.address} />
+  <Address address={res?.address} />
 {:else if res.type === "span"}
-  <span style="overflow-wrap: break-word; width: 100%">{res.content}</span>
+  <span style="overflow-wrap: break-word; width: 100%">{res?.content}</span>
 {:else}
   {typeof res}
-  abcde
 {/if}

@@ -7,6 +7,7 @@ export * from "./fetchPriceFromUniswap";
 export * from "./getParsedError";
 export * from "./networks";
 export * from "./notification";
+export * from "../../scaffold.config";
 export * from "./utils";
 export * from "./utilsDebug";
 export * from "./utilsEns";
