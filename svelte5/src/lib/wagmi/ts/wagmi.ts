@@ -1,7 +1,7 @@
 import { createClient, http } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";
 import { createConfig as createWagmiConfig } from "@wagmi/core";
-import { coinbaseWallet, injected, walletConnect } from "@wagmi/connectors";
+import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 import { createBurnerConnector } from "$lib/burner-wallet";
 import { getAlchemyHttpUrl } from "$lib/scaffold-eth/ts";
 import scaffoldConfig from "$lib/scaffold.config";
@@ -14,17 +14,16 @@ export const enabledChains = targetNetworks.find((network: Chain) => network.id 
 
 const connectors = [
   injected(),
+  metaMask(),
   walletConnect({
     projectId: walletConnectProjectId,
-    showQrModal: false
+    showQrModal: true
   }),
   coinbaseWallet({
     appName: "scaffold-eth-2",
     preference: "all"
   }),
-  ...(!targetNetworks.some((network) => network.id !== anvil.id) || !onlyLocalBurnerWallet
-    ? [createBurnerConnector()]
-    : [])
+  createBurnerConnector()
 ];
 
 export const wagmiConfig = createWagmiConfig({
@@ -36,8 +35,8 @@ export const wagmiConfig = createWagmiConfig({
       transport: http(getAlchemyHttpUrl(chain.id)),
       ...(chain.id === (anvil as Chain).id
         ? {
-            pollingInterval: scaffoldConfig.pollingInterval
-          }
+          pollingInterval: scaffoldConfig.pollingInterval
+        }
         : {})
     });
   }

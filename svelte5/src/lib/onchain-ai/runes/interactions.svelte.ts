@@ -9,7 +9,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
 
   const eventName = "InteractionLog";
   const { chainId, client, address, abi, account: sender } = $derived.by(() => createContract("OnChainAIv1"));
-  $inspect("createInteractions", chainId, address, sender);
+  // $inspect("createInteractions", chainId, address, sender);
 
   const paramsAll: InteractionLogsParamsType = $derived({ address, abi, eventName });
   const params = $derived.by(() => {
@@ -68,7 +68,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
     });
   });
 
-  $inspect("interactions", interactions);
+  // $inspect("interactions", interactions);
 
   return {
     get interactions() {

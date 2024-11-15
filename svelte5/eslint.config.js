@@ -6,9 +6,9 @@ import ts from "typescript-eslint";
 
 export default ts.config(
   js.configs.recommended,
+  prettier,
   ...ts.configs.recommended,
   ...svelte.configs["flat/recommended"],
-  prettier,
   ...svelte.configs["flat/prettier"],
   {
     languageOptions: {
@@ -19,7 +19,7 @@ export default ts.config(
     }
   },
   {
-    files: ["**/*.svelte"],
+    files: ["**/*.svelte", "**/*.ts"],
 
     languageOptions: {
       parserOptions: {
@@ -38,6 +38,6 @@ export default ts.config(
     }
   },
   {
-    ignores: ["node_modules/", "build/", ".svelte-kit/", "dist/"]
+    ignores: ["node_modules/", "build/", ".svelte-kit/"]
   }
 );

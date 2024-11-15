@@ -24,6 +24,8 @@ const createBalance = ({ chainId: chainIdParam, address }: { chainId?: number; a
     fetch();
   });
 
+  // $inspect("createBalance ~ balance:", balance);
+
   return {
     fetch,
     get balance() {

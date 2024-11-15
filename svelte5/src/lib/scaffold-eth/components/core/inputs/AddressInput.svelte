@@ -35,7 +35,7 @@
 
   const reFocus = $derived(isAddress(value));
 
-  $inspect("AddressInput ~ value:", value);
+  // $inspect("AddressInput ~ value:", value);
 </script>
 
 <InputBase bind:value={value as Address} {name} {placeholder} error={ensAddress === null} {disabled} {reFocus}>

@@ -26,8 +26,8 @@ class LastInteraction {
     });
 
     // $inspect("blockNumber", this.blockReader?.blockNumber);
-    $inspect("account", this.account);
-    $inspect("lastInteraction", this.lastInteraction);
+    // $inspect("account", this.account);
+    // $inspect("lastInteraction", this.lastInteraction);
   }
 }
 

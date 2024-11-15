@@ -1,102 +1,74 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { type Address } from "viem";
-  import { anvil } from "viem/chains";
-  import { connect, switchChain } from "@wagmi/core";
-  import { injected, metaMask, coinbaseWallet, safe, walletConnect } from "@wagmi/connectors";
+  import { connect, getConnectors, switchChain, type GetConnectorsReturnType } from "@wagmi/core";
 
   import scaffoldConfig from "$lib/scaffold.config";
   import { createConfig } from "$lib/wagmi/runes";
-  import { SvelteMap } from "svelte/reactivity";
-  import { createBurnerConnector } from "$lib/burner-wallet";
   import { createChainId } from "$lib/scaffold-eth/runes";
 
-  type Connector = () => any;
-  type ConnectorMap = { connector: Connector; name: string; title: string };
+  type ConnectorType = GetConnectorsReturnType[number];
 
   let { chainId = $bindable(), address = $bindable() }: { chainId?: number; address?: Address } = $props();
 
-  const { chainIdCurrent, chainIdDefault, chainIdLocal } = $derived.by(createChainId);
+  const { chainIdDefault, chainIdLocal } = $derived.by(createChainId);
 
   const config = $derived.by(createConfig());
-  let walletName = $state<string>();
 
-  let connectorsMap: Map<string, ConnectorMap> = new SvelteMap();
+  let injectedSlug: string;
+
+  const connectors: GetConnectorsReturnType = $derived(getConnectors(config));
+  const findConnector = (type: string) => {
+    const connector = connectors.find((c) => c.type === type);
+    if (!connector) return {};
+
+    const injected = connector?.type === "injected";
+    const slug = injected ? injectedSlug : connector?.type;
+    const name = `${slug.charAt(0).toUpperCase()}${slug.slice(1)}${injected ? " Wallet" : ""}`;
+    return { connector, slug, name };
+  };
 
   onMount(() => {
     const provider = window.ethereum;
     if (provider) {
       // prettier-ignore
-      let name =  provider.isRabby ?       "rabby"
-                : provider.isBraveWallet ? "brave"
-                : provider.isTally?        "taho"
-                : provider.isTrust ?       "trust"
-                : provider.isFrame ?       "frame"
-                :                          "injected";
-      let title = `${name.charAt(0).toUpperCase()}${name.slice(1)} Wallet`;
-      connectorsMap.set(name === "injected" ? "injected" : "wallet", { connector: injected, name, title });
+      injectedSlug =
+      provider.isRabby ?       "rabby"
+      : provider.isBraveWallet ? "brave"
+      : provider.isTally?        "taho"
+      : provider.isTrust ?       "trust"
+      : provider.isFrame ?       "frame"
+      :                          "injected";
     }
-
-    connectorsMap.set("metaMask", {
-      connector: metaMask,
-      name: "metaMask",
-      title: "MetaMask"
-    });
-
-    connectorsMap.set("coinbaseWallet", {
-      connector: coinbaseWallet,
-      name: "coinbaseWallet",
-      title: "Coinbase Wallet"
-    });
-
-    connectorsMap.set("walletConnect", {
-      connector: () => walletConnect({ projectId: scaffoldConfig.walletConnectProjectId }),
-      name: "walletConnect",
-      title: "WalletConnect"
-    });
-
-    const isIframe = typeof window !== "undefined" && window?.parent !== window;
-    if (isIframe) {
-      connectorsMap.set("safe", {
-        connector: () => safe({ allowedDomains: [/gnosis-safe.io$/, /app.safe.global$/], debug: true }),
-        name: "safe",
-        title: "Safe"
-      });
-    }
-
-    connectorsMap.set("burner", {
-      connector: () => createBurnerConnector(),
-      name: "burner",
-      title: "Burner Wallet"
-    });
+    console.log("onMount ~ injectedSlug:", injectedSlug);
   });
 
-  const connectWallet = async (connectorMap: ConnectorMap) => {
+  const connectWallet = async (connector: ConnectorType) => {
     if (!config) return;
     modalDisplay = false;
 
-    walletName = connectorMap.name;
+
     address = undefined;
 
-    const wallet = await connect(config, { connector: connectorMap.connector() });
+    const params: { connector: ConnectorType; chainId?: number } = { connector };
+    // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
+    if (connector.type === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet) params.chainId = chainIdLocal;
 
-    chainId = wallet.chainId;
+    console.log("connectWallet params:", params);
+    const wallet = await connect(config, params);
+    console.log("connectWallet ~ wallet:", wallet);
+
     address = wallet.accounts[0];
 
-    // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
-    if (walletName === "burner" && scaffoldConfig.onlyLocalBurnerWallet) {
-      console.log("connect Burner Wallet => switch to local Chain");
-      switchChain(config, { chainId: chainIdLocal });
-    }
-
     // if not on an existing configurated network, switch to default one
-    if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === chainId)) {
+    if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === wallet.chainId)) {
       console.log("connect Wallet ~ switch default Chain:", chainIdDefault);
       switchChain(config, { chainId: chainIdDefault });
+      chainId = chainIdDefault;
+    } else {
+      chainId = wallet.chainId;
     }
   };
-
-  const displayBurnerWallet = $derived(!chainId || chainId === anvil.id || !scaffoldConfig.onlyLocalBurnerWallet);
 
   let modalDisplay = $state(false);
 </script>
@@ -114,28 +86,23 @@
         &times;
       </button>
       <ul class="space-y-6 text-center">
-        {@render connectSnippet("wallet")}
+        {@render connectSnippet("injected")}
         {@render connectSnippet("metaMask")}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
-        {@render connectSnippet("injected")}
-        {@render connectSnippet("safe")}
-        {@render connectSnippet("burner")}
+        {@render connectSnippet("burnerWallet")}
       </ul>
     </div>
   </div>
 {/if}
 
-{#snippet connectSnippet(connectorName: string)}
-  {@const connectorMap = connectorsMap.get(connectorName)}
-  {#if connectorMap}
+{#snippet connectSnippet(type: string)}
+  {@const { connector, slug, name } = findConnector(type)}
+  {#if connector}
     <li class="flex align-center">
-      <img src="/{connectorMap.name}.svg" alt={connectorMap.title} class="w-8 h-8 mr-2" />
-      <button
-        class="btn btn-default btn-sm w-40 {walletName === connectorMap.name ? 'btn-accent' : ''}"
-        onclick={() => connectWallet(connectorMap)}
-      >
-        {connectorMap.title}
+      <img src="/{slug}.svg" alt={name} class="w-8 h-8 mr-2" />
+      <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(connector)}>
+        {name}
       </button>
     </li>
   {/if}

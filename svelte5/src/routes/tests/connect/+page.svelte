@@ -25,3 +25,7 @@
 <div class="px-8">
   account: {account?.account.address}
 </div>
+
+<div class="px-8">
+  account: {account?.account.chainId}
+</div>
