@@ -29,5 +29,5 @@
     "format": "forge fmt",
     "test": "forge test"
   },
-  "version": "1.0.3"
+  "version": "1.0.4"
 }
