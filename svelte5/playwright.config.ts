@@ -1,11 +1,25 @@
-import type { PlaywrightTestConfig } from "@playwright/test";
+import { type PlaywrightTestConfig, devices } from "@playwright/test";
+// import { synpressFixtures } from "@synthetixio/synpress";
 
 const config: PlaywrightTestConfig = {
-  webServer: {
-    command: "npm run build && npm run preview",
-    port: 4173
+  use: {
+    baseURL: "http://localhost:5173", // Adresse du serveur SvelteKit
+    viewport: null // Utilise les dimensions par défaut du navigateur
   },
-  testDir: "tests",
+  webServer: {
+    // command: "npm run build && pnpm run preview",
+    command: "npm run dev",
+    port: 5173
+    // timeout: 120 * 1000
+  },
+  projects: [
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] }
+    }
+  ],
+  reporter: [["list"], ["html"]],
+  testDir: "test",
   testMatch: /(.+\.)?(test|spec)\.[jt]s/
 };
 

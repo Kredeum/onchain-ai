@@ -7,9 +7,12 @@
     "@fleek-platform/cli": "^3.7.3",
     "@onchain-ai/common": "workspace:^",
     "@onchain-ai/foundry": "workspace:^",
+    "@playwright/test": "^1.48.2",
     "@sveltejs/adapter-static": "^3.0.6",
     "@sveltejs/kit": "^2.8.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "@synthetixio/synpress": "^4.0.3",
+    "@synthetixio/synpress-cache": "^0.0.4",
     "@tanstack/svelte-query": "^5.59.20",
     "@types/eslint": "^9.6.1",
     "@types/node": "^22.9.0",
@@ -59,7 +62,12 @@
     "lint": "prettier --check . && eslint .",
     "preview": "vite preview",
     "start": "vite dev",
-    "vercel": "vercel"
+    "vercel": "vercel",
+    "test:chromium": "playwright install chromium",
+    "test": "playwright test",
+    "test:debug": "playwright test --debug",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report"
   },
   "type": "module",
   "version": "1.0.4"
