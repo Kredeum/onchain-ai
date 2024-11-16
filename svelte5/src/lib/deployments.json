@@ -461,7 +461,7 @@
   },
   "31337": {
     "Counter": {
-      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+      "address": "0x2706A171ECb68E0038378D40Dd1d136361d0cB7d",
       "abi": [
         {
           "type": "function",
@@ -495,11 +495,24 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "NumberChanged",
+          "inputs": [
+            {
+              "name": "newNumber",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
         }
       ]
     },
     "OnChainAIv1": {
-      "address": "0xd771D7C0e1EBE89C9E9F663824851BB89b926d1a",
+      "address": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
       "abi": [
         {
           "type": "constructor",
@@ -993,6 +1006,19 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "NumberChanged",
+          "inputs": [
+            {
+              "name": "newNumber",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
         }
       ]
     },
@@ -1491,6 +1517,19 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "NumberChanged",
+          "inputs": [
+            {
+              "name": "newNumber",
+              "type": "uint256",
+              "indexed": false,
+              "internalType": "uint256"
+            }
+          ],
+          "anonymous": false
         }
       ]
     },

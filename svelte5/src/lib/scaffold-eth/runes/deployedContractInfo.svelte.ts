@@ -13,11 +13,10 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(c
   const deployedContract = $derived(chainId ? contracts?.[chainId]?.[contractName] : undefined);
   let status = $state(ContractCodeStatus.LOADING);
 
-  $inspect("createDeployedContractInfo ~ chainId (status)", chainId, status);
+  // $inspect("createDeployedContractInfo ~ chainId (status)", chainId, status);
 
   $effect(() => {
     const checkContractDeployment = async () => {
-
       if (!(deployedContract && publicClient)) {
         status = ContractCodeStatus.NOT_FOUND;
         return;

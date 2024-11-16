@@ -14,6 +14,8 @@ export const createTargetNetwork = (): (() => ChainWithAttributes) => {
     }
   });
 
+  // $inspect("createTargetNetwork", account);
+
   return () => ({
     ...targetNetwork.targetNetwork,
     ...NETWORKS_EXTRA_DATA[targetNetwork.targetNetwork.id]

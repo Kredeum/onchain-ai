@@ -21,6 +21,8 @@
       displayUsdMode = !displayUsdMode;
     }
   };
+
+  // $inspect("<Balance", address, formattedBalance, balance);
 </script>
 
 {#if balance}

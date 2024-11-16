@@ -24,8 +24,9 @@ const createEvents = (
     const fetchLogs = async () => {
       try {
         const toBlock = await client.getBlockNumber();
-        const maxBlock = 10_000n;
+        const maxBlock = 100_000n;
         const fromBlock = toBlock > maxBlock ? toBlock - maxBlock : 0n;
+        console.log("fetchLogs", fromBlock, toBlock);
 
         eventsAll = ((await client.getContractEvents({ ...params, fromBlock, toBlock })) as LogWithArgs[]).sort(
           (a, b) => {
@@ -34,6 +35,7 @@ const createEvents = (
             return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
           }
         );
+        console.log("fetchLogs", fromBlock, toBlock, eventsAll.length);
 
         events = eventsAll.reverse().slice(0, options.limit);
       } catch (error) {
@@ -51,7 +53,7 @@ const createEvents = (
     });
   });
 
-  $inspect("events", events);
+  $inspect("readEvents", params, events);
 
   return {
     get events() {

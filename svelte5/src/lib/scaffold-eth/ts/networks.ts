@@ -11,28 +11,35 @@ type ChainAttributes = {
 
 export type ChainWithAttributes = chains.Chain & Partial<ChainAttributes>;
 
-// Mapping of chainId to RPC chain name an format followed by alchemy and infura
-export const RPC_CHAIN_NAMES: Record<number, string> = {
+// Mapping of chainId to RPC chain name format followed by alchemy
+export const RPC_CHAIN_ALCHEMY_NAMES: Record<number, string> = {
   [chains.mainnet.id]: "eth-mainnet",
-  [chains.goerli.id]: "eth-goerli",
   [chains.sepolia.id]: "eth-sepolia",
+  [chains.holesky.id]: "eth-holesky",
   [chains.optimism.id]: "opt-mainnet",
   [chains.optimismSepolia.id]: "opt-sepolia",
   [chains.arbitrum.id]: "arb-mainnet",
   [chains.arbitrumSepolia.id]: "arb-sepolia",
-  [chains.polygon.id]: "polygon-mainnet",
-  [chains.polygonMumbai.id]: "polygon-mumbai",
-  [chains.polygonAmoy.id]: "polygon-amoy",
-  [chains.astar.id]: "astar-mainnet",
-  [chains.polygonZkEvm.id]: "polygonzkevm-mainnet",
-  [chains.polygonZkEvmTestnet.id]: "polygonzkevm-testnet",
   [chains.base.id]: "base-mainnet",
-  [chains.baseSepolia.id]: "base-sepolia"
+  [chains.baseSepolia.id]: "base-sepolia",
+  [chains.scroll.id]: "scroll-mainnet",
+  [chains.scrollSepolia.id]: "scroll-sepolia",
+  [chains.linea.id]: "linea-mainnet",
+  [chains.lineaSepolia.id]: "linea-sepolia",
+  [chains.zksync.id]: "zksync-mainnet",
+  [chains.zksyncSepoliaTestnet.id]: "zksync-sepolia",
+  [chains.blast.id]: "blast-mainnet",
+  [chains.mantle.id]: "mantle-mainnet",
+  [chains.polygon.id]: "polygon-mainnet",
+  [chains.polygonAmoy.id]: "polygon-amoy",
+  [chains.polygonZkEvm.id]: "polygonzkevm-mainnet",
+  [chains.polygonZkEvmCardona.id]: "polygonzkevm-cardona",
+  [chains.astar.id]: "astar-mainnet"
 };
 
 export const getAlchemyHttpUrl = (chainId: number) => {
-  return RPC_CHAIN_NAMES[chainId]
-    ? `https://${RPC_CHAIN_NAMES[chainId]}.g.alchemy.com/v2/${scaffoldConfig.alchemyApiKey}`
+  return RPC_CHAIN_ALCHEMY_NAMES[chainId]
+    ? `https://${RPC_CHAIN_ALCHEMY_NAMES[chainId]}.g.alchemy.com/v2/${scaffoldConfig.alchemyApiKey}`
     : undefined;
 };
 
@@ -40,25 +47,26 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   [chains.anvil.id]: {
     color: "#b8af0c"
   },
+  [chains.gnosis.id]: {
+    color: "#48a9a6"
+  },
   [chains.mainnet.id]: {
     color: "#ff8b9e"
   },
   [chains.sepolia.id]: {
     color: ["#5f4bb6", "#87ff65"]
   },
-  [chains.gnosis.id]: {
-    color: "#48a9a6"
-  },
-  [chains.polygon.id]: {
-    color: "#2bbdf7",
-    nativeCurrencyTokenAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0"
-  },
-  [chains.polygonMumbai.id]: {
-    color: "#92D9FA",
-    nativeCurrencyTokenAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0"
+  [chains.optimism.id]: {
+    color: "#f01a37"
   },
   [chains.optimismSepolia.id]: {
     color: "#f01a37"
+  },
+  [chains.arbitrum.id]: {
+    color: "#28a0f0"
+  },
+  [chains.arbitrumSepolia.id]: {
+    color: "#28a0f0"
   },
   [chains.base.id]: {
     color: "#239ad4"
@@ -66,19 +74,18 @@ export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   [chains.baseSepolia.id]: {
     color: "#239ad4"
   },
-  [chains.optimism.id]: {
-    color: "#f01a37"
+  [chains.polygon.id]: {
+    color: "#2bbdf7",
+    nativeCurrencyTokenAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0"
   },
-  [chains.arbitrumSepolia.id]: {
-    color: "#28a0f0"
+  [chains.polygonAmoy.id]: {
+    color: "#92D9FA",
+    nativeCurrencyTokenAddress: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0"
   },
-  [chains.arbitrum.id]: {
-    color: "#28a0f0"
-  },
-  [chains.fantom.id]: {
+  [chains.polygonZkEvm.id]: {
     color: "#1969ff"
   },
-  [chains.fantomTestnet.id]: {
+  [chains.polygonZkEvmCardona.id]: {
     color: "#1969ff"
   },
   [chains.scrollSepolia.id]: {

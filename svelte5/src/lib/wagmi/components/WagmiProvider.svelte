@@ -3,32 +3,12 @@
   import { hydrate, type ResolvedRegister, type State } from "@wagmi/core";
   import { setContext, type Snippet } from "svelte";
 
-  const {
-    children,
-    config,
-    initialState,
-    reconnectOnMount = true
-  } = $props<{
+  const { children, config } = $props<{
     children: Snippet;
     config: ResolvedRegister["config"];
-    initialState?: State | undefined;
-    reconnectOnMount?: boolean | undefined;
   }>();
-  const configState = $state({ config });
 
-  const { onMount } = hydrate(config, { initialState, reconnectOnMount });
-
-  let active = true;
-
-  $effect(() => {
-    if (!active) return;
-    if (!config._internal.ssr) return;
-    onMount();
-    active = false;
-  });
-
-  setContext("wagmi", configState);
-
+  setContext("wagmi", { config });
   const queryClient = new QueryClient();
 </script>
 

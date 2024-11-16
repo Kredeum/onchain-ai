@@ -23,7 +23,7 @@
 
   const blockExplorerAddressLink = $derived(address ? getBlockExplorerAddressLink(targetNetwork, address) : undefined);
 
-  $inspect("<ConnectButton", address, chainId);
+  // $inspect("<ConnectButton", chainId, address);
 </script>
 
 {#if !connected}

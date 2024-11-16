@@ -22,7 +22,7 @@
 
   $inspect("PAGE account", account);
   $inspect("PAGE balance", balance);
-  $inspect("PAGE ensName", ensName);
+  // $inspect("PAGE ensName", ensName);
 </script>
 
 <Balance {address} />
