@@ -1,6 +1,6 @@
 {
   "name": "onchain-ai",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "OnChainAI - AI for smartcontracts",
   "main": "index.js",
   "scripts": {
