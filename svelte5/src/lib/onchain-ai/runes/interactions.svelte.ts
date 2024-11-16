@@ -27,7 +27,9 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
     const fetchLogs = async () => {
       try {
         const toBlock = await client.getBlockNumber();
-        const fromBlock = 0n;
+        const maxBlock = 100_000n;
+        const fromBlock = toBlock > maxBlock ? toBlock - maxBlock : 0n;
+        console.log("fetchLogs", fromBlock, toBlock);
 
         (
           (await client.getContractEvents({
@@ -45,6 +47,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
           .forEach((log) => {
             logsMap.set(log.requestId, log);
           });
+        console.log("fetchLogs", fromBlock, toBlock, logsMap.size);
 
         interactions = ([...logsMap.values()] as InteractionType[]) //
           .reverse()

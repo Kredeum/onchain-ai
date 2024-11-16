@@ -6,12 +6,14 @@
   import scaffoldConfig from "$lib/scaffold.config";
   import { createConfig } from "$lib/wagmi/runes";
   import { createChainId } from "$lib/scaffold-eth/runes";
+  import { anvil } from "viem/chains";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
   let { chainId = $bindable(), address = $bindable() }: { chainId?: number; address?: Address } = $props();
 
-  const { chainIdDefault, chainIdLocal } = $derived.by(createChainId);
+  const { chainIdCurrent, chainIdDefault, chainIdLocal } = $derived.by(createChainId);
+  // $inspect("<Connect chainIdCurrent, chainIdDefault, chainId:", chainIdCurrent, chainIdDefault, chainId);
 
   const config = $derived.by(createConfig());
 
@@ -40,29 +42,27 @@
       : provider.isFrame ?       "frame"
       :                          "injected";
     }
-    console.log("onMount ~ injectedSlug:", injectedSlug);
+    console.info("<Connect injected wallet:", injectedSlug);
   });
 
   const connectWallet = async (connector: ConnectorType) => {
     if (!config) return;
     modalDisplay = false;
 
-
     address = undefined;
 
-    const params: { connector: ConnectorType; chainId?: number } = { connector };
+    const parameters: { connector: ConnectorType; chainId?: number } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
-    if (connector.type === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet) params.chainId = chainIdLocal;
-
-    console.log("connectWallet params:", params);
-    const wallet = await connect(config, params);
-    console.log("connectWallet ~ wallet:", wallet);
+    if (connector.type === "burnerWallet") {
+      parameters.chainId = scaffoldConfig.onlyLocalBurnerWallet ? chainIdLocal : chainIdCurrent || chainIdDefault;
+    }
+    const wallet = await connect(config, parameters);
 
     address = wallet.accounts[0];
 
     // if not on an existing configurated network, switch to default one
     if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === wallet.chainId)) {
-      console.log("connect Wallet ~ switch default Chain:", chainIdDefault);
+      console.log("<Connect connectWallet ~ switch default Chain:", chainIdDefault);
       switchChain(config, { chainId: chainIdDefault });
       chainId = chainIdDefault;
     } else {
@@ -71,6 +71,8 @@
   };
 
   let modalDisplay = $state(false);
+
+  $inspect("<Connect", chainId, address);
 </script>
 
 <button class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}> Connect Wallet </button>
@@ -90,7 +92,9 @@
         {@render connectSnippet("metaMask")}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
-        {@render connectSnippet("burnerWallet")}
+        {#if !scaffoldConfig.onlyLocalBurnerWallet || chainIdCurrent === anvil.id}
+          {@render connectSnippet("burnerWallet")}
+        {/if}
       </ul>
     </div>
   </div>

@@ -51,7 +51,8 @@ const createReadContract = ({
   };
   if (onStart) fetch();
 
-  // $inspect("createReadContract data", data);
+  // $inspect("readContract", chainId, address, functionName, args, data);
+
   return {
     fetch,
     get isFetching() {

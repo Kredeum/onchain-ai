@@ -6,11 +6,7 @@ import { createBurnerConnector } from "$lib/burner-wallet";
 import { getAlchemyHttpUrl } from "$lib/scaffold-eth/ts";
 import scaffoldConfig from "$lib/scaffold.config";
 
-const { onlyLocalBurnerWallet, walletConnectProjectId, targetNetworks } = scaffoldConfig;
-
-export const enabledChains = targetNetworks.find((network: Chain) => network.id === 1)
-  ? targetNetworks
-  : ([...targetNetworks, mainnet] as const);
+const { walletConnectProjectId, targetNetworks } = scaffoldConfig;
 
 const connectors = [
   injected(),
@@ -26,18 +22,23 @@ const connectors = [
   createBurnerConnector()
 ];
 
-export const wagmiConfig = createWagmiConfig({
-  chains: enabledChains,
+const chains = targetNetworks.find((network: Chain) => network.id === 1)
+  ? targetNetworks
+  : ([...targetNetworks, mainnet] as const);
+
+const wagmiConfig = createWagmiConfig({
+  chains,
   connectors,
   client({ chain }) {
-    return createClient({
-      chain,
-      transport: http(getAlchemyHttpUrl(chain.id)),
-      ...(chain.id === (anvil as Chain).id
-        ? {
-          pollingInterval: scaffoldConfig.pollingInterval
-        }
-        : {})
-    });
+    const client = createClient({ chain, transport: http(getAlchemyHttpUrl(chain.id)) });
+    console.log("client created:", chain.id, client);
+    if (chain.id === anvil.id) client.pollingInterval = scaffoldConfig.pollingInterval;
+    return client;
   }
 });
+
+const initialChainId = wagmiConfig.state.chainId;
+
+console.log("wagmiConfig onMount:", initialChainId, wagmiConfig);
+
+export { wagmiConfig, initialChainId };

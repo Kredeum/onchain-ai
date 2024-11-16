@@ -5,10 +5,10 @@
   let chainId = $state(undefined);
   let address = $state(undefined);
 
-  let account = createAccount();
+  let { account } = $derived(createAccount());
 
-  $inspect("<Connect account:", account);
-  $inspect("<Connect address:", address);
+  $inspect("PAGE connect bind:", chainId, address);
+  $inspect("PAGE connect account:", account?.chainId, account?.address);
 </script>
 
 <div class="p-8">
@@ -23,9 +23,9 @@
 </div>
 
 <div class="px-8">
-  account: {account?.account.address}
+  account: {account?.address}
 </div>
 
 <div class="px-8">
-  account: {account?.account.chainId}
+  account: {account?.chainId}
 </div>

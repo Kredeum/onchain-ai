@@ -14,6 +14,7 @@
   const {
     abi,
     abiFunction,
+    onchange,
     contractAddress,
     inheritedFrom
   }: {
@@ -54,6 +55,8 @@
 
     txReceipt = await wait(txHash);
     console.log("handleWrite ~ txReceipt:", txReceipt);
+
+    onchange();
   };
 
   const transformedFunction = transformAbiFunction(abiFunction);
