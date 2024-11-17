@@ -1,11 +1,9 @@
 <script lang="ts">
-  import Chat from "$lib/onchain-ai/components/Chat.svelte";
-  import Explorer from "$lib/onchain-ai/components/Explorer.svelte";
-  import Form from "$lib/onchain-ai/components/Form.svelte";
+  import { Chat, Form, LinksInteraction } from "$lib/onchain-ai/components";
   import { createContract } from "$lib/wagmi/runes/";
 
   const { address } = $derived.by(() => createContract("OnChainAIv1"));
-  let txHash: `0x${string}` | undefined = $state();
+  let hash: `0x${string}` | undefined = $state();
 </script>
 
 <div class="flex flex-col items-center">
@@ -14,11 +12,11 @@
   </h1>
 
   <div class="p-2 w-full max-w-lg">
-    <Form bind:txHash />
+    <Form bind:hash />
   </div>
 
   <div class="text-center">
-    <Explorer {txHash} {address} />
+    <LinksInteraction {hash} {address} />
   </div>
 
   <div class="pt-4 w-full max-w-lg">

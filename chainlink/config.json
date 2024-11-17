@@ -15,7 +15,7 @@
   "31337": {
     "chainName": "local",
     "donId": "fun-local-1",
-    "explorer": "explorer42",
+    "explorer": "http://localhost:5173/blockexplorer",
     "gatewayUrls": ["42", "4242"],
     "router": "0x0000000000000000000000000000000000000000",
     "price": "100000000000000",

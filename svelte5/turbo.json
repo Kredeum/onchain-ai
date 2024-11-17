@@ -24,6 +24,10 @@
       "cache": false,
       "persistent": true,
       "outputLogs": "new-only"
+    },
+    "fleek": {
+      "dependsOn": ["build"],
+      "outputLogs": "new-only"
     }
   }
 }

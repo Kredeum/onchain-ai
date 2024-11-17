@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { InteractionType } from "$lib/onchain-ai/ts";
-  import { Explorer } from "$lib/onchain-ai/components";
+  import { LinksInteraction } from "$lib/onchain-ai/components";
 
   let { interaction }: { interaction?: InteractionType } = $props();
 
@@ -20,7 +20,7 @@
   </div>
 
   <div class="pl-4 pb-4 text-left">
-    <Explorer requestId={interaction.requestId} />
+    <LinksInteraction requestId="{interaction.requestId as `0x${string}`}}" />
   </div>
 {/if}
 

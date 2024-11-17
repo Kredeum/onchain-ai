@@ -4,9 +4,8 @@
   import { notification } from "$lib/scaffold-eth/ts";
   import { createChainId } from "$lib/scaffold-eth/runes";
   import { readConfig } from "@onchain-ai/common";
-  import { Explorer } from "$lib/onchain-ai/components";
 
-  let { txHash = $bindable() }: { txHash?: `0x${string}` } = $props();
+  let { hash = $bindable() }: { hash?: `0x${string}` } = $props();
 
   const { chainIdCurrent } = $derived.by(createChainId);
   const config = $derived(readConfig(chainIdCurrent));
@@ -20,19 +19,15 @@
 
   const handleSend = async () => {
     try {
-      txHash = await send();
-      if (!txHash) return;
+      hash = await send();
+      if (!hash) return;
 
-      console.log("handleSend ~ txHash:", txHash);
-      let notificationId = notification.info(`Transaction in progress...`);
+      console.log("handleSend ~ hash:", hash);
 
-      txReceipt = await wait(txHash);
+      txReceipt = await wait(hash);
       console.log("handleSend ~ txReceipt:", txReceipt);
-
-      notification.remove(notificationId);
-      notification.success(`Transaction OK`);
     } catch (e) {
-      notification.error(`Transaction ${e}`);
+      console.error(`Transaction KO ${e}`);
     }
   };
 </script>

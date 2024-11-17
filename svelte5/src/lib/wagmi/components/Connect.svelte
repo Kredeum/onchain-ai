@@ -26,7 +26,8 @@
 
     const injected = connector?.type === "injected";
     const slug = injected ? injectedSlug : connector?.type;
-    const name = `${slug.charAt(0).toUpperCase()}${slug.slice(1)}${injected ? " Wallet" : ""}`;
+    let name = `${slug.charAt(0).toUpperCase()}${slug.slice(1)}${injected ? "Wallet" : ""}`;
+    name = name.replace("Wallet", " Wallet").trim();
     return { connector, slug, name };
   };
 
@@ -35,7 +36,7 @@
     if (provider) {
       // prettier-ignore
       injectedSlug =
-      provider.isRabby ?       "rabby"
+        provider.isRabby ?       "rabby"
       : provider.isBraveWallet ? "brave"
       : provider.isTally?        "taho"
       : provider.isTrust ?       "trust"
