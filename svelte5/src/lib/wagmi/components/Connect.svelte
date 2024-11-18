@@ -22,11 +22,14 @@
   const connectors: GetConnectorsReturnType = $derived(getConnectors(config));
   const findConnector = (type: string) => {
     const connector = connectors.find((c) => c.type === type);
-    const slug = injected || connector?.type;
+
+    const typeInjected = type === "injected";
+    const slug = typeInjected ? injected : connector?.type;
     if (!slug) return {};
 
-    let name = `${slug.charAt(0).toUpperCase()}${slug.slice(1)}${injected ? "Wallet" : ""}`;
+    let name = `${slug.charAt(0).toUpperCase()}${slug.slice(1)}${typeInjected ? "Wallet" : ""}`;
     name = name.replace("Wallet", " Wallet").trim();
+
     return { connector, slug, name };
   };
 
