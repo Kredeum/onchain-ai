@@ -62,7 +62,7 @@ const createWriteContract = ({
 
     notification.remove(notifs.get(hash));
     notification.success(LinkTx as any, {
-      props: { hash, message: "Transaction validated!" }
+      props: { hash, message: "Transaction validated!", duration: 10000 }
     });
 
     waitingTxReceipt = false;

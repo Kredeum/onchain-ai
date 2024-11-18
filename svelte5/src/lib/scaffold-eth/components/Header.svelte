@@ -102,7 +102,7 @@
         <img alt="SE2 logo" class="cursor-pointer" src={logo} />
       </div>
       <div class="flex flex-col">
-        <span class="font-bold leading-tight">Scaffold-ETH</span>
+        <span class="font-bold leading-tight">Scaffold-ETH Svelte5</span>
         <span class="text-xs">Ethereum dev stack</span>
       </div>
     </a>

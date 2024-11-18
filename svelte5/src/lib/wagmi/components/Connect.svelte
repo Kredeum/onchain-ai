@@ -17,15 +17,14 @@
 
   const config = $derived.by(createConfig());
 
-  let injectedSlug: string;
+  let injected: string | undefined = $state();
 
   const connectors: GetConnectorsReturnType = $derived(getConnectors(config));
   const findConnector = (type: string) => {
     const connector = connectors.find((c) => c.type === type);
-    if (!connector) return {};
+    const slug = injected || connector?.type;
+    if (!slug) return {};
 
-    const injected = connector?.type === "injected";
-    const slug = injected ? injectedSlug : connector?.type;
     let name = `${slug.charAt(0).toUpperCase()}${slug.slice(1)}${injected ? "Wallet" : ""}`;
     name = name.replace("Wallet", " Wallet").trim();
     return { connector, slug, name };
@@ -33,9 +32,10 @@
 
   onMount(() => {
     const provider = window.ethereum;
+    console.log("onMount ~ provider:", provider);
     if (provider) {
       // prettier-ignore
-      injectedSlug =
+      injected =
         provider.isRabby ?       "rabby"
       : provider.isBraveWallet ? "brave"
       : provider.isTally?        "taho"
@@ -43,7 +43,7 @@
       : provider.isFrame ?       "frame"
       :                          "injected";
     }
-    console.info("<Connect injected wallet:", injectedSlug);
+    console.info("<Connect injected wallet:", injected);
   });
 
   const connectWallet = async (connector: ConnectorType) => {
@@ -89,8 +89,10 @@
         &times;
       </button>
       <ul class="space-y-6 text-center">
-        {@render connectSnippet("injected")}
-        {@render connectSnippet("metaMask")}
+        {#if injected}
+          {@render connectSnippet("injected")}
+          {@render connectSnippet("metaMask")}
+        {/if}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
         {#if !scaffoldConfig.onlyLocalBurnerWallet || chainIdCurrent === anvil.id}
