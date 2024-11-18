@@ -1,6 +1,24 @@
 {
+  "name": "@onchain-ai/svelte5",
+  "private": true,
+  "type": "module",
+  "version": "1.0.7",
   "author": "Kredeum",
   "description": "OnChainAI Svelte5 package",
+  "scripts": {
+    "build": "vite build",
+    "check": "pnpm run lint && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+    "clean": "rm -rf node_modules .turbo build .svelte-kit",
+    "fleek": "pnpm run build && fleek sites deploy",
+    "dev": "vite dev",
+    "fleek:login": "fleek login",
+    "format": "prettier --write --list-different .",
+    "lint": "prettier --check . && eslint .",
+    "preview": "vite preview",
+    "start": "vite dev",
+    "vercel": "vercel"
+  },
   "devDependencies": {
     "@castlenine/svelte-qrcode": "^2.3.0",
     "@coinbase/wallet-sdk": "^4.2.3",
@@ -44,23 +62,5 @@
     "viem": "^2.21.47",
     "vite": "^5.4.11",
     "vitest": "^2.1.5"
-  },
-  "name": "@onchain-ai/svelte5",
-  "private": true,
-  "scripts": {
-    "build": "vite build",
-    "check": "pnpm run lint && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
-    "clean": "rm -rf node_modules .turbo build .svelte-kit",
-    "fleek": "pnpm run build && fleek sites deploy",
-    "dev": "vite dev",
-    "fleek:login": "fleek login",
-    "format": "prettier --write --list-different .",
-    "lint": "prettier --check . && eslint .",
-    "preview": "vite preview",
-    "start": "vite dev",
-    "vercel": "vercel"
-  },
-  "type": "module",
-  "version": "1.0.6"
+  }
 }
