@@ -4,27 +4,30 @@
   import { contracts } from "$lib/scaffold-eth/ts";
   import { createChainId } from "$lib/scaffold-eth/runes";
 
-  const selectedContractStorageKey = "scaffoldEth2.selectedContract";
+  const localStorageContractKey = "scaffoldEth2.selectedContract";
 
   const { chainIdCurrent } = $derived.by(createChainId);
   const contractsData = $derived(contracts?.[chainIdCurrent] || {});
   const contractNames = $derived(Object.keys(contractsData));
 
   let clickedContractName = $state("");
-  let selectedContract = $derived.by(() => {
+  const selectedContract = $derived.by(() => {
     if (contractNames.length == 0) return;
 
-    if (clickedContractName) return clickedContractName;
+    const item = localStorage.getItem(localStorageContractKey);
+    const localStorageContractName = item && contractNames.includes(item) ? item : "";
 
-    const localStorageContractName = localStorage.getItem(selectedContractStorageKey);
-    if (localStorageContractName && contractNames.includes(localStorageContractName)) return localStorageContractName;
+    let selected = clickedContractName
+      ? clickedContractName
+      : localStorageContractName
+        ? localStorageContractName
+        : contractNames[0];
 
-    return contractNames[0];
+    localStorage.setItem(localStorageContractKey, String(selected));
+    return selected;
   });
 
-  $effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
-
-  // $inspect("<DebugContracts ~ contractNames:", contractNames);
+  // $inspect("<DebugContracts ~ contractNames:", chainIdCurrent, contractNames, contractsData, selectedContract);
 </script>
 
 <div class="flex flex-col items-center justify-center gap-y-6 py-8 lg:gap-y-8 lg:py-12">

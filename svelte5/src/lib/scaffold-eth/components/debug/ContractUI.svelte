@@ -12,7 +12,7 @@
 
   const { contractName, hidden }: { contractName: ContractName; hidden: boolean } = $props();
 
-  const { data: deployedContractData, isLoading: deployedContractLoading } = $derived.by(
+  const { data: deployedContractData, isLoading: deployedContractLoading } = $derived(
     createDeployedContractInfo(contractName)
   );
 

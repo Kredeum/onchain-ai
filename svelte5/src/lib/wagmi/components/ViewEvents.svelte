@@ -4,7 +4,7 @@
   import { contracts } from "$lib/scaffold-eth/ts";
   import { createChainId } from "$lib/scaffold-eth/runes";
 
-  const selectedContractStorageKey = "scaffoldEth2.selectedContract";
+  const localStorageContractKey = "scaffoldEth2.selectedContract";
 
   const { chainIdCurrent } = $derived.by(createChainId);
   const contractsData = $derived(contracts?.[chainIdCurrent] || {});
@@ -16,13 +16,13 @@
 
     if (clickedContractName) return clickedContractName;
 
-    const localStorageContractName = localStorage.getItem(selectedContractStorageKey);
+    const localStorageContractName = localStorage.getItem(localStorageContractKey);
     if (localStorageContractName && contractNames.includes(localStorageContractName)) return localStorageContractName;
 
     return contractNames[0];
   });
 
-  $effect(() => localStorage.setItem(selectedContractStorageKey, String(selectedContract)));
+  $effect(() => localStorage.setItem(localStorageContractKey, String(selectedContract)));
 </script>
 
 <div class="flex flex-col items-center justify-center gap-y-6 py-8 lg:gap-y-8 lg:py-12">
