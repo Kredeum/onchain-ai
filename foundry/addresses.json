@@ -6,9 +6,9 @@
     "chainName": "optimism-sepolia"
   },
   "31337": {
-    "Counter": "0x2706A171ECb68E0038378D40Dd1d136361d0cB7d",
+    "Counter": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
     "OnChainAI": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
-    "OnChainAIv1": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
+    "OnChainAIv1": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
     "chainName": "local"
   },
   "8453": {

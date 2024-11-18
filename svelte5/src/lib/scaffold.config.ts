@@ -36,7 +36,7 @@ const scaffoldConfig = {
   walletConnectProjectId: PUBLIC_WALLET_CONNECT_PROJECT_ID || "",
 
   // Only show the Burner Wallet when running on local network
-  onlyLocalBurnerWallet: true,
+  onlyLocalBurnerWallet: false,
 
   /**
    * Auto connect:

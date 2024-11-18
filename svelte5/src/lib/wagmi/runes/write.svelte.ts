@@ -3,6 +3,8 @@ import type { Address } from "viem";
 import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes/config.svelte";
 import { createChainId } from "$lib/scaffold-eth/runes";
+import { notification } from "$lib/scaffold-eth/ts";
+import { LinkTx } from "$lib/wagmi/components";
 
 const createWriteContract = ({
   chainId: chainIdParam,
@@ -22,6 +24,7 @@ const createWriteContract = ({
   let lastTxHash: `0x${string}` | undefined = $state();
   let waitingTxHash = $state(false);
   let waitingTxReceipt = $state(false);
+  let notifs = new Map();
 
   const config = $derived.by(createConfig());
 
@@ -33,16 +36,22 @@ const createWriteContract = ({
 
     let hash: `0x${string}` | undefined;
     try {
+      const idSend = notification.loading("Sending transaction...");
+
       hash = await writeContract(config, { chainId, address, functionName, args, value, abi });
       lastTxHash = hash;
+
+      notification.remove(idSend);
+      const idHash = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
+      notifs.set(hash, idHash);
     } catch (e: unknown) {
-      console.error("writeContract error:", e);
-      throw new Error("\nwriteContract call failed");
+      notification.error(LinkTx as any, { props: { hash, message: "Transaction call failed!" } });
+      throw new Error(`writeContract error: ${e}`);
     }
     waitingTxHash = false;
-
     if (!hash) {
-      throw new Error("\nwriteContract no hash");
+      notification.error(`Transaction failed, no hash!`);
+      throw new Error("writeContract no hash");
     }
     return hash;
   };
@@ -50,6 +59,11 @@ const createWriteContract = ({
   const wait = async (hash: `0x${string}`) => {
     waitingTxReceipt = true;
     let receipt = await waitForTransactionReceipt(config, { chainId, hash });
+
+    notification.remove(notifs.get(hash));
+    notification.success(LinkTx as any, {
+      props: { hash, message: "Transaction validated!", duration: 10000 }
+    });
 
     waitingTxReceipt = false;
     return receipt;
