@@ -1,7 +1,10 @@
+import { dev } from "$app/environment";
+import scaffoldConfig from "$lib/scaffold.config";
 import type { Hex } from "viem";
 import { generatePrivateKey } from "viem/accounts";
 
-const burnerStorageKey = "scaffoldEth2.burnerWallet.sk";
+const burnerLocalStorageKey = "scaffoldEth2.burnerWallet.sk";
+let currentSk: Hex = "0x";
 
 /**
  * Checks if the private key is valid
@@ -11,16 +14,16 @@ const isValidSk = (pk: Hex | string | undefined | null): boolean => {
 };
 
 /**
- * If no burner is found in localstorage, we will generate a random private key
+ * If no burner is found in localstorage or environment, generate a random private key
  */
-const newDefaultPrivateKey = generatePrivateKey();
+const generatedPrivateKey = generatePrivateKey();
 
 /**
  * Save the current burner private key to local storage
  */
 export const saveBurnerSK = (privateKey: Hex): void => {
   if (typeof window != "undefined" && window != null) {
-    window?.localStorage?.setItem(burnerStorageKey, privateKey);
+    window?.localStorage?.setItem(burnerLocalStorageKey, privateKey);
   }
 };
 
@@ -28,15 +31,22 @@ export const saveBurnerSK = (privateKey: Hex): void => {
  * Gets the current burner private key from local storage
  */
 export const loadBurnerSK = (): Hex => {
-  let currentSk: Hex = "0x";
-  if (typeof window != "undefined" && window != null) {
-    currentSk = (window?.localStorage?.getItem?.(burnerStorageKey)?.replaceAll('"', "") ?? "0x") as Hex;
-  }
+  if (isValidSk(currentSk)) return currentSk;
 
-  if (!!currentSk && isValidSk(currentSk)) {
-    return currentSk;
-  } else {
-    saveBurnerSK(newDefaultPrivateKey);
-    return newDefaultPrivateKey;
-  }
+  // search for Key in local storage
+  const localStorageKey = (window?.localStorage?.getItem?.(burnerLocalStorageKey)?.replaceAll('"', "") ?? "0x") as Hex;
+
+  // search for Key in environnement (dev mode only)
+  const envStorageKey = ((dev && scaffoldConfig.burnetWalletKey) || "0x") as Hex;
+
+  // set the current key to the first valid key found
+  currentSk = isValidSk(localStorageKey)
+    ? localStorageKey
+    : isValidSk(envStorageKey)
+      ? envStorageKey
+      : generatedPrivateKey;
+
+  // save the current key to local storage and return it
+  if (!dev) saveBurnerSK(currentSk);
+  return currentSk;
 };
