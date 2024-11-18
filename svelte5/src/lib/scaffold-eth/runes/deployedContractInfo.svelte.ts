@@ -1,19 +1,16 @@
-import { targetNetwork } from "./global.svelte";
+import { createChainId, targetNetwork } from "./global.svelte";
 import { createPublicClient } from "$lib/wagmi/runes";
 import { ContractCodeStatus, contracts, type Contract, type ContractName } from "$lib/scaffold-eth/ts";
 import type { Address } from "viem";
-import { switchChain } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
 
 export const createDeployedContractInfo = <TContractName extends ContractName>(contractName: TContractName) => {
-  const config = $derived.by(createConfig());
   const publicClient = $derived.by(createPublicClient());
-  const chainId = $derived(publicClient?.chain.id);
+  const { chainIdCurrent } = $derived.by(createChainId);
 
-  const deployedContract = $derived(chainId ? contracts?.[chainId]?.[contractName] : undefined);
+  const deployedContract = $derived(chainIdCurrent ? contracts?.[chainIdCurrent]?.[contractName] : undefined);
   let status = $state(ContractCodeStatus.LOADING);
 
-  // $inspect("createDeployedContractInfo ~ chainId (status)", chainId, status);
+  // $inspect("createDeployedContractInfo ~ chainIdCurrent (status)", chainIdCurrent, contractName, status);
 
   $effect(() => {
     const checkContractDeployment = async () => {
@@ -36,8 +33,12 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(c
     checkContractDeployment();
   });
 
-  return () => ({
-    data: status === ContractCodeStatus.DEPLOYED ? deployedContract : undefined,
-    isLoading: status === ContractCodeStatus.LOADING
-  });
+  return {
+    get data() {
+      return status === ContractCodeStatus.DEPLOYED ? deployedContract : undefined;
+    },
+    get isLoading() {
+      return status === ContractCodeStatus.LOADING;
+    }
+  };
 };

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { replacer } from "$lib/scaffold-eth/ts";
+  import { replacer, type ContractName } from "$lib/scaffold-eth/ts";
   import type { DeploymentContractName } from "@onchain-ai/common";
   import { createContract, createEvents } from "$lib/wagmi/runes";
 
-  const { contractName, hidden }: { contractName: string; hidden: boolean } = $props();
+  const { contractName, hidden }: { contractName: ContractName; hidden: boolean } = $props();
 
   const { address, abi } = $derived.by(() => createContract(contractName as DeploymentContractName));
 
