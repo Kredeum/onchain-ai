@@ -3,13 +3,20 @@ import { type PlaywrightTestConfig, devices } from "@playwright/test";
 
 const config: PlaywrightTestConfig = {
   use: {
-    baseURL: "http://localhost:5173", // Adresse du serveur SvelteKit
-    viewport: null // Utilise les dimensions par défaut du navigateur
+    baseURL: "http://localhost:4173"
+    // video: {
+    //   mode: "on",
+    //   size: { width: 1280, height: 720 }
+    // },
+    // viewport: null, // Use default browser dimensions
+    // launchOptions: {
+    //   slowMo: 100 // Slow test actions of 100ms
+    // }
   },
   webServer: {
-    // command: "npm run build && pnpm run preview",
-    command: "npm run dev",
-    port: 5173
+    command: "pnpm run build && pnpm run preview",
+    port: 4173,
+    reuseExistingServer: true // If "pnpm run preview" running, doesn't re-build project
     // timeout: 120 * 1000
   },
   projects: [
