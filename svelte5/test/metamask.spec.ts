@@ -15,9 +15,34 @@ test("should connect wallet to the MetaMask Test Dapp", async ({ context, page, 
   // Navigate to the homepage
   await page.goto("/");
 
+  // page.on("console", (message) => {
+  //   console.log(`Log de la page : [${message.type()}] ${message.text()}`);
+  // });
+
+  // page.on("console", async (message) => {
+  //   const args = await Promise.all(message.args().map((arg) => arg.jsonValue()));
+  //   console.log(`[${message.type()}] ${message.text()}`, ...args);
+  // });
+
+  // page.on("console", (message) => {
+  //   const location = message.location();
+  //   console.log(
+  //     `Log de la page : [${message.type()}] ${message.text()} (${location.url}:${location.lineNumber}:${location.columnNumber})`
+  //   );
+  // });
+
+  //////////////////////////////////////////////////////////
+  // const ethereumExists = await page.evaluate(() => {
+  //   return typeof window.ethereum !== "undefined";
+  // });
+
+  // expect(ethereumExists).toBe(true);
+
+  //////////////////////////////////////////////////////////
   // Click the connect buttons
   await page.locator("#connect-button").click();
-  await page.locator("#metaMask").click();
+  await page.waitForSelector("#metamask", { state: "attached" });
+  await page.locator("#metamask").click();
 
   // Connect MetaMask to the dapp
   await metamask.connectToDapp();

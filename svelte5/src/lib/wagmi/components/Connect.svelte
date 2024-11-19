@@ -79,7 +79,9 @@
   $inspect("<Connect", chainId, address);
 </script>
 
-<button id="connect-button" class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}> Connect Wallet </button>
+<button id="connect-button" class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}>
+  Connect Wallet
+</button>
 
 {#if modalDisplay}
   <div class="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-start">
@@ -111,7 +113,11 @@
   {#if connector}
     <li class="flex align-center">
       <img src="/{slug}.svg" alt={name} class="w-8 h-8 mr-2" />
-      <button id={name} class="btn btn-default btn-sm w-40" onclick={() => connectWallet(connector)}>
+      <button
+        id={name.toLocaleLowerCase().replace(" ", "-")}
+        class="btn btn-default btn-sm w-40"
+        onclick={() => connectWallet(connector)}
+      >
         {name}
       </button>
     </li>

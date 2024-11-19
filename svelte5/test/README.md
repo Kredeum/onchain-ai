@@ -16,6 +16,11 @@ Have perhaps to install sub dependencies manually too:
 pnpm i -D @synthetixio/ethereum-wallet-mock
 pnpm i -D @synthetixio/synpress-core
 pnpm i -D @synthetixio/synpress-metamask
+
+# for cache wallet
+pnpm i -D playwright-core
+pnpm i -D esbuild
+pnpm i -D tsup
 ```
 
 ## Doc is wrong correct test is
