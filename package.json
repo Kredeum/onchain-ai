@@ -7,7 +7,10 @@
     "all": "pnpm run clean && pnpm install && turbo start",
     "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
-    "deploy": "pnpm run --filter foundry deploy:anvil"
+    "deploy": "pnpm run --filter foundry deploy:anvil",
+    "e2e": "pnpm run --filter svelte5 e2e",
+    "e2e:headed": "pnpm run --filter svelte5 e2e:headed",
+    "e2e:debug": "pnpm run --filter svelte5 e2e:debug"
   },
   "keywords": [],
   "author": "",
