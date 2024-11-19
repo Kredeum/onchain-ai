@@ -27,7 +27,7 @@ fi
 # Restart anvil: `anvil.sh --restart`
 if [ "$1" = "-r" ] || [ "$1" = "--restart" ]; then
   pkill -f anvil
-  echo "Anvil restarting..."
+  echo "🔄 Anvil restarting..."
 fi
 
 # Test anvil port
@@ -36,8 +36,8 @@ if nc -z localhost 8545; then
   echo "✅ Anvil already running."
 else
   # Start anvil
-  echo "Anvil starting"
-  anvil > ./anvil.log &
+  echo "🚀 Anvil starting (not started)"
+  nohup anvil > ./anvil.log &
 
   # Wait for: `Listening`...
   while ! grep -q "Listening" < anvil.log; do

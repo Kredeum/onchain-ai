@@ -35,18 +35,20 @@ const createWriteContract = ({
     waitingTxHash = true;
 
     let hash: `0x${string}` | undefined;
+    let idSend: string = "";
     try {
-      const idSend = notification.loading("Sending transaction...");
+      idSend = notification.loading("Sending transaction...");
 
       hash = await writeContract(config, { chainId, address, functionName, args, value, abi });
       lastTxHash = hash;
 
-      notification.remove(idSend);
       const idHash = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
       notifs.set(hash, idHash);
     } catch (e: unknown) {
       notification.error(LinkTx as any, { props: { hash, message: "Transaction call failed!" } });
       throw new Error(`writeContract error: ${e}`);
+    } finally {
+      notification.remove(idSend);
     }
     waitingTxHash = false;
     if (!hash) {
