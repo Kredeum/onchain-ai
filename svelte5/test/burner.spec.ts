@@ -34,10 +34,13 @@ test.describe("Burner wallet interactions", () => {
     // const balanceText = await page.locator("#user-balance");
     // await expect(balanceText).toHaveText("0.0000 ETH");
 
-    const elementBefore = await page.locator("#user-balance");
-    console.log("Texte avant changement : ", elementBefore);
+    const locator = await page.getByTestId("user-balance").first();
+    // const locator = await page.getByRole("button", { name: /ETH/ });
 
-    await expect(await page.locator("#user-balance").first()).toHaveText("0.0000 ETH");
+    // const elementBefore = await page.getByTestId("user-balance");
+    console.log("Texte avant changement : ", locator);
+
+    await expect(locator).toHaveText("0.0000 ETH");
 
     await page.locator("#address-dropdown").click();
     await page.locator("#switch-network-button").click();
@@ -57,11 +60,9 @@ test.describe("Burner wallet interactions", () => {
 
     // await page.waitForTimeout(5000);
 
-    await page.locator("#user-balance").first().waitFor({ state: "attached" });
+    locator.waitFor({ state: "attached" });
+    console.log("Texte apres changement : ", locator);
 
-    const elementAfter = await page.locator("#user-balance");
-    console.log("Texte après changement : ", elementAfter);
-
-    await expect(await page.locator("#user-balance").first()).toHaveText("1.0000 ETH");
+    await expect(locator).toHaveText("1.0000 ETH");
   });
 });
