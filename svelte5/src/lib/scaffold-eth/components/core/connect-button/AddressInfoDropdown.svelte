@@ -115,6 +115,7 @@
     {#if switchEnabled}
       <li class={selectingNetwork ? "hidden" : ""}>
         <button
+          id="switch-network-button"
           class="btn-sm flex gap-3 !rounded-xl py-3"
           type="button"
           onclick={() => {

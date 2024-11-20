@@ -23,10 +23,13 @@ const config: PlaywrightTestConfig = {
   // },
   /////////////// DEV
   use: {
-    baseURL: "http://localhost:5173"
+    baseURL: "http://localhost:5173",
+    launchOptions: {
+      slowMo: 100 // Slow test actions of 100ms
+    }
   },
   webServer: {
-    command: "pnpm run chain && pnpm run dev",
+    command: "pnpm run dev",
     port: 5173,
     reuseExistingServer: true // If "pnpm run preview" running, doesn't re-build project
   },

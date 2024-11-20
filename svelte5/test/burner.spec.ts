@@ -31,14 +31,37 @@ test.describe("Burner wallet interactions", () => {
   });
 
   test("should get 1.0000 ETH at Faucet claim", async ({ page }) => {
-    const text = await page.locator("#user-balance").textContent();
-    await expect(page.locator("#user-balance")).toHaveText("0.0000 ETH");
+    // const balanceText = await page.locator("#user-balance");
+    // await expect(balanceText).toHaveText("0.0000 ETH");
+
+    const elementBefore = await page.locator("#user-balance");
+    console.log("Texte avant changement : ", elementBefore);
+
+    await expect(await page.locator("#user-balance").first()).toHaveText("0.0000 ETH");
+
+    await page.locator("#address-dropdown").click();
+    await page.locator("#switch-network-button").click();
+    await page.locator("#Anvil").click();
 
     await page.locator("#faucet-button").click();
-    // console.log("test ~ text:", text);
-    // const balance = Number(text);
-    // console.log("test ~ balance:", balance);
 
-    // expect(balance).toBe(0);
+    // await page.waitForFunction(async (balanceText) => (await balanceText.textContent()) !== "0.0000 ETH", balanceText);
+
+    // await page.waitForFunction(
+    //   (selector) => {
+    //     const element = document.querySelector(selector);
+    //     return element?.textContent?.trim() !== "0.0000 ETH";
+    //   },
+    //   "#user-balance" // Sélecteur de l'élément à surveiller
+    // );
+
+    // await page.waitForTimeout(5000);
+
+    await page.locator("#user-balance").first().waitFor({ state: "attached" });
+
+    const elementAfter = await page.locator("#user-balance");
+    console.log("Texte après changement : ", elementAfter);
+
+    await expect(await page.locator("#user-balance").first()).toHaveText("1.0000 ETH");
   });
 });
