@@ -1,39 +1,38 @@
-import { getBlockNumber, watchBlockNumber } from "@wagmi/core";
-import { createConfig } from "./config.svelte";
-import { createChainId } from "$lib/scaffold-eth/runes/global.svelte";
+import type { WatchBlockNumberReturnType, GetPublicClientReturnType as WagmiPublicClient } from "@wagmi/core";
+import { Client } from "$lib/wagmi/runes";
 
-const createLatestBlock = ({ chainId: chainIdParam, watch = true }: { chainId?: number; watch?: boolean } = {}) => {
-  const config = $derived.by(createConfig());
+class BlockNumber {
+  latest: number | undefined = $state();
 
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const chainId = $derived(chainIdParam || chainIdCurrent);
+  client: WagmiPublicClient | undefined = $state();
 
-  let blockNumber = $state();
-  const fetch = async () => {
-    blockNumber = await getBlockNumber(config, { chainId });
+  fetch = async () => (this.latest = Number(await this.client?.getBlockNumber()));
 
-    return blockNumber;
-  };
-  fetch();
+  watching = $state(false);
 
-  let unwatch = (): void => {};
-  $effect(() => {
-    if (!watch) return;
+  unwatch: WatchBlockNumberReturnType | undefined;
 
-    unwatch();
-    unwatch = watchBlockNumber(config, {
-      onBlockNumber(newBlockNumber) {
-        blockNumber = newBlockNumber;
-      }
+  watch = () => {
+    if (this.watching) return;
+
+    this.watching = true;
+    const unwatch = this.client?.watchBlockNumber({
+      emitOnBegin: true,
+      onBlockNumber: (latest) => (this.latest = Number(latest))
     });
-  });
 
-  return {
-    fetch,
-    get blockNumber() {
-      return blockNumber;
-    }
+    this.unwatch = () => {
+      this.watching = false;
+      unwatch?.();
+    };
   };
-};
 
-export { createLatestBlock };
+
+  constructor({ watch = true }: { watch?: boolean } = {}) {
+    ({ publicClient: this.client } = new Client());
+    this.fetch();
+
+    if (watch) this.watch();
+  }
+}
+export { BlockNumber };

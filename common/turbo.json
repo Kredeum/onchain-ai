@@ -2,7 +2,6 @@
   "extends": ["//"],
   "tasks": {
     "format": {
-      "dependsOn": ["@onchain-ai/foundry#deploy"],
       "inputs": ["src/**", "../chainlink/config.json", "../foundry/addresses.json"],
       "outputs": ["../svelte5/src/lib/deployments.json"],
       "outputLogs": "new-only"

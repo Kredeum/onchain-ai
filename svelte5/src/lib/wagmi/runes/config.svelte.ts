@@ -17,4 +17,4 @@ const createConfig = <config extends Config = ResolvedRegister["config"]>(
   return () => config;
 };
 
-export { createConfig };
+export { createConfig, type CreateConfigReturnType, type CreateConfigParameters };

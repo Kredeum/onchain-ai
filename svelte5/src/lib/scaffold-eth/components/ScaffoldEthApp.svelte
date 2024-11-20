@@ -19,7 +19,9 @@
         const recentConnectorId = await wagmiConfig.storage?.getItem("recentConnectorId");
 
         if (recentConnectorId) reconnect(wagmiConfig);
-      } catch {}
+      } catch (e) {
+        console.error("Failed to reconnect wallet", e);
+      }
     });
   });
 
