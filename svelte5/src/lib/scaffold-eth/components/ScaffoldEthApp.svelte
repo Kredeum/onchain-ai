@@ -14,8 +14,12 @@
   });
 
   $effect(() => {
-    untrack(() => {
-      reconnect(wagmiConfig);
+    untrack(async () => {
+      try {
+        const recentConnectorId = await wagmiConfig.storage?.getItem("recentConnectorId");
+
+        if (recentConnectorId) reconnect(wagmiConfig);
+      } catch {}
     });
   });
 

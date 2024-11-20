@@ -47,6 +47,6 @@ export const loadBurnerSK = (): Hex => {
       : generatedPrivateKey;
 
   // save the current key to local storage and return it
-  if (!dev) saveBurnerSK(currentSk);
+  if (dev) saveBurnerSK(currentSk);
   return currentSk;
 };
