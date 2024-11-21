@@ -5,23 +5,23 @@ import { BlockNumber } from "$lib/wagmi/runes";
 import { untrack } from "svelte";
 
 const createBalance = ({ address }: { address?: Address }) => {
-  address = address && isAddress(address) ? address : zeroAddress;
-
   const config = $derived.by(createConfig());
 
   let balance: GetBalanceReturnType | undefined = $state();
   const fetch = async () => {
+    if (!(address && isAddress(address))) return;
     balance = await getBalance(config, { address });
     return balance;
   };
+  fetch();
 
-  // const block = untrack(() => new BlockNumber());
-  // $effect(() => {
-  //   block.latest;
-  //   fetch();
-  // });
+  const block = untrack(() => new BlockNumber());
+  $effect(() => {
+    block.latest;
+    fetch();
+  });
 
-  // $inspect("createBalance ~ balance:", balance);
+  $inspect("createBalance ~ balance:", balance);
 
   return {
     fetch,
