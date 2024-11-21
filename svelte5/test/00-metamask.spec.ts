@@ -27,8 +27,8 @@ test.describe("Metamask wallet connection", () => {
     const ethAddress = addressInfoDropdown.locator("summary > span");
 
     // Disconnect from auto connected burner wallet
-    addressInfoDropdown.click();
-    await page.getByRole("button", { name: "Disconnect" }).click();
+    // addressInfoDropdown.click();
+    // await page.getByRole("button", { name: "Disconnect" }).click();
 
     // Click the connect buttons
     await page.getByRole("button", { name: "Connect Wallet" }).click();
