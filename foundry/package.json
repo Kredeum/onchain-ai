@@ -1,14 +1,11 @@
 {
-  "author": "Kredeum",
-  "description": "OnChainAI Foundry package",
-  "devDependencies": {
-    "eslint-plugin-json": "^4.0.1",
-    "solhint": "^5.0.3"
-  },
-  "keywords": [],
-  "license": "ISC",
   "main": "index.js",
   "name": "@onchain-ai/foundry",
+  "version": "1.0.8",
+  "author": "Kredeum",
+  "description": "OnChainAI Foundry package",
+  "keywords": [],
+  "license": "ISC",
   "scripts": {
     "all": "pnpm run clean && pnpm run format && pnpm run check && pnpm run build && pnpm run test  && pnpm run deploy:anvil",
     "build": "forge compile",
@@ -29,5 +26,8 @@
     "format": "forge fmt",
     "test": "forge test"
   },
-  "version": "1.0.4"
+  "devDependencies": {
+    "eslint-plugin-json": "^4.0.1",
+    "solhint": "^5.0.3"
+  }
 }
