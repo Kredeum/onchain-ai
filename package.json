@@ -8,9 +8,10 @@
     "clean": "pnpm -r clean && rm -rf node_modules .turbo pnpm-lock.yaml",
     "chain": "pnpm run --filter foundry chain",
     "deploy": "pnpm run --filter foundry deploy:anvil",
-    "e2e": "pnpm run chain && pnpm run --filter svelte5 e2e",
-    "e2e:headed": "pnpm run chain && pnpm run --filter svelte5 e2e:headed",
-    "e2e:debug": "pnpm run chain && pnpm run --filter svelte5 e2e:debug"
+    "e2e": "pnpm  chain && pnpm run --filter svelte5 e2e",
+    "e2e:headed": "pnpm  chain && pnpm run --filter svelte5 e2e:headed",
+    "e2e:ui": "pnpm  chain && pnpm run --filter svelte5 e2e:ui",
+    "e2e:debug": "pnpm  chain && pnpm run --filter svelte5 e2e:debug"
   },
   "keywords": [],
   "author": "",

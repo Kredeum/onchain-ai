@@ -20,8 +20,9 @@
     "vercel": "vercel",
     "e2e:chromium": "playwright install chromium",
     "e2e": "playwright test",
-    "e2e:debug": "playwright test --debug",
-    "e2e:headed": "playwright test --ui",
+    "e2e:headed": "playwright test headed",
+    "e2e:debug": "pnpm e2e --debug",
+    "e2e:ui": "pnpm e2e --ui",
     "e2e:report": "playwright show-report"
   },
   "devDependencies": {
