@@ -1,18 +1,18 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.28;
 
-contract Counter {
+import {ICounter} from "./interfaces/ICounter.sol";
+
+contract Counter is ICounter {
     uint256 public number;
 
-    event NumberChanged(uint256 newNumber);
-
-    function setNumber(uint256 newNumber) public {
+    function setNumber(uint256 newNumber) public override(ICounter) {
         number = newNumber;
 
         emit NumberChanged(number);
     }
 
-    function increment() public {
+    function increment() public override(ICounter) {
         setNumber(++number);
     }
 }

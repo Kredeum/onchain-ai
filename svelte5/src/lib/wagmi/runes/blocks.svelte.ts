@@ -27,7 +27,6 @@ class BlockNumber {
     };
   };
 
-
   constructor({ watch = true }: { watch?: boolean } = {}) {
     ({ publicClient: this.client } = new Client());
     this.fetch();
