@@ -35,7 +35,7 @@
 
   onMount(() => {
     const provider = window.ethereum;
-    console.log("onMount ~ provider:", provider);
+    // console.log("onMount ~ provider:", provider);
     if (provider) {
       // prettier-ignore
       injected =
@@ -76,7 +76,7 @@
 
   let modalDisplay = $state(false);
 
-  $inspect("<Connect", chainId, address);
+  // $inspect("<Connect", chainId, address);
 </script>
 
 <button class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}> Connect Wallet </button>

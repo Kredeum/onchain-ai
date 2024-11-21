@@ -1,35 +1,36 @@
-import { getBalance } from "@wagmi/core";
+import { getBalance as getBalanceWagmi } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes";
-import { type Address, zeroAddress, isAddress } from "viem";
+import { type Address, isAddress } from "viem";
 import { BlockChain } from "$lib/wagmi/classes";
 import { untrack } from "svelte";
 
 class Balance {
   config = $derived.by(createConfig());
+
   address = $state<Address>();
   value = $state<bigint | undefined>();
-  fetch = () =>
-    untrack(async () => ({ value: this.value } = await getBalance(this.config, { address: this.address! })));
+  getBalance = () =>
+    untrack(async () => ({ value: this.value } = await getBalanceWagmi(this.config, { address: this.address! })));
 
-  watching = $state();
-  watch = () => (this.watching = true);
-  unwatch = () => (this.watching = false);
+  watchingBalance = $state();
+  watchBalance = () => (this.watchingBalance = true);
+  unwatchBalance = () => (this.watchingBalance = false);
 
-  constructor({ address, watch = true }: { address?: Address; watch?: boolean }) {
+  constructor({ address, watchBalance = true }: { address?: Address; watchBalance?: boolean }) {
     if (!(address && isAddress(address))) throw new Error("Invalid address");
 
     this.address = address;
-    this.fetch();
+    this.getBalance();
 
-    let watching = watch;
+    let watchingBalance = watchBalance;
     const blockChain = untrack(() => new BlockChain());
     $effect(() => {
-      if (!watching) return;
+      if (!watchingBalance) return;
       blockChain.blockNumber;
-      this.fetch();
+      this.getBalance();
     });
 
-    $inspect("Balance", this.value);
+    // $inspect("Balance", this.value);
   }
 }
 export { Balance };

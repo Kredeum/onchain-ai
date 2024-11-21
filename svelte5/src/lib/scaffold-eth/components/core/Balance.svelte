@@ -22,7 +22,7 @@
     }
   };
 
-  $inspect("<Balance", address, formattedBalance, balance);
+  // $inspect("<Balance", address, formattedBalance, balance);
 </script>
 
 {#if balance}
