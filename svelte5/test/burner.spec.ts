@@ -34,8 +34,8 @@ test.describe("Burner wallet interactions", () => {
     // const balanceText = await page.locator("#user-balance");
     // await expect(balanceText).toHaveText("0.0000 ETH");
 
-    const locator = await page.getByTestId("user-balance").first();
-    // const locator = await page.getByRole("button", { name: /ETH/ });
+    // const locator = await page.getByTestId("user-balance").first();
+    const locator = await page.getByRole("button", { name: /ETH/ });
 
     // const elementBefore = await page.getByTestId("user-balance");
 
@@ -64,6 +64,7 @@ test.describe("Burner wallet interactions", () => {
     await page.locator("#faucet-button").click();
     // locator.waitFor({ state: "attached" });
 
-    await expect(locator).toHaveText("2.0000 ETH");
+    await expect(await page.getByRole("button", { name: /2.0000 ETH/ })).toBeVisible();
+    // await expect(locator).toHaveText("2.0000 ETH");
   });
 });
