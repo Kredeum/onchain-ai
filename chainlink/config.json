@@ -17,7 +17,7 @@
     "donId": "fun-local-1",
     "explorer": "http://localhost:5173/blockexplorer",
     "gatewayUrls": ["42", "4242"],
-    "router": "0x0000000000000000000000000000000000000000",
+    "router": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
     "price": "100000000000000",
     "rpc": "rpc42",
     "subscriptionId": "1"

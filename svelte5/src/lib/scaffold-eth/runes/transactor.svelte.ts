@@ -3,6 +3,7 @@ import { getPublicClient, getWalletClient } from "@wagmi/core";
 import type { Hash, SendTransactionParameters, TransactionReceipt, WalletClient } from "viem";
 import { notification, getParsedError, getBlockExplorerTxLink } from "$lib/scaffold-eth/ts";
 import { wagmiConfig } from "$lib/wagmi/ts";
+import { LinkTx } from "$lib/wagmi/components";
 
 export type TransactionFunc = (
   tx: (() => Promise<Hash>) | SendTransactionParameters,
@@ -28,47 +29,34 @@ export const createTransactor = (_walletClient?: () => WalletClient): (() => Tra
     }
 
     let notificationId = null;
-    let transactionHash: Hash | undefined = undefined;
+    let hash: Hash | undefined = undefined;
     try {
       const network = await walletClient.getChainId();
       // Get full transaction from public client
       const publicClient = getPublicClient(wagmiConfig);
 
-      notificationId = notification.loading(TxnNotification as any, {
-        props: { message: "Awaiting for user confirmation" }
-      });
+      notificationId = notification.loading("Awaiting for user confirmation");
       if (typeof tx === "function") {
         // Tx is already prepared by the caller
         const result = await tx();
-        transactionHash = result;
+        hash = result;
       } else if (tx != null) {
-        transactionHash = await walletClient.sendTransaction(tx);
+        hash = await walletClient.sendTransaction(tx);
       } else {
         throw new Error("Incorrect transaction passed to transactor");
       }
       notification.remove(notificationId);
 
-      const blockExplorerTxURL = network ? getBlockExplorerTxLink(network, transactionHash) : "";
-
-      notificationId = notification.loading(TxnNotification as any, {
-        props: {
-          message: "Waiting for transaction to complete.",
-          blockExplorerLink: blockExplorerTxURL
-        }
-      });
+      notificationId = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
 
       const transactionReceipt = await publicClient.waitForTransactionReceipt({
-        hash: transactionHash,
+        hash: hash,
         confirmations: options?.blockConfirmations
       });
       notification.remove(notificationId);
 
-      notification.success(TxnNotification as any, {
-        props: {
-          message: "Transaction completed successfully!",
-          blockExplorerLink: blockExplorerTxURL
-        },
-        icon: "🎉"
+      notification.success(LinkTx as any, {
+        props: { hash, message: "Transaction validated!" }
       });
 
       if (options?.onBlockConfirmation) options.onBlockConfirmation(transactionReceipt);
@@ -82,7 +70,7 @@ export const createTransactor = (_walletClient?: () => WalletClient): (() => Tra
       throw error;
     }
 
-    return transactionHash;
+    return hash;
   };
 
   return () => result;

@@ -16,7 +16,7 @@ flowchart TD
         C1[common#format]
         C2[common#check]
         C3[common#build]
-        F6 --> C1 --> C2 --> C3
+        C1 --> C2 --> C3
     end
 
     subgraph Svelte5
@@ -28,6 +28,7 @@ flowchart TD
         S6[start#svelte5]
         S7[dev#svelte5]
         C3 --> S1 --> S2 --> S3 --> S4
+        F6 --> S6
         S2 --> S6
         S3 --> S5
     end

@@ -14,8 +14,14 @@
   });
 
   $effect(() => {
-    untrack(() => {
-      reconnect(wagmiConfig);
+    untrack(async () => {
+      try {
+        const recentConnectorId = await wagmiConfig.storage?.getItem("recentConnectorId");
+
+        if (recentConnectorId) reconnect(wagmiConfig);
+      } catch (e) {
+        console.error("Failed to reconnect wallet", e);
+      }
     });
   });
 

@@ -461,7 +461,7 @@
   },
   "31337": {
     "Counter": {
-      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
       "abi": [
         {
           "type": "function",
@@ -511,8 +511,129 @@
         }
       ]
     },
+    "MockRouter": {
+      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+      "abi": [
+        {
+          "type": "function",
+          "name": "addConsumer",
+          "inputs": [
+            {
+              "name": "subscriptionId",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "consumer",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "getConsumer",
+          "inputs": [
+            {
+              "name": "consumer",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "subscriptionId",
+              "type": "uint64",
+              "internalType": "uint64"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "tuple",
+              "internalType": "struct IMockRouter.Consumer",
+              "components": [
+                {
+                  "name": "allowed",
+                  "type": "bool",
+                  "internalType": "bool"
+                },
+                {
+                  "name": "initiatedRequests",
+                  "type": "uint64",
+                  "internalType": "uint64"
+                },
+                {
+                  "name": "completedRequests",
+                  "type": "uint64",
+                  "internalType": "uint64"
+                }
+              ]
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "removeConsumer",
+          "inputs": [
+            {
+              "name": "subscriptionId",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "consumer",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "sendRequest",
+          "inputs": [
+            {
+              "name": "",
+              "type": "uint64",
+              "internalType": "uint64"
+            },
+            {
+              "name": "",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "",
+              "type": "uint16",
+              "internalType": "uint16"
+            },
+            {
+              "name": "",
+              "type": "uint32",
+              "internalType": "uint32"
+            },
+            {
+              "name": "",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            }
+          ],
+          "stateMutability": "nonpayable"
+        }
+      ]
+    },
     "OnChainAIv1": {
-      "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
+      "address": "0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd",
       "abi": [
         {
           "type": "constructor",

@@ -7,7 +7,7 @@
       "outputLogs": "new-only"
     },
     "start": {
-      "dependsOn": ["check"],
+      "dependsOn": ["@onchain-ai/foundry#deploy", "check"],
       "cache": false,
       "persistent": true,
       "inputs": ["src/**"],
