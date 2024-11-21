@@ -39,30 +39,35 @@ test.describe("Burner wallet connection", () => {
 
 test.describe("Burner wallet interactions", () => {
   test("should have 0.0000 ETH on Anvil at connexion", async ({ page }) => {
-    await switchToAnvil(page);
-    //** This works
-    await expect(await page.getByRole("button", { name: /0.0000 ETH/ })).toBeVisible();
+    // await switchToAnvil(page);
 
-    //  This works if no switch chain
-    // await expect(await page.getByTestId("user-balance")).toHaveText("0.0000 ETH");
-    //** If switch chain get this error :
+    //** This works
+    // await expect(await page.getByRole("button", { name: /0.0000 ETH/ })).toBeVisible();
+
+    //  This doesn't work on Anvil but works on Base if no switch chain on test start
+    await expect(page.getByTestId("user-balance")).toHaveText("0.0000 ETH");
+    //** If Anvil chain get this error :
     //** Error: expect.toHaveText: Error: strict mode violation: getByTestId('user-balance') resolved to 2 elements:
     //** 1) <div data-testid="user-balance" class="flex w-full items-center justify-center">…</div> aka getByRole('button', { name: '0.0000 ETH' })
     //** 2) <div data-testid="user-balance" class="flex w-full items-center justify-center">…</div> aka getByRole('button', { name: '9919.9998 ETH' })
+    //** and { name: '9919.9998 ETH' } value of second element changes a bit at each tests run
     //**
-    //** Same thing in next test we avoid this selector :
+    //** Same thing in next test, so we avoid this selector :
     //** await expect(page.getByTestId("user-balance"))
   });
 
   test("should get 2.0000 ETH at Faucet claim on Anvil", async ({ page }) => {
     await switchToAnvil(page);
 
+    //** Works on Base but not on Anvil
     // const userBalance = await page.getByTestId("user-balance");
     // await expect(userBalance).toHaveText("0.0000 ETH");
+
     await expect(await page.getByRole("button", { name: /0.0000 ETH/ })).toBeVisible();
 
     await page.locator("#faucet-button").click();
 
+    //** This doesn't work even if change default chain to Anvil in scaffold config but faucet but doesn't exist in this case
     // await expect(userBalance).toHaveText("1.0000 ETH");
     await expect(await page.getByRole("button", { name: /1.0000 ETH/ })).toBeVisible();
     await expect(await page.getByRole("button", { name: /0.0000 ETH/ })).not.toBeVisible();
