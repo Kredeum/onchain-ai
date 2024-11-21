@@ -61,7 +61,7 @@
   };
 </script>
 
-<details class="dropdown dropdown-end leading-3" bind:this={dropdown}>
+<details data-testid="address-info-dropdown" class="dropdown dropdown-end leading-3" bind:this={dropdown}>
   <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
     <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
