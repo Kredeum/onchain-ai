@@ -34,7 +34,7 @@
 {:else}
   <div class="mr-1 flex flex-col items-center">
     <Balance address={address as Address} class="h-auto min-h-0" />
-    <span class="text-xs" style:color={networkColor}>
+    <span data-testid="connected-network" class="text-xs" style:color={networkColor}>
       {chain?.name}
     </span>
   </div>

@@ -79,7 +79,7 @@
   $inspect("<Connect", chainId, address);
 </script>
 
-<button id="connect-button" class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}>
+<button class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}>
   Connect Wallet
 </button>
 
