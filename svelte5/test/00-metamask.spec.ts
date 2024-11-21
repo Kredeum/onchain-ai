@@ -7,8 +7,8 @@ const test = testWithSynpress(metaMaskFixtures(basicSetup));
 
 const { expect } = test;
 
-test.describe("Metamask wallet connection", () => {
-  test("should connect wallet to the MetaMask Test Dapp", async ({ context, page, extensionId }) => {
+test.describe("Metamask wallet", () => {
+  test("should connect MetaMask Wallet to Dapp", async ({ context, page, extensionId }) => {
     // Create a new MetaMask instance
     const metamask = new MetaMask(context, page, basicSetup.walletPassword, extensionId);
 
@@ -23,8 +23,7 @@ test.describe("Metamask wallet connection", () => {
     expect(ethereumExists).toBe(true);
 
     //////////////////////////////////////////////////////////
-    const addressInfoDropdown = await page.getByTestId("address-info-dropdown");
-    const ethAddress = addressInfoDropdown.locator("summary > span");
+    const ethAddress = await page.getByTestId("address-info-dropdown").locator("summary > span");
 
     // Disconnect from auto connected burner wallet
     // addressInfoDropdown.click();

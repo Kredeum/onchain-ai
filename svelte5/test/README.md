@@ -23,6 +23,15 @@ pnpm i -D esbuild
 pnpm i -D tsup
 ```
 
+## Doc discretly says about Metamask cache
+
+Before to run any test with Metamask, Metamask cahe must be build :  
+See https://synpress.io/docs/guides/wallet-cache
+
+```bash
+npx synpress
+```
+
 ## Doc is wrong correct test is
 
 See : https://github.com/Synthetixio/synpress/blob/dev/examples/metamask/test/playwright/01_basic.spec.ts
@@ -59,13 +68,4 @@ test("should connect wallet to the MetaMask Test Dapp", async ({ context, page, 
   // Verify that the correct account address is returned and displayed
   await expect(page.locator("#getAccountsResult")).toHaveText("0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266");
 });
-```
-
-## Doc discretly says about Metamask cache
-
-Before to run any test with Metamask, Metamask cahe must be build :  
-See https://synpress.io/docs/guides/wallet-cache
-
-```bash
-npx synpress
 ```
