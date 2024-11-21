@@ -39,7 +39,7 @@ test.describe("Burner wallet connection", () => {
 
 test.describe("Burner wallet interactions", () => {
   test("should have 0.0000 ETH on Anvil at connexion", async ({ page }) => {
-    // await switchToAnvil(page);
+    await switchToAnvil(page);
 
     //** This works
     // await expect(await page.getByRole("button", { name: /0.0000 ETH/ })).toBeVisible();
