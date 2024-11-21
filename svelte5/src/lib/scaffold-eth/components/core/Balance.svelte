@@ -2,7 +2,7 @@
   import { formatEther, type Address } from "viem";
   import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes";
   import { createTargetNetwork } from "$lib/scaffold-eth/runes";
-  import { createBalance } from "$lib/wagmi/runes";
+  import { Balance } from "$lib/wagmi/classes";
 
   const {
     address,
@@ -11,9 +11,9 @@
   }: { address?: Address; class?: string; usdMode?: boolean } = $props();
 
   const targetNetwork = $derived.by(createTargetNetwork());
-  const { balance } = $derived(createBalance({ address }));
+  const balance = $derived(address && new Balance({ address }));
 
-  const formattedBalance = $derived(balance ? Number(formatEther(balance.value)) : 0);
+  const formattedBalance = $derived(Number(formatEther(balance?.value || 0n)));
   let displayUsdMode = $state(nativeCurrencyPrice.price > 0 ? Boolean(usdMode) : false);
 
   const toggleBalanceMode = () => {
@@ -22,7 +22,7 @@
     }
   };
 
-  // $inspect("<Balance", address, formattedBalance, balance);
+  $inspect("<Balance", address, formattedBalance, balance);
 </script>
 
 {#if balance}
