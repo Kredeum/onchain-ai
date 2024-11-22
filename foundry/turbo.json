@@ -12,6 +12,9 @@
       "inputs": [
         "script/**"
       ],
+      "outputs": [
+        "out/**"
+      ],
       "dependsOn": [
         "build",
         "chain"
