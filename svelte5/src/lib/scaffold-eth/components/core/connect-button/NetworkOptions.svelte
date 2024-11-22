@@ -21,6 +21,7 @@
 {#each items as network (network.id)}
   <li class:hidden>
     <button
+      id="switch-{network.name.toLowerCase()}"
       class="menu-item btn-sm flex gap-3 whitespace-nowrap !rounded-xl py-3"
       type="button"
       onclick={() => {

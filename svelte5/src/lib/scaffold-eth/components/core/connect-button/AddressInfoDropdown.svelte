@@ -62,7 +62,7 @@
   };
 </script>
 
-<details class="dropdown dropdown-end leading-3" bind:this={dropdown}>
+<details id="address-info-dropdown" class="dropdown dropdown-end leading-3" bind:this={dropdown}>
   <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
     <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
@@ -116,6 +116,7 @@
     {#if switchEnabled}
       <li class={selectingNetwork ? "hidden" : ""}>
         <button
+          id="switch-network"
           class="btn-sm flex gap-3 !rounded-xl py-3"
           type="button"
           onclick={() => {
@@ -129,6 +130,7 @@
     {/if}
     <li class={selectingNetwork ? "hidden" : ""}>
       <button
+      id="disconnect-wallet"
         class="menu-item btn-sm flex gap-3 !rounded-xl py-3 text-error"
         type="button"
         onclick={() => blockChain?.disconnect()}

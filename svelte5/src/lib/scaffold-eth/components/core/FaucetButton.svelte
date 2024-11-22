@@ -50,7 +50,7 @@
       : "tooltip tooltip-bottom tooltip-open tooltip-secondary ml-1 font-bold before:left-auto before:right-0 before:transform-none before:content-[attr(data-tip)]"}
     data-tip="Grab funds from faucet"
   >
-    <button class="btn btn-secondary btn-sm rounded-full px-2" onclick={sendETH} disabled={loading}>
+    <button id="faucet-button" class="btn btn-secondary btn-sm rounded-full px-2" onclick={sendETH} disabled={loading}>
       {#if loading}
         <span class="loading loading-spinner loading-xs"></span>
       {:else}

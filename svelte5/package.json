@@ -17,7 +17,13 @@
     "lint": "prettier --check . && eslint .",
     "preview": "vite preview",
     "start": "vite dev",
-    "vercel": "vercel"
+    "vercel": "vercel",
+    "e2e:chromium": "playwright install chromium",
+    "e2e": "playwright test",
+    "e2e:headed": "pnpm e2e --headed",
+    "e2e:debug": "pnpm e2e --debug",
+    "e2e:ui": "pnpm e2e --ui",
+    "e2e:report": "playwright show-report"
   },
   "devDependencies": {
     "@castlenine/svelte-qrcode": "^2.3.0",
@@ -25,6 +31,7 @@
     "@fleek-platform/cli": "^3.7.3",
     "@onchain-ai/common": "workspace:^",
     "@onchain-ai/foundry": "workspace:^",
+    "@playwright/test": "^1.49.0",
     "@sveltejs/adapter-static": "^3.0.6",
     "@sveltejs/kit": "^2.8.1",
     "@sveltejs/vite-plugin-svelte": "^4.0.1",
@@ -46,6 +53,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-svelte": "^2.46.0",
     "globals": "^15.12.0",
+    "playwright-core": "^1.49.0",
     "postcss": "^8.4.49",
     "postcss-load-config": "^6.0.1",
     "prettier": "^3.3.3",
@@ -57,6 +65,7 @@
     "svelte-hero-icons": "^5.2.0",
     "tailwindcss": "^3.4.15",
     "tslib": "^2.8.1",
+    "tsup": "^8.3.5",
     "type-fest": "^4.27.0",
     "typescript": "^5.6.3",
     "viem": "^2.21.48",

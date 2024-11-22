@@ -49,7 +49,10 @@ class SmartContract {
   constructor({ name, address, abi }: { name?: DeploymentContractName; address?: Address; abi?: Abi }) {
     const { chainIdCurrent } = $derived.by(createChainId);
     if (name && !(address && abi)) {
-      ({ address, abi } = jsonDeployments[chainIdCurrent as unknown as DeploymentsChainId][name] as { address: Address; abi: Abi });
+      ({ address, abi } = jsonDeployments[chainIdCurrent as unknown as DeploymentsChainId][name] as {
+        address: Address;
+        abi: Abi;
+      });
     }
 
     this.address = address;
