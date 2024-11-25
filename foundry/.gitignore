@@ -12,3 +12,4 @@ docs/
 .env
 
 anvil.log
+.certora_internal
