@@ -30,7 +30,7 @@
     class="btn btn-ghost btn-sm flex flex-col items-center font-normal hover:bg-transparent {className}"
     onclick={toggleBalanceMode}
   >
-    <div id="user-balance" class="flex w-full items-center justify-center">
+    <div class="flex w-full items-center justify-center user-balance">
       {#if displayUsdMode}
         <span class="mr-1 text-[0.8em] font-bold">$</span>
         <span>{(formattedBalance * nativeCurrencyPrice.price).toFixed(2)}</span>

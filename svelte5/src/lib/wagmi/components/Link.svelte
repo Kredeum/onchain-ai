@@ -1,5 +1,5 @@
 <script lang="ts">
-  import toast_ from "svelte-french-toast";
+  import toast_ from "svelte-hot-french-toast";
 
   const { href, description }: { href: string; description: string } = $props();
 </script>

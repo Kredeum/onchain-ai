@@ -38,6 +38,6 @@ export default ts.config(
     }
   },
   {
-    ignores: ["node_modules/", "build/", ".svelte-kit/", ".cache-synpress"]
+    ignores: ["node_modules/", "build/", ".svelte-kit/", ".cache-synpress", "playwright-report"]
   }
 );

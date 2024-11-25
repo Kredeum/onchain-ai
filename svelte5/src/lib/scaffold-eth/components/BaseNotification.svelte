@@ -7,7 +7,8 @@
     InformationCircle,
     XMark
   } from "svelte-hero-icons";
-  import toast_, { type Renderable, type Toast } from "svelte-french-toast";
+  import toast_, { type Renderable, type Toast } from "svelte-hot-french-toast";
+  import { clickOutside } from "$lib/scaffold-eth/ts";
 
   const {
     ...allProps
@@ -23,6 +24,7 @@
 </script>
 
 <div
+  use:clickOutside={() => toast_.dismiss(id)}
   class="relative flex max-w-sm transform-gpu flex-row items-start justify-between space-x-2 rounded-xl bg-base-200 p-4 shadow-center shadow-accent transition-all duration-500 ease-in-out {position!.substring(
     0,
     3
@@ -55,7 +57,7 @@
     {/if}
   </div>
 
-  <button class="cursor-pointer text-lg" class:mt-1={icon} onclick={() => toast_.dismiss(id)}>
-    <Icon src={XMark} class="w-6 cursor-pointer" onclick={() => toast_.remove(id)} />
+  <button class="cursor-pointer text-lg" class:mt-1={icon} >
+    <Icon src={XMark} class="w-6 cursor-pointer notification-close" onclick={() => toast_.remove(id)} />
   </button>
 </div>

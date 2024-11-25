@@ -1,5 +1,5 @@
 import { BaseNotification } from "$lib/scaffold-eth/components";
-import toast, { type Renderable, type ToastPosition } from "svelte-french-toast";
+import toast, { type Renderable, type ToastPosition } from "svelte-hot-french-toast";
 
 type NotificationProps = {
   Content: Renderable;

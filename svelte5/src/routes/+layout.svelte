@@ -3,7 +3,7 @@
   import "../app.pcss";
   import ScaffoldEthApp from "$lib/scaffold-eth/components/ScaffoldEthApp.svelte";
   import { wagmiConfig } from "$lib/wagmi/ts/wagmi";
-  import { Toaster } from "svelte-french-toast";
+  import { Toaster } from "svelte-hot-french-toast";
   import type { Snippet } from "svelte";
 
   let { children, data }: { children: Snippet; data: { url: string } } = $props();

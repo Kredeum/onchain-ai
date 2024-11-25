@@ -25,6 +25,7 @@ const config: PlaywrightTestConfig = {
     baseURL: "http://localhost:5173"
   },
   webServer: {
+    // reuseExistingServer: true,
     command: "pnpm run dev",
     port: 5173
   },

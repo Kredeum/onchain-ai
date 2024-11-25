@@ -113,7 +113,11 @@
   {#if connector}
     <li class="flex align-center">
       <img src="/{slug}.svg" alt={name} class="w-8 h-8 mr-2" />
-      <button id="connect-{slug.toLowerCase()}" class="btn btn-default btn-sm w-40" onclick={() => connectWallet(connector)}>
+      <button
+        id="connect-{slug.toLowerCase()}"
+        class="btn btn-default btn-sm w-40"
+        onclick={() => connectWallet(connector)}
+      >
         {name}
       </button>
     </li>

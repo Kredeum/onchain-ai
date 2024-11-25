@@ -130,7 +130,7 @@
     {/if}
     <li class={selectingNetwork ? "hidden" : ""}>
       <button
-      id="disconnect-wallet"
+        id="disconnect-wallet"
         class="menu-item btn-sm flex gap-3 !rounded-xl py-3 text-error"
         type="button"
         onclick={() => blockChain?.disconnect()}
