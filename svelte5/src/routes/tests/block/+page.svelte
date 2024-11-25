@@ -1,16 +1,19 @@
 <script lang="ts">
-  import { BlockNumber } from "$lib/wagmi/runes";
+  import { BlockChain } from "$lib/wagmi/classes";
 
-  const block = new BlockNumber();
-  $inspect("block:", block.latest);
+  const blockChain = new BlockChain();
+  $inspect("blockNumber:", blockChain.blockNumber);
 </script>
 
 <div class="p-4">
-  blockNumber = {block.latest} ...
+  blockNumber = {blockChain.blockNumber} ...
 </div>
 
 <div class="p-4">
-  <button class="btn btn-info" onclick={() => (block.watching ? block.unwatch?.() : block.watch())}>
-    {block.watching ? "Unwatch" : "Watch"}
+  <button
+    class="btn btn-info"
+    onclick={() => (blockChain.watchingBlockNumber ? blockChain.unwatchBlockNumber?.() : blockChain.watchBlockNumber())}
+  >
+    {blockChain.watchingBlockNumber ? "Unwatch" : "Watch"}
   </button>
 </div>

@@ -2,11 +2,11 @@
   "author": "Kredeum",
   "description": "OnChainAI Common package",
   "devDependencies": {
-    "@types/node": "^22.9.0",
+    "@types/node": "^22.9.3",
     "eslint": "^9.15.0",
     "eslint-plugin-json": "^4.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.6.3"
+    "typescript": "^5.7.2"
   },
   "keywords": [],
   "license": "ISC",

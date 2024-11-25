@@ -14,7 +14,8 @@
   import { goto } from "$app/navigation";
   import { isEns, getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
-  import { createAccount, createDisconnect } from "$lib/wagmi/runes";
+  import { BlockChain } from "$lib/wagmi/classes";
+  import { createAccount } from "$lib/wagmi/runes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
 
@@ -48,7 +49,7 @@
     }
   );
 
-  const { disconnect } = $derived(createDisconnect());
+  const blockChain = new BlockChain();
 
   const checkSumAddress = $derived(getAddress(address));
 
@@ -61,7 +62,7 @@
   };
 </script>
 
-<details class="dropdown dropdown-end leading-3" bind:this={dropdown}>
+<details id="address-info-dropdown" class="dropdown dropdown-end leading-3" bind:this={dropdown}>
   <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
     <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
@@ -115,6 +116,7 @@
     {#if switchEnabled}
       <li class={selectingNetwork ? "hidden" : ""}>
         <button
+          id="switch-network"
           class="btn-sm flex gap-3 !rounded-xl py-3"
           type="button"
           onclick={() => {
@@ -128,9 +130,10 @@
     {/if}
     <li class={selectingNetwork ? "hidden" : ""}>
       <button
+        id="disconnect-wallet"
         class="menu-item btn-sm flex gap-3 !rounded-xl py-3 text-error"
         type="button"
-        onclick={() => disconnect()}
+        onclick={() => blockChain?.disconnect()}
       >
         <Icon src={ArrowLeftOnRectangle} class="ml-2 h-6 w-4 sm:ml-0" /> <span>Disconnect</span>
       </button>

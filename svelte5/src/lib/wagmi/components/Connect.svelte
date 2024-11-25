@@ -35,7 +35,7 @@
 
   onMount(() => {
     const provider = window.ethereum;
-    console.log("onMount ~ provider:", provider);
+    // console.log("onMount ~ provider:", provider);
     if (provider) {
       // prettier-ignore
       injected =
@@ -76,10 +76,12 @@
 
   let modalDisplay = $state(false);
 
-  $inspect("<Connect", chainId, address);
+  // $inspect("<Connect", chainId, address);
 </script>
 
-<button class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}> Connect Wallet </button>
+<button id="connect-wallet" class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}>
+  Connect Wallet
+</button>
 
 {#if modalDisplay}
   <div class="fixed inset-0 bg-black bg-opacity-60 z-50 flex justify-center items-start">
@@ -111,7 +113,11 @@
   {#if connector}
     <li class="flex align-center">
       <img src="/{slug}.svg" alt={name} class="w-8 h-8 mr-2" />
-      <button class="btn btn-default btn-sm w-40" onclick={() => connectWallet(connector)}>
+      <button
+        id="connect-{slug.toLowerCase()}"
+        class="btn btn-default btn-sm w-40"
+        onclick={() => connectWallet(connector)}
+      >
         {name}
       </button>
     </li>

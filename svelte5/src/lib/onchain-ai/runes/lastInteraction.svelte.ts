@@ -1,7 +1,7 @@
 import { type Address, isAddress } from "viem";
 import { createReadOnchainAI } from "$lib/onchain-ai/runes";
 import type { InteractionType, InteractionTypeTuple } from "$lib/onchain-ai/ts";
-import { BlockNumber } from "$lib/wagmi/runes";
+import { BlockChain } from "$lib/wagmi/classes";
 
 class LastInteraction {
   lastInteraction: InteractionType | undefined = $derived.by(() => {
@@ -11,7 +11,8 @@ class LastInteraction {
   });
 
   account: Address | undefined = $state();
-  blockReader: BlockNumber | undefined = $state();
+  blockChain: BlockChain | undefined = $state();
+
   readOnchainAI: ReturnType<typeof createReadOnchainAI> | undefined = $derived.by(() => {
     if (!(this.account && isAddress(this.account))) return;
     return createReadOnchainAI({ functionName: "lastInteraction", args: [this.account] });
@@ -19,10 +20,10 @@ class LastInteraction {
 
   constructor(account: Address) {
     this.account = account;
-    this.blockReader = new BlockNumber();
+    this.blockChain = new BlockChain();
 
     $effect(() => {
-      this.blockReader?.latest;
+      this.blockChain?.blockNumber;
       this.readOnchainAI?.fetch && this.readOnchainAI.fetch();
     });
 

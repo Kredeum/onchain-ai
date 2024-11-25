@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
-  import { createBalance, createAccount } from "$lib/wagmi/runes";
+  import { createAccount } from "$lib/wagmi/runes";
+  import { Balance } from "$lib/wagmi/classes";
 
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";
@@ -19,9 +20,9 @@
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 
-  let { balance } = $derived(createBalance({ address: FAUCET_ADDRESS }));
+  let balance = new Balance({ address: FAUCET_ADDRESS });
 
-  const isBalanceZero = $derived(balance?.value === 0n);
+  const isBalanceZero = $derived(balance.value === 0n);
 
   let loading = $state(false);
 
@@ -49,7 +50,7 @@
       : "tooltip tooltip-bottom tooltip-open tooltip-secondary ml-1 font-bold before:left-auto before:right-0 before:transform-none before:content-[attr(data-tip)]"}
     data-tip="Grab funds from faucet"
   >
-    <button class="btn btn-secondary btn-sm rounded-full px-2" onclick={sendETH} disabled={loading}>
+    <button id="faucet-button" class="btn btn-secondary btn-sm rounded-full px-2" onclick={sendETH} disabled={loading}>
       {#if loading}
         <span class="loading loading-spinner loading-xs"></span>
       {:else}

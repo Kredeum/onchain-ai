@@ -52,8 +52,6 @@ export const createBurnerConnector = () => {
     name: "Burner Wallet",
 
     async connect({ chainId } = {}) {
-      console.log("BurnerConnector connect", chainId);
-
       const provider = await this.getProvider({ chainId });
       const accounts = await provider.request({
         method: "eth_accounts"
@@ -66,7 +64,6 @@ export const createBurnerConnector = () => {
       connected = true;
       localStoreSetChainId(currentChainId);
 
-      console.log("BurnerConnector connect", chainId, currentChainId);
       return { accounts, chainId: currentChainId };
     },
 
@@ -122,12 +119,10 @@ export const createBurnerConnector = () => {
 
     onChainChanged(chain) {
       const chainId = Number(chain);
-      console.log("BurnerConnector onChainChanged:", chainId);
       config.emitter.emit("change", { chainId });
     },
 
     async getAccounts() {
-      console.log("BurnerConnector getAccounts");
       if (!connected) throw new ConnectorNotConnectedError();
       const provider = await this.getProvider();
       const accounts = await provider.request({ method: "eth_accounts" });
@@ -143,7 +138,6 @@ export const createBurnerConnector = () => {
       const provider = await this.getProvider();
       const hexChainId = await provider.request({ method: "eth_chainId" });
       const chainId = fromHex(hexChainId, "number");
-      console.log("BurnerConnector getChainId", chainId);
       return chainId;
     },
 
@@ -162,7 +156,6 @@ export const createBurnerConnector = () => {
     },
 
     async switchChain({ chainId }) {
-      console.log("BurnerConnector switchChain", chainId);
       const provider = await this.getProvider();
       const chain = config.chains.find((x) => x.id === chainId);
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());
@@ -177,7 +170,6 @@ export const createBurnerConnector = () => {
     },
 
     disconnect() {
-      console.log("BurnerConnector disconnect from burnerwallet");
       connected = false;
       return Promise.resolve();
     }

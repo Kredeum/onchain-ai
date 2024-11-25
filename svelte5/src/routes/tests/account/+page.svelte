@@ -1,34 +1,23 @@
 <script lang="ts">
-  import {
-    createAccount,
-    createBalance,
-    createEnsName,
-    createEnsAvatar,
-    createEnsAddress,
-    BlockNumber
-  } from "$lib/wagmi/runes";
-  import { Balance } from "$lib/scaffold-eth/components";
-
-  import type { GetBalanceReturnType } from "@wagmi/core";
+  import { createAccount, createEnsName, createEnsAvatar, createEnsAddress } from "$lib/wagmi/runes";
+  import { Balance, BlockChain } from "$lib/wagmi/classes";
 
   const { account } = $derived(createAccount());
   const { chainId, address } = $derived(account);
 
-  const { balance } = $derived(createBalance({ address }));
+  const balance = $derived(address && new Balance({ address }));
   const { ensName } = $derived(createEnsName(address));
   const { ensAvatar } = $derived(createEnsAvatar(ensName));
   const { ensAddress } = $derived(createEnsAddress(ensName));
-  const { latest: blockNumber } = new BlockNumber();
+  const blockChain = new BlockChain();
 
   $inspect("PAGE account", account);
   $inspect("PAGE balance", balance);
   // $inspect("PAGE ensName", ensName);
 </script>
 
-<Balance {address} />
-
 <div class="p-4">
-  chainId = {chainId} #{blockNumber}
+  chainId = {chainId} #{blockChain?.blockNumber}
 </div>
 <div class="p-4">
   address = {address}
@@ -37,5 +26,5 @@
   <img src={ensAvatar} width="64" alt={ensName} />
 </div>
 <div class="p-4">
-  balance = {(balance as GetBalanceReturnType)?.value}
+  balance = {balance?.value}
 </div>

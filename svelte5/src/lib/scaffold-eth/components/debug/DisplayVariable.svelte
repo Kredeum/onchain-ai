@@ -6,7 +6,7 @@
 
   import { InheritanceTooltip, DisplayTxResult } from "$lib/scaffold-eth/components";
   import { createTargetNetwork, createAnimationConfig } from "$lib/scaffold-eth/runes";
-  import { createReadContract } from "$lib/wagmi/runes";
+  import { SmartContract } from "$lib/wagmi/classes";
 
   const {
     contractAddress,
@@ -22,30 +22,23 @@
     abi: Abi;
   } = $props();
 
-  let contractRead = $derived(
-    createReadContract({
-      address: contractAddress,
-      functionName: abiFunction.name,
-      abi
-    })
-  );
+  const smartContract = new SmartContract({ address: contractAddress, abi });
+
+  const smartContractCall = () => smartContract.call({ functionName: abiFunction.name });
 
   $effect(() => {
     refreshDisplayVariables;
-
-    untrack(() => {
-      contractRead.fetch();
-    });
+    untrack(() => smartContractCall());
   });
 
-  const showAnimation = $derived.by(createAnimationConfig(() => contractRead?.data));
+  const showAnimation = $derived.by(createAnimationConfig(() => smartContract.dataRead));
 </script>
 
 <div class="space-y-1 pb-2">
   <div class="flex items-center">
     <h3 class="mb-0 break-all text-lg font-medium">{abiFunction.name}</h3>
-    <button class="btn btn-ghost btn-xs" onclick={async () => await contractRead?.fetch()}>
-      {#if !contractRead}
+    <button class="btn btn-ghost btn-xs" onclick={smartContractCall}>
+      {#if !smartContract}
         <span class="loading loading-spinner loading-xs"></span>
       {:else}
         <Icon src={ArrowPath} class="h-3 w-3 cursor-pointer" aria-hidden="true" />
@@ -60,7 +53,7 @@
           ? 'animate-pulse-fast rounded-sm bg-warning'
           : ''}"
       >
-        <DisplayTxResult content={contractRead?.data} />
+        <DisplayTxResult content={smartContract.dataRead} />
       </div>
     </div>
   </div>

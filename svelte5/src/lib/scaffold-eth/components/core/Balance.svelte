@@ -2,7 +2,7 @@
   import { formatEther, type Address } from "viem";
   import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes";
   import { createTargetNetwork } from "$lib/scaffold-eth/runes";
-  import { createBalance } from "$lib/wagmi/runes";
+  import { Balance } from "$lib/wagmi/classes";
 
   const {
     address,
@@ -11,9 +11,9 @@
   }: { address?: Address; class?: string; usdMode?: boolean } = $props();
 
   const targetNetwork = $derived.by(createTargetNetwork());
-  const { balance } = $derived(createBalance({ address }));
+  const balance = $derived(address && new Balance({ address }));
 
-  const formattedBalance = $derived(balance ? Number(formatEther(balance.value)) : 0);
+  const formattedBalance = $derived(Number(formatEther(balance?.value || 0n)));
   let displayUsdMode = $state(nativeCurrencyPrice.price > 0 ? Boolean(usdMode) : false);
 
   const toggleBalanceMode = () => {
@@ -30,7 +30,7 @@
     class="btn btn-ghost btn-sm flex flex-col items-center font-normal hover:bg-transparent {className}"
     onclick={toggleBalanceMode}
   >
-    <div class="flex w-full items-center justify-center">
+    <div class="flex w-full items-center justify-center user-balance">
       {#if displayUsdMode}
         <span class="mr-1 text-[0.8em] font-bold">$</span>
         <span>{(formattedBalance * nativeCurrencyPrice.price).toFixed(2)}</span>

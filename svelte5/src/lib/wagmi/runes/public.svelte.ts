@@ -4,7 +4,7 @@ import {
   watchPublicClient,
   type WatchPublicClientReturnType
 } from "@wagmi/core";
-import { createConfig } from "./config.svelte";
+import { createConfig } from "$lib/wagmi/runes";
 import type { Config as WagmiConfigType } from "@wagmi/core";
 
 const createPublicClient = () => {
@@ -24,19 +24,4 @@ const createPublicClient = () => {
   return () => publicClient;
 };
 
-class Client {
-  config: WagmiConfigType = $derived.by(createConfig());
-
-  publicClient: WagmiPublicType = $state(getPublicClient(this.config));
-
-  onChange(publicClient: WagmiPublicType) {
-    this.publicClient = publicClient;
-  }
-
-  unsubscribe: WatchPublicClientReturnType = $derived.by(() => {
-    this.unsubscribe?.();
-    return watchPublicClient(this.config, { onChange: this.onChange });
-  });
-}
-
-export { createPublicClient, Client };
+export { createPublicClient };
