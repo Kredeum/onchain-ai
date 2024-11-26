@@ -16,9 +16,10 @@
     transport: http()
   });
 
+  let { faucetAddress }: { faucetAddress: AddressType } = $props();
+
   let loading = $state(false);
   let inputAddress = $state<AddressType>("" as AddressType);
-  let faucetAddress = $state<AddressType>();
   let sendValue = $state("");
 
   const { account } = $derived(createAccount());
@@ -37,7 +38,7 @@
           console.error("⚡️ ~ file: Faucet.tsx:getFaucetAddress ~ error", error);
         }
       };
-      getFaucetAddress();
+      if (!faucetAddress) getFaucetAddress();
     });
   });
 
@@ -63,7 +64,7 @@
   };
 </script>
 
-{#if chain?.id === anvil.id}
+{#if faucetAddress}
   <div>
     <label for="faucet-modal" class="btn btn-primary btn-sm gap-1 font-normal">
       <Icon src={Banknotes} class="h-4 w-4" />

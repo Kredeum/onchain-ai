@@ -35,9 +35,8 @@
 
   const targetNetwork = $derived.by(createTargetNetwork());
   const writeDisabled = $derived(!chain || chain?.id !== targetNetwork.id);
-  let writeTxn = $derived.by(createTransactor());
 
-  let { send, wait, waitingTxHash, waitingTxReceipt } = $derived(
+  let { send, wait, waitingTxReceipt } = $derived(
     createWriteContract({
       address: contractAddress,
       abi,

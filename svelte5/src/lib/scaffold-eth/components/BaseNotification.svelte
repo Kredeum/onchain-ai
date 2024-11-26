@@ -57,7 +57,7 @@
     {/if}
   </div>
 
-  <button class="cursor-pointer text-lg" class:mt-1={icon} >
+  <button class="cursor-pointer text-lg" class:mt-1={icon}>
     <Icon src={XMark} class="w-6 cursor-pointer notification-close" onclick={() => toast_.remove(id)} />
   </button>
 </div>

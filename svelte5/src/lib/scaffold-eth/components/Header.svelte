@@ -6,10 +6,13 @@
   import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
   import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
   import { derived as derived4 } from "svelte/store";
-  import { anvil } from "viem/chains";
+  import { anvil, type Chain } from "viem/chains";
+  import { readAddresses } from "@onchain-ai/common";
+  import { zeroAddress, type Address as AddressType } from "viem";
 
   const targetNetwork = $derived.by(createTargetNetwork());
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
+  const faucetAddress = $derived(readAddresses(targetNetwork.id).Faucet as AddressType);
 
   let isDrawerOpen = $state(false);
   let burgerMenu: HTMLDivElement | undefined = undefined;
@@ -112,8 +115,8 @@
   </div>
   <div class="navbar-end mr-4 flex-grow">
     <ConnectButton />
-    {#if isLocalNetwork}
-      <FaucetButton />
+    {#if faucetAddress && faucetAddress != zeroAddress}
+      <FaucetButton {faucetAddress} />
     {/if}
   </div>
 </div>

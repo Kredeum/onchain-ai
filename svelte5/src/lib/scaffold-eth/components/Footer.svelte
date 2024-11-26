@@ -5,10 +5,13 @@
   import { CurrencyDollar, Heart, Icon, MagnifyingGlass } from "svelte-hero-icons";
   import Faucet from "./core/Faucet.svelte";
   import SwitchTheme from "./SwitchTheme.svelte";
-  import { anvil } from "viem/chains";
+  import { anvil, baseSepolia } from "viem/chains";
+  import { readAddresses } from "@onchain-ai/common";
+  import { type Address as AddressType, zeroAddress } from "viem";
 
   const targetNetwork = $derived.by(createTargetNetwork());
-  let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
+  const isLocalNetwork = $derived(targetNetwork.id == anvil.id);
+  const faucetAddress = $derived(readAddresses(targetNetwork.id).Faucet as AddressType);
 </script>
 
 <div class="mb-11 min-h-0 px-1 py-5 lg:mb-0">
@@ -24,7 +27,9 @@
           </div>
         {/if}
         {#if isLocalNetwork}
-          <Faucet />
+          {#if faucetAddress && faucetAddress != zeroAddress})}
+            <Faucet {faucetAddress} />
+          {/if}
           <a href="/blockexplorer" class="btn btn-primary btn-sm gap-1 font-normal">
             <Icon src={MagnifyingGlass} class="h-4 w-4" />
             <span>Block Explorer</span>

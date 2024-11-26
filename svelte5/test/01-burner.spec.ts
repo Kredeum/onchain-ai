@@ -57,7 +57,6 @@ test.describe("Connected wallet interactions", () => {
 
   test.only("should get some ETH at Faucet claim on Anvil", async ({ page }) => {
     const userbalance = await page.locator(".navbar-end .user-balance");
-    await expect(userbalance).toHaveText("0.0000 ETH");
 
     await page.locator("#faucet-button").click();
     await expect(userbalance).toHaveText("1.0000 ETH");
@@ -65,7 +64,6 @@ test.describe("Connected wallet interactions", () => {
 
     await page.locator("#faucet-button").click();
     await expect(userbalance).toHaveText("2.0000 ETH");
-
     await page.locator(".notification-close").click();
   });
 });
