@@ -22,7 +22,7 @@
     "deploy:optimism": "CHAIN=optimism pnpm deploy:mainnet",
     "deploy:optimism-sepolia": "CHAIN=optimism-sepolia pnpm deploy:testnet",
     "deploy:testnet": "ACCOUNT=testnet-deployer pnpm deploy:deploy --verify && pnpm run deploy:validate",
-    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN",
+    "deploy:validate": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT",
     "format": "forge fmt",
     "test": "forge test"
   },

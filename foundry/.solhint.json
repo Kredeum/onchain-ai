@@ -2,7 +2,13 @@
   "extends": "solhint:recommended",
   "rules": {
     "no-console": "off",
-    "func-visibility": ["warn", { "ignoreConstructors": true }],
-    "gas-custom-errors": "off"
+    "func-visibility": [
+      "warn",
+      {
+        "ignoreConstructors": true
+      }
+    ],
+    "gas-custom-errors": "off",
+    "custom-errors": "off"
   }
 }
