@@ -19,18 +19,18 @@ const switchTo = async (page: Page, chainName: string) => {
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await connectBurnerWallet(page);
-  await switchTo(page, "base-sepolia");
-  // await switchTo(page, "anvil");
+  // await switchTo(page, "base-sepolia");
+  await switchTo(page, "anvil");
 });
 
 test.describe("Ask!", () => {
-  test("Should display OnChainAI and Scaffold-ETH Svelte5", async ({ page }) => {
+  test.only("Should display OnChainAI and Scaffold-ETH Svelte5", async ({ page }) => {
     expect(await page.title()).toBe("OnChainAI");
-    expect(await page.locator("body")).toContainText("Scaffold-ETH Svelte5");
-    await page.locator("text=Ask? OnChainAI").isVisible();
+    await expect(page.locator("body")).toContainText("Scaffold-ETH Svelte5");
+    await expect(page.locator("text=Ask? OnChainAI")).toBeVisible();
   });
 
-  test.only("Should answer correctly to simple calculation", async ({ page }) => {
+  test("Should answer correctly to simple calculation", async ({ page }) => {
     const a: number = Math.floor(Math.random() * 50);
     const b: number = Math.floor(Math.random() * 50);
     const prompt = `${a}+${b}`;

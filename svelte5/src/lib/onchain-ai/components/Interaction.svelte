@@ -7,7 +7,7 @@
   // $inspect("<Interaction", interaction);
 </script>
 
-{#if interaction}
+{#if interaction?.prompt}
   <div id="interaction-{index}" class="flex flex-col">
     <div class="prompt p-2 m-2 rounded-lg inline-block max-w-xs self-end bg-green-ai">
       {interaction.prompt}
