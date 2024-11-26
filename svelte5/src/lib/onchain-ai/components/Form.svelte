@@ -33,11 +33,11 @@
 </script>
 
 <div class="flex justify-center">
-  <div class="w-full max-w-xl">
+  <div id="ask-input" class="w-full max-w-xl">
     <InputBase name="Prompt" placeholder="Enter your question" onchange={(input) => (prompt = input)} value={prompt} />
   </div>
 
-  <button class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>
+  <button id="ask-button" class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>
     <span class="text-lg">Send</span>
   </button>
 </div>

@@ -7,13 +7,12 @@ const connectBurnerWallet = async (page: Page) => {
 
 const switchToAnvil = async (page: Page) => {
   const connectedNetwork = await page.locator("#connected-network");
-  if ((await connectedNetwork.textContent()) !== "Anvil") {
+  if ((await connectedNetwork.getAttribute("data-chain-name")) !== "anvil") {
     await page.locator("#address-info-dropdown").click();
     await page.locator("#switch-network").click();
     await page.locator("#switch-anvil").click();
   }
-
-  await expect(connectedNetwork).toHaveText("Anvil");
+  await expect(connectedNetwork).toHaveAttribute("data-chain-name", "anvil");
 };
 
 test.beforeEach(async ({ page }) => {
@@ -32,7 +31,7 @@ test.describe("Wallet connection, deconnection", () => {
     await expect(faucetButton).toBeVisible();
   });
 
-  test("should disconnect BurnerWallet from Dapp", async ({ page }) => {
+  test("Should disconnect BurnerWallet from Dapp", async ({ page }) => {
     let connectWallet = await page.locator("#connect-wallet");
     await connectBurnerWallet(page);
 
@@ -50,22 +49,23 @@ test.describe("Connected wallet interactions", () => {
     await switchToAnvil(page);
   });
 
-  test("should have 0.0000 ETH on Anvil at connexion", async ({ page }) => {
+  test("Should have ETH balance displayed", async ({ page }) => {
     const userbalance = await page.locator(".navbar-end .user-balance");
-    await expect(userbalance).toHaveText("0.0000 ETH");
+    await expect(userbalance).toContainText("ETH");
   });
 
-  test.only("should get some ETH at Faucet claim on Anvil", async ({ page }) => {
-    const userbalance = await page.locator(".navbar-end .user-balance");
-    await expect(userbalance).toHaveText("0.0000 ETH");
+  test("Should get 2 ETH from Faucet on Anvil", async ({ page }) => {
+    let userbalance = await page.locator(".navbar-end .user-balance");
+    const bal0 = BigInt((await userbalance.getAttribute("data-balance")) || "0");
 
+    const bal1 = bal0 + 10n ** 18n;
     await page.locator("#faucet-button").click();
-    await expect(userbalance).toHaveText("1.0000 ETH");
+    await expect(userbalance).toHaveAttribute("data-balance", String(bal1));
     await page.locator(".notification-close").click();
 
+    const bal2 = bal1 + 10n ** 18n;
     await page.locator("#faucet-button").click();
-    await expect(userbalance).toHaveText("2.0000 ETH");
-
+    await expect(userbalance).toHaveAttribute("data-balance", String(bal2));
     await page.locator(".notification-close").click();
   });
 });

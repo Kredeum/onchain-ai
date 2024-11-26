@@ -23,8 +23,8 @@
     </div>
   {/if}
 
-  {#each interactions as interaction}
-    <Interaction {interaction} />
+  {#each interactions as interaction, index}
+    <Interaction {interaction} {index} />
   {/each}
 </div>
 

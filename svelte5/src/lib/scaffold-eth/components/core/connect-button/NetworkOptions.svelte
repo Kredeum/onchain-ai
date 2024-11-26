@@ -16,12 +16,14 @@
   const { isDarkMode } = $derived.by(createDarkMode());
 
   const items = $derived(allowedNetworks.filter((network) => network.id !== chain?.id));
+
+  const normalizeName = (name: string | undefined): string => (name ? name.toLowerCase().replace(/\s+/g, "-") : "");
 </script>
 
 {#each items as network (network.id)}
   <li class:hidden>
     <button
-      id="switch-{network.name.toLowerCase()}"
+      id="switch-{normalizeName(network.name)}"
       class="menu-item btn-sm flex gap-3 whitespace-nowrap !rounded-xl py-3"
       type="button"
       onclick={() => {
