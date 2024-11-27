@@ -4,13 +4,13 @@ pragma solidity 0.8.28;
 import {IMockRouter} from "./interfaces/IMockRouter.sol";
 
 interface IOnChainAI {
-    function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) external;
+    function handleOracleFulfillment(bytes32 requestId, bytes memory response, bytes memory err) external;
 }
 
 contract MockRouter is IMockRouter {
     uint256 internal _requestId;
     mapping(uint64 => mapping(address => bool)) internal _allowed;
-    address internal onChainAI;
+    address public onChainAI;
 
     event RequestEvent(
         bytes32 indexed requestId,
@@ -40,7 +40,7 @@ contract MockRouter is IMockRouter {
     }
 
     function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) external {
-        IOnChainAI(onChainAI).fulfillRequest(requestId, response, err);
+        IOnChainAI(onChainAI).handleOracleFulfillment(requestId, response, err);
     }
 
     function getConsumer(address consumer, uint64 subscriptionId)
