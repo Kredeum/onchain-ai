@@ -1,4 +1,4 @@
-import { readConfig } from "@onchain-ai/common";
+import { readChainLinkConfig } from "@onchain-ai/common";
 import { createChainId } from "$lib/scaffold-eth/runes";
 
 class ChainLink {
@@ -7,7 +7,7 @@ class ChainLink {
 
   constructor({ requestId }: { requestId?: `0x${string}` } = {}) {
     const { chainIdCurrent } = $derived.by(createChainId);
-    const config = $derived(readConfig(chainIdCurrent));
+    const config = $derived(readChainLinkConfig(chainIdCurrent));
     const href = $derived(
       chainIdCurrent === 31337
         ? "/chainLink"

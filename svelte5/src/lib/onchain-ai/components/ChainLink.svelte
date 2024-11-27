@@ -12,7 +12,7 @@
 
   const targetNetwork = $derived.by(createTargetNetwork());
 
-  const lastResponseSimulation = $derived(eval(lastInteraction.prompt) );
+  const lastResponseSimulation = $derived(eval(lastInteraction.prompt));
 </script>
 
 <div class="flex flex-col text-2xl">

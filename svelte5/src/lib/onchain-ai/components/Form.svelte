@@ -1,14 +1,8 @@
 <script lang="ts">
   import { InputBase } from "$lib/scaffold-eth/components";
   import { createWriteOnchainAI } from "$lib/onchain-ai/runes";
-  import { notification } from "$lib/scaffold-eth/ts";
-  import { createChainId } from "$lib/scaffold-eth/runes";
-  import { readConfig } from "@onchain-ai/common";
 
   let { hash = $bindable() }: { hash?: `0x${string}` } = $props();
-
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const config = $derived(readConfig(chainIdCurrent));
 
   let txReceipt = $state();
   let prompt: string = $state("");

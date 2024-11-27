@@ -1,5 +1,5 @@
 import { getWallet, setVersion, uploadSecrets } from "../lib";
-import { readAddresses } from "@onchain-ai/common";
+import { readAddresses, type AddressesChainId } from "@onchain-ai/common";
 
 const uploadSecretsAndSetVersion = async (chainId: number, expiration: number) => {
   console.log("uploadSecretsAndSetVersion chainId:", chainId, "expiration:", expiration);
@@ -11,7 +11,7 @@ const uploadSecretsAndSetVersion = async (chainId: number, expiration: number) =
   if (!version) throw new Error(`❌ Secrets not uploaded to Chainlink gateways`);
   console.log("✅ Secrets uploaded to Chainlink gateways, version:", version);
 
-  const { OnChainAIv1: address } = readAddresses(chainId);
+  const { OnChainAIv1: address } = readAddresses(String(chainId) as AddressesChainId);
 
   const status = await setVersion(chainId, address, version, signer);
 

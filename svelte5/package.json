@@ -65,7 +65,6 @@
     "svelte-hot-french-toast": "^1.0.0",
     "tailwindcss": "^3.4.15",
     "tslib": "^2.8.1",
-    "tsup": "^8.3.5",
     "type-fest": "^4.28.1",
     "typescript": "^5.7.2",
     "viem": "^2.21.51",

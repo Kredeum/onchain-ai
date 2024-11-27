@@ -1,72 +1,80 @@
-import jsonConfig from "../../chainlink/config.json";
+import jsonChainLinkConfig from "../../chainlink/config.json";
 import jsonAddresses from "../../foundry/addresses.json";
 import jsonDeployments from "../../svelte5/src/lib/deployments.json";
 
-type ConfigChains = typeof jsonConfig;
-type ConfigChainKey = keyof ConfigChains;
-type ConfigChain = ConfigChains[ConfigChainKey];
+type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
 
-const readConfig = (chainId: number | string): ConfigChain => {
-  const chainIds = Object.keys(jsonConfig);
-  const chainKey = String(chainId) as ConfigChainKey;
+type ChainLinkConfigChains = typeof jsonChainLinkConfig;
+type ChainLinkConfigChainId = keyof ChainLinkConfigChains;
+type ChainLinkConfigChain = ChainLinkConfigChains[ChainLinkConfigChainId];
+type ChainLinkConfigChainKey = KeysOfUnion<ChainLinkConfigChain>;
 
-  if (!chainIds.includes(chainKey)) throw new Error(`No config for chainId ${chainId}!`);
+const readChainLinkConfig = (chainId: number | string): ChainLinkConfigChain => {
+  const chainIds = Object.keys(jsonChainLinkConfig);
+  const chainIdString = String(chainId) as ChainLinkConfigChainId;
 
-  return jsonConfig[chainKey];
+  if (!chainIds.includes(chainIdString)) throw new Error(`No Config for chainId ${chainId}!`);
+
+  return jsonChainLinkConfig[chainIdString];
 };
 
 type AddressesChains = typeof jsonAddresses;
-type AddressesChainKey = keyof AddressesChains;
-type AddressesChain = AddressesChains[AddressesChainKey];
+type AddressesChainId = keyof AddressesChains;
+type AddressesChain = AddressesChains[AddressesChainId];
+type AddressesChainKey = KeysOfUnion<AddressesChain>;
 
 const readAddresses = (chainId: number | string): AddressesChain => {
   const chainIds = Object.keys(jsonAddresses);
-  const chainKey = String(chainId) as AddressesChainKey;
+  const chainIdString = String(chainId) as AddressesChainId;
 
-  if (!chainIds.includes(chainKey)) throw new Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainIdString)) throw new Error(`No Addresses for chainId ${chainId}!`);
 
-  return jsonAddresses[chainKey];
+  return jsonAddresses[chainIdString];
 };
 
 type DeploymentsChains = typeof jsonDeployments;
-type DeploymentsChainKey = keyof DeploymentsChains;
-type DeploymentsChain = DeploymentsChains[DeploymentsChainKey];
+type DeploymentsChainId = keyof DeploymentsChains;
+type DeploymentsChain = DeploymentsChains[DeploymentsChainId];
+type DeploymentContractName = KeysOfUnion<DeploymentsChain>;
+type DeploymentContractKey = keyof DeploymentsChain;
 
 const readDeploymentsChain = (chainId: number | string): DeploymentsChain => {
   const chainIds = Object.keys(jsonDeployments);
-  const chainKey = String(chainId) as DeploymentsChainKey;
+  const chainIdString = String(chainId) as DeploymentsChainId;
 
-  if (!chainIds.includes(chainKey)) throw new Error(`No config for chainId ${chainId}!`);
+  if (!chainIds.includes(chainIdString)) throw new Error(`No Deployments for chainId ${chainId}!`);
 
-  return jsonDeployments[chainKey];
+  return jsonDeployments[chainIdString];
 };
 
-type DeploymentContractName = keyof DeploymentsChain;
-type DeploymentContract = DeploymentsChain[DeploymentContractName];
+type DeploymentContract = DeploymentsChain[DeploymentContractKey];
 
 const readDeploymentContract = (
   chainId: number | string,
   contractName: DeploymentContractName
 ): DeploymentContract => {
-  const chainDeployments = readDeploymentsChain(chainId);
+  const chainDeployment = readDeploymentsChain(chainId);
 
-  if (!chainDeployments[contractName])
+  if (!(contractName in chainDeployment))
     throw new Error(`No deployment found for ${contractName} for chainId ${chainId}!`);
 
-  return chainDeployments[contractName];
+  return chainDeployment[contractName as DeploymentContractKey];
 };
 
-export { readConfig, readAddresses, readDeploymentsChain, readDeploymentContract };
+export { readChainLinkConfig, readAddresses, readDeploymentsChain, readDeploymentContract };
 export type {
-  ConfigChains,
-  ConfigChain,
-  ConfigChainKey,
+  ChainLinkConfigChains,
+  ChainLinkConfigChainId,
+  ChainLinkConfigChain,
+  ChainLinkConfigChainKey,
   AddressesChains,
+  AddressesChainId,
   AddressesChain,
   AddressesChainKey,
   DeploymentsChains,
+  DeploymentsChainId,
   DeploymentsChain,
-  DeploymentsChainKey,
   DeploymentContract,
-  DeploymentContractName
+  DeploymentContractName,
+  DeploymentContractKey
 };

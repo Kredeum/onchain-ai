@@ -15,9 +15,6 @@ contract FaucetTest is Test {
         vm.prank(owner);
         faucet = new Faucet();
 
-        vm.prank(owner);
-        faucet.setAllowedRequester(someRequester);
-
         someAmount = faucet.someAmount();
     }
 
@@ -26,11 +23,17 @@ contract FaucetTest is Test {
         faucet.requestSomeEther(address(0));
 
         vm.prank(someRequester);
-
         vm.expectRevert();
         faucet.requestSomeEther(someReceiver);
 
         vm.deal(address(faucet), someAmount);
+
+        vm.prank(someRequester);
+        vm.expectRevert();
+        faucet.requestSomeEther(someReceiver);
+
+        vm.prank(owner);
+        faucet.setAllowedRequester(someRequester);
 
         vm.prank(someRequester);
         faucet.requestSomeEther(someReceiver);

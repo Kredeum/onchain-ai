@@ -6,6 +6,10 @@ import {IFunctionsSubscriptions} from "@chainlink/functions/v1_0_0/interfaces/IF
 import {IOnChainAIv1} from "../src/interfaces/IOnChainAIv1.sol";
 import {console} from "forge-std/console.sol";
 
+interface ISet {
+    function setOnChainAI(address) external;
+}
+
 contract DeployOnChainAI is DeployLite {
     error WrongConfig_javascript(string javascript);
     error WrongConfig_router(address router);
@@ -46,16 +50,21 @@ contract DeployOnChainAI is DeployLite {
 
         // Setup contract if newly deployed
         if (deployState("OnChainAIv1", args) == DeployState.New) {
+            vm.startBroadcast();
+
             // Register newly deployed OnChainAI as consumer on router
-            vm.broadcast();
             IFunctionsSubscriptions(router).addConsumer(subscriptionId, onChainAIv1);
+
+            // Set OnChainAI on router
+            ISet(router).setOnChainAI(onChainAIv1);
 
             // Local setup with fake version, for tests
             // For remote chain, version has to be define offchain... so can't be set here
             if (block.chainid == 31337) {
-                vm.broadcast();
                 IOnChainAIv1(onChainAIv1).setDonHostedSecretsVersion(1);
             }
+
+            vm.stopBroadcast();
         }
     }
 
