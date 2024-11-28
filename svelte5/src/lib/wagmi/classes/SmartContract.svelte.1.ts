@@ -1,7 +1,7 @@
 import { readDeploymentContract, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
 import jsonDeployments from "$lib/deployments.json";
 import type { Abi, AbiFunction, Address } from "viem";
-import { createConfig } from "$lib/wagmi/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
 import {
   type ReadContractReturnType,
   deepEqual,
@@ -9,13 +9,11 @@ import {
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { targetNetwork } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { notification } from "$lib/scaffold-eth/ts";
 import { LinkTx } from "../components";
 
 class SmartContract {
-  config = $derived.by(createConfig());
-
   chainId = $derived(targetNetwork.id);
   address = $state<Address>();
   abi = $state<Abi>();
@@ -42,7 +40,7 @@ class SmartContract {
 
     let data: ReadContractReturnType;
     try {
-      this.dataRead = await readContract(this.config, { address: this.address, abi: this.abi, functionName, args });
+      this.dataRead = await readContract(wagmiConfig, { address: this.address, abi: this.abi, functionName, args });
     } catch (e: unknown) {
       console.error("SmartContract dataRead ERROR", e);
     }
@@ -73,7 +71,7 @@ class SmartContract {
     try {
       this.sendId = notification.loading("Sending transaction...");
 
-      hash = await writeContract(this.config, { address: this.address, abi: this.abi, functionName, args, value });
+      hash = await writeContract(wagmiConfig, { address: this.address, abi: this.abi, functionName, args, value });
 
       const idHash = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
       this.notifs.set(hash, idHash);
@@ -95,7 +93,7 @@ class SmartContract {
   waiting = $state(false);
   wait = async (hash: `0x${string}`) => {
     this.waiting = true;
-    let receipt = await waitForTransactionReceipt(this.config, { hash });
+    let receipt = await waitForTransactionReceipt(wagmiConfig, { hash });
 
     notification.remove(this.notifs.get(hash));
     notification.success(LinkTx as any, {

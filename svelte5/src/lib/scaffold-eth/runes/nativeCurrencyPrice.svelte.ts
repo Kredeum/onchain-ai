@@ -1,15 +1,14 @@
-import { createTargetNetwork } from "./targetNetwork.svelte";
+import { targetNetwork } from "../classes/TargetNetwork.svelte";
 import scaffoldConfig from "$lib/scaffold.config";
 import { fetchPriceFromUniswap } from "$lib/scaffold-eth/ts";
 
 const enablePolling = false;
 
 export const createNativeCurrencyPrice = () => {
-  const targetNetwork = $derived.by(createTargetNetwork());
   let nativeCurrencyPrice = $state(0);
 
   const getPrice = async () => {
-    const price = await fetchPriceFromUniswap(targetNetwork);
+    const price = await fetchPriceFromUniswap(targetNetwork.chain);
     nativeCurrencyPrice = price;
   };
 

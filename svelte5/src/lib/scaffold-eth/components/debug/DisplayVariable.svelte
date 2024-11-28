@@ -5,7 +5,7 @@
   import type { AbiFunction, Abi } from "abitype";
 
   import { InheritanceTooltip, DisplayTxResult } from "$lib/scaffold-eth/components";
-  import { createTargetNetwork, createAnimationConfig } from "$lib/scaffold-eth/runes";
+  import { createAnimationConfig } from "$lib/scaffold-eth/runes";
   import { SmartContract } from "$lib/wagmi/classes";
 
   const {

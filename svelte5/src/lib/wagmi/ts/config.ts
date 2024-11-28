@@ -1,6 +1,6 @@
 import { createClient, http } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";
-import { createConfig as createWagmiConfig } from "@wagmi/core";
+import { createConfig } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 import { createBurnerConnector } from "$lib/burner-wallet";
 import { getAlchemyHttpUrl } from "$lib/scaffold-eth/ts";
@@ -26,7 +26,7 @@ const chains = targetNetworks.find((network: Chain) => network.id === 1)
   ? targetNetworks
   : ([...targetNetworks, mainnet] as const);
 
-const wagmiConfig = createWagmiConfig({
+const wagmiConfig = createConfig({
   chains,
   connectors,
   client({ chain }) {
@@ -37,8 +37,4 @@ const wagmiConfig = createWagmiConfig({
   }
 });
 
-const initialChainId = wagmiConfig.state.chainId;
-
-console.log("wagmiConfig onMount:", initialChainId, wagmiConfig);
-
-export { wagmiConfig, initialChainId };
+export { wagmiConfig };

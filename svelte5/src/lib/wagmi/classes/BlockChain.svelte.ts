@@ -5,14 +5,12 @@ import {
   watchBlockNumber as watchBlockNumberWagmi
 } from "@wagmi/core";
 import { disconnect as disconnectWagmi } from "@wagmi/core";
-
-import { createConfig } from "$lib/wagmi/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
+import type { TargetNetworkId } from "$lib/scaffold-eth/classes";
 
 class BlockChain {
-  configWagmi = $derived.by(createConfig());
-
   blockNumber: number | undefined = $state();
-  getBlockNumber = async () => (this.blockNumber = Number(await getBlockNumberWagmi(this.configWagmi)));
+  getBlockNumber = async () => (this.blockNumber = Number(await getBlockNumberWagmi(wagmiConfig)));
 
   watchingBlockNumber = $state(false);
   unwatchBlockNumber: WatchBlockNumberReturnType | undefined;
@@ -20,7 +18,7 @@ class BlockChain {
     if (this.watchingBlockNumber) return;
 
     this.watchingBlockNumber = true;
-    const unwatch = watchBlockNumberWagmi(this.configWagmi, {
+    const unwatch = watchBlockNumberWagmi(wagmiConfig, {
       emitOnBegin: true,
       onBlockNumber: (blockNumber) => (this.blockNumber = Number(blockNumber))
     });
@@ -31,12 +29,12 @@ class BlockChain {
     };
   };
 
-  switchChain = async (chainId: number) => {
-    await switchChainWagmi(this.configWagmi, { chainId });
+  switchChain = async (chainId: TargetNetworkId) => {
+    await switchChainWagmi(wagmiConfig, { chainId });
   };
 
   disconnect = async () => {
-    await disconnectWagmi(this.configWagmi);
+    await disconnectWagmi(wagmiConfig);
   };
 
   constructor({ watch = true }: { watch?: boolean } = {}) {

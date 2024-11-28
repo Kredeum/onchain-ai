@@ -1,5 +1,5 @@
 import { readChainLinkConfig } from "@onchain-ai/common";
-import { targetNetwork } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 
 class ChainLink {
   href = $state<string>("");

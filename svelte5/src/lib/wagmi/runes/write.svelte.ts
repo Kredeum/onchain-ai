@@ -1,8 +1,8 @@
 import { type Abi } from "abitype";
 import type { Address } from "viem";
 import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
-import { targetNetwork } from "$lib/scaffold-eth/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
+import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
 import { notification } from "$lib/scaffold-eth/ts";
 import { LinkTx } from "$lib/wagmi/components";
 
@@ -14,7 +14,7 @@ const createWriteContract = ({
   value = 0n,
   abi
 }: {
-  chainId?: number;
+  chainId?: TargetNetworkId;
   address: Address;
   functionName: string;
   args?: unknown[];
@@ -26,8 +26,6 @@ const createWriteContract = ({
   let waitingTxReceipt = $state(false);
   let notifs = new Map();
 
-  const config = $derived.by(createConfig());
-
   const chainId = $derived(chainIdParam || targetNetwork.id);
 
   const send = async () => {
@@ -38,7 +36,7 @@ const createWriteContract = ({
     try {
       idSend = notification.loading("Sending transaction...");
 
-      hash = await writeContract(config, { chainId, address, functionName, args, value, abi });
+      hash = await writeContract(wagmiConfig, { chainId, address, functionName, args, value, abi });
       lastTxHash = hash;
 
       const idHash = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
@@ -59,7 +57,7 @@ const createWriteContract = ({
 
   const wait = async (hash: `0x${string}`) => {
     waitingTxReceipt = true;
-    let receipt = await waitForTransactionReceipt(config, { chainId, hash });
+    let receipt = await waitForTransactionReceipt(wagmiConfig, { chainId, hash });
 
     notification.remove(notifs.get(hash));
     notification.success(LinkTx as any, {

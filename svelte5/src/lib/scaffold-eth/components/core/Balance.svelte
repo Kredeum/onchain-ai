@@ -1,7 +1,6 @@
 <script lang="ts">
   import { formatEther, type Address } from "viem";
-  import { targetNetwork } from "$lib/scaffold-eth/runes";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { Balance } from "$lib/wagmi/classes";
 
   const {

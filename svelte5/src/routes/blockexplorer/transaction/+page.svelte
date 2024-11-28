@@ -1,8 +1,13 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { replacer, decodeTransactionData, getFunctionDetails } from "$lib/scaffold-eth/ts";
+  import {
+    replacer,
+    decodeTransactionData,
+    getFunctionDetails,
+    type TransactionWithFunction
+  } from "$lib/scaffold-eth/ts";
   import { Address } from "$lib/scaffold-eth/components";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { createPublicClient } from "$lib/wagmi/runes";
   import { type Transaction, type TransactionReceipt, type Hash, formatEther, formatUnits } from "viem";
 
@@ -17,15 +22,13 @@
   let receipt = $state<TransactionReceipt>();
   let functionCalled = $state<string>();
 
-  const targetNetwork = $derived.by(createTargetNetwork());
-
   $effect(() => {
     if (txHash && client) {
       const fetchTransaction = async () => {
         const tx = await client.getTransaction({ hash: txHash });
         const txReceipt = await client.getTransactionReceipt({ hash: txHash });
 
-        const transactionWithDecodedData = decodeTransactionData(tx);
+        const transactionWithDecodedData = decodeTransactionData(tx as TransactionWithFunction);
         transaction = transactionWithDecodedData;
         receipt = txReceipt;
 

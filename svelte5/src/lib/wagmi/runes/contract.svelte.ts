@@ -1,7 +1,7 @@
 import { type Abi } from "abitype";
 import { type Address } from "viem";
 import { type DeploymentContractName, readDeploymentContract } from "@onchain-ai/common";
-import { targetNetwork } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { createPublicClient, createAccount } from "$lib/wagmi/runes";
 
 const createContract = (name: DeploymentContractName) => {

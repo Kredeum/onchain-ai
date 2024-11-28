@@ -1,13 +1,10 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
 
   const { address, description = "address" }: { address?: `0x${string}`; description?: string } = $props();
 
-  const targetNetwork = $derived.by(createTargetNetwork());
-
-  const explorer = $derived(targetNetwork.blockExplorers?.default);
-  const href = $derived(address && explorer ? `${explorer}/address/${address}` : "");
+  const href = $derived(address && targetNetwork.explorer ? `${targetNetwork.explorer}/address/${address}` : "");
 </script>
 
 <Link {href} {description} />

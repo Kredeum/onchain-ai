@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ChainLink } from "$lib/onchain-ai/runes";
   import { Link } from "$lib/wagmi/components";
 

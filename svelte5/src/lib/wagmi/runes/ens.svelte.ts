@@ -2,7 +2,7 @@ import { type Address } from "viem";
 import { isAddress } from "$lib/scaffold-eth/ts";
 
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
 
 const createEnsName = (
   address?: Address | string | null | undefined
@@ -10,13 +10,12 @@ const createEnsName = (
   fetch: () => Promise<string | undefined>;
   readonly ensName: string;
 } => {
-  const config = $derived.by(createConfig());
   let ensName: string = $state("");
 
   const fetch = async () => {
     if (!(address && isAddress(address))) return;
 
-    ensName = (await getEnsName(config, { chainId: 1, address: address as Address })) || "";
+    ensName = (await getEnsName(wagmiConfig, { chainId: 1, address: address as Address })) || "";
 
     return ensName;
   };
@@ -36,13 +35,12 @@ const createEnsAvatar = (
   fetch: () => Promise<string | undefined>;
   readonly ensAvatar: string;
 } => {
-  const config = $derived.by(createConfig());
   let ensAvatar: string = $state("");
 
   const fetch = async () => {
     if (!ensName) return;
 
-    ensAvatar = (await getEnsAvatar(config, { chainId: 1, name: ensName })) || "";
+    ensAvatar = (await getEnsAvatar(wagmiConfig, { chainId: 1, name: ensName })) || "";
 
     return ensAvatar;
   };
@@ -62,13 +60,12 @@ const createEnsAddress = (
   fetch: () => Promise<string | null | undefined>;
   readonly ensAddress: Address | null;
 } => {
-  const config = $derived.by(createConfig());
   let ensAddress: Address | null = $state(null);
 
   const fetch = async () => {
     if (!ensName) return;
 
-    ensAddress = await getEnsAddress(config, { chainId: 1, name: ensName });
+    ensAddress = await getEnsAddress(wagmiConfig, { chainId: 1, name: ensName });
 
     return ensAddress;
   };

@@ -4,7 +4,7 @@
   import { CheckCircle, DocumentDuplicate, Icon } from "svelte-hero-icons";
 
   import { getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { BlockieAvatar } from "$lib/scaffold-eth/components";
   import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes";
 
@@ -45,12 +45,10 @@
     return checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4);
   });
 
-  const targetNetwork = $derived.by(createTargetNetwork());
-
   let blockExplorerAddressLink = $state<string>();
   $effect(() => {
     if (checkSumAddress) {
-      blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork, checkSumAddress);
+      blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork.chain, checkSumAddress);
     }
   });
 </script>

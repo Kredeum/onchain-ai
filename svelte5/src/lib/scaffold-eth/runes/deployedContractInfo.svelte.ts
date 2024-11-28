@@ -1,4 +1,4 @@
-import { targetNetwork } from "./global.svelte";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { createPublicClient } from "$lib/wagmi/runes";
 import { ContractCodeStatus, contracts, type Contract, type ContractName } from "$lib/scaffold-eth/ts";
 import type { Address } from "viem";

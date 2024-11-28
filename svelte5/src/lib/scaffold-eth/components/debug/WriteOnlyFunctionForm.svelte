@@ -7,7 +7,8 @@
     getParsedContractFunctionArgs,
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
-  import { createTargetNetwork, createTransactor } from "$lib/scaffold-eth/runes";
+  import { createTransactor } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { IntegerInput, InheritanceTooltip, ContractInput, DisplayTxResult } from "$lib/scaffold-eth/components";
   import { createAccount, createWriteContract } from "$lib/wagmi/runes";
 
@@ -33,7 +34,6 @@
   const { account } = $derived(createAccount());
   const { chain } = $derived(account);
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   const writeDisabled = $derived(!chain || chain?.id !== targetNetwork.id);
   let writeTxn = $derived.by(createTransactor());
 

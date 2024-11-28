@@ -7,7 +7,8 @@
   let all: boolean = $state(true);
   let limit: number = $state(lim);
 
-  const { account, chainId, address, abi } = $derived.by(() => createContract("MockRouter"));
+  // const { account, chainId, address, abi } = $derived.by(() => createContract("MockRouter"));
+  const { account, chainId } = $derived.by(() => createContract("OnChainAIv1"));
 
   const { interactions, interactionsMax } = $derived(createInteractions({ all, limit }));
 
@@ -19,33 +20,33 @@
   const lastInteraction = $derived(interactions?.[0]);
   const missingResponse = $derived(!lastInteraction.response);
 
-  let hash = $state<`0x${string}`>();
-  let txReceipt = $state();
-  const { send, wait } = $derived(
-    createWriteContract({
-      chainId,
-      address,
-      abi,
-      functionName: "fulfillRequest",
-      args: [lastInteraction.requestId, "0x32" /*`Response to ${lastInteraction.prompt}`*/, ""]
-    })
-  );
+  // let hash = $state<`0x${string}`>();
+  // let txReceipt = $state();
+  // const { send, wait } = $derived(
+  //   createWriteContract({
+  //     chainId,
+  //     address,
+  //     abi,
+  //     functionName: "fulfillRequest",
+  //     args: [lastInteraction.requestId, "0x32" /*`Response to ${lastInteraction.prompt}`*/, ""]
+  //   })
+  // );
 
-  const handleSend = async () => {
-    try {
-      console.log("handleSend");
+  // const handleSend = async () => {
+  //   try {
+  //     console.log("handleSend");
 
-      hash = await send();
-      if (!hash) return;
+  //     hash = await send();
+  //     if (!hash) return;
 
-      console.log("handleSend ~ hash:", hash);
+  //     console.log("handleSend ~ hash:", hash);
 
-      txReceipt = await wait(hash);
-      console.log("handleSend ~ txReceipt:", txReceipt);
-    } catch (e) {
-      console.error(`Transaction KO ${e}`);
-    }
-  };
+  //     txReceipt = await wait(hash);
+  //     console.log("handleSend ~ txReceipt:", txReceipt);
+  //   } catch (e) {
+  //     console.error(`Transaction KO ${e}`);
+  //   }
+  // };
 
   // let done = false;
   // $effect(() => {
@@ -58,7 +59,7 @@
   //   }
   // });
 
-  $inspect("ABI", chainId, abi);
+  // $inspect("ABI", chainId, abi);
 </script>
 
 <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">

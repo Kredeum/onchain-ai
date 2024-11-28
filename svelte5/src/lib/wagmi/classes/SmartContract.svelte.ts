@@ -1,13 +1,11 @@
 import { readDeploymentContract, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
 import jsonDeployments from "$lib/deployments.json";
 import type { Abi, AbiFunction, Address } from "viem";
-import { createConfig } from "$lib/wagmi/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
 import { type ReadContractReturnType, deepEqual, readContract } from "@wagmi/core";
-import { targetNetwork } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 
 class SmartContract {
-  config = $derived.by(createConfig());
-
   address = $state<Address>();
   abi = $state<Abi>();
   dataRead = $state<ReadContractReturnType>();
@@ -30,7 +28,7 @@ class SmartContract {
     this.calling = true;
 
     try {
-      const newData = await readContract(this.config, { address: this.address, abi: this.abi, functionName, args });
+      const newData = await readContract(wagmiConfig, { address: this.address, abi: this.abi, functionName, args });
       if (!deepEqual($state.snapshot(this.dataRead), newData)) this.dataRead = newData;
     } catch (e: unknown) {
       console.error("SmartContract dataRead ERROR", e);

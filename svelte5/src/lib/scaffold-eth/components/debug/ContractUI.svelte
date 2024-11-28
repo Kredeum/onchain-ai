@@ -1,7 +1,8 @@
 <script lang="ts">
   import { type Address as AddressType } from "viem";
   import { type ContractName } from "$lib/scaffold-eth/ts";
-  import { createDeployedContractInfo, createTargetNetwork, createNetworkColor } from "$lib/scaffold-eth/runes";
+  import { createDeployedContractInfo, createNetworkColor } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import {
     Address,
     Balance,
@@ -16,7 +17,6 @@
     createDeployedContractInfo(contractName)
   );
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   const networkColor = $derived.by(createNetworkColor());
 
   let refreshDisplayVariables = $state(false);

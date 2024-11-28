@@ -2,7 +2,6 @@
   import { WagmiProvider } from "$lib/wagmi/components";
   import "../app.pcss";
   import ScaffoldEthApp from "$lib/scaffold-eth/components/ScaffoldEthApp.svelte";
-  import { wagmiConfig } from "$lib/wagmi/ts/wagmi";
   import { Toaster } from "svelte-hot-french-toast";
   import type { Snippet } from "svelte";
 
@@ -33,7 +32,7 @@
 
 <Toaster />
 
-<WagmiProvider config={wagmiConfig}>
+<WagmiProvider>
   <ScaffoldEthApp>
     {@render children()}
   </ScaffoldEthApp>

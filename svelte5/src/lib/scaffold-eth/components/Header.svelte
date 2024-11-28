@@ -3,11 +3,11 @@
   import logo from "$lib/assets/logo.svg";
 
   import { Link, Bars3, BugAnt, Beaker, Icon, ChatBubbleLeftRight, type IconSource } from "svelte-hero-icons";
-  import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { createOutsideClick } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
   import { anvil } from "viem/chains";
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 
   let isDrawerOpen = $state(false);

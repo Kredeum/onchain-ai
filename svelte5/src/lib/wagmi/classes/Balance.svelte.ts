@@ -1,16 +1,14 @@
 import { getBalance as getBalanceWagmi } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
 import { type Address, isAddress } from "viem";
 import { BlockChain } from "$lib/wagmi/classes";
 import { untrack } from "svelte";
 
 class Balance {
-  config = $derived.by(createConfig());
-
   address = $state<Address>();
   value = $state<bigint | undefined>();
   getBalance = () =>
-    untrack(async () => ({ value: this.value } = await getBalanceWagmi(this.config, { address: this.address! })));
+    untrack(async () => ({ value: this.value } = await getBalanceWagmi(wagmiConfig, { address: this.address! })));
 
   watchingBalance = $state();
   watchBalance = () => (this.watchingBalance = true);
