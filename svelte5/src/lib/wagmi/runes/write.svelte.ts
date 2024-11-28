@@ -2,7 +2,7 @@ import { type Abi } from "abitype";
 import type { Address } from "viem";
 import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes";
-import { createChainId } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/runes";
 import { notification } from "$lib/scaffold-eth/ts";
 import { LinkTx } from "$lib/wagmi/components";
 
@@ -28,8 +28,7 @@ const createWriteContract = ({
 
   const config = $derived.by(createConfig());
 
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const chainId = $derived(chainIdParam || chainIdCurrent);
+  const chainId = $derived(chainIdParam || targetNetwork.id);
 
   const send = async () => {
     waitingTxHash = true;

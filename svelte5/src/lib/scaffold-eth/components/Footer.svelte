@@ -1,13 +1,11 @@
 <script lang="ts">
-  import { nativeCurrencyPrice } from "$lib/scaffold-eth/runes/global.svelte";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
+  import { targetNetwork } from "$lib/scaffold-eth/runes";
   import BuidlGuidlLogo from "./assets/BuidlGuidlLogo.svelte";
   import { CurrencyDollar, Heart, Icon, MagnifyingGlass } from "svelte-hero-icons";
   import Faucet from "./core/Faucet.svelte";
   import SwitchTheme from "./SwitchTheme.svelte";
   import { anvil } from "viem/chains";
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 </script>
 
@@ -15,11 +13,11 @@
   <div>
     <div class="pointer-events-none fixed bottom-0 left-0 z-10 flex w-full items-center justify-between p-4">
       <div class="pointer-events-auto flex flex-col gap-2 md:flex-row">
-        {#if nativeCurrencyPrice.price > 0}
+        {#if targetNetwork.nativeCurrencyPrice > 0}
           <div>
             <div class="btn btn-primary btn-sm cursor-auto gap-1 font-normal">
               <Icon src={CurrencyDollar} class="h-4 w-4" />
-              <span>{nativeCurrencyPrice.price}</span>
+              <span>{targetNetwork.nativeCurrencyPrice}</span>
             </div>
           </div>
         {/if}

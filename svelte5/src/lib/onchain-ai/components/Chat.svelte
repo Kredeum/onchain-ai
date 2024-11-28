@@ -47,16 +47,16 @@
     }
   };
 
-  let done = false;
-  $effect(() => {
-    if (done) return;
-    if (!lastInteraction) return;
-    if (missingResponse) {
-      done = true;
-      handleSend();
-      // alert(`I wait for some response to '${lastInteraction.prompt}' ${lastInteraction.requestId}`);
-    }
-  });
+  // let done = false;
+  // $effect(() => {
+  //   if (done) return;
+  //   if (!lastInteraction) return;
+  //   if (missingResponse) {
+  //     done = true;
+  //     handleSend();
+  //     // alert(`I wait for some response to '${lastInteraction.prompt}' ${lastInteraction.requestId}`);
+  //   }
+  // });
 
   $inspect("ABI", chainId, abi);
 </script>

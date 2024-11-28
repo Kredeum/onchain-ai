@@ -13,7 +13,7 @@
   } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
   import { isEns, getTargetNetworks } from "$lib/scaffold-eth/ts";
-  import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { createOutsideClick, targetNetwork } from "$lib/scaffold-eth/runes";
   import { BlockChain } from "$lib/wagmi/classes";
   import { createAccount } from "$lib/wagmi/runes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
@@ -31,7 +31,6 @@
     ensAvatar?: string;
   } = $props();
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 
   const { account } = $derived.by(createAccount);

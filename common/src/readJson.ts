@@ -1,6 +1,7 @@
 import jsonChainLinkConfig from "../../chainlink/config.json";
 import jsonAddresses from "../../foundry/addresses.json";
 import jsonDeployments from "../../svelte5/src/lib/deployments.json";
+import type { Abi, Address } from "viem";
 
 type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
 
@@ -47,7 +48,7 @@ const readDeploymentsChain = (chainId: number | string): DeploymentsChain => {
   return jsonDeployments[chainIdString];
 };
 
-type DeploymentContract = DeploymentsChain[DeploymentContractKey];
+type DeploymentContract = { address: Address; abi: Abi };
 
 const readDeploymentContract = (
   chainId: number | string,
@@ -58,7 +59,7 @@ const readDeploymentContract = (
   if (!(name in chainDeployment))
     throw new Error(`No deployment found for ${name} for chainId ${chainId}!`);
 
-  return chainDeployment[name as DeploymentContractKey];
+  return chainDeployment[name as DeploymentContractKey] as DeploymentContract;
 };
 
 export { readChainLinkConfig, readAddresses, readDeploymentsChain, readDeploymentContract };

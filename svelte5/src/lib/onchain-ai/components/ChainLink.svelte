@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/runes";
   import { ChainLink } from "$lib/onchain-ai/runes";
   import { Link } from "$lib/wagmi/components";
 
@@ -9,8 +9,6 @@
   const { lastInteraction } = $derived(createInteractions({ all: true, limit: 1 }));
 
   const chainLink = new ChainLink({});
-
-  const targetNetwork = $derived.by(createTargetNetwork());
 
   const lastResponseSimulation = $derived(eval(lastInteraction.prompt));
 </script>

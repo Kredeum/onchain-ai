@@ -5,15 +5,12 @@
 
   import scaffoldConfig from "$lib/scaffold.config";
   import { createConfig } from "$lib/wagmi/runes";
-  import { createChainId } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/runes";
   import { anvil } from "viem/chains";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
   let { chainId = $bindable(), address = $bindable() }: { chainId?: number; address?: Address } = $props();
-
-  const { chainIdCurrent, chainIdDefault, chainIdLocal } = $derived.by(createChainId);
-  // $inspect("<Connect chainIdCurrent, chainIdDefault, chainId:", chainIdCurrent, chainIdDefault, chainId);
 
   const config = $derived.by(createConfig());
 
@@ -58,7 +55,9 @@
     const parameters: { connector: ConnectorType; chainId?: number } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
-      parameters.chainId = scaffoldConfig.onlyLocalBurnerWallet ? chainIdLocal : chainIdCurrent || chainIdDefault;
+      parameters.chainId = scaffoldConfig.onlyLocalBurnerWallet
+        ? targetNetwork.idLocal
+        : targetNetwork.id || targetNetwork.idDefault;
     }
     const wallet = await connect(config, parameters);
 
@@ -66,9 +65,9 @@
 
     // if not on an existing configurated network, switch to default one
     if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === wallet.chainId)) {
-      console.log("<Connect connectWallet ~ switch default Chain:", chainIdDefault);
-      switchChain(config, { chainId: chainIdDefault });
-      chainId = chainIdDefault;
+      console.log("<Connect connectWallet ~ switch default Chain:", targetNetwork.idDefault);
+      switchChain(config, { chainId: targetNetwork.idDefault });
+      chainId = targetNetwork.idDefault;
     } else {
       chainId = wallet.chainId;
     }
@@ -100,7 +99,7 @@
         {/if}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
-        {#if !scaffoldConfig.onlyLocalBurnerWallet || chainIdCurrent === anvil.id}
+        {#if !scaffoldConfig.onlyLocalBurnerWallet || targetNetwork.id === anvil.id}
           {@render connectSnippet("burnerWallet")}
         {/if}
       </ul>

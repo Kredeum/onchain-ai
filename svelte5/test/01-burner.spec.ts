@@ -1,19 +1,5 @@
 import { type Page, test, expect } from "@playwright/test";
-
-const connectBurnerWallet = async (page: Page) => {
-  await page.locator("#connect-wallet").click();
-  await page.locator("#connect-burnerwallet").click();
-};
-
-const switchToAnvil = async (page: Page) => {
-  const connectedNetwork = await page.locator("#connected-network");
-  if ((await connectedNetwork.getAttribute("data-chain-name")) !== "anvil") {
-    await page.locator("#address-info-dropdown").click();
-    await page.locator("#switch-network").click();
-    await page.locator("#switch-anvil").click();
-  }
-  await expect(connectedNetwork).toHaveAttribute("data-chain-name", "anvil");
-};
+import { connectWallet, switchChain } from "./common";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/tests/void");
@@ -21,32 +7,40 @@ test.beforeEach(async ({ page }) => {
 
 test.describe("Wallet connection, deconnection", () => {
   test("should connect BurnerWallet to Dapp", async ({ page }) => {
-    const connectWallet = await page.locator("#connect-wallet");
-    const faucetButton = await page.locator("#faucet-button");
+    const connectWalletButton = await page.locator("#connect-wallet");
 
-    await expect(connectWallet).toBeVisible();
-    await expect(faucetButton).not.toBeVisible();
-    await connectBurnerWallet(page);
-    await expect(connectWallet).not.toBeVisible();
-    await expect(faucetButton).toBeVisible();
+    await expect(connectWalletButton).toBeVisible();
+    await connectWallet(page);
+    await expect(connectWalletButton).not.toBeVisible();
   });
 
   test("Should disconnect BurnerWallet from Dapp", async ({ page }) => {
-    let connectWallet = await page.locator("#connect-wallet");
-    await connectBurnerWallet(page);
+    let connectWalletButton = await page.locator("#connect-wallet");
+    await connectWallet(page);
 
-    await expect(connectWallet).not.toBeVisible();
+    await expect(connectWalletButton).not.toBeVisible();
     await page.locator("#address-info-dropdown").click();
     await page.locator("#disconnect-wallet").click();
-    connectWallet = await page.locator("#connect-wallet");
-    await expect(connectWallet).toBeVisible();
+    connectWalletButton = await page.locator("#connect-wallet");
+    await expect(connectWalletButton).toBeVisible();
+  });
+
+  test("Should switch network", async ({ page }) => {
+    await connectWallet(page);
+    const connectedNetwork = await page.locator("#connected-network");
+
+    await switchChain(page, "anvil");
+    await expect(connectedNetwork).toHaveAttribute("data-chain-name", "anvil");
+
+    await switchChain(page, "base-sepolia");
+    await expect(connectedNetwork).toHaveAttribute("data-chain-name", "base-sepolia");
   });
 });
 
 test.describe("Connected wallet interactions", () => {
   test.beforeEach(async ({ page }) => {
-    await connectBurnerWallet(page);
-    await switchToAnvil(page);
+    await connectWallet(page);
+    await switchChain(page, "anvil");
   });
 
   test("Should have ETH balance displayed", async ({ page }) => {
@@ -55,16 +49,19 @@ test.describe("Connected wallet interactions", () => {
   });
 
   test("Should get 2 ETH from Faucet on Anvil", async ({ page }) => {
+    const faucetButton = await page.locator("#faucet-button");
+    await expect(faucetButton).toBeVisible();
+
     let userbalance = await page.locator(".navbar-end .user-balance");
     const bal0 = BigInt((await userbalance.getAttribute("data-balance")) || "0");
 
     const bal1 = bal0 + 10n ** 18n;
-    await page.locator("#faucet-button").click();
+    faucetButton.click();
     await expect(userbalance).toHaveAttribute("data-balance", String(bal1));
     await page.locator(".notification-close").click();
 
     const bal2 = bal1 + 10n ** 18n;
-    await page.locator("#faucet-button").click();
+    faucetButton.click();
     await expect(userbalance).toHaveAttribute("data-balance", String(bal2));
     await page.locator(".notification-close").click();
   });

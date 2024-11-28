@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createAccount, createEnsName, createEnsAvatar, createEnsAddress } from "$lib/wagmi/runes";
   import { Balance, BlockChain } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/runes";
 
   const { account } = $derived(createAccount());
   const { chainId, address } = $derived(account);
@@ -17,7 +18,8 @@
 </script>
 
 <div class="p-4">
-  chainId = {chainId} #{blockChain?.blockNumber}
+  chainId = {targetNetwork.id}
+  {chainId} #{blockChain?.blockNumber}
 </div>
 <div class="p-4">
   address = {address}

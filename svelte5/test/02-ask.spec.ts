@@ -1,25 +1,11 @@
 import { type Page, test, expect } from "@playwright/test";
-
-const connectWallet = async (page: Page, walletName = "burnerwallet") => {
-  await page.locator("#connect-wallet").click();
-  await page.locator(`#connect-${walletName}`).click();
-};
-
-const switchTo = async (page: Page, chainName: string) => {
-  const connectedNetwork = await page.locator("#connected-network");
-  if ((await connectedNetwork.getAttribute("data-chain-name")) !== chainName) {
-    await page.locator("#address-info-dropdown").click();
-    await page.locator("#switch-network").click();
-    await page.locator(`#switch-${chainName}`).click();
-  }
-  await expect(connectedNetwork).toHaveAttribute("data-chain-name", chainName);
-};
+import { connectWallet, switchChain } from "./common";
 
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await connectWallet(page);
-  await switchTo(page, "base-sepolia");
-  // await switchTo(page, "anvil");
+  await switchChain(page, "base-sepolia");
+  // await switchChain(page, "anvil");
   // await page.locator("#faucet-button").click();
 });
 

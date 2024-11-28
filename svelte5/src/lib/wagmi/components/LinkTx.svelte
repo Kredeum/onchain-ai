@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { createChainId } from "$lib/scaffold-eth/runes";
   import { createTargetNetwork } from "$lib/scaffold-eth/runes";
 
   const short = (addr: `0x${string}`) => addr?.slice(0, 8) + "..." + addr?.slice(-6);

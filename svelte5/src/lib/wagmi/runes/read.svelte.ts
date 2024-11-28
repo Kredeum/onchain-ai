@@ -2,7 +2,7 @@ import type { Abi, AbiFunction, AbiParameter } from "abitype";
 import type { Address } from "viem";
 import { type ReadContractReturnType, readContract, deepEqual } from "@wagmi/core";
 import { createConfig } from "$lib/wagmi/runes";
-import { createChainId } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/runes";
 
 const createReadContract = ({
   chainId: chainIdParam,
@@ -21,8 +21,7 @@ const createReadContract = ({
 }) => {
   const config = $derived.by(createConfig());
 
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const chainId = $derived(chainIdParam || chainIdCurrent);
+  const chainId = $derived(chainIdParam || targetNetwork.id);
 
   let data: ReadContractReturnType = $state();
   let isFetching = $state(false);
