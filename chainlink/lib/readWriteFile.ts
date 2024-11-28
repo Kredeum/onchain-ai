@@ -3,12 +3,15 @@ import type { ChainLinkConfigChainId, ChainLinkConfigChainKey } from "@onchain-a
 import jsonConfig from "../config.json";
 import { readChainLinkConfig } from "@onchain-ai/common";
 
-
 const readJavascript = (name = "OnChainAI.js"): string => {
   return fs.readFileSync(`${__dirname}/../source/${name}`, "utf-8");
 };
 
-const writeConfig = (chainId: number | string, key: ChainLinkConfigChainKey, value: string | number) => {
+const writeConfig = (
+  chainId: number | string,
+  key: ChainLinkConfigChainKey,
+  value: string | number
+) => {
   const chainIds = Object.keys(jsonConfig);
   const chainIdString = String(chainId) as ChainLinkConfigChainId;
 

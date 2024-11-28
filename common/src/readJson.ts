@@ -51,14 +51,14 @@ type DeploymentContract = DeploymentsChain[DeploymentContractKey];
 
 const readDeploymentContract = (
   chainId: number | string,
-  contractName: DeploymentContractName
+  name: DeploymentContractName
 ): DeploymentContract => {
   const chainDeployment = readDeploymentsChain(chainId);
 
-  if (!(contractName in chainDeployment))
-    throw new Error(`No deployment found for ${contractName} for chainId ${chainId}!`);
+  if (!(name in chainDeployment))
+    throw new Error(`No deployment found for ${name} for chainId ${chainId}!`);
 
-  return chainDeployment[contractName as DeploymentContractKey];
+  return chainDeployment[name as DeploymentContractKey];
 };
 
 export { readChainLinkConfig, readAddresses, readDeploymentsChain, readDeploymentContract };

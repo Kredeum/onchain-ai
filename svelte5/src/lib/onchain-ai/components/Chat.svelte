@@ -69,7 +69,7 @@
   {/if}
 
   {#each interactions as interaction, index}
-     <Interaction {interaction} {index} />
+    <Interaction {interaction} {index} />
   {/each}
 </div>
 

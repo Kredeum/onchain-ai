@@ -1,14 +1,9 @@
-import { readDeploymentContract } from "@onchain-ai/common";
+import { readDeploymentContract, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
 import jsonDeployments from "$lib/deployments.json";
 import type { Abi, AbiFunction, Address } from "viem";
 import { createConfig } from "$lib/wagmi/runes";
 import { type ReadContractReturnType, deepEqual, readContract } from "@wagmi/core";
 import { createChainId } from "$lib/scaffold-eth/runes";
-
-type DeploymentsChains = typeof jsonDeployments;
-type DeploymentsChainId = keyof DeploymentsChains;
-type DeploymentsChain = DeploymentsChains[DeploymentsChainId];
-type DeploymentContractName = keyof DeploymentsChain;
 
 class SmartContract {
   config = $derived.by(createConfig());
@@ -49,10 +44,7 @@ class SmartContract {
   constructor({ name, address, abi }: { name?: DeploymentContractName; address?: Address; abi?: Abi }) {
     const { chainIdCurrent } = $derived.by(createChainId);
     if (name && !(address && abi)) {
-      ({ address, abi } = jsonDeployments[chainIdCurrent as unknown as DeploymentsChainId][name] as {
-        address: Address;
-        abi: Abi;
-      });
+      ({ address, abi } = readDeploymentContract(chainIdCurrent, name) as { address: Address; abi: Abi });
     }
 
     this.address = address;

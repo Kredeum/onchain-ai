@@ -9,6 +9,7 @@
     "format": {
       "inputs": [
         "src/**",
+        "script/**",
         "test/**"
       ],
       "outputLogs": "new-only"

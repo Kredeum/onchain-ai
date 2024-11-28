@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+//
 // Awfull buggy Typescript... (v5.7.2)
 //
 // dataArray1 and dataArray2 are the same, but
@@ -20,13 +22,12 @@
 //  import type { KeysOfUnion } from 'type-fest';
 type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
 
-
 const data = {
   0: { a: 1, b: 2 },
   1: { a: 4, c: 5 }
 };
 type DataKeys = keyof typeof data;
-type DataValues = typeof data[DataKeys];
+type DataValues = (typeof data)[DataKeys];
 type InnerKeys = KeysOfUnion<DataValues>;
 
 const dataArray1 = Object.values(data);

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+//
 // Awfull buggy Typescript... (v5.7.2)
 //
 // dataArray1 and dataArray2 are the same, but
@@ -17,8 +19,7 @@
 //
 // in consequence, no way to simply type json files...
 
-import type {  KeysOfUnion } from 'type-fest';
-
+import type { KeysOfUnion } from "type-fest";
 
 // const data = {
 //   0: { a: 1, b: 2 },
@@ -41,7 +42,7 @@ import type {  KeysOfUnion } from 'type-fest';
 // Your data object
 const data = {
   0: { a: 1, b: 2 },
-  1: { a: 4, c: 5 },
+  1: { a: 4, c: 5 }
 };
 
 // Get the type of the keys of 'data'
@@ -49,7 +50,7 @@ type DataKeys = keyof typeof data;
 // DataKeys is '0' | '1'
 
 // Get the type of the values in 'data'
-type DataValues = typeof data[DataKeys];
+type DataValues = (typeof data)[DataKeys];
 // DataValues is { a: number; b: number } | { a: number; c: number }
 
 // Get the keys of the union of inner objects
