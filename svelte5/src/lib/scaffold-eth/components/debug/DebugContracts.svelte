@@ -2,12 +2,11 @@
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
   import ContractUI from "./ContractUI.svelte";
   import { contracts } from "$lib/scaffold-eth/ts";
-  import { createChainId } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
 
   const localStorageContractKey = "scaffoldEth2.selectedContract";
 
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const contractsData = $derived(contracts?.[chainIdCurrent] || {});
+  const contractsData = $derived(contracts?.[targetNetwork.id] || {});
   const contractNames = $derived(Object.keys(contractsData));
 
   let clickedContractName = $state("");

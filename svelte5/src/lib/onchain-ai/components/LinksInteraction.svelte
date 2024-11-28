@@ -6,15 +6,20 @@
     $props();
 </script>
 
-<div class="text-gray-300">
-  view
+<div class="flex flex-row text-gray-300 space-x-2">
   {#if address}
-    <LinkAddress {address} description="contract" />,
+    <span>| view</span>
+    <LinkAddress {address} description="contract" />
   {/if}
+
   {#if hash}
-    <LinkTx {hash} description="last transaction" />,
+    <span>| view</span> <LinkTx {hash} description="last transaction" />
   {/if}
+
   {#if requestId}
+    <span>| view on</span>
     <LinkChainLink {requestId} />
   {/if}
+
+  <span>|</span>
 </div>

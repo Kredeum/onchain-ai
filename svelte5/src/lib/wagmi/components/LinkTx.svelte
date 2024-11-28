@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { createChainId } from "$lib/scaffold-eth/runes";
-  import { readConfig } from "@onchain-ai/common";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
 
   const short = (addr: `0x${string}`) => addr?.slice(0, 8) + "..." + addr?.slice(-6);
 
@@ -11,10 +10,7 @@
     message
   }: { hash: `0x${string}`; description?: string; message?: string } = $props();
 
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const config = $derived(readConfig(chainIdCurrent));
-
-  const href = $derived(hash ? `${config.explorer}/tx/${hash}` : "");
+  const href = $derived(hash && targetNetwork.explorer ? `${targetNetwork.explorer}/tx/${hash}` : "");
 </script>
 
 {#if message}

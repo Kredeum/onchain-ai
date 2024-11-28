@@ -2,13 +2,12 @@
   import { page } from "$app/stores";
   import logo from "$lib/assets/logo.svg";
 
-  import { Bars3, BugAnt, Beaker, Icon, ChatBubbleLeftRight, type IconSource } from "svelte-hero-icons";
-  import { createOutsideClick, createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { Link, Bars3, BugAnt, Beaker, Icon, ChatBubbleLeftRight, type IconSource } from "svelte-hero-icons";
+  import { createOutsideClick } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
-  import { derived as derived4 } from "svelte/store";
   import { anvil } from "viem/chains";
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 
   let isDrawerOpen = $state(false);
@@ -26,7 +25,7 @@
     icon?: IconSource;
   };
 
-  export const menuLinks: HeaderMenuLink[] = [
+  const menuLinks: HeaderMenuLink[] = [
     {
       label: "Ask?",
       href: "/",
@@ -38,20 +37,23 @@
       icon: BugAnt
     },
     {
+      label: "Tests",
+      href: "/tests",
+      icon: Beaker
+    },
+    {
       label: "View Events",
       href: "/events",
       icon: Bars3
     },
     {
-      label: "Tests",
-      href: "/tests",
-      icon: Beaker
+      label: "ChainLink Admin",
+      href: "/chainlink",
+      icon: Link
     }
   ];
 
-  const isCurrentPage = derived4(page, ($page) => (href: string) => {
-    return href === $page.url.pathname;
-  });
+  const isCurrentPage = (href: string) => href === $page.url.pathname;
 </script>
 
 {#snippet menuLinksSnippet()}
@@ -62,11 +64,9 @@
         onclick={() => {
           isDrawerOpen = false;
         }}
-        class="grid grid-flow-col gap-2 rounded-full px-3 py-1.5 text-sm hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral {$isCurrentPage(
+        class="grid grid-flow-col gap-2 rounded-full px-3 py-1.5 text-sm hover:bg-secondary hover:shadow-md focus:!bg-secondary active:!text-neutral {isCurrentPage(
           href
-        )
-          ? 'bg-secondary shadow-md'
-          : ''}"
+        ) && 'bg-secondary shadow-md'}"
       >
         {#if icon}
           <Icon src={icon} class="h-4 w-4" />

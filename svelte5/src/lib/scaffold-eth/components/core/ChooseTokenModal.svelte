@@ -1,7 +1,7 @@
 <script lang="ts">
   import { InputBase } from "./inputs";
   import { createAccount } from "$lib/wagmi/runes";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
+  import { targetNetwork } from "$lib/scaffold-eth/classes/TargetNetwork.svelte";
   import { ArrowRight, Icon } from "svelte-hero-icons";
   import type { Address } from "viem";
   import type { Token } from ".";
@@ -26,7 +26,6 @@
   const { account } = $derived(createAccount());
   const { chain: accountChain } = $derived(account);
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   const chainId = $derived(chainIdOverride ?? accountChain?.id ?? targetNetwork.id);
 
   let searchInput = $state("");

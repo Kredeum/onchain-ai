@@ -2,15 +2,19 @@
   import { reconnect } from "@wagmi/core";
   import { untrack, type Snippet } from "svelte";
   import { wagmiConfig } from "$lib/wagmi/ts";
-  import { setNativeCurrencyPrice, createNativeCurrencyPrice, createDarkMode } from "$lib/scaffold-eth/runes";
+  import { createNativeCurrencyPrice, createDarkMode } from "$lib/scaffold-eth/runes";
+  import { newTargetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { Header, Footer } from "$lib/scaffold-eth/components";
 
   let { children }: { children: Snippet } = $props();
 
   const price = createNativeCurrencyPrice();
 
+  newTargetNetwork();
+
   $effect(() => {
-    setNativeCurrencyPrice(price.nativeCurrencyPrice);
+    targetNetwork.nativeCurrencyPrice = price.nativeCurrencyPrice;
   });
 
   $effect(() => {

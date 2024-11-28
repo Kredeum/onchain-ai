@@ -1,5 +1,5 @@
 import { ethers, type Wallet } from "ethers";
-import { readConfig } from "@onchain-ai/common";
+import { readChainLinkConfig } from "@onchain-ai/common";
 import { getWallet } from "./getWallet";
 
 const setVersion = async (
@@ -11,7 +11,7 @@ const setVersion = async (
   signer ||= await getWallet(chainId);
 
   const abi = ["function setDonHostedSecretsVersion(uint64) external"];
-  const { explorer } = readConfig(chainId);
+  const { explorer } = readChainLinkConfig(chainId);
 
   const onChainAI = new ethers.Contract(address, abi, signer);
 

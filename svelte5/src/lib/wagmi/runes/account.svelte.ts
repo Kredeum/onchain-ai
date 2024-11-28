@@ -1,10 +1,9 @@
 import { getAccount, watchAccount } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
 
 const createAccount = () => {
-  const config = $derived.by(createConfig());
-  let account = $state(getAccount(config));
-  watchAccount(config, {
+  let account = $state(getAccount(wagmiConfig));
+  watchAccount(wagmiConfig, {
     onChange: (newAccount) => {
       account = newAccount;
     }

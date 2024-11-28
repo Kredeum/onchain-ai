@@ -8,7 +8,9 @@
   "tasks": {
     "format": {
       "inputs": [
-        "src/**"
+        "src/**",
+        "script/**",
+        "test/**"
       ],
       "outputLogs": "new-only"
     },

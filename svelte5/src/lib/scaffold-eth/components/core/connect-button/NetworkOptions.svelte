@@ -4,6 +4,7 @@
   import { getNetworkColor, createDarkMode } from "$lib/scaffold-eth/runes";
   import { createAccount } from "$lib/wagmi/runes";
   import { BlockChain } from "$lib/wagmi/classes";
+  import { type TargetNetworkId } from "$lib/scaffold-eth/classes";
 
   const { hidden = false } = $props();
 
@@ -16,16 +17,18 @@
   const { isDarkMode } = $derived.by(createDarkMode());
 
   const items = $derived(allowedNetworks.filter((network) => network.id !== chain?.id));
+
+  const normalizeName = (name: string | undefined): string => (name ? name.toLowerCase().replace(/\s+/g, "-") : "");
 </script>
 
 {#each items as network (network.id)}
   <li class:hidden>
     <button
-      id="switch-{network.name.toLowerCase()}"
+      id="switch-{normalizeName(network.name)}"
       class="menu-item btn-sm flex gap-3 whitespace-nowrap !rounded-xl py-3"
       type="button"
       onclick={() => {
-        blockChain.switchChain?.(network.id);
+        blockChain.switchChain?.(network.id as TargetNetworkId);
       }}
     >
       <Icon src={ArrowsRightLeft} class="ml-2 h-6 w-4 sm:ml-0" />

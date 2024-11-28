@@ -108,8 +108,8 @@ export function getBlockExplorerTxLink(chainId: number, txnHash: string) {
     return "";
   }
 
-  const targetChain = targetChainArr[0] as keyof typeof chains;
-  const blockExplorerTxURL = chains[targetChain]?.blockExplorers?.default?.url;
+  const targetNetwork = targetChainArr[0] as keyof typeof chains;
+  const blockExplorerTxURL = chains[targetNetwork]?.blockExplorers?.default?.url;
 
   if (!blockExplorerTxURL) {
     return "";

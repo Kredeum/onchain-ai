@@ -460,19 +460,92 @@
     }
   },
   "31337": {
-    "Counter": {
+    "Faucet": {
       "address": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
       "abi": [
         {
-          "type": "function",
-          "name": "increment",
+          "type": "constructor",
           "inputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "receive",
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "allowedRequester",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "requestSomeEther",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
         {
           "type": "function",
-          "name": "number",
+          "name": "setAllowedRequester",
+          "inputs": [
+            {
+              "name": "requester",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setAmount",
+          "inputs": [
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "someAmount",
           "inputs": [],
           "outputs": [
             {
@@ -485,34 +558,100 @@
         },
         {
           "type": "function",
-          "name": "setNumber",
-          "inputs": [
-            {
-              "name": "newNumber",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
+          "name": "withdraw",
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
         {
-          "type": "event",
-          "name": "NumberChanged",
+          "type": "error",
+          "name": "FailedToSendEther",
           "inputs": [
             {
-              "name": "newNumber",
+              "name": "balance",
               "type": "uint256",
-              "indexed": false,
+              "internalType": "uint256"
+            },
+            {
+              "name": "someAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "result",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "FailedToWithdrawEther",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "result",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotAllowedRequester",
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotEnoughBalance",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "someAmount",
+              "type": "uint256",
               "internalType": "uint256"
             }
-          ],
-          "anonymous": false
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotForZeroAddress",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NotOwner",
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
         }
       ]
     },
     "MockRouter": {
-      "address": "0x9bAaB117304f7D6517048e371025dB8f89a8DbE5",
+      "address": "0x7Ec559176d42Af1fBf0B8b64CfA82c0B3431DE65",
       "abi": [
         {
           "type": "function",
@@ -527,6 +666,29 @@
               "name": "consumer",
               "type": "address",
               "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "fulfillRequest",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "internalType": "bytes32"
+            },
+            {
+              "name": "response",
+              "type": "bytes",
+              "internalType": "bytes"
+            },
+            {
+              "name": "err",
+              "type": "bytes",
+              "internalType": "bytes"
             }
           ],
           "outputs": [],
@@ -575,6 +737,19 @@
         },
         {
           "type": "function",
+          "name": "onChainAI",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
           "name": "removeConsumer",
           "inputs": [
             {
@@ -596,27 +771,27 @@
           "name": "sendRequest",
           "inputs": [
             {
-              "name": "",
+              "name": "subscriptionId",
               "type": "uint64",
               "internalType": "uint64"
             },
             {
-              "name": "",
+              "name": "data",
               "type": "bytes",
               "internalType": "bytes"
             },
             {
-              "name": "",
+              "name": "dataVersion",
               "type": "uint16",
               "internalType": "uint16"
             },
             {
-              "name": "",
+              "name": "callbackGasLimit",
               "type": "uint32",
               "internalType": "uint32"
             },
             {
-              "name": "",
+              "name": "donId",
               "type": "bytes32",
               "internalType": "bytes32"
             }
@@ -629,11 +804,92 @@
             }
           ],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setOnChainAI",
+          "inputs": [
+            {
+              "name": "onChainAI_",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "event",
+          "name": "ConsumerEvent",
+          "inputs": [
+            {
+              "name": "consumer",
+              "type": "address",
+              "indexed": true,
+              "internalType": "address"
+            },
+            {
+              "name": "subscriptionId",
+              "type": "uint64",
+              "indexed": true,
+              "internalType": "uint64"
+            },
+            {
+              "name": "allowed",
+              "type": "bool",
+              "indexed": true,
+              "internalType": "bool"
+            }
+          ],
+          "anonymous": false
+        },
+        {
+          "type": "event",
+          "name": "RequestEvent",
+          "inputs": [
+            {
+              "name": "requestId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "data",
+              "type": "bytes",
+              "indexed": false,
+              "internalType": "bytes"
+            },
+            {
+              "name": "subscriptionId",
+              "type": "uint64",
+              "indexed": true,
+              "internalType": "uint64"
+            },
+            {
+              "name": "donId",
+              "type": "bytes32",
+              "indexed": true,
+              "internalType": "bytes32"
+            },
+            {
+              "name": "dataVersion",
+              "type": "uint16",
+              "indexed": false,
+              "internalType": "uint16"
+            },
+            {
+              "name": "callbackGasLimit",
+              "type": "uint32",
+              "indexed": false,
+              "internalType": "uint32"
+            }
+          ],
+          "anonymous": false
         }
       ]
     },
     "OnChainAIv1": {
-      "address": "0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd",
+      "address": "0xeFeF25D7AD0689c29c400eD6eC29c57Cb86cB058",
       "abi": [
         {
           "type": "constructor",
@@ -1092,19 +1348,92 @@
     }
   },
   "84532": {
-    "Counter": {
-      "address": "0x1bC96A82609F23419065FCEf120E16E2A6Bd3981",
+    "Faucet": {
+      "address": "0xafdB96b80590042c2B557D38Ea4a4b9EceAf262b",
       "abi": [
         {
-          "type": "function",
-          "name": "increment",
+          "type": "constructor",
           "inputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "receive",
+          "stateMutability": "payable"
+        },
+        {
+          "type": "function",
+          "name": "allowedRequester",
+          "inputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "",
+              "type": "bool",
+              "internalType": "bool"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "owner",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "stateMutability": "view"
+        },
+        {
+          "type": "function",
+          "name": "requestSomeEther",
+          "inputs": [
+            {
+              "name": "receiver",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
         {
           "type": "function",
-          "name": "number",
+          "name": "setAllowedRequester",
+          "inputs": [
+            {
+              "name": "requester",
+              "type": "address",
+              "internalType": "address"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "setAmount",
+          "inputs": [
+            {
+              "name": "amount",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "outputs": [],
+          "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "someAmount",
           "inputs": [],
           "outputs": [
             {
@@ -1117,29 +1446,95 @@
         },
         {
           "type": "function",
-          "name": "setNumber",
-          "inputs": [
-            {
-              "name": "newNumber",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
+          "name": "withdraw",
+          "inputs": [],
           "outputs": [],
           "stateMutability": "nonpayable"
         },
         {
-          "type": "event",
-          "name": "NumberChanged",
+          "type": "error",
+          "name": "FailedToSendEther",
           "inputs": [
             {
-              "name": "newNumber",
+              "name": "balance",
               "type": "uint256",
-              "indexed": false,
+              "internalType": "uint256"
+            },
+            {
+              "name": "someAmount",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "result",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "FailedToWithdrawEther",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "result",
+              "type": "bytes",
+              "internalType": "bytes"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotAllowedRequester",
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotEnoughBalance",
+          "inputs": [
+            {
+              "name": "balance",
+              "type": "uint256",
+              "internalType": "uint256"
+            },
+            {
+              "name": "someAmount",
+              "type": "uint256",
               "internalType": "uint256"
             }
-          ],
-          "anonymous": false
+          ]
+        },
+        {
+          "type": "error",
+          "name": "NotForZeroAddress",
+          "inputs": []
+        },
+        {
+          "type": "error",
+          "name": "NotOwner",
+          "inputs": [
+            {
+              "name": "sender",
+              "type": "address",
+              "internalType": "address"
+            },
+            {
+              "name": "owner",
+              "type": "address",
+              "internalType": "address"
+            }
+          ]
         }
       ]
     },
@@ -1603,57 +1998,6 @@
     }
   },
   "11155420": {
-    "Counter": {
-      "address": "0x8354Ef7b78012151c276f51F8d19147FF8C47288",
-      "abi": [
-        {
-          "type": "function",
-          "name": "increment",
-          "inputs": [],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "function",
-          "name": "number",
-          "inputs": [],
-          "outputs": [
-            {
-              "name": "",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "stateMutability": "view"
-        },
-        {
-          "type": "function",
-          "name": "setNumber",
-          "inputs": [
-            {
-              "name": "newNumber",
-              "type": "uint256",
-              "internalType": "uint256"
-            }
-          ],
-          "outputs": [],
-          "stateMutability": "nonpayable"
-        },
-        {
-          "type": "event",
-          "name": "NumberChanged",
-          "inputs": [
-            {
-              "name": "newNumber",
-              "type": "uint256",
-              "indexed": false,
-              "internalType": "uint256"
-            }
-          ],
-          "anonymous": false
-        }
-      ]
-    },
     "OnChainAIv1": {
       "address": "0x879ae6BC9a6173A14111FE204ec0E14DCB619e9E",
       "abi": [

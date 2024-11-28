@@ -1,14 +1,8 @@
 <script lang="ts">
   import { InputBase } from "$lib/scaffold-eth/components";
   import { createWriteOnchainAI } from "$lib/onchain-ai/runes";
-  import { notification } from "$lib/scaffold-eth/ts";
-  import { createChainId } from "$lib/scaffold-eth/runes";
-  import { readConfig } from "@onchain-ai/common";
 
   let { hash = $bindable() }: { hash?: `0x${string}` } = $props();
-
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const config = $derived(readConfig(chainIdCurrent));
 
   let txReceipt = $state();
   let prompt: string = $state("");
@@ -33,11 +27,11 @@
 </script>
 
 <div class="flex justify-center">
-  <div class="w-full max-w-xl">
+  <div id="ask-input" class="w-full max-w-xl">
     <InputBase name="Prompt" placeholder="Enter your question" onchange={(input) => (prompt = input)} value={prompt} />
   </div>
 
-  <button class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>
+  <button id="ask-button" class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>
     <span class="text-lg">Send</span>
   </button>
 </div>

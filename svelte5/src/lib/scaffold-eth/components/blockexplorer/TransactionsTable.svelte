@@ -1,13 +1,11 @@
 <script lang="ts">
   import { Address } from "$lib/scaffold-eth/components";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes/targetNetwork.svelte";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import type { TransactionWithFunction, TransactionsTableProps } from "$lib/scaffold-eth/ts/block";
   import { formatEther } from "viem";
   import TransactionHash from "./TransactionHash.svelte";
 
   const { blocks, transactionReceipts }: TransactionsTableProps = $props();
-
-  const targetNetwork = $derived.by(createTargetNetwork());
 </script>
 
 <div class="flex justify-center px-4 md:px-0">

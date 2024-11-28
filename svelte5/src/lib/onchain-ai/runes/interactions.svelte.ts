@@ -74,6 +74,9 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
   // $inspect("interactions", interactions);
 
   return {
+    get lastInteraction() {
+      return interactions[0] || {};
+    },
     get interactions() {
       return interactions;
     },

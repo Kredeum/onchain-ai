@@ -1,7 +1,11 @@
 <script lang="ts">
   import { SmartContract } from "$lib/wagmi/classes";
+  import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
 
-  const smartContract = new SmartContract({ name: "OnChainAIv1" });
+  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
+  $inspect("owner", JSON.stringify(owner, null, 2));
+
+  const smartContract = new SmartContract("OnChainAIv1");
 
   let refresh = $state<number>();
   let data = $state();
@@ -19,6 +23,11 @@
 <div class="p-4">
   data = {smartContract.dataRead}
 </div>
+
+<div class="p-4">
+  owner = {owner}
+</div>
+
 <div class="p-4">
   <button class="btn btn-primary" onclick={smartContractCall}>Refresh</button>
 </div>

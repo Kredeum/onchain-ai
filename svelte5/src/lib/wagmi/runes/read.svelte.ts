@@ -1,8 +1,8 @@
 import type { Abi, AbiFunction, AbiParameter } from "abitype";
 import type { Address } from "viem";
 import { type ReadContractReturnType, readContract, deepEqual } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
-import { createChainId } from "$lib/scaffold-eth/runes";
+import { wagmiConfig } from "$lib/wagmi/ts";
+import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
 
 const createReadContract = ({
   chainId: chainIdParam,
@@ -12,17 +12,14 @@ const createReadContract = ({
   abi,
   onStart = true
 }: {
-  chainId?: number;
+  chainId?: TargetNetworkId;
   address: Address;
   functionName: string;
   args?: unknown[];
   abi: Abi;
   onStart?: boolean;
 }) => {
-  const config = $derived.by(createConfig());
-
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const chainId = $derived(chainIdParam || chainIdCurrent);
+  const chainId = $derived(chainIdParam || targetNetwork.id);
 
   let data: ReadContractReturnType = $state();
   let isFetching = $state(false);
@@ -40,7 +37,7 @@ const createReadContract = ({
     isFetching = true;
 
     try {
-      const newData = await readContract(config, { chainId, address, abi, functionName, args });
+      const newData = await readContract(wagmiConfig, { chainId, address, abi, functionName, args });
       if (!deepEqual($state.snapshot(data), newData)) data = newData;
     } catch (e: unknown) {
       console.error("createReadContract ERROR", e);

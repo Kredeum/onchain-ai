@@ -1,13 +1,12 @@
 import { type Abi } from "abitype";
 import { type Address } from "viem";
 import { type DeploymentContractName, readDeploymentContract } from "@onchain-ai/common";
-import { createChainId } from "$lib/scaffold-eth/runes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { createPublicClient, createAccount } from "$lib/wagmi/runes";
 
 const createContract = (name: DeploymentContractName) => {
   const client = $derived.by(createPublicClient());
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const { address, abi } = $derived(readDeploymentContract(chainIdCurrent, name));
+  const { address, abi } = $derived(readDeploymentContract(targetNetwork.id, name));
   const { account } = $derived(createAccount());
   const { address: acountAddress } = $derived(account);
 
@@ -18,7 +17,7 @@ const createContract = (name: DeploymentContractName) => {
       return client;
     },
     get chainId() {
-      return chainIdCurrent;
+      return targetNetwork.id;
     },
     get address() {
       return address as Address;

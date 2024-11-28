@@ -1,7 +1,8 @@
 <script lang="ts">
   import { type Address as AddressType } from "viem";
   import { type ContractName } from "$lib/scaffold-eth/ts";
-  import { createDeployedContractInfo, createTargetNetwork, createNetworkColor } from "$lib/scaffold-eth/runes";
+  import { createDeployedContractInfo, createNetworkColor } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import {
     Address,
     Balance,
@@ -16,7 +17,6 @@
     createDeployedContractInfo(contractName)
   );
 
-  const targetNetwork = $derived.by(createTargetNetwork());
   const networkColor = $derived.by(createNetworkColor());
 
   let refreshDisplayVariables = $state(false);
@@ -26,11 +26,7 @@
   <div class="mt-14">
     <span class="loading loading-spinner loading-lg"></span>
   </div>
-{:else if !deployedContractData}
-  <p class="mt-14 text-3xl">
-    No contract found by the name of "{contractName}" on chain "{targetNetwork.name}"!
-  </p>
-{:else}
+{:else if deployedContractData?.address}
   <div class="my-0 grid w-full max-w-7xl grid-cols-1 px-6 lg:grid-cols-6 lg:gap-12 lg:px-10" class:hidden>
     <div class="col-span-5 grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-10">
       <div class="col-span-1 flex flex-col">
@@ -97,4 +93,8 @@
       </div>
     </div>
   </div>
+{:else}
+  <p class="mt-14 text-3xl">
+    No contract found by the name of "{contractName}" on chain "{targetNetwork.name}"!
+  </p>
 {/if}

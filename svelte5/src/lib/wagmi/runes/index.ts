@@ -1,4 +1,3 @@
-export * from "./config.svelte";
 export * from "./account.svelte";
 export * from "./contract.svelte";
 export * from "./ens.svelte";

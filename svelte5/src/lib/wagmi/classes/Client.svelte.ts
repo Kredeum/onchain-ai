@@ -1,24 +1,18 @@
-import {
-  getPublicClient,
-  type GetPublicClientReturnType as WagmiPublicType,
-  watchPublicClient,
-  type WatchPublicClientReturnType
-} from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
-import type { Config as WagmiConfigType } from "@wagmi/core";
+import { getPublicClient, watchPublicClient, type GetPublicClientReturnType } from "@wagmi/core";
+import { wagmiConfig } from "$lib/wagmi/ts";
+
+type PublicClientType = typeof Client.prototype.publicClient;
 
 class Client {
-  config: WagmiConfigType = $derived.by(createConfig());
+  publicClient = $state(getPublicClient(wagmiConfig));
 
-  publicClient: WagmiPublicType = $state(getPublicClient(this.config));
-
-  onChange(publicClient: WagmiPublicType) {
+  onChange(publicClient: PublicClientType) {
     this.publicClient = publicClient;
   }
 
-  unsubscribe: WatchPublicClientReturnType = $derived.by(() => {
+  unsubscribe = $derived.by(() => {
     this.unsubscribe?.();
-    return watchPublicClient(this.config, { onChange: this.onChange });
+    return watchPublicClient(wagmiConfig, { onChange: this.onChange });
   });
 }
 

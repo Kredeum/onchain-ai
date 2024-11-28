@@ -1,5 +1,5 @@
 import { type Wallet, ethers } from "ethers";
-import { readConfig } from "@onchain-ai/common";
+import { readChainLinkConfig } from "@onchain-ai/common";
 import promptSync from "prompt-sync";
 import fs from "fs";
 
@@ -11,7 +11,7 @@ const getWallet = async (chainId: number): Promise<Wallet> => {
   const privateKey = process.env.DEPLOYER_PRIVATE_KEY;
   const keystoreDir = process.env.KEYSTORE_DIR;
 
-  const { rpc } = readConfig(chainId);
+  const { rpc } = readChainLinkConfig(chainId);
   if (!rpc) throw new Error(`❌ rpc not provided for chainId: ${chainId} - check your config`);
 
   if (!rpcApiKey) throw new Error("❌ rpcApiKey not provided - check your ENV variables");

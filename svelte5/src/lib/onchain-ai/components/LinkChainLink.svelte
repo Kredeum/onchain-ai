@@ -1,17 +1,12 @@
 <script lang="ts">
-  import { readConfig } from "@onchain-ai/common";
-  import { createChainId } from "$lib/scaffold-eth/runes";
   import { Link } from "$lib/wagmi/components";
+  import { ChainLink } from "$lib/onchain-ai/runes";
 
   const { requestId }: { requestId?: `0x${string}` } = $props();
 
-  const { chainIdCurrent } = $derived.by(createChainId);
-  const config = $derived(readConfig(chainIdCurrent));
-
-  const href = $derived(
-    `https://functions.chain.link/${config.chainName}/${config.subscriptionId}` +
-      (requestId ? `#/side-drawer/request/${requestId}` : "")
-  );
+  const chainLink = new ChainLink({ requestId });
 </script>
 
-<Link {href} description="chainlink" />
+<span class="text-gray-400 italic">
+  <Link href={chainLink?.href} description="ChainLink" />
+</span>

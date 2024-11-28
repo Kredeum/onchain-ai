@@ -1,16 +1,13 @@
 <script lang="ts">
   import type { Address } from "viem";
-  import scaffoldConfig from "$lib/scaffold.config";
   import { createNetworkColor } from "$lib/scaffold-eth/runes";
   import { formatENS, formatAddress, getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
   import { createEnsAvatar, createAccount, createEnsName } from "$lib/wagmi/runes";
   import { Balance } from "$lib/scaffold-eth/components";
-  import { createTargetNetwork } from "$lib/scaffold-eth/runes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import AddressInfoDropdown from "./AddressInfoDropdown.svelte";
   import AddressQRCodeModal from "./AddressQRCodeModal.svelte";
   import { Connect } from "$lib/wagmi/components";
-
-  const targetNetwork = $derived.by(createTargetNetwork());
 
   const { account } = $derived(createAccount());
   const { address, chain, chainId, isConnected } = $derived(account);
@@ -21,8 +18,11 @@
   const { ensName: name } = $derived(createEnsName(address));
   const { ensAvatar } = $derived(createEnsAvatar(name));
 
-  const blockExplorerAddressLink = $derived(address ? getBlockExplorerAddressLink(targetNetwork, address) : undefined);
+  const blockExplorerAddressLink = $derived(
+    address ? getBlockExplorerAddressLink(targetNetwork.chain, address) : undefined
+  );
 
+  const normalizeName = (name: string | undefined): string => (name ? name.toLowerCase().replace(/\s+/g, "-") : "");
   // $inspect("<ConnectButton", chainId, address);
 </script>
 
@@ -34,7 +34,12 @@
 {:else}
   <div class="mr-1 flex flex-col items-center">
     <Balance address={address as Address} class="h-auto min-h-0" />
-    <span id="connected-network" class="text-xs" style:color={networkColor}>
+    <span
+      id="connected-network"
+      data-chain-name={normalizeName(chain?.name)}
+      class="text-xs"
+      style:color={networkColor}
+    >
       {chain?.name}
     </span>
   </div>

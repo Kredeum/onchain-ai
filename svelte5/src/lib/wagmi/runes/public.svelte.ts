@@ -4,17 +4,15 @@ import {
   watchPublicClient,
   type WatchPublicClientReturnType
 } from "@wagmi/core";
-import { createConfig } from "$lib/wagmi/runes";
-import type { Config as WagmiConfigType } from "@wagmi/core";
+import { wagmiConfig } from "$lib/wagmi/ts";
 
 const createPublicClient = () => {
-  const config = $derived.by(createConfig());
-  let publicClient = $state(getPublicClient(config));
+  let publicClient = $state(getPublicClient(wagmiConfig));
 
   let unsubscribe: WatchPublicClientReturnType;
   $effect(() => {
     unsubscribe?.();
-    unsubscribe = watchPublicClient(config, {
+    unsubscribe = watchPublicClient(wagmiConfig, {
       onChange(newPublicClient) {
         publicClient = newPublicClient;
       }
