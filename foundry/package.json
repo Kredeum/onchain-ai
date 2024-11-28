@@ -1,7 +1,7 @@
 {
   "main": "index.js",
   "name": "@onchain-ai/foundry",
-  "version": "1.0.8",
+  "version": "1.0.10",
   "author": "Kredeum",
   "description": "OnChainAI Foundry package",
   "keywords": [],

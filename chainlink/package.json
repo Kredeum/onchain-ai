@@ -1,6 +1,16 @@
 {
+  "version": "1.0.10",
   "author": "Kredeum",
+  "keywords": [],
+  "license": "ISC",
+  "name": "@onchain-ai/chainlink",
   "description": "OnChainAI Chainlink package",
+  "scripts": {
+    "clean": "rm -rf node_modules .turbo",
+    "format": "prettier --write --list-different .",
+    "check": "prettier --check . && eslint **/*.ts",
+    "secrets": "ts-node scripts/upload-secrets.ts"
+  },
   "devDependencies": {
     "@chainlink/functions-toolkit": "^0.3.2",
     "@onchain-ai/common": "workspace:^",
@@ -16,15 +26,5 @@
     "type-fest": "^4.29.0",
     "typescript-eslint": "^8.16.0",
     "utf-8-validate": "^5.0.10"
-  },
-  "keywords": [],
-  "license": "ISC",
-  "name": "@onchain-ai/chainlink",
-  "scripts": {
-    "clean": "rm -rf node_modules .turbo",
-    "format": "prettier --write --list-different .",
-    "check": "prettier --check . && eslint **/*.ts",
-    "secrets": "ts-node scripts/upload-secrets.ts"
-  },
-  "version": "1.0.5"
+  }
 }

@@ -1,6 +1,16 @@
 {
   "author": "Kredeum",
   "description": "OnChainAI Common package",
+  "keywords": [],
+  "license": "ISC",
+  "name": "@onchain-ai/common",
+  "version": "1.0.10",
+  "scripts": {
+    "clean": "rm -rf node_modules .turbo",
+    "format": "prettier --write --list-different .",
+    "check": "prettier --check . && eslint **/*.ts",
+    "build": "ts-node script/mergeAbis.ts"
+  },
   "devDependencies": {
     "@types/node": "^22.10.1",
     "eslint": "^9.15.0",
@@ -8,15 +18,5 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
     "viem": "^2.21.51"
-  },
-  "keywords": [],
-  "license": "ISC",
-  "name": "@onchain-ai/common",
-  "scripts": {
-    "clean": "rm -rf node_modules .turbo",
-    "format": "prettier --write --list-different .",
-    "check": "prettier --check . && eslint **/*.ts",
-    "build": "ts-node script/mergeAbis.ts"
-  },
-  "version": "1.0.5"
+  }
 }
