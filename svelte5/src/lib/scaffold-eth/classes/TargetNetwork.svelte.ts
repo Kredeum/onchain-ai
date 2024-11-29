@@ -1,6 +1,7 @@
 import scaffoldConfig from "$lib/scaffold.config";
 import { NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
-import { createAccount } from "$lib/wagmi/runes";
+import { Account } from "$lib/wagmi/classes";
+import { createNativeCurrencyPrice } from "../runes";
 
 type TargetNetworkChain = (typeof scaffoldConfig.targetNetworks)[number];
 type TargetNetworkId = TargetNetworkChain["id"];
@@ -22,14 +23,20 @@ class TargetNetwork {
   nativeCurrencyPrice: number = $state(0);
 
   constructor() {
-    const { account } = $derived(createAccount());
-    const chainId = $derived(account.chain?.id || 0);
+    const account = new Account();
+    const price = createNativeCurrencyPrice();
 
     $effect(() => {
-      const newNetwork = scaffoldConfig.targetNetworks.find((nw) => nw.id === chainId && nw.id !== this.id);
+      const newNetwork = scaffoldConfig.targetNetworks.find((nw) => nw.id === account.chainId && nw.id !== this.id);
 
-      if (newNetwork) this.chain = { ...newNetwork, ...NETWORKS_EXTRA_DATA[chainId] };
+      if (newNetwork && account.chainId) this.chain = { ...newNetwork, ...NETWORKS_EXTRA_DATA[account.chainId] };
     });
+
+    $effect(() => {
+      this.nativeCurrencyPrice = price.nativeCurrencyPrice;
+    });
+
+    $inspect("TargetNetwork", this.id, this.name);
   }
 }
 

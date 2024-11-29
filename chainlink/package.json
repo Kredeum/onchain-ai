@@ -9,7 +9,7 @@
     "clean": "rm -rf node_modules .turbo",
     "format": "prettier --write --list-different .",
     "check": "prettier --check . && eslint **/*.ts",
-    "secrets": "ts-node scripts/upload-secrets.ts"
+    "secrets": "ts-node script/upload-secrets.ts"
   },
   "devDependencies": {
     "@chainlink/functions-toolkit": "^0.3.2",

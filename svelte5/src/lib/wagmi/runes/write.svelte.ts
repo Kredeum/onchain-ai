@@ -1,7 +1,7 @@
 import { type Abi } from "abitype";
 import type { Address } from "viem";
 import { waitForTransactionReceipt, writeContract } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
 import { notification } from "$lib/scaffold-eth/ts";
 import { LinkTx } from "$lib/wagmi/components";

@@ -2,7 +2,7 @@ import { type Address } from "viem";
 import { isAddress } from "$lib/scaffold-eth/ts";
 
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 
 const createEnsName = (
   address?: Address | string | null | undefined

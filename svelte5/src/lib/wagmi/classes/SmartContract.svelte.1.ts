@@ -1,7 +1,7 @@
 import { readDeploymentContract, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
 import jsonDeployments from "$lib/deployments.json";
 import type { Abi, AbiFunction, Address } from "viem";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 import {
   type ReadContractReturnType,
   deepEqual,

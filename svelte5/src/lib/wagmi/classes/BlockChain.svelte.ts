@@ -5,7 +5,7 @@ import {
   watchBlockNumber as watchBlockNumberWagmi
 } from "@wagmi/core";
 import { disconnect as disconnectWagmi } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 import type { TargetNetworkId } from "$lib/scaffold-eth/classes";
 
 class BlockChain {

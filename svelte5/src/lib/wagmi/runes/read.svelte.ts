@@ -1,7 +1,7 @@
 import type { Abi, AbiFunction, AbiParameter } from "abitype";
 import type { Address } from "viem";
 import { type ReadContractReturnType, readContract, deepEqual } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
 
 const createReadContract = ({

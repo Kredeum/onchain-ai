@@ -1,6 +1,6 @@
 import { createClient, http } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";
-import { createConfig } from "@wagmi/core";
+import { createConfig, getConnections, getPublicClient, reconnect } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 import { createBurnerConnector } from "$lib/burner-wallet";
 import { getAlchemyHttpUrl } from "$lib/scaffold-eth/ts";
@@ -31,10 +31,29 @@ const wagmiConfig = createConfig({
   connectors,
   client({ chain }) {
     const client = createClient({ chain, transport: http(getAlchemyHttpUrl(chain.id)) });
-    console.log("client created:", chain.id, client);
+    console.log("WAGMI client created:", chain.id, client);
     if (chain.id === anvil.id) client.pollingInterval = scaffoldConfig.pollingInterval;
     return client;
   }
 });
 
-export { wagmiConfig };
+class Wagmi {
+  publicClient = $derived.by(() => getPublicClient(wagmiConfig));
+
+  recentConnectorId = $state();
+
+  reconnect = async () => {
+    this.recentConnectorId = await wagmiConfig.storage?.getItem("recentConnectorId");
+    if (this.recentConnectorId) reconnect(wagmiConfig);
+  };
+
+  constructor() {
+    this.reconnect();
+  }
+}
+
+let wagmi: Wagmi;
+// Should only be instantiate once, by main app `ScaffoldEthApp.svelte`
+const newWagmi = () => (wagmi ||= new Wagmi());
+
+export { newWagmi, wagmi, wagmiConfig };

@@ -10,7 +10,8 @@
   import { createTransactor } from "$lib/scaffold-eth/runes";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { IntegerInput, InheritanceTooltip, ContractInput, DisplayTxResult } from "$lib/scaffold-eth/components";
-  import { createAccount, createWriteContract } from "$lib/wagmi/runes";
+  import { createWriteContract } from "$lib/wagmi/runes";
+  import { Account } from "$lib/wagmi/classes";
 
   const {
     abi,
@@ -31,10 +32,9 @@
   let txHash: `0x${string}` | undefined = $state();
   let txReceipt = $state();
 
-  const { account } = $derived(createAccount());
-  const { chain } = $derived(account);
+  const account = new Account();
 
-  const writeDisabled = $derived(!chain || chain?.id !== targetNetwork.id);
+  const writeDisabled = $derived(account.chainId !== targetNetwork.id);
   let writeTxn = $derived.by(createTransactor());
 
   let { send, wait, waitingTxHash, waitingTxReceipt } = $derived(

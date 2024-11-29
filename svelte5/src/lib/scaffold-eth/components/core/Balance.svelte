@@ -12,10 +12,10 @@
   const balance = $derived(address && new Balance({ address }));
 
   const formattedBalance = $derived(Number(formatEther(balance?.value || 0n)));
-  let displayUsdMode = $state(targetNetwork.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);
+  let displayUsdMode = $state(targetNetwork?.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);
 
   const toggleBalanceMode = () => {
-    if (targetNetwork.nativeCurrencyPrice > 0) {
+    if (targetNetwork?.nativeCurrencyPrice > 0) {
       displayUsdMode = !displayUsdMode;
     }
   };

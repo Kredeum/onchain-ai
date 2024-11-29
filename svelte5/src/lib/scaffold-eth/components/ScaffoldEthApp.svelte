@@ -1,35 +1,13 @@
 <script lang="ts">
-  import { reconnect } from "@wagmi/core";
-  import { untrack, type Snippet } from "svelte";
-  import { wagmiConfig } from "$lib/wagmi/ts";
-  import { createNativeCurrencyPrice, createDarkMode } from "$lib/scaffold-eth/runes";
+  import { onMount, type Snippet } from "svelte";
   import { newTargetNetwork } from "$lib/scaffold-eth/classes";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { newWagmi } from "$lib/wagmi/classes";
   import { Header, Footer } from "$lib/scaffold-eth/components";
 
   let { children }: { children: Snippet } = $props();
 
-  const price = createNativeCurrencyPrice();
-
+  newWagmi();
   newTargetNetwork();
-
-  $effect(() => {
-    targetNetwork.nativeCurrencyPrice = price.nativeCurrencyPrice;
-  });
-
-  $effect(() => {
-    untrack(async () => {
-      try {
-        const recentConnectorId = await wagmiConfig.storage?.getItem("recentConnectorId");
-
-        if (recentConnectorId) reconnect(wagmiConfig);
-      } catch (e) {
-        console.error("Failed to reconnect wallet", e);
-      }
-    });
-  });
-
-  const { isDarkMode } = $derived.by(createDarkMode());
 </script>
 
 <div class="flex min-h-screen flex-col">

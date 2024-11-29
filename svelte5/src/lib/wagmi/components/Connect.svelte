@@ -4,7 +4,7 @@
   import { connect, getConnectors, switchChain, type GetConnectorsReturnType } from "@wagmi/core";
 
   import scaffoldConfig from "$lib/scaffold.config";
-  import { wagmiConfig } from "$lib/wagmi/ts";
+  import { wagmiConfig } from "$lib/wagmi/classes";
   import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
   import { anvil } from "viem/chains";
 
@@ -61,9 +61,8 @@
 
     address = wallet.accounts[0];
 
-    // if not on an existing configurated network, switch to default one
     if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === wallet.chainId)) {
-      console.log("<Connect connectWallet ~ switch default Chain:", targetNetwork.idDefault);
+      console.log("<Connect connectWallet ~ switch to default Chain:", targetNetwork.idDefault);
       switchChain(wagmiConfig, { chainId: targetNetwork.idDefault });
       chainId = targetNetwork.idDefault;
     } else {
@@ -73,7 +72,7 @@
 
   let modalDisplay = $state(false);
 
-  // $inspect("<Connect", chainId, address);
+  $inspect("<Connect", chainId, address);
 </script>
 
 <button id="connect-wallet" class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}>

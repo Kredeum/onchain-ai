@@ -1,5 +1,5 @@
 import { getBalance as getBalanceWagmi } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 import { type Address, isAddress } from "viem";
 import { BlockChain } from "$lib/wagmi/classes";
 import { untrack } from "svelte";

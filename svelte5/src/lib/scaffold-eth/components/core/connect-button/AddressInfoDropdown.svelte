@@ -16,7 +16,7 @@
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { BlockChain } from "$lib/wagmi/classes";
-  import { createAccount } from "$lib/wagmi/runes";
+  import { Account } from "$lib/wagmi/classes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
 
@@ -34,10 +34,9 @@
 
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 
-  const { account } = $derived.by(createAccount);
+  const account = new Account();
   const switchEnabled = $derived(
-    getTargetNetworks().length > 1 &&
-      !(account?.connector?.id === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet)
+    getTargetNetworks().length > 1 && !(account.connectorId === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet)
   );
 
   let dropdown: HTMLElement | undefined = undefined;

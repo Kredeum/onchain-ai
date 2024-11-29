@@ -1,5 +1,8 @@
 <script lang="ts">
   import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
+  import { Account, wagmiConfig } from "$lib/wagmi/classes";
+
+  const account = new Account();
 
   let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
 
@@ -7,5 +10,5 @@
 </script>
 
 <div class="p-4">
-  owner = {owner}
+  owner = {owner} / {account.address}
 </div>
