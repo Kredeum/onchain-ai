@@ -1,14 +1,11 @@
 <script lang="ts">
-  import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
-  import { Account, wagmiConfig } from "$lib/wagmi/classes";
+  import { OnChainAI } from "$lib/onchain-ai/classes";
 
-  const account = new Account();
+  const onChainAI = new OnChainAI();
 
-  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
-
-  $inspect("owner", JSON.stringify(owner, null, 2));
+  $inspect("OnChainAI owner", onChainAI.owner);
 </script>
 
 <div class="p-4">
-  owner = {owner} / {account.address}
+  owner = {onChainAI.owner}
 </div>

@@ -52,17 +52,38 @@ type DeploymentContract = { address: Address; abi: Abi };
 
 const readDeploymentContract = (
   chainId: number | string,
-  name: DeploymentContractName
+  contractName: string
 ): DeploymentContract => {
   const chainDeployment = readDeploymentsChain(chainId);
 
-  if (!(name in chainDeployment))
-    throw new Error(`No deployment found for ${name} for chainId ${chainId}!`);
+  if (!(contractName in chainDeployment)) {
+    console.log("ERROR readDeploymentContract |", contractName, "|", chainDeployment);
+    throw new Error(`No deployment found for ${contractName} for chainId ${chainId}!`);
+  }
 
-  return chainDeployment[name as DeploymentContractKey] as DeploymentContract;
+  return chainDeployment[contractName as DeploymentContractKey] as DeploymentContract;
 };
 
-export { readChainLinkConfig, readAddresses, readDeploymentsChain, readDeploymentContract };
+// search contract name when contract is referenced by its address
+const findDeploymentContractName = (chainId: number, address: Address) => {
+  const deployments: DeploymentsChain = readDeploymentsChain(chainId);
+  const deploymentsContractName = Object.keys(deployments) as DeploymentContractKey[];
+  const name = deploymentsContractName.find(
+    (contractName) => deployments[contractName].address === address
+  );
+
+  if (!name) throw new Error("No contract found, address mismatch");
+
+  return name;
+};
+
+export {
+  readChainLinkConfig,
+  readAddresses,
+  readDeploymentsChain,
+  readDeploymentContract,
+  findDeploymentContractName
+};
 export type {
   ChainLinkConfigChains,
   ChainLinkConfigChainId,

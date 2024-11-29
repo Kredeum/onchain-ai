@@ -1,27 +1,24 @@
 <script lang="ts">
   import { SmartContract } from "$lib/wagmi/classes";
   import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
+  import { OnChainAI } from "$lib/onchain-ai/classes";
 
-  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
-  $inspect("owner", JSON.stringify(owner, null, 2));
+  // 1. Simple way, using specific OnChainAI class
+  const onChainAI = new OnChainAI();
 
+  // 2. Complex way, using generic SmartContract class and IFFE for async effect
   const smartContract = new SmartContract("OnChainAIv1");
-
-  let refresh = $state<number>();
-  let data = $state();
-
-  const smartContractCall = async () => (data = await smartContract.call({ functionName: "owner" }));
-
+  let dataOwner = $state();
   $effect(() => {
-    refresh;
-    smartContractCall();
+    (async () => (dataOwner = await smartContract.call("owner")))();
   });
 
-  $inspect("data", data);
+  // 3. Old way, using createRead...
+  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
 </script>
 
 <div class="p-4">
-  data = {smartContract.dataRead}
+  owner = {onChainAI.owner}
 </div>
 
 <div class="p-4">
@@ -29,5 +26,5 @@
 </div>
 
 <div class="p-4">
-  <button class="btn btn-primary" onclick={smartContractCall}>Refresh</button>
+  dataOwner = {dataOwner}
 </div>

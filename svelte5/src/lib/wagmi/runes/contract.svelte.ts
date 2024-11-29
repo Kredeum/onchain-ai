@@ -5,6 +5,8 @@ import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { Account, wagmi } from "$lib/wagmi/classes";
 
 const createContract = (name: DeploymentContractName) => {
+  if (!name) throw new Error("No contract name provided!");
+
   const client = wagmi.publicClient;
   const { address, abi } = $derived(readDeploymentContract(targetNetwork.id, name));
   const account = new Account();

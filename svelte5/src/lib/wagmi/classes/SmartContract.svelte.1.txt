@@ -14,43 +14,6 @@ import { notification } from "$lib/scaffold-eth/ts";
 import { LinkTx } from "../components";
 
 class SmartContract {
-  chainId = $derived(targetNetwork.id);
-  address = $state<Address>();
-  abi = $state<Abi>();
-  dataRead = $state<ReadContractReturnType>();
-
-  // Read SmartContract : call
-  calling = $state(false);
-  call = async ({ functionName = "", args = [] }: { functionName?: string; args?: unknown[] }) => {
-    if (this.calling) return;
-    if (!(this.abi && this.address)) return;
-
-    const abiFunction = (this.abi as unknown as AbiFunction[]).find(
-      (f) => f.type === "function" && f.name === functionName
-    );
-    const abiFunctionInputsLength = abiFunction?.inputs?.length || 0;
-
-    // waiting for params in args
-    if (args.length !== abiFunctionInputsLength) {
-      console.warn("args mismatch", args.length, abiFunctionInputsLength, args);
-      return;
-    }
-
-    this.calling = true;
-
-    let data: ReadContractReturnType;
-    try {
-      this.dataRead = await readContract(wagmiConfig, { address: this.address, abi: this.abi, functionName, args });
-    } catch (e: unknown) {
-      console.error("SmartContract dataRead ERROR", e);
-    }
-
-    this.calling = false;
-
-    console.log("call= ~ this.dataRead:", this.chainId, this.dataRead);
-    return this.dataRead;
-  };
-
   // Write SmartContract : send then wait
   sendId = $state<string>("");
   sending = $derived(Boolean(this.sendId));
@@ -103,13 +66,6 @@ class SmartContract {
     this.waiting = false;
     return receipt;
   };
-
-  constructor(param: DeploymentContractName | { address: Address; abi: Abi }) {
-    ({ address: this.address, abi: this.abi } =
-      typeof param === "string" ? readDeploymentContract(this.chainId, param) : param);
-
-    $inspect("SC chainId", this.chainId, this.address, this.abi);
-  }
 }
 
 export { SmartContract };

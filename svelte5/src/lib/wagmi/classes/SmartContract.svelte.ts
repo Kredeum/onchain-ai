@@ -1,22 +1,25 @@
-import { readDeploymentContract, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
-import jsonDeployments from "$lib/deployments.json";
+import {
+  findDeploymentContractName,
+  readDeploymentContract,
+  readDeploymentsChain,
+  type DeploymentContractKey,
+  type DeploymentContractName,
+  type DeploymentsChain
+} from "@onchain-ai/common";
 import type { Abi, AbiFunction, Address } from "viem";
 import { wagmiConfig } from "$lib/wagmi/classes";
 import { type ReadContractReturnType, deepEqual, readContract } from "@wagmi/core";
 import { targetNetwork } from "$lib/scaffold-eth/classes";
 
 class SmartContract {
-  address = $state<Address>();
-  abi = $state<Abi>();
-  dataRead = $state<ReadContractReturnType>();
+  // contractName is constant (defined in constructor)
+  contractName = "";
 
-  calling = $state(false);
-  call = async ({ functionName = "", args = [] }: { functionName?: string; args?: unknown[] }) => {
-    if (!(this.abi && this.address)) return;
+  // call smartcontract named function with args
+  call = async (functionName: string = "", args: unknown[] = []) => {
+    const { address, abi } = readDeploymentContract(targetNetwork.id, this.contractName);
 
-    const abiFunction = (this.abi as unknown as AbiFunction[]).find(
-      (f) => f.type === "function" && f.name === functionName
-    );
+    const abiFunction = (abi as unknown as AbiFunction[]).find((f) => f.type === "function" && f.name === functionName);
     const abiFunctionInputsLength = abiFunction?.inputs?.length || 0;
 
     // waiting for params in args
@@ -25,32 +28,23 @@ class SmartContract {
       return;
     }
 
-    this.calling = true;
-
+    let data: ReadContractReturnType;
     try {
-      const newData = await readContract(wagmiConfig, { address: this.address, abi: this.abi, functionName, args });
-      if (!deepEqual($state.snapshot(this.dataRead), newData)) this.dataRead = newData;
+      data = await readContract(wagmiConfig, { address, abi, functionName, args });
     } catch (e: unknown) {
-      console.error("SmartContract dataRead ERROR", e);
+      console.warn("SMARTCONTRACT readContract interrupted", e);
     }
 
-    this.calling = false;
-
-    return this.dataRead;
+    return data;
   };
 
-  constructor(param: DeploymentContractName | { address: Address; abi: Abi }) {
-    // Reactive on chain change ONLY when contract name is passed as param
-    const multiChain = typeof param === "string";
+  // SmartContract created either by contract name or by address
+  constructor(param: DeploymentContractName | Address) {
+    const paramIsAddress = param.startsWith("0x");
 
-    if (!multiChain) ({ address: this.address, abi: this.abi } = param);
-    $effect(() => {
-      console.log("SMART CONTRACT EFFECT", targetNetwork.id, multiChain);
-      if (multiChain) ({ address: this.address, abi: this.abi } = readDeploymentContract(targetNetwork.id, param));
-    });
+    this.contractName = paramIsAddress ? findDeploymentContractName(targetNetwork.id, param as Address) : param;
 
-    console.info("SMART CONTRACT NEW", targetNetwork.id, this.address, multiChain, param);
-    $inspect("SMART CONTRACT INSPECT", targetNetwork.id, this.address, multiChain, param);
+    $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.contractName);
   }
 }
 

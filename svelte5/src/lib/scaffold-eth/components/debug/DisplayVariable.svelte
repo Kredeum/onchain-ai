@@ -22,16 +22,16 @@
     abi: Abi;
   } = $props();
 
-  const smartContract = new SmartContract({ address: contractAddress, abi });
+  const smartContract = new SmartContract(contractAddress);
 
-  const smartContractCall = () => smartContract.call({ functionName: abiFunction.name });
+  const smartContractCall = () => smartContract.call(abiFunction.name);
 
   $effect(() => {
     refreshDisplayVariables;
     untrack(() => smartContractCall());
   });
 
-  const showAnimation = $derived.by(createAnimationConfig(() => smartContract.dataRead));
+  const showAnimation = false; // $derived.by(createAnimationConfig(() => smartContract.dataRead));
 </script>
 
 <div class="space-y-1 pb-2">
@@ -53,7 +53,7 @@
           ? 'animate-pulse-fast rounded-sm bg-warning'
           : ''}"
       >
-        <DisplayTxResult content={smartContract.dataRead} />
+        <!-- <DisplayTxResult content={smartContract.dataRead} /> -->
       </div>
     </div>
   </div>

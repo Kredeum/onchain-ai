@@ -6,9 +6,9 @@
 
   const { account }: { account: Address } = $props();
 
-  let data = $derived(new LastInteraction(account));
+  let data = new LastInteraction(account);
 
-  // $inspect("<LastInteraction", data.lastInteraction);
+  $inspect("<LastInteraction", data.lastInteraction);
 </script>
 
 <div class="flex flex-col p-4 m-12 max-w-lg rounded-lg shadow-md bg-base-300">
