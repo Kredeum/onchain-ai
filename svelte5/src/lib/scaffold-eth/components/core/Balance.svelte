@@ -9,7 +9,7 @@
     usdMode = false
   }: { address?: Address; class?: string; usdMode?: boolean } = $props();
 
-  const balance = $derived(address && new Balance({ address }));
+  const balance = new Balance({ address });
 
   const formattedBalance = $derived(Number(formatEther(balance?.value || 0n)));
   let displayUsdMode = $state(targetNetwork?.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);

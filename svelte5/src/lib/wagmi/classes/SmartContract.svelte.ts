@@ -1,50 +1,82 @@
-import {
-  findDeploymentContractName,
-  readDeploymentContract,
-  readDeploymentsChain,
-  type DeploymentContractKey,
-  type DeploymentContractName,
-  type DeploymentsChain
-} from "@onchain-ai/common";
-import type { Abi, AbiFunction, Address } from "viem";
-import { wagmiConfig } from "$lib/wagmi/classes";
+import type { AbiFunction, Address } from "viem";
+import { SvelteMap } from "svelte/reactivity";
 import { type ReadContractReturnType, deepEqual, readContract } from "@wagmi/core";
 import { targetNetwork } from "$lib/scaffold-eth/classes";
+import { wagmiConfig } from "$lib/wagmi/classes";
+import { readDeployment, type DeploymentContractName } from "@onchain-ai/common";
+import { untrack } from "svelte";
+
+
+let counter = 0;
 
 class SmartContract {
-  // contractName is constant (defined in constructor)
-  contractName = "";
+  id = 0;
+  nameOrAddress: DeploymentContractName | Address;
+  chainId = $derived(targetNetwork.id);
 
-  // call smartcontract named function with args
-  call = async (functionName: string = "", args: unknown[] = []) => {
-    const { address, abi } = readDeploymentContract(targetNetwork.id, this.contractName);
+  getDataKey = (functionName: string, args: unknown[]): string =>
+    JSON.stringify({ chainId: this.chainId, functionName, args });
 
-    const abiFunction = (abi as unknown as AbiFunction[]).find((f) => f.type === "function" && f.name === functionName);
-    const abiFunctionInputsLength = abiFunction?.inputs?.length || 0;
+  #call = async (functionName: string = "", args: unknown[] = []) => {
+    const chainId = this.chainId;
+    const deployment = readDeployment(chainId, this.nameOrAddress);
+    console.log("SMARTCONTRACT readContract", chainId, functionName, deployment, args);
+    if (!deployment) return;
+    // console.log("SMARTCONTRACT readContract", chainId, functionName, deployment, args);
 
-    // waiting for params in args
-    if (args.length !== abiFunctionInputsLength) {
-      console.warn("args mismatch", args.length, abiFunctionInputsLength, args);
-      return;
-    }
+    const { address, abi } = deployment;
+    const abiFunction = (abi as unknown as AbiFunction[]).find(
+      (f) => f.type === "function" && f.name === functionName && f.inputs.length === args.length
+    );
+    if (!abiFunction) throw new Error(`Function call to ${functionName} with ${args.length} args not found`);
 
     let data: ReadContractReturnType;
     try {
       data = await readContract(wagmiConfig, { address, abi, functionName, args });
     } catch (e: unknown) {
-      console.warn("SMARTCONTRACT readContract interrupted", e);
+      const newChainId = targetNetwork.id;
+      if (newChainId === chainId) {
+        console.error(`SMARTCONTRACT readContract '${functionName}' error on chain '${chainId}'`, e);
+      } else {
+        console.warn(
+          `SMARTCONTRACT readContract '${functionName}' aborted`,
+          `while changing chain '${chainId}' => '${newChainId}'`
+        );
+      }
     }
 
     return data;
   };
 
-  // SmartContract created either by contract name or by address
-  constructor(param: DeploymentContractName | Address) {
-    const paramIsAddress = param.startsWith("0x");
+  isFetching = $state(false);
+  #datas: SvelteMap<string, unknown | undefined> = (new SvelteMap());
+  asyncCall = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
+    const dataKey = this.getDataKey(functionName, args);
 
-    this.contractName = paramIsAddress ? findDeploymentContractName(targetNetwork.id, param as Address) : param;
+    this.isFetching = true;
+    const newData = await this.#call(functionName, args);
+    this.isFetching = false;
 
-    $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.contractName);
+    const prevData = $state.snapshot(this.#datas.get(dataKey));
+    if (!deepEqual(prevData, newData)) {
+      this.#datas.set(dataKey, newData);
+      console.info(`SmartContract ${this.nameOrAddress} #${this.id}`, this.#datas);
+    }
+  };
+  call = (functionName: string = "", args: unknown[] = []): unknown | undefined => {
+    const dataKey = this.getDataKey(functionName, args);
+    if (this.#datas.has(dataKey)) return this.#datas.get(dataKey);
+
+    untrack(() => this.asyncCall(functionName, args));
+  };
+
+  constructor(nameOrAddress: DeploymentContractName | Address) {
+    if (!nameOrAddress) throw new Error("SmartContract nameOrAddress is required");
+
+    this.id = ++counter;
+    this.nameOrAddress = nameOrAddress;
+
+    $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.nameOrAddress, this.id);
   }
 }
 

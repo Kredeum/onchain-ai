@@ -3,7 +3,7 @@ import { anvil, mainnet, type Chain } from "viem/chains";
 import { createConfig, getConnections, getPublicClient, reconnect } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 import { createBurnerConnector } from "$lib/burner-wallet";
-import { getAlchemyHttpUrl } from "$lib/scaffold-eth/ts";
+import { getAlchemyTransport } from "$lib/scaffold-eth/ts";
 import scaffoldConfig from "$lib/scaffold.config";
 
 const { walletConnectProjectId, targetNetworks } = scaffoldConfig;
@@ -30,7 +30,7 @@ const wagmiConfig = createConfig({
   chains,
   connectors,
   client({ chain }) {
-    const client = createClient({ chain, transport: http(getAlchemyHttpUrl(chain.id)) });
+    const client = createClient({ chain, transport: getAlchemyTransport(chain.id, "wss") });
     console.log("WAGMI client created:", chain.id, client);
     if (chain.id === anvil.id) client.pollingInterval = scaffoldConfig.pollingInterval;
     return client;

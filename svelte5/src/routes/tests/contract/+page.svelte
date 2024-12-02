@@ -1,30 +1,32 @@
 <script lang="ts">
-  import { SmartContract } from "$lib/wagmi/classes";
-  import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
+
   import { OnChainAI } from "$lib/onchain-ai/classes";
+  import { MockRouter } from "$lib/onchain-ai/classes";
+  import { SmartContract } from "$lib/wagmi/classes";
 
-  // 1. Simple way, using specific OnChainAI class
-  const onChainAI = new OnChainAI();
+  // const onChainAI = new SmartContract("OnChainAIv1");
+  // const owner = $derived(onChainAI.call("owner"));
+  // const price = $derived(onChainAI.call("price"));
 
-  // 2. Complex way, using generic SmartContract class and IFFE for async effect
-  const smartContract = new SmartContract("OnChainAIv1");
-  let dataOwner = $state();
-  $effect(() => {
-    (async () => (dataOwner = await smartContract.call("owner")))();
-  });
-
-  // 3. Old way, using createRead...
-  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
+  const mockRouter = new SmartContract("MockRouter");
+  const counter = $derived(mockRouter.call("counter"));
+  const addressOnChainAI = $derived(mockRouter.call("onChainAI"));
 </script>
 
-<div class="p-4">
-  owner = {onChainAI.owner}
-</div>
-
+<!--
 <div class="p-4">
   owner = {owner}
 </div>
-
 <div class="p-4">
-  dataOwner = {dataOwner}
-</div>
+  price = {price}
+</div> -->
+
+{#if mockRouter}
+  <div class="p-4">
+    counter = {counter}
+  </div>
+  <div class="p-4">
+    addressOnChainAI = {addressOnChainAI}
+  </div>
+{/if}

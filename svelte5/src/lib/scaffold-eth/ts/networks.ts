@@ -1,5 +1,6 @@
 import * as chains from "viem/chains";
 import scaffoldConfig from "$lib/scaffold.config";
+import { http, webSocket } from "viem";
 
 type ChainAttributes = {
   // color | [lightThemeColor, darkThemeColor]
@@ -37,11 +38,17 @@ export const RPC_CHAIN_ALCHEMY_NAMES: Record<number, string> = {
   [chains.astar.id]: "astar-mainnet"
 };
 
-export const getAlchemyHttpUrl = (chainId: number) => {
+export const getAlchemyUrl = (chainId: number, protocol: "https" | "wss" = "https") => {
   return RPC_CHAIN_ALCHEMY_NAMES[chainId]
-    ? `https://${RPC_CHAIN_ALCHEMY_NAMES[chainId]}.g.alchemy.com/v2/${scaffoldConfig.alchemyApiKey}`
+    ? `${protocol}://${RPC_CHAIN_ALCHEMY_NAMES[chainId]}.g.alchemy.com/v2/${scaffoldConfig.alchemyApiKey}`
     : undefined;
 };
+
+export const getAlchemyTransport = (chainId: number, protocol: "https" | "wss" = "https") => {
+  const fnProtocol = protocol === "https" ? http : webSocket;
+  return fnProtocol(getAlchemyUrl(chainId, protocol));
+};
+console.log("Inside network.ts AFTER  getAlchemyUrl");
 
 export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   [chains.anvil.id]: {

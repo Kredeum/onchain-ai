@@ -651,7 +651,7 @@
       ]
     },
     "MockRouter": {
-      "address": "0x7Ec559176d42Af1fBf0B8b64CfA82c0B3431DE65",
+      "address": "0x1Eb835EB7BEEEE9E6bbFe08F16a2d2eF668204bd",
       "abi": [
         {
           "type": "function",
@@ -670,6 +670,19 @@
           ],
           "outputs": [],
           "stateMutability": "nonpayable"
+        },
+        {
+          "type": "function",
+          "name": "counter",
+          "inputs": [],
+          "outputs": [
+            {
+              "name": "",
+              "type": "uint256",
+              "internalType": "uint256"
+            }
+          ],
+          "stateMutability": "view"
         },
         {
           "type": "function",
@@ -889,7 +902,7 @@
       ]
     },
     "OnChainAIv1": {
-      "address": "0xeFeF25D7AD0689c29c400eD6eC29c57Cb86cB058",
+      "address": "0x31A65C6d4EB07ad51E7afc890aC3b7bE84dF2Ead",
       "abi": [
         {
           "type": "constructor",

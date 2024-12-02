@@ -1,18 +1,26 @@
 <script lang="ts">
   import { OnChainAI } from "$lib/onchain-ai/classes";
   import { LastInteraction } from "$lib/onchain-ai/components";
-  import { Account } from "$lib/wagmi/classes";
+  import { Account, SmartContract } from "$lib/wagmi/classes";
+  import { onMount } from "svelte";
+
+  const counter = $state(0);
 
   const account = new Account();
-  const onChainAI = new OnChainAI();
+  const contract = new SmartContract("OnChainAIv1");
+  const owner = $derived(contract.call("owner"));
+  const lastInteraction = $derived(contract.call("lastInteraction", [account?.address]));
+
 </script>
 
-{#if onChainAI && account.address}
+{#if account.address}
   <div class="p-4">
-    {JSON.stringify(onChainAI.lastInteraction(account?.address), null, 2)}
+    owner: {owner}<br />
+    counter: {counter}<br />
+    {JSON.stringify(lastInteraction, null, 2)}
   </div>
 
   <LastInteraction account={account.address} />
 {:else}
-  <p class="p-4">No onChainAI or account address found</p>
+  <p class="p-4">No account address found</p>
 {/if}

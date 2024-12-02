@@ -48,41 +48,55 @@ const readDeploymentsChain = (chainId: number | string): DeploymentsChain => {
   return jsonDeployments[chainIdString];
 };
 
-type DeploymentContract = { address: Address; abi: Abi };
+type DeploymentType = { address: Address; abi: Abi; name?: string };
 
-const readDeploymentContract = (
-  chainId: number | string,
-  contractName: string
-): DeploymentContract => {
-  const chainDeployment = readDeploymentsChain(chainId);
-
-  if (!(contractName in chainDeployment)) {
-    console.log("ERROR readDeploymentContract |", contractName, "|", chainDeployment);
-    throw new Error(`No deployment found for ${contractName} for chainId ${chainId}!`);
-  }
-
-  return chainDeployment[contractName as DeploymentContractKey] as DeploymentContract;
-};
-
-// search contract name when contract is referenced by its address
-const findDeploymentContractName = (chainId: number, address: Address) => {
+const readDeploymentByAddress = (
+  chainId: string | number,
+  address: string
+): DeploymentType | undefined => {
   const deployments: DeploymentsChain = readDeploymentsChain(chainId);
   const deploymentsContractName = Object.keys(deployments) as DeploymentContractKey[];
-  const name = deploymentsContractName.find(
+  const contractName = deploymentsContractName.find(
     (contractName) => deployments[contractName].address === address
   );
+  if (!contractName) return;
 
-  if (!name) throw new Error("No contract found, address mismatch");
+  const deployment = deployments[contractName] as DeploymentType;
+  deployment.name = contractName;
+  return deployment;
+};
 
-  return name;
+const readDeploymentByName = (
+  chainId: string | number,
+  contractName: DeploymentContractName
+): DeploymentType | undefined => {
+  const chainDeployment = readDeploymentsChain(chainId);
+
+  if (!(contractName in chainDeployment)) return;
+
+  const deployment = chainDeployment[contractName as DeploymentContractKey] as DeploymentType;
+  deployment.name = contractName;
+  return deployment;
+};
+
+const readDeployment = (
+  chainId: string | number,
+  param: DeploymentContractName | Address
+): DeploymentType | undefined => {
+  const paramIsAddress = param.slice(0, 2) === "0x";
+
+  return paramIsAddress
+    ? readDeploymentByAddress(chainId, param as Address)
+    : readDeploymentByName(chainId, param as DeploymentContractName);
 };
 
 export {
   readChainLinkConfig,
   readAddresses,
   readDeploymentsChain,
-  readDeploymentContract,
-  findDeploymentContractName
+  readDeploymentByAddress,
+  readDeploymentByName,
+  readDeployment
 };
 export type {
   ChainLinkConfigChains,
@@ -96,7 +110,7 @@ export type {
   DeploymentsChains,
   DeploymentsChainId,
   DeploymentsChain,
-  DeploymentContract,
+  DeploymentType,
   DeploymentContractName,
   DeploymentContractKey
 };

@@ -1,3 +1,4 @@
+export * from "./Watcher.svelte";
 export * from "./Account.svelte";
 export * from "./Balance.svelte";
 export * from "./BlockChain.svelte";

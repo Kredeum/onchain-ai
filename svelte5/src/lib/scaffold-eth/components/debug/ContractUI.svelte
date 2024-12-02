@@ -20,6 +20,8 @@
   const networkColor = $derived.by(createNetworkColor());
 
   let refreshDisplayVariables = $state(false);
+
+  $inspect("CONTRACT UI deployedContractData:", deployedContractData);
 </script>
 
 {#if deployedContractLoading}

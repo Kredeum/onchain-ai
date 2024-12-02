@@ -13,10 +13,10 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.1",
-    "eslint": "^9.15.0",
+    "eslint": "^9.16.0",
     "eslint-plugin-json": "^4.0.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2",
-    "viem": "^2.21.52"
+    "viem": "^2.21.53"
   }
 }

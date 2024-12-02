@@ -9,6 +9,7 @@
   } from "$lib/scaffold-eth/ts";
   import { ContractInput, DisplayTxResult, InheritanceTooltip } from "$lib/scaffold-eth/components";
   import { createReadContract } from "$lib/wagmi/runes";
+  import { SmartContract } from "$lib/wagmi/classes";
 
   const {
     contractAddress,
@@ -22,17 +23,21 @@
     abi: Abi;
   } = $props();
 
-  let form = $state<Record<string, any>>(getInitialFormState(abiFunction));
+  let refresh = 1;
+  const functionName = abiFunction.name;
 
-  let { data, fetch, isFetching } = $derived(
-    createReadContract({
-      address: contractAddress,
-      functionName: abiFunction.name,
-      abi,
-      args: getParsedContractFunctionArgs(form),
-      onStart: false
-    })
-  );
+  let form = $state<Record<string, any>>(getInitialFormState(abiFunction));
+  let args = $derived(getParsedContractFunctionArgs(form));
+
+  const contract = new SmartContract(contractAddress);
+
+  let data = $state();
+  $effect(() => {
+    refresh;
+    data = contract.call(functionName, args);
+  });
+  const isFetching = false;
+
   const transformedFunction = $derived(transformAbiFunction(abiFunction));
 </script>
 
@@ -60,7 +65,7 @@
         </div>
       {/if}
     </div>
-    <button class="btn btn-secondary btn-sm" onclick={fetch} disabled={isFetching}>
+    <button class="btn btn-secondary btn-sm" onclick={() => refresh++} disabled={isFetching}>
       {#if isFetching}
         <span class="loading loading-spinner loading-xs"></span>
       {/if}

@@ -5,14 +5,19 @@ import type { Address } from "viem";
 
 export const createDeployedContractInfo = <TContractName extends ContractName>(contractName: TContractName) => {
   const publicClient = $derived.by(createPublicClient());
+  console.log("CREATE DEPLOYED INFOS  ~ publicClient:", publicClient);
 
   const deployedContract = $derived(targetNetwork.id ? contracts?.[targetNetwork.id]?.[contractName] : undefined);
   let status = $state(ContractCodeStatus.LOADING);
 
-  // $inspect("createDeployedContractInfo ~ chainIdCurrent (status)", chainIdCurrent, contractName, status);
+  $inspect("CREATE DEPLOYED INFOS ~ chainIdCurrent (status)", targetNetwork.id, contractName, status);
 
   $effect(() => {
+    console.log("CREATE DEPLOYED INFOS $effect ~ checkContractDeployment:");
+
     const checkContractDeployment = async () => {
+      console.log("CREATE DEPLOYED INFOS $effect ~ async checkContractDeployment:", deployedContract);
+
       if (!(deployedContract && publicClient)) {
         status = ContractCodeStatus.NOT_FOUND;
         return;
