@@ -1,23 +1,19 @@
 <script lang="ts">
   import { OnChainAI } from "$lib/onchain-ai/classes";
   import { LastInteraction } from "$lib/onchain-ai/components";
-  import { Account, SmartContract } from "$lib/wagmi/classes";
-  import { onMount } from "svelte";
-
-  const counter = $state(0);
+  import { Account } from "$lib/wagmi/classes";
 
   const account = new Account();
-  const contract = new SmartContract("OnChainAIv1");
-  const owner = $derived(contract.call("owner"));
-  const lastInteraction = $derived(contract.call("lastInteraction", [account?.address]));
-
+  const onChainAI = new OnChainAI();
 </script>
 
 {#if account.address}
   <div class="p-4">
-    owner: {owner}<br />
-    counter: {counter}<br />
-    {JSON.stringify(lastInteraction, null, 2)}
+    owner: {onChainAI.owner}<br />
+  </div>
+
+  <div class="p-4">
+    {JSON.stringify(onChainAI.lastInteraction(account?.address), null, 2)}
   </div>
 
   <LastInteraction account={account.address} />

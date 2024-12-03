@@ -1,32 +1,26 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
-
   import { OnChainAI } from "$lib/onchain-ai/classes";
   import { MockRouter } from "$lib/onchain-ai/classes";
-  import { SmartContract } from "$lib/wagmi/classes";
 
-  // const onChainAI = new SmartContract("OnChainAIv1");
-  // const owner = $derived(onChainAI.call("owner"));
-  // const price = $derived(onChainAI.call("price"));
-
-  const mockRouter = new SmartContract("MockRouter");
-  const counter = $derived(mockRouter.call("counter"));
-  const addressOnChainAI = $derived(mockRouter.call("onChainAI"));
+  const onChainAI = new OnChainAI();
+  const mockRouter = new MockRouter();
 </script>
 
-<!--
 <div class="p-4">
-  owner = {owner}
+  owner = {onChainAI.owner}
 </div>
 <div class="p-4">
-  price = {price}
-</div> -->
+  price = {onChainAI.price}
+</div>
 
 {#if mockRouter}
   <div class="p-4">
-    counter = {counter}
+    counter = {mockRouter.counter}
   </div>
   <div class="p-4">
-    addressOnChainAI = {addressOnChainAI}
+    addressOnChainAI = {mockRouter.addressOnChainAI}
+  </div>
+  <div class="p-4">
+    consumer.allowed = {mockRouter.getConsumer(mockRouter.addressOnChainAI)?.allowed}
   </div>
 {/if}

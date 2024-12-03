@@ -20,7 +20,6 @@ class SmartContract {
   #call = async (functionName: string = "", args: unknown[] = []) => {
     const chainId = this.chainId;
     const deployment = readDeployment(chainId, this.nameOrAddress);
-    console.log("SMARTCONTRACT readContract", chainId, functionName, deployment, args);
     if (!deployment) return;
     // console.log("SMARTCONTRACT readContract", chainId, functionName, deployment, args);
 
@@ -76,7 +75,7 @@ class SmartContract {
     this.id = ++counter;
     this.nameOrAddress = nameOrAddress;
 
-    $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.nameOrAddress, this.id);
+    // $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.nameOrAddress, this.id);
   }
 }
 

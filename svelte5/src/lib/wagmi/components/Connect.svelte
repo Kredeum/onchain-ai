@@ -72,7 +72,7 @@
 
   let modalDisplay = $state(false);
 
-  $inspect("<Connect", chainId, address);
+  // $inspect("<Connect", chainId, address);
 </script>
 
 <button id="connect-wallet" class="btn btn-primary btn-sm" onclick={() => (modalDisplay = true)}>

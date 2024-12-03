@@ -1,21 +1,25 @@
 import { SmartContract } from "$lib/wagmi/classes";
 import type { Address } from "viem";
 
-class MockRouter {
-  contract: SmartContract;
+type getConsumerReturnType = {
+  allowed: boolean,
+  completedRequests: bigint,
+  initiatedRequests: bigint
+};
 
+class MockRouter extends SmartContract {
   get addressOnChainAI() {
-    return this.contract.call("onChainAI") as Address;
+    return this.call("onChainAI") as Address;
   }
   get counter() {
-    return this.contract.call("counter") as number;
+    return this.call("counter") as number;
   }
-  getCounsumer(address: Address, subscriptionId = 0) {
-    return this.contract.call("getConsumer", [address]) as boolean;
+  getConsumer(address: Address, subscriptionId = 0): getConsumerReturnType {
+    return this.call("getConsumer", [address, subscriptionId]) as getConsumerReturnType;
   }
 
   constructor() {
-    this.contract = new SmartContract("MockRouter");
+    super("MockRouter");
   }
 }
 

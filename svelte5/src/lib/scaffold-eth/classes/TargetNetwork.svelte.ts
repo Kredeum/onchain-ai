@@ -36,7 +36,7 @@ class TargetNetwork {
       this.nativeCurrencyPrice = price.nativeCurrencyPrice;
     });
 
-    $inspect("TargetNetwork", this.id, this.name);
+    // $inspect("TargetNetwork", this.id, this.name);
   }
 }
 

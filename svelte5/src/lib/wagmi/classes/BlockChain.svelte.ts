@@ -69,7 +69,7 @@ class BlockChain {
 
     if (watch) this.watchBlockNumber();
 
-    $inspect("BLOCKCHAIN", targetNetwork.id, this.chainId, this.blockNumber);
+    // $inspect("BLOCKCHAIN", targetNetwork.id, this.chainId, this.blockNumber);
   }
 }
 

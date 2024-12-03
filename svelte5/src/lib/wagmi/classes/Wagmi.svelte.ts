@@ -31,7 +31,8 @@ const wagmiConfig = createConfig({
   connectors,
   client({ chain }) {
     const client = createClient({ chain, transport: getAlchemyTransport(chain.id, "wss") });
-    console.log("WAGMI client created:", chain.id, client);
+    // console.log("WAGMI client created:", chain.id, client);
+
     if (chain.id === anvil.id) client.pollingInterval = scaffoldConfig.pollingInterval;
     return client;
   }

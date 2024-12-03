@@ -23,7 +23,7 @@
   );
 
   const normalizeName = (name: string | undefined): string => (name ? name.toLowerCase().replace(/\s+/g, "-") : "");
-  $inspect("<ConnectButton", chainId, address, isConnected, account.account);
+  // $inspect("<ConnectButton", chainId, address, isConnected, accouXnt.account);
 </script>
 
 {#if !isConnected}

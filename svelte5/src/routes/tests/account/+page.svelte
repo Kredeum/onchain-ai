@@ -6,7 +6,6 @@
 
   $effect(() => {
     balance.address = account.address;
-    balance.getBalance();
   });
 
   $inspect("PAGE account", account.chainId, account.address);
