@@ -6,7 +6,6 @@ import { wagmiConfig } from "$lib/wagmi/classes";
 import { readDeployment, type DeploymentContractName } from "@onchain-ai/common";
 import { untrack } from "svelte";
 
-
 let counter = 0;
 
 class SmartContract {
@@ -21,7 +20,8 @@ class SmartContract {
     const chainId = this.chainId;
     const deployment = readDeployment(chainId, this.nameOrAddress);
     if (!deployment) return;
-    // console.log("SMARTCONTRACT readContract", chainId, functionName, deployment, args);
+    console.log("SMARTCONTRACT READ", functionName, args, chainId, deployment.address, `#${this.id}`);
+    // console.log("SMARTCONTRACT READ",  deployment.abi);
 
     const { address, abi } = deployment;
     const abiFunction = (abi as unknown as AbiFunction[]).find(
@@ -35,10 +35,10 @@ class SmartContract {
     } catch (e: unknown) {
       const newChainId = targetNetwork.id;
       if (newChainId === chainId) {
-        console.error(`SMARTCONTRACT readContract '${functionName}' error on chain '${chainId}'`, e);
+        console.error(`SMARTCONTRACT READ '${functionName}' error on chain '${chainId}'`, e);
       } else {
         console.warn(
-          `SMARTCONTRACT readContract '${functionName}' aborted`,
+          `SMARTCONTRACT READ '${functionName}' aborted`,
           `while changing chain '${chainId}' => '${newChainId}'`
         );
       }
@@ -48,7 +48,7 @@ class SmartContract {
   };
 
   isFetching = $state(false);
-  #datas: SvelteMap<string, unknown | undefined> = (new SvelteMap());
+  #datas: SvelteMap<string, unknown | undefined> = new SvelteMap();
   asyncCall = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
     const dataKey = this.getDataKey(functionName, args);
 
@@ -59,7 +59,15 @@ class SmartContract {
     const prevData = $state.snapshot(this.#datas.get(dataKey));
     if (!deepEqual(prevData, newData)) {
       this.#datas.set(dataKey, newData);
-      console.info(`SmartContract ${this.nameOrAddress} #${this.id}`, this.#datas);
+      console.info(
+        "SMARTCONTRACT RESULT",
+        functionName,
+        args,
+        this.chainId,
+        this.nameOrAddress,
+        `#${this.id}`,
+        this.#datas
+      );
     }
   };
   call = (functionName: string = "", args: unknown[] = []): unknown | undefined => {

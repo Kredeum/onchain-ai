@@ -22,23 +22,19 @@
     abi: Abi;
   } = $props();
 
-  const smartContract = new SmartContract(contractAddress);
+  const contract = new SmartContract(contractAddress);
+  const data = $derived(contract.call(abiFunction.name));
 
-  const smartContractCall = () => smartContract.call(abiFunction.name);
+  const showAnimation = false; // $derived.by(createAnimationConfig(() => contract.dataRead));
 
-  $effect(() => {
-    refreshDisplayVariables;
-    untrack(() => smartContractCall());
-  });
-
-  const showAnimation = false; // $derived.by(createAnimationConfig(() => smartContract.dataRead));
+  $inspect("<DisplayVariable", abiFunction.name, contractAddress, data);
 </script>
 
 <div class="space-y-1 pb-2">
   <div class="flex items-center">
     <h3 class="mb-0 break-all text-lg font-medium">{abiFunction.name}</h3>
-    <button class="btn btn-ghost btn-xs" onclick={smartContractCall}>
-      {#if !smartContract}
+    <button class="btn btn-ghost btn-xs" onclick={() => {}}>
+      {#if !contract}
         <span class="loading loading-spinner loading-xs"></span>
       {:else}
         <Icon src={ArrowPath} class="h-3 w-3 cursor-pointer" aria-hidden="true" />
@@ -53,7 +49,7 @@
           ? 'animate-pulse-fast rounded-sm bg-warning'
           : ''}"
       >
-        <!-- <DisplayTxResult content={smartContract.dataRead} /> -->
+        <DisplayTxResult content={data} />
       </div>
     </div>
   </div>

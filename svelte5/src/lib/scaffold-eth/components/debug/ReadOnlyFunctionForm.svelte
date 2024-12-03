@@ -8,8 +8,8 @@
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
   import { ContractInput, DisplayTxResult, InheritanceTooltip } from "$lib/scaffold-eth/components";
-  import { createReadContract } from "$lib/wagmi/runes";
   import { SmartContract } from "$lib/wagmi/classes";
+  import { untrack } from "svelte";
 
   const {
     contractAddress,
@@ -23,22 +23,24 @@
     abi: Abi;
   } = $props();
 
-  let refresh = 1;
   const functionName = abiFunction.name;
 
   let form = $state<Record<string, any>>(getInitialFormState(abiFunction));
   let args = $derived(getParsedContractFunctionArgs(form));
 
   const contract = new SmartContract(contractAddress);
+  let data: unknown = $state();
+  const refresh = () => {
+    untrack(() => {
+      data = contract.asyncCall(functionName, args);
+    });
+  };
 
-  let data = $state();
-  $effect(() => {
-    refresh;
-    data = contract.call(functionName, args);
-  });
   const isFetching = false;
 
   const transformedFunction = $derived(transformAbiFunction(abiFunction));
+
+  $inspect("<ReadOnlyFunctionForm", functionName, args, isFetching, data, transformedFunction);
 </script>
 
 <div class="flex flex-col gap-3 py-5 first:pt-0 last:pb-1">
@@ -65,7 +67,7 @@
         </div>
       {/if}
     </div>
-    <button class="btn btn-secondary btn-sm" onclick={() => refresh++} disabled={isFetching}>
+    <button class="btn btn-secondary btn-sm" onclick={() => refresh} disabled={isFetching}>
       {#if isFetching}
         <span class="loading loading-spinner loading-xs"></span>
       {/if}

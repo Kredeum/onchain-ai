@@ -19,7 +19,7 @@
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 
-  let balance = new Balance({ address: FAUCET_ADDRESS });
+  let balance = new Balance(FAUCET_ADDRESS);
 
   const isBalanceZero = $derived(balance.value === 0n);
 

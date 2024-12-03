@@ -53,7 +53,9 @@
       </div>
     {/if}
     {#each contractNames as contractName}
-      <ContractUI {contractName} hidden={contractName !== selectedContract} />
+      {#if contractName === selectedContract}
+        <ContractUI {contractName} hidden={contractName !== selectedContract} />
+      {/if}
     {/each}
   {/if}
 </div>

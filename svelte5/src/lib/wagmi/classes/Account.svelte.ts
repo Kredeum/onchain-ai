@@ -1,26 +1,43 @@
-import { getAccount, watchAccount } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/classes";
+import {
+  deepEqual,
+  getAccount,
+  watchAccount,
+  getBalance as getBalanceWagmi,
+  type GetBalanceReturnType
+} from "@wagmi/core";
+import { Balance, wagmiConfig } from "$lib/wagmi/classes";
+import { isAddress } from "$lib/scaffold-eth/ts";
 
 type AccountType = ReturnType<typeof getAccount>;
 
 class Account {
   account = $state<AccountType>(getAccount(wagmiConfig));
 
-  chain = $derived(this.account.chain);
-  chainId = $derived(this.account.chainId);
-  address = $derived(this.account.address);
-  isConnected = $derived(this.account.isConnected);
-  connectorId = $derived(this.account.connector?.id);
+  get chain() {
+    return this.account?.chain;
+  }
+  get chainId() {
+    return this.account?.chainId;
+  }
+  get address() {
+    return this.account?.address;
+  }
+  get isConnected() {
+    return this.account?.isConnected;
+  }
+  get connectorId() {
+    return this.account?.connector?.id;
+  }
 
   watch = () =>
     watchAccount(wagmiConfig, {
       onChange: (newAccount: AccountType) => (this.account = newAccount)
     });
 
-  constructor(label?: string) {
-    $inspect("Account", label, this.chainId, this.address, this.connectorId);
-
+  constructor() {
     this.watch();
+
+    // $inspect("Account", this.chainId, this.address, this.connectorId);
   }
 }
 

@@ -1,6 +1,7 @@
 import { SmartContract } from "$lib/wagmi/classes";
 import type { Address } from "viem";
 import type { InteractionType, InteractionTypeTuple } from "../ts";
+import { isAddress } from "$lib/scaffold-eth/ts";
 
 class OnChainAI extends SmartContract {
   get owner() {
@@ -9,7 +10,9 @@ class OnChainAI extends SmartContract {
   get price() {
     return this.call("price") as bigint;
   }
-  lastInteraction(address: Address): InteractionType {
+  lastInteraction(address: Address): InteractionType | undefined {
+    if (!isAddress(address)) return;
+
     const lastInteractionTuple = this.call("lastInteraction", [address]) as InteractionTypeTuple;
     // if (!(lastInteractionTuple && lastInteractionTuple.length === 4)) return;
 

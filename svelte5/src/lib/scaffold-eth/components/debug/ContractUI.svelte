@@ -21,7 +21,7 @@
 
   let refreshDisplayVariables = $state(false);
 
-  $inspect("CONTRACT UI deployedContractData:", deployedContractData);
+  // $inspect("CONTRACT UI deployedContractData:", deployedContractData);
 </script>
 
 {#if deployedContractLoading}

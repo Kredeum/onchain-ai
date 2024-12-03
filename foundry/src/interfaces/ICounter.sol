@@ -12,4 +12,6 @@ interface ICounter {
     function setNumber(uint256 newNumber) external;
 
     function increment() external;
+
+    function balanceOf(address account) external view returns (uint256);
 }

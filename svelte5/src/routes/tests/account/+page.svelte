@@ -1,14 +1,16 @@
 <script lang="ts">
   import { Balance, Account } from "$lib/wagmi/classes";
+  import { onMount, untrack } from "svelte";
 
-  const account = new Account("acc");
-  const balance = new Balance();
+  const account = new Account();
+  let balance = new Balance();
 
   $effect(() => {
     balance.address = account.address;
   });
 
-  $inspect("PAGE account", account.chainId, account.address);
+  // $inspect("PAGE account", account.chainId, account.address);
+  // $inspect("PAGE BALANCE", balance?.value, balance?.address);
 </script>
 
 <div class="p-4">
@@ -20,5 +22,5 @@
 </div>
 
 <div class="p-4">
-  balance = {balance?.value}
+  balance = {balance.value}
 </div>

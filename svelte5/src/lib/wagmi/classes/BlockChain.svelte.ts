@@ -14,9 +14,7 @@ class BlockChain {
 
   blockNumber: number | undefined = $state();
   getBlockNumber = async () => {
-    console.log("BLOCKCHAIN getBlockNumber", targetNetwork.id);
     const blockNumber = Number(await getBlockNumberWagmi(wagmiConfig));
-    console.log("BLOCKCHAIN getBlockNumber", blockNumber);
 
     if (this.blockNumber !== blockNumber) this.blockNumber = blockNumber;
 
@@ -27,7 +25,6 @@ class BlockChain {
   unwatchBlockNumber: WatchBlockNumberReturnType | undefined;
   watchBlockNumber = () => {
     if (this.watchingBlockNumber) return;
-    console.log("BLOCKCHAIN watchBlockNumber", targetNetwork.id);
 
     this.watchingBlockNumber = true;
     const unwatch = watchBlockNumberWagmi(wagmiConfig, {

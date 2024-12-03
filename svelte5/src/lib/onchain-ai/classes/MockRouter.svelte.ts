@@ -1,10 +1,11 @@
 import { SmartContract } from "$lib/wagmi/classes";
-import type { Address } from "viem";
+import { type Address } from "viem";
+import { isAddress } from "$lib/scaffold-eth/ts";
 
 type getConsumerReturnType = {
-  allowed: boolean,
-  completedRequests: bigint,
-  initiatedRequests: bigint
+  allowed: boolean;
+  completedRequests: bigint;
+  initiatedRequests: bigint;
 };
 
 class MockRouter extends SmartContract {
@@ -14,7 +15,9 @@ class MockRouter extends SmartContract {
   get counter() {
     return this.call("counter") as number;
   }
-  getConsumer(address: Address, subscriptionId = 0): getConsumerReturnType {
+  getConsumer(address: Address, subscriptionId = 0): getConsumerReturnType | undefined {
+    if (!isAddress(address)) return;
+
     return this.call("getConsumer", [address, subscriptionId]) as getConsumerReturnType;
   }
 
