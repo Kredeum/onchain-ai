@@ -7,7 +7,6 @@ export type ScaffoldConfig = {
   alchemyApiKey: string;
   walletConnectProjectId: string;
   onlyLocalBurnerWallet: boolean;
-  walletAutoConnect: boolean;
   burnetWalletKey: string;
 };
 
@@ -39,13 +38,6 @@ const scaffoldConfig = {
 
   // Only show the Burner Wallet when running on local network
   onlyLocalBurnerWallet: false,
-
-  /**
-   * Auto connect:
-   * 1. If the user was connected into a wallet before, on page reload reconnect automatically
-   * 2. If user is not connected to any wallet:  On reload, connect to burner wallet if burnerWallet.enabled is true && burnerWallet.onlyLocal is false
-   */
-  walletAutoConnect: true,
 
   burnetWalletKey: PUBLIC_BURNER_WALLET_KEY || ""
 } as const satisfies ScaffoldConfig;

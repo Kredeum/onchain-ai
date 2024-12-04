@@ -20,7 +20,7 @@ class SmartContract {
     const chainId = this.chainId;
     const deployment = readDeployment(chainId, this.nameOrAddress);
     if (!deployment) return;
-    console.log("SMARTCONTRACT READ", functionName, args, chainId, deployment.address, `#${this.id}`);
+    // console.log("SMARTCONTRACT READ", functionName, args, chainId, deployment.address, `#${this.id}`);
     // console.log("SMARTCONTRACT READ",  deployment.abi);
 
     const { address, abi } = deployment;
@@ -49,7 +49,7 @@ class SmartContract {
 
   isFetching = $state(false);
   #datas: SvelteMap<string, unknown | undefined> = new SvelteMap();
-  asyncCall = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
+  fetch = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
     const dataKey = this.getDataKey(functionName, args);
 
     this.isFetching = true;
@@ -74,7 +74,7 @@ class SmartContract {
     const dataKey = this.getDataKey(functionName, args);
     if (this.#datas.has(dataKey)) return this.#datas.get(dataKey);
 
-    untrack(() => this.asyncCall(functionName, args));
+    untrack(() => this.fetch(functionName, args));
   };
 
   constructor(nameOrAddress: DeploymentContractName | Address) {

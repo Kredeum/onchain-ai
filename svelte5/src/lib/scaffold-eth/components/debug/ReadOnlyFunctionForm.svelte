@@ -32,7 +32,7 @@
   let data: unknown = $state();
   const refresh = () => {
     untrack(() => {
-      data = contract.asyncCall(functionName, args);
+      data = contract.fetch(functionName, args);
     });
   };
 

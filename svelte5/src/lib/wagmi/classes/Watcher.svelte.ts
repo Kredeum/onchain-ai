@@ -3,22 +3,23 @@ import scaffoldConfig from "$lib/scaffold.config";
 class Watcher {
   id = $state(0);
 
-  watch = () => {
+  start = () => {
     if (this.id) return;
 
     this.id = setInterval(this.fn, scaffoldConfig.pollingInterval) as unknown as number;
-    console.info("WATCHER watch", this.id);
+    console.info("WATCHER start", this.id);
     this.fn();
   };
-  unwatch = () => {
+  stop = () => {
     if (!this.id) return;
 
     clearInterval(this.id);
+    console.info("WATCHER stop", this.id);
     this.id = 0;
   };
 
   constructor(public fn: () => unknown) {
-    this.watch();
+    this.start();
 
     $inspect("WATCHER ", this.id);
   }

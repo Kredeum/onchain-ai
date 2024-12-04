@@ -1,6 +1,5 @@
 <script lang="ts">
   import { ArrowPath, Icon } from "svelte-hero-icons";
-  import { untrack } from "svelte";
   import type { Address } from "viem";
   import type { AbiFunction, Abi } from "abitype";
 
@@ -25,7 +24,13 @@
   const contract = new SmartContract(contractAddress);
   const data = $derived(contract.call(abiFunction.name));
 
-  const showAnimation = false; // $derived.by(createAnimationConfig(() => contract.dataRead));
+  const refresh = () => contract.fetch(abiFunction.name);
+  $effect(() => {
+    refreshDisplayVariables;
+    refresh();
+  });
+
+  const showAnimation = $derived(createAnimationConfig(() => data));
 
   $inspect("<DisplayVariable", abiFunction.name, contractAddress, data);
 </script>
@@ -33,7 +38,7 @@
 <div class="space-y-1 pb-2">
   <div class="flex items-center">
     <h3 class="mb-0 break-all text-lg font-medium">{abiFunction.name}</h3>
-    <button class="btn btn-ghost btn-xs" onclick={() => {}}>
+    <button class="btn btn-ghost btn-xs" onclick={refresh}>
       {#if !contract}
         <span class="loading loading-spinner loading-xs"></span>
       {:else}
@@ -45,7 +50,7 @@
   <div class="flex flex-col items-start font-medium text-gray-500">
     <div>
       <div
-        class="block break-all bg-transparent transition {showAnimation
+        class="block break-all bg-transparent transition {showAnimation()
           ? 'animate-pulse-fast rounded-sm bg-warning'
           : ''}"
       >

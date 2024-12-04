@@ -27,14 +27,14 @@ class BlockChain {
     if (this.watchingBlockNumber) return;
 
     this.watchingBlockNumber = true;
-    const unwatch = watchBlockNumberWagmi(wagmiConfig, {
+    const stop = watchBlockNumberWagmi(wagmiConfig, {
       emitOnBegin: false,
       onBlockNumber: (blockNumber) => (this.blockNumber = Number(blockNumber))
     });
 
     this.unwatchBlockNumber = () => {
       this.watchingBlockNumber = false;
-      unwatch?.();
+      stop?.();
     };
   };
 
