@@ -28,7 +28,7 @@
 
 {#if !isConnected}
   <span class="text-xs p-4" style:color={networkColor}>
-    {targetNetwork.name}
+    {targetNetwork?.name}
   </span>
   <Connect />
 {:else}

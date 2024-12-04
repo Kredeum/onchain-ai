@@ -13,5 +13,7 @@ interface ICounter {
 
     function increment() external;
 
+    function square(uint256 newNumber) external returns (uint256);
+
     function balanceOf(address account) external view returns (uint256);
 }

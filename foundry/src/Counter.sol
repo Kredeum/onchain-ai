@@ -6,6 +6,10 @@ import {ICounter} from "./interfaces/ICounter.sol";
 contract Counter is ICounter {
     uint256 public number;
 
+    function square(uint256 num) public pure override(ICounter) returns (uint256) {
+        return num ** 2;
+    }
+
     function setNumber(uint256 newNumber) public override(ICounter) {
         number = newNumber;
 

@@ -23,24 +23,19 @@
     abi: Abi;
   } = $props();
 
-  const functionName = abiFunction.name;
-
   let form = $state<Record<string, any>>(getInitialFormState(abiFunction));
   let args = $derived(getParsedContractFunctionArgs(form));
 
   const contract = new SmartContract(contractAddress);
-  let data: unknown = $state();
-  const refresh = () => {
-    untrack(() => {
-      data = contract.fetch(functionName, args);
-    });
-  };
+  const data = $derived(contract.call(abiFunction.name, args, false));
+
+  const refresh = () => contract.fetch(abiFunction.name, args);
 
   const isFetching = false;
 
   const transformedFunction = $derived(transformAbiFunction(abiFunction));
 
-  $inspect("<ReadOnlyFunctionForm", functionName, args, isFetching, data, transformedFunction);
+  $inspect("<ReadOnlyFunctionForm", abiFunction.name, args, contractAddress, data, isFetching, transformedFunction);
 </script>
 
 <div class="flex flex-col gap-3 py-5 first:pt-0 last:pb-1">
@@ -67,7 +62,7 @@
         </div>
       {/if}
     </div>
-    <button class="btn btn-secondary btn-sm" onclick={() => refresh} disabled={isFetching}>
+    <button class="btn btn-secondary btn-sm" onclick={refresh} disabled={isFetching}>
       {#if isFetching}
         <span class="loading loading-spinner loading-xs"></span>
       {/if}

@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
   import { Account } from "$lib/wagmi/classes";
-  import { Balance } from "$lib/wagmi/classes";
 
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";
   import { anvil } from "viem/chains";
+  import { Address } from "$lib/wagmi/classes";
 
   const AMOUNT_TO_SEND = "1";
   const FAUCET_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
@@ -19,9 +19,9 @@
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 
-  let balance = new Balance(FAUCET_ADDRESS);
+  let addr = new Address(FAUCET_ADDRESS);
 
-  const isBalanceZero = $derived(balance.value === 0n);
+  const isBalanceZero = $derived(addr.balance === 0n);
 
   let loading = $state(false);
 

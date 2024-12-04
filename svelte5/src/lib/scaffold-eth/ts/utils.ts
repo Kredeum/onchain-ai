@@ -117,7 +117,7 @@ export const isEns = (ensName: string | null | undefined) => {
   return /.+\..+/.test(ensName);
 };
 
-export const isAddress = (address: Address | string | null | undefined) => {
+export const isAddress = (address: Address | string | null | undefined): address is Address => {
   if (!address) return false;
 
   return isAddressViem(address as string);

@@ -4,6 +4,8 @@ import type { CreateInfiniteQueryParameters, CreateQueryParameters } from "./que
 import type { Readable } from "svelte/store";
 import type { Address, Log } from "viem";
 
+export type Nullable<T> = T | null | undefined;
+
 export type LogWithArgs = Log & { args: []; index: number };
 
 export type LogsParamsType = {

@@ -1,26 +1,31 @@
-import {
-  deepEqual,
-  getAccount,
-  watchAccount,
-  getBalance as getBalanceWagmi,
-  type GetBalanceReturnType
-} from "@wagmi/core";
-import { Balance, wagmiConfig } from "$lib/wagmi/classes";
-import { isAddress } from "$lib/scaffold-eth/ts";
+import { type Address as AddressType } from "viem";
+import { getAccount, watchAccount } from "@wagmi/core";
+import { AddressEns, wagmiConfig } from "$lib/wagmi/classes";
+import type { Nullable } from "../ts";
 
 type AccountType = ReturnType<typeof getAccount>;
 
-class Account {
-  account = $state<AccountType>(getAccount(wagmiConfig));
+// Account => account & chain & chainId & isConnected & connectorId
+// AddressEns => ensName & ensAvatar
+// Address => address & balance & symbol & decimals
+//
+// Account extends AddressEns extends Address
+class Account extends AddressEns {
+  #account = $state<Nullable<AccountType>>();
+
+  get account(): Nullable<AccountType> {
+    return this.#account;
+  }
+  set account(account: Nullable<AccountType>) {
+    this.#account = account;
+    super.address = account?.address;
+  }
 
   get chain() {
     return this.account?.chain;
   }
   get chainId() {
     return this.account?.chainId;
-  }
-  get address() {
-    return this.account?.address;
   }
   get isConnected() {
     return this.account?.isConnected;
@@ -35,9 +40,12 @@ class Account {
     });
 
   constructor() {
-    this.watch();
+    super();
+    this.account = getAccount(wagmiConfig);
 
-    // $inspect("Account", this.chainId, this.address, this.connectorId);
+    this.watch();
+    $inspect("Account account", this.account);
+    $inspect("Account", this.chainId, this.address, this.connectorId);
   }
 }
 

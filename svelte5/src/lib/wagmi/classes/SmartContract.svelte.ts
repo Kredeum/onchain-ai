@@ -70,11 +70,11 @@ class SmartContract {
       );
     }
   };
-  call = (functionName: string = "", args: unknown[] = []): unknown | undefined => {
+  call = (functionName: string = "", args: unknown[] = [], onStart = true): unknown | undefined => {
     const dataKey = this.getDataKey(functionName, args);
     if (this.#datas.has(dataKey)) return this.#datas.get(dataKey);
 
-    untrack(() => this.fetch(functionName, args));
+    if (onStart) untrack(() => this.fetch(functionName, args));
   };
 
   constructor(nameOrAddress: DeploymentContractName | Address) {

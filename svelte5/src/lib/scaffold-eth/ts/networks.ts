@@ -48,7 +48,6 @@ export const getAlchemyTransport = (chainId: number, protocol: "https" | "wss" =
   const fnProtocol = protocol === "https" ? http : webSocket;
   return fnProtocol(getAlchemyUrl(chainId, protocol));
 };
-console.log("Inside network.ts AFTER  getAlchemyUrl");
 
 export const NETWORKS_EXTRA_DATA: Record<string, ChainAttributes> = {
   [chains.anvil.id]: {
