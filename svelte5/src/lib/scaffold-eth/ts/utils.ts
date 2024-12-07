@@ -113,8 +113,8 @@ export const isValidInteger = (dataType: IntegerVariant, value: bigint | string,
 export const isEns = (ensName: string | null | undefined) => {
   if (!ensName) return false;
 
-  // Treat any dot-separated string as a potential ENS name
-  return /.+\..+/.test(ensName);
+  // Treat .eth string as potential ENS name
+  return /.+\.eth/.test(ensName);
 };
 
 export const isAddress = (address: Address | string | null | undefined): address is Address => {
@@ -122,3 +122,5 @@ export const isAddress = (address: Address | string | null | undefined): address
 
   return isAddressViem(address as string);
 };
+
+export const shorten0xString = (addr: `0x${string}`) => addr?.slice(0, 8) + "..." + addr?.slice(-6);

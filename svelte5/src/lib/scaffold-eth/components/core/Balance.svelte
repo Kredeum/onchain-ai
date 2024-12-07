@@ -24,7 +24,7 @@
   // $inspect("<Balance", address, formattedBalance, balance);
 </script>
 
-{#if addr.balance}
+{#if addr.balance != null}
   <button
     class="btn btn-ghost btn-sm flex flex-col items-center font-normal hover:bg-transparent {className}"
     onclick={toggleBalanceMode}

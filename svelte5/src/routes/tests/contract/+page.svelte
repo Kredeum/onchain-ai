@@ -13,7 +13,7 @@
   price = {onChainAI.price}
 </div>
 
-{#if mockRouter}
+{#if mockRouter.addressOnChainAI}
   <div class="p-4">
     counter = {mockRouter.counter}
   </div>

@@ -14,7 +14,7 @@ class OnChainAI extends SmartContract {
     if (!isAddress(address)) return;
 
     const lastInteractionTuple = this.call("lastInteraction", [address]) as InteractionTypeTuple;
-    // if (!(lastInteractionTuple && lastInteractionTuple.length === 4)) return;
+    if (!(lastInteractionTuple && lastInteractionTuple.length === 4)) return;
 
     const [requestId, sender, prompt, response] = lastInteractionTuple;
     return { requestId, sender, prompt, response, isResponse: Boolean(response) };
