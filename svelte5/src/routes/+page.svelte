@@ -1,8 +1,8 @@
 <script lang="ts">
+  import { OnChainAI } from "$lib/onchain-ai/classes";
   import { Chat, Form, LinksInteraction } from "$lib/onchain-ai/components";
-  import { createContract } from "$lib/wagmi/runes/";
 
-  const { address } = $derived.by(() => createContract("OnChainAIv1"));
+  const onChainAI = new OnChainAI();
   let hash: `0x${string}` | undefined = $state();
 </script>
 
@@ -16,7 +16,7 @@
   </div>
 
   <div class="text-center">
-    <LinksInteraction {hash} {address} />
+    <LinksInteraction {hash} address={onChainAI.address} />
   </div>
 
   <div class="pt-4 w-full max-w-lg">

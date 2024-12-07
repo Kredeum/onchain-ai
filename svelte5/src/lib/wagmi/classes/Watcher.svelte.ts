@@ -3,12 +3,13 @@ import scaffoldConfig from "$lib/scaffold.config";
 class Watcher {
   id = $state(0);
 
-  start = () => {
+  start = (fn: () => unknown, onStart = false) => {
     if (this.id) return;
 
-    this.id = setInterval(this.fn, scaffoldConfig.pollingInterval) as unknown as number;
+    if (onStart) fn();
+    this.id = setInterval(fn, scaffoldConfig.pollingInterval) as unknown as number;
     console.info("WATCHER start", this.id);
-    this.fn();
+    fn();
   };
   stop = () => {
     if (!this.id) return;
@@ -17,11 +18,15 @@ class Watcher {
     console.info("WATCHER stop", this.id);
     this.id = 0;
   };
+  restart = (fn: () => unknown, onStart = false) => {
+    this.stop();
+    this.start(fn, onStart);
+  };
 
-  constructor(public fn: () => unknown) {
-    this.start();
+  constructor(fn?: () => unknown) {
+    if (fn) this.start(fn);
 
-    $inspect("WATCHER ", this.id);
+    // $inspect("WATCHER ", this.id);
   }
 }
 

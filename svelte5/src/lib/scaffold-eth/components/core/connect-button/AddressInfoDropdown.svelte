@@ -50,7 +50,7 @@
 
   const blockChain = new BlockChain();
 
-  const checkSumAddress = $derived(getAddress(address));
+  const checksumAddress = $derived(getAddress(address));
 
   let addressCopied = $state(false);
   let selectingNetwork = $state(false);
@@ -63,9 +63,9 @@
 
 <details id="address-info-dropdown" class="dropdown dropdown-end leading-3" bind:this={dropdown}>
   <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
-    <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
+    <BlockieAvatar address={checksumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
-      {isEns(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
+      {isEns(displayName) ? displayName : checksumAddress?.slice(0, 6) + "..." + checksumAddress?.slice(-4)}
     </span>
     <Icon src={ChevronDown} class="ml-2 h-6 w-4 sm:ml-0" />
   </summary>
@@ -79,7 +79,7 @@
         onclick={() => {
           if (addressCopied) return;
 
-          navigator.clipboard.writeText(checkSumAddress);
+          navigator.clipboard.writeText(checksumAddress);
 
           addressCopied = true;
           setTimeout(() => {

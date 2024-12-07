@@ -20,7 +20,7 @@
     size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
   } = $props();
 
-  const checkSumAddress = $derived(address ? getAddress(address) : undefined);
+  const checksumAddress = $derived(address ? getAddress(address) : undefined);
 
   const blockieSizeMap = {
     xs: 6,
@@ -32,7 +32,7 @@
     "3xl": 15
   };
 
-  let { ensName } = $derived(createEnsName(checkSumAddress));
+  let { ensName } = $derived(createEnsName(checksumAddress));
   let { ensAvatar } = $derived(createEnsAvatar(ensName));
   let addressCopied = $state(false);
 
@@ -40,33 +40,33 @@
     if (ensName) {
       return ensName;
     } else if (format === "long") {
-      return checkSumAddress;
+      return checksumAddress;
     }
-    return checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4);
+    return checksumAddress?.slice(0, 6) + "..." + checksumAddress?.slice(-4);
   });
 
   let blockExplorerAddressLink = $state<string>();
   $effect(() => {
-    if (checkSumAddress) {
-      blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork.chain, checkSumAddress);
+    if (checksumAddress) {
+      blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork.chain, checksumAddress);
     }
   });
 </script>
 
-{#if !checkSumAddress}
+{#if !checksumAddress}
   <div class="flex animate-pulse space-x-4">
     <div class="h-6 w-6 rounded-md bg-slate-300"></div>
     <div class="flex items-center space-y-6">
       <div class="h-2 w-28 rounded bg-slate-300"></div>
     </div>
   </div>
-{:else if !isAddress(checkSumAddress)}
+{:else if !isAddress(checksumAddress)}
   <span class="text-error">Wrong address</span>
 {:else}
   <div class="flex items-center">
     <div class="flex-shrink-0">
       <BlockieAvatar
-        address={checkSumAddress}
+        address={checksumAddress}
         size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
         ensImage={ensAvatar}
       />
@@ -99,7 +99,7 @@
         class="ml-1.5 h-5 w-5 cursor-pointer text-xl font-normal text-sky-600"
         aria-hidden="true"
         onclick={() => {
-          navigator.clipboard.writeText(checkSumAddress);
+          navigator.clipboard.writeText(checksumAddress);
           addressCopied = true;
           setTimeout(() => (addressCopied = false), 800);
         }}

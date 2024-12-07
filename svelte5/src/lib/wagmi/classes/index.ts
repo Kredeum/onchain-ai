@@ -1,5 +1,4 @@
 export * from "./Address.svelte";
-export * from "./AddressEns.svelte";
 export * from "./Account.svelte";
 export * from "./BlockChain.svelte";
 export * from "./Client.svelte";

@@ -1,26 +1,22 @@
 import { type Address as AddressType } from "viem";
 import { getAccount, watchAccount } from "@wagmi/core";
-import { AddressEns, wagmiConfig } from "$lib/wagmi/classes";
+import { Address, wagmiConfig } from "$lib/wagmi/classes";
 import type { Nullable } from "../ts";
 
 type AccountType = ReturnType<typeof getAccount>;
 
 // Account => account & chain & chainId & isConnected & connectorId
-// AddressEns => ensName & ensAvatar
-// Address => address & balance & symbol & decimals
-//
-// Account extends AddressEns extends Address
-class Account extends AddressEns {
+// Address => address & balance & symbol & decimals & ensName & ensAvatar
+class Account extends Address {
   #account = $state<Nullable<AccountType>>();
 
-  get account(): Nullable<AccountType> {
-    return this.#account;
-  }
   set account(account: Nullable<AccountType>) {
     this.#account = account;
     super.address = account?.address;
   }
-
+  get account(): Nullable<AccountType> {
+    return this.#account;
+  }
   get chain() {
     return this.account?.chain;
   }
