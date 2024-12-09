@@ -48,7 +48,6 @@
     if (reFocus) input.focus();
   });
 
-
   $inspect("<InputBase", value);
 </script>
 

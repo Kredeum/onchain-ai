@@ -6,7 +6,7 @@
   import { getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { BlockieAvatar } from "$lib/scaffold-eth/components";
-  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes";
+  import { Address } from "$lib/wagmi/classes";
 
   const {
     address,
@@ -32,13 +32,13 @@
     "3xl": 15
   };
 
-  let { ensName } = $derived(createEnsName(checksumAddress));
-  let { ensAvatar } = $derived(createEnsAvatar(ensName));
+  const addr = new Address(address, { ens: true });
+
   let addressCopied = $state(false);
 
   let displayAddress = $derived.by(() => {
-    if (ensName) {
-      return ensName;
+    if (addr.ensName) {
+      return addr.ensName;
     } else if (format === "long") {
       return checksumAddress;
     }
@@ -68,7 +68,7 @@
       <BlockieAvatar
         address={checksumAddress}
         size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
-        ensImage={ensAvatar}
+        ensImage={addr.ensAvatar}
       />
     </div>
     {#if disableAddressLink}

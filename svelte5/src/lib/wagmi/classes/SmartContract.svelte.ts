@@ -11,8 +11,6 @@ import { shorten0xString } from "$lib/scaffold-eth/ts";
 let counter = 0;
 
 class SmartContract {
-  id = 0;
-
   name: string | undefined;
   #nameOrAddress: DeploymentContractName | AddressType | undefined;
 

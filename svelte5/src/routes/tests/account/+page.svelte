@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Account } from "$lib/wagmi/classes";
-  const account = new Account();
+  const account = new Account({ watchBalance: true, ens: true });
 
   $inspect("PAGE account", account.chainId, account.address);
 </script>

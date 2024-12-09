@@ -28,7 +28,15 @@
   // $inspect("<AddressInput", value, addr.address, addr.ensName, addr.ensAvatar);
 </script>
 
-<InputBase {name} bind:value={value as AddressType} {placeholder} error={addr.address == null} {onchange} {disabled} {reFocus}>
+<InputBase
+  {name}
+  bind:value={value as AddressType}
+  {placeholder}
+  error={addr.address == null}
+  {onchange}
+  {disabled}
+  {reFocus}
+>
   {#snippet prefix()}
     {#if addr.ensName}
       <div class="flex items-center rounded-l-full bg-base-300">

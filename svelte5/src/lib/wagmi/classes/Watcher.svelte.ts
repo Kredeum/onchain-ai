@@ -7,15 +7,16 @@ class Watcher {
     if (this.id) return;
 
     if (onStart) fn();
+
     this.id = setInterval(fn, scaffoldConfig.pollingInterval) as unknown as number;
-    console.info("WATCHER start", this.id);
-    fn();
+    console.info("WATCHER START", this.id);
   };
   stop = () => {
     if (!this.id) return;
 
     clearInterval(this.id);
-    console.info("WATCHER stop", this.id);
+    console.info("WATCHER STOP", this.id);
+    
     this.id = 0;
   };
   restart = (fn: () => unknown, onStart = false) => {

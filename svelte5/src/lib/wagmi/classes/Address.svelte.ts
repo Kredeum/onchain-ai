@@ -21,8 +21,11 @@ class Address {
     this.#ensName = null;
     this.#ensAvatar = null;
   };
+
   #getAndWatchBalance = () => {
     this.#getBalance();
+
+    console.log("#getAndWatchBalance:", Boolean(this.watcher));
     this.watcher?.restart(this.#getBalance);
   };
   #getBalance = async () => {
@@ -30,15 +33,18 @@ class Address {
 
     const balance = await getBalanceWagmi(wagmiConfig, { address: this.address });
     if (!deepEqual($state.snapshot(this.#balance), balance)) this.#balance = balance;
-
-    return balance;
   };
 
-  #setAddressPlus = async (address: AddressType) => {
+  #setAddressPlus = async (address: AddressType, ens = true) => {
     this.#address = address;
-    const ensName = address ? await getEnsName(wagmiConfig, { chainId: mainnet.id, address }) : null;
-    this.#ensName = ensName;
-    this.#ensAvatar = ensName ? await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName }) : null;
+    if (ens) {
+      const ensName = address ? await getEnsName(wagmiConfig, { chainId: mainnet.id, address }) : null;
+      this.#ensName = ensName;
+      this.#ensAvatar = ensName ? await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName }) : null;
+    } else {
+      this.#ensName = null;
+      this.#ensAvatar = null;
+    }
   };
   #setEnsNamePlus = async (ensName: string) => {
     this.#ensName = ensName;
@@ -46,7 +52,7 @@ class Address {
     this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
   };
 
-  setAddressOrName = (addressOrName: Nullable<AddressType | string>) => {
+  setAddressOrName = (addressOrName: AddressType | string) => {
     if (isAddress(addressOrName)) {
       this.address = addressOrName;
     } else if (isEns(addressOrName)) {
@@ -55,15 +61,19 @@ class Address {
       this.#reset();
     }
   };
-  set address(addr: Nullable<AddressType>) {
+  set address(addr: AddressType) {
     const checkSumAddr = isAddress(addr) ? checksumAddress(addr as AddressType) : addr;
-    if (this.#address === checkSumAddr) return;
+
+    // let noChange = false;
+    // untrack(() => (noChange = this.#address === checkSumAddr));
+    // if (noChange) return;
+
     if (!isAddress(checkSumAddr)) this.#reset();
 
     this.#setAddressPlus(checkSumAddr!);
     this.#getAndWatchBalance();
   }
-  set ensName(ensName: Nullable<string>) {
+  set ensName(ensName: string) {
     if (this.#ensName === ensName) return;
     if (!isEns(ensName)) this.#reset();
 
@@ -94,7 +104,7 @@ class Address {
     // console.log("<Address constructor", addressOrName);
 
     if (watchBalance) this.watcher = new Watcher();
-    this.setAddressOrName(addressOrName);
+    if (addressOrName) this.setAddressOrName(addressOrName);
 
     // $inspect("<Address", this.address, this.ensName);
   }

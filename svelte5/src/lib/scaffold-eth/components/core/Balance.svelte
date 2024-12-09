@@ -2,7 +2,6 @@
   import { formatEther, type Address as AddressType } from "viem";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { Address } from "$lib/wagmi/classes";
-  import { type GetBalanceReturnType } from "@wagmi/core";
 
   const {
     address,
@@ -10,7 +9,7 @@
     usdMode = false
   }: { address?: AddressType; class?: string; usdMode?: boolean } = $props();
 
-  const addr = new Address(address, true);
+  const addr = new Address(address, { watchBalance: true });
 
   const formattedBalance = $derived(Number(formatEther(addr.balance || 0n)));
   let displayUsdMode = $state(targetNetwork?.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);
@@ -21,7 +20,7 @@
     }
   };
 
-  // $inspect("<Balance", address, formattedBalance, balance);
+  $inspect("<Balance", address, addr.balance, formattedBalance, addr);
 </script>
 
 {#if addr.balance != null}

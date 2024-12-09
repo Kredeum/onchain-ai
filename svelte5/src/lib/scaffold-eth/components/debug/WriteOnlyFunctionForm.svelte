@@ -60,7 +60,7 @@
   const transformedFunction = transformAbiFunction(abiFunction);
   const zeroInputs = transformedFunction.inputs.length === 0 && abiFunction.stateMutability !== "payable";
 
-$inspect("<WriteOnlyFunctionForm Receipt txHash", txHash, "=>", txReceipt);
+  $inspect("<WriteOnlyFunctionForm Receipt txHash", txHash, "=>", txReceipt);
 </script>
 
 <div class="space-y-3 py-5 first:pt-0 last:pb-1">

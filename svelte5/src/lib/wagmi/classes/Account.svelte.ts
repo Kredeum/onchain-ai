@@ -10,34 +10,32 @@ type AccountType = ReturnType<typeof getAccount>;
 class Account extends Address {
   #account = $state<Nullable<AccountType>>();
 
-  set account(account: Nullable<AccountType>) {
-    this.#account = account;
-    super.address = account?.address;
-  }
-  get account(): Nullable<AccountType> {
-    return this.#account;
-  }
   get chain() {
-    return this.account?.chain;
+    return this.#account?.chain;
   }
   get chainId() {
-    return this.account?.chainId;
+    return this.#account?.chainId;
   }
   get isConnected() {
-    return this.account?.isConnected;
+    return this.#account?.isConnected;
   }
   get connectorId() {
-    return this.account?.connector?.id;
+    return this.#account?.connector?.id;
   }
 
   watch = () =>
     watchAccount(wagmiConfig, {
-      onChange: (newAccount: AccountType) => (this.account = newAccount)
+      onChange: (newAccount: AccountType) => {
+        this.#account = newAccount;
+        if (newAccount.address) super.address = newAccount.address;
+      }
     });
 
-  constructor() {
-    super();
-    this.account = getAccount(wagmiConfig);
+  constructor({ ens = false, watchBalance = false } = {}) {
+    const account = getAccount(wagmiConfig);
+    super(account.address, { ens, watchBalance });
+
+    this.#account = account;
 
     this.watch();
     // $inspect("Account account", this.account);
