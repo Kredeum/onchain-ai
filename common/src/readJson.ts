@@ -1,7 +1,7 @@
 import jsonChainLinkConfig from "../../chainlink/config.json";
 import jsonAddresses from "../../foundry/addresses.json";
 import jsonDeployments from "../../svelte5/src/lib/deployments.json";
-import type { Abi, Address } from "viem";
+import { isAddress, type Abi, type Address } from "viem";
 
 type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
 
@@ -83,9 +83,9 @@ const readDeployment = (
   chainId: string | number,
   param: DeploymentContractName | Address
 ): DeploymentType | undefined => {
-  const paramIsAddress = param.slice(0, 2) === "0x";
+  if (!(chainId && param)) return;
 
-  return paramIsAddress
+  return isAddress(param)
     ? readDeploymentByAddress(chainId, param as Address)
     : readDeploymentByName(chainId, param as DeploymentContractName);
 };

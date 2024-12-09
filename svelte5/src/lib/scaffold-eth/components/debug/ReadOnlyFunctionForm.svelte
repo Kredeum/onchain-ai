@@ -35,7 +35,7 @@
 
   const transformedFunction = $derived(transformAbiFunction(abiFunction));
 
-  $inspect("<ReadOnlyFunctionForm", abiFunction.name, args, contractAddress, data, isFetching, transformedFunction);
+  $inspect("<ReadOnlyFunctionForm", contractAddress, abiFunction.name, args, "=>", data);
 </script>
 
 <div class="flex flex-col gap-3 py-5 first:pt-0 last:pb-1">

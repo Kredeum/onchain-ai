@@ -21,7 +21,7 @@
     </div>
 
     <div class="pl-4 pb-4 text-left">
-      <LinksInteraction requestId="{interaction.requestId as `0x${string}`}}" />
+      <LinksInteraction requestId={interaction.requestId as `0x${string}`} />
     </div>
   </div>
 {/if}

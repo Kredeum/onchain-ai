@@ -1,40 +1,88 @@
-import { type Account, type Address as AddressType, checksumAddress } from "viem";
+import { type Address as AddressType, checksumAddress } from "viem";
 import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } from "@wagmi/core";
 
-import { isAddress } from "$lib/scaffold-eth/ts";
+import { isAddress, isEns } from "$lib/scaffold-eth/ts";
 import type { Nullable } from "$lib/wagmi/ts";
 import { Account as AccountClass, wagmiConfig, Watcher } from "$lib/wagmi/classes";
+import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
+import { mainnet } from "viem/chains";
 
-// Address => address & balance & symbol & decimals
 class Address {
-  #address: Nullable<AddressType> = $state();
+  watcher: Nullable<Watcher>;
+  #address = $state<Nullable<AddressType>>();
+  #balance = $state<Nullable<GetBalanceReturnType>>();
+  #ensName = $state<Nullable<string>>();
+  #ensAvatar = $state<Nullable<string>>();
+
+  #reset = () => {
+    this.watcher?.stop();
+    this.#address = null;
+    this.#balance = null;
+    this.#ensName = null;
+    this.#ensAvatar = null;
+  };
+  #getAndWatchBalance = () => {
+    this.#getBalance();
+    this.watcher?.restart(this.#getBalance);
+  };
+  #getBalance = async () => {
+    if (!(this.address && isAddress(this.address))) return;
+
+    const balance = await getBalanceWagmi(wagmiConfig, { address: this.address });
+    if (!deepEqual($state.snapshot(this.#balance), balance)) this.#balance = balance;
+
+    return balance;
+  };
+
+  #setAddressPlus = async (address: AddressType) => {
+    this.#address = address;
+    const ensName = address ? await getEnsName(wagmiConfig, { chainId: mainnet.id, address }) : null;
+    this.#ensName = ensName;
+    this.#ensAvatar = ensName ? await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName }) : null;
+  };
+  #setEnsNamePlus = async (ensName: string) => {
+    this.#ensName = ensName;
+    this.#ensAvatar = await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName });
+    this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
+  };
+
+  setAddressOrName = (addressOrName: Nullable<AddressType | string>) => {
+    if (isAddress(addressOrName)) {
+      this.address = addressOrName;
+    } else if (isEns(addressOrName)) {
+      this.ensName = addressOrName as string;
+    } else {
+      this.#reset();
+    }
+  };
+  set address(addr: Nullable<AddressType>) {
+    const checkSumAddr = isAddress(addr) ? checksumAddress(addr as AddressType) : addr;
+    if (this.#address === checkSumAddr) return;
+    if (!isAddress(checkSumAddr)) this.#reset();
+
+    this.#setAddressPlus(checkSumAddr!);
+    this.#getAndWatchBalance();
+  }
+  set ensName(ensName: Nullable<string>) {
+    if (this.#ensName === ensName) return;
+    if (!isEns(ensName)) this.#reset();
+
+    this.#setEnsNamePlus(ensName!);
+    this.#getAndWatchBalance();
+  }
 
   get address(): Nullable<AddressType> {
     return this.#address;
   }
-  set address(addr: Nullable<AddressType>) {
-    if (!isAddress(addr)) return;
-
-    if (this.#address !== checksumAddress(addr)) {
-      this.#address = checksumAddress(addr);
-    }
-    this.getBalance();
+  get ensName(): Nullable<string> {
+    return this.#ensName;
   }
-
-  #balance = $state<GetBalanceReturnType>();
+  get ensAvatar(): Nullable<string> {
+    return this.#ensAvatar;
+  }
   get balance() {
     return this.#balance?.value;
   }
-  getBalance = async () => {
-    if (!(this.address && isAddress(this.address))) return;
-
-    const balance = await getBalanceWagmi(wagmiConfig, { address: this.address });
-
-    if (!deepEqual($state.snapshot(this.#balance), balance)) this.#balance = balance;
-    // console.log("getBalance", this.address, balance);
-
-    return balance;
-  };
   get decimals() {
     return this.#balance?.decimals;
   }
@@ -42,17 +90,13 @@ class Address {
     return this.#balance?.symbol;
   }
 
-  watcher?: Watcher;
+  constructor(addressOrName?: Nullable<AddressType | string>, watchBalance = false) {
+    // console.log("<Address constructor", addressOrName);
 
-  constructor(address?: Nullable<AddressType>, watchBalance = true) {
-    console.log("<Address constructor ~ address:", address);
+    if (watchBalance) this.watcher = new Watcher();
+    this.setAddressOrName(addressOrName);
 
-    if (isAddress(address)) {
-      this.address = address;
-      if (watchBalance) this.watcher = new Watcher(this.getBalance);
-    }
-
-    $inspect("<Address", this.#address);
+    // $inspect("<Address", this.address, this.ensName);
   }
 }
 

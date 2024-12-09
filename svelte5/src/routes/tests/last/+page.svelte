@@ -16,7 +16,7 @@
     {JSON.stringify(onChainAI.lastInteraction(account?.address), null, 2)}
   </div>
 
-  <LastInteraction account={account.address} />
+  <LastInteraction address={account.address} />
 {:else}
   <p class="p-4">No account address found</p>
 {/if}

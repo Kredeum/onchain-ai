@@ -10,7 +10,7 @@
     usdMode = false
   }: { address?: AddressType; class?: string; usdMode?: boolean } = $props();
 
-  const addr = new Address(address);
+  const addr = new Address(address, true);
 
   const formattedBalance = $derived(Number(formatEther(addr.balance || 0n)));
   let displayUsdMode = $state(targetNetwork?.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);
@@ -24,7 +24,7 @@
   // $inspect("<Balance", address, formattedBalance, balance);
 </script>
 
-{#if addr.balance}
+{#if addr.balance != null}
   <button
     class="btn btn-ghost btn-sm flex flex-col items-center font-normal hover:bg-transparent {className}"
     onclick={toggleBalanceMode}

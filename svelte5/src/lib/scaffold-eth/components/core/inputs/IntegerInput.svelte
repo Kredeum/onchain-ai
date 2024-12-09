@@ -4,9 +4,9 @@
 
   let {
     value = $bindable(),
-    onchange,
     name,
     placeholder,
+    onchange,
     disabled,
     variant = IntegerVariant.INT256,
     disableMultiplyBy1e18 = false
@@ -34,6 +34,8 @@
     value = BigInt(Math.round(Number(value) * 10 ** 18));
     return onchange?.(value);
   };
+
+  $inspect("<IntegerInput", value);
 </script>
 
 <InputBase {name} bind:value {placeholder} error={inputError} {onchange} {disabled}>

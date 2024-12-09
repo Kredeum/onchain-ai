@@ -1,21 +1,22 @@
 <script lang="ts">
   import { createInteractions, createWriteOnchainAI } from "$lib/onchain-ai/runes";
-  import { createContract, createWriteContract } from "$lib/wagmi/runes";
+  import { OnChainAI } from "$lib/onchain-ai/classes";
   import { Interaction } from "$lib/onchain-ai/components";
+  import { Account } from "$lib/wagmi/classes";
 
   const lim = 3;
   let all: boolean = $state(true);
   let limit: number = $state(lim);
 
-  // const { account, chainId, address, abi } = $derived.by(() => createContract("MockRouter"));
-  const { account, chainId } = $derived.by(() => createContract("OnChainAIv1"));
+  const onChainAI = new OnChainAI();
+  const account = new Account();
 
   const { interactions, interactionsMax } = $derived(createInteractions({ all, limit }));
 
   let noMore = $derived(limit >= interactionsMax);
   let interactionsCount = $derived(interactions.length);
 
-  let disabled = $derived(all && !account);
+  let disabled = $derived(all && !account.address);
 
   const lastInteraction = $derived(interactions?.[0]);
   const missingResponse = $derived(!lastInteraction.response);

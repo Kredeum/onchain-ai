@@ -1,12 +1,11 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-
-  const short = (addr: `0x${string}`) => addr?.slice(0, 8) + "..." + addr?.slice(-6);
+  import { shorten0xString } from "$lib/scaffold-eth/ts";
 
   const {
     hash,
-    description = short(hash),
+    description = shorten0xString(hash),
     message
   }: { hash: `0x${string}`; description?: string; message?: string } = $props();
 
