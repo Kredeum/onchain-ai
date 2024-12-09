@@ -1,6 +1,6 @@
 import { SmartContract } from "$lib/wagmi/classes";
 import type { Address } from "viem";
-import type { InteractionType, InteractionTypeTuple } from "../ts";
+import type { InteractionType, InteractionTypeTuple } from "$lib/onchain-ai/ts";
 import { isAddress } from "$lib/scaffold-eth/ts";
 
 class OnChainAI extends SmartContract {

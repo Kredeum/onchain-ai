@@ -16,7 +16,7 @@ class Watcher {
 
     clearInterval(this.id);
     console.info("WATCHER STOP", this.id);
-    
+
     this.id = 0;
   };
   restart = (fn: () => unknown, onStart = false) => {

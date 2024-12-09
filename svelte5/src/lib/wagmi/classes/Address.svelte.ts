@@ -11,22 +11,28 @@ class Address {
   watcher: Nullable<Watcher>;
   #address = $state<Nullable<AddressType>>();
   #balance = $state<Nullable<GetBalanceReturnType>>();
-  #ensName = $state<Nullable<string>>();
-  #ensAvatar = $state<Nullable<string>>();
+  #ensName = $state<string | undefined>();
+  #ensAvatar = $state<string | undefined>();
+
+  #watchBalance = false;
+  #ens = false;
 
   #reset = () => {
     this.watcher?.stop();
     this.#address = null;
     this.#balance = null;
-    this.#ensName = null;
-    this.#ensAvatar = null;
+    this.#ensName = undefined;
+    this.#ensAvatar = undefined;
   };
 
   #getAndWatchBalance = () => {
     this.#getBalance();
+    if (this.#watchBalance) {
+      this.watcher ??= new Watcher();
 
-    console.log("#getAndWatchBalance:", Boolean(this.watcher));
-    this.watcher?.restart(this.#getBalance);
+      console.log("WATCHER RESTART ", this.address);
+      this.watcher.restart(this.#getBalance);
+    }
   };
   #getBalance = async () => {
     if (!(this.address && isAddress(this.address))) return;
@@ -35,20 +41,24 @@ class Address {
     if (!deepEqual($state.snapshot(this.#balance), balance)) this.#balance = balance;
   };
 
-  #setAddressPlus = async (address: AddressType, ens = true) => {
+  #setAddressPlus = async (address: AddressType) => {
     this.#address = address;
-    if (ens) {
-      const ensName = address ? await getEnsName(wagmiConfig, { chainId: mainnet.id, address }) : null;
+    if (this.#ens) {
+      const ensName = address
+        ? ((await getEnsName(wagmiConfig, { chainId: mainnet.id, address })) as string)
+        : undefined;
       this.#ensName = ensName;
-      this.#ensAvatar = ensName ? await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName }) : null;
+      this.#ensAvatar = ensName
+        ? ((await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName })) as string)
+        : undefined;
     } else {
-      this.#ensName = null;
-      this.#ensAvatar = null;
+      this.#ensName = undefined;
+      this.#ensAvatar = undefined;
     }
   };
   #setEnsNamePlus = async (ensName: string) => {
     this.#ensName = ensName;
-    this.#ensAvatar = await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName });
+    this.#ensAvatar = (await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName })) as string;
     this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
   };
 
@@ -84,10 +94,10 @@ class Address {
   get address(): Nullable<AddressType> {
     return this.#address;
   }
-  get ensName(): Nullable<string> {
+  get ensName(): string | undefined {
     return this.#ensName;
   }
-  get ensAvatar(): Nullable<string> {
+  get ensAvatar(): string | undefined {
     return this.#ensAvatar;
   }
   get balance() {
@@ -100,10 +110,12 @@ class Address {
     return this.#balance?.symbol;
   }
 
-  constructor(addressOrName?: Nullable<AddressType | string>, watchBalance = false) {
+  constructor(addressOrName: Nullable<AddressType | string>, { watchBalance = false, ens = false } = {}) {
     // console.log("<Address constructor", addressOrName);
 
-    if (watchBalance) this.watcher = new Watcher();
+    this.#watchBalance = watchBalance;
+    this.#ens = ens;
+
     if (addressOrName) this.setAddressOrName(addressOrName);
 
     // $inspect("<Address", this.address, this.ensName);

@@ -1,6 +1,6 @@
 import { type Abi, type AbiFunction, type Address as AddressType } from "viem";
 import { SvelteMap } from "svelte/reactivity";
-import { type ReadContractReturnType, deepEqual, readContract } from "@wagmi/core";
+import { type ReadContractReturnType, deepEqual, readContract, waitForTransactionReceipt, writeContract } from "@wagmi/core";
 import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { wagmiConfig } from "$lib/wagmi/classes";
 import { isAddress } from "$lib/scaffold-eth/ts";
@@ -11,6 +11,8 @@ import { shorten0xString } from "$lib/scaffold-eth/ts";
 let counter = 0;
 
 class SmartContract {
+  id = 0;
+
   name: string | undefined;
   #nameOrAddress: DeploymentContractName | AddressType | undefined;
 
@@ -94,6 +96,20 @@ class SmartContract {
 
     if (onStart) untrack(() => this.fetch(functionName, args));
   };
+
+
+  sendAsync = async (functionName: string = "", args: unknown[] = [], value = 0n) => {
+    const chainId = targetNetwork.id;
+    const { address, abi } = readDeployment(chainId, this.#nameOrAddress!) ?? {};
+    if (!(address && abi)) return;
+
+    const hash = await writeContract(wagmiConfig, { address, abi, functionName, args, value });
+    await waitForTransactionReceipt(wagmiConfig, { hash });
+  }
+
+  send = (functionName: string = "", args: unknown[] = [], value = 0n) => {
+    this.sendAsync(functionName, args, value);
+  }
 
   constructor(nameOrAddress: DeploymentContractName | AddressType) {
     if (!nameOrAddress) throw new Error("SmartContract nameOrAddress is required");

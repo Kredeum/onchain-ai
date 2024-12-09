@@ -1,21 +1,22 @@
 import { SvelteMap } from "svelte/reactivity";
 import { type InteractionLogsParamsType, type InteractionLogWithArgs, type InteractionType } from "$lib/onchain-ai/ts";
-import { createContract } from "$lib/wagmi/runes/";
+import { readDeployment } from "@onchain-ai/common";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
+import { Account, wagmi } from "$lib/wagmi/classes";
 
 const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
   let interactions: InteractionType[] = $state([]);
   let logsMap = $state(new SvelteMap());
   let interactionsMax: number = $derived(logsMap.size);
 
-  const eventName = "InteractionLog";
-  const { client, address, abi, account: sender } = $derived.by(() => createContract("OnChainAIv1"));
-  // $inspect("createInteractions", chainId, address, sender);
+  const account = new Account();
+  const client = wagmi.publicClient;
 
-  const paramsAll: InteractionLogsParamsType = $derived({ address, abi, eventName });
   const params = $derived.by(() => {
+    const { address, abi } = readDeployment(targetNetwork.id, "OnChainAIv1") ?? {};
     if (!(address && abi)) return;
-
-    return all ? paramsAll : { ...paramsAll, args: { sender } };
+    const paramsAll = { address, abi, eventName: "InteractionLog" };
+    return all ? paramsAll : { ...paramsAll, args: { sender: account.address } };
   });
 
   $effect(() => {
@@ -36,7 +37,7 @@ const createInteractions = ({ all = false, limit = 3, refresh = 0 } = {}) => {
             ...params,
             fromBlock,
             toBlock
-          })) as InteractionLogWithArgs[]
+          })) as unknown as InteractionLogWithArgs[]
         )
           .sort((a, b) => {
             const blockDelta = (Number(a.blockNumber) || 0) - (Number(b.blockNumber) || 0);

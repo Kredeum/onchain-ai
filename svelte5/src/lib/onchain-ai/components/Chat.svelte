@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createInteractions, createWriteOnchainAI } from "$lib/onchain-ai/runes";
+  import { createInteractions } from "$lib/onchain-ai/runes";
   import { OnChainAI } from "$lib/onchain-ai/classes";
   import { Interaction } from "$lib/onchain-ai/components";
   import { Account } from "$lib/wagmi/classes";
