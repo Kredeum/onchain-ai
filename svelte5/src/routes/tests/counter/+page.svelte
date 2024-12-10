@@ -1,38 +1,21 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import { SmartContract } from "./contract.svelte";
+  import { Counter } from "$lib/onchain-ai/classes";
 
-  const contract = new SmartContract();
-
-  let counter = $derived(contract.result("counter"));
-
-  const refresh = () => contract.fetch("counter");
-
-  onMount(() => refresh());
+  const contract = new Counter();
 </script>
 
 <div class="p-4">
-  <button class="btn-primary" onclick={() => refresh()}>
-    #{contract.isFetching ? "??" : counter}
+  <button class="btn btn-primary" onclick={() => contract.increment()}>
+    {contract.isFetching ? "??" : contract.number}
   </button>
 </div>
 
-<style>
-  .btn-primary {
-    background-color: #007bff;
-    color: white;
-    padding: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-  }
+<div class="p-4">
+  <button class="btn btn-primary">
+    3² = {contract.square(3)}
+  </button>
+</div>
 
-  .btn-primary:hover {
-    background-color: #0056b3;
-  }
-
-  .btn-primary:active {
-    background-color: #004085;
-  }
-</style>
+<div class="p-4">
+  <button class="btn btn-primary" onclick={() => contract.setNumber(42)}> setNumber to 42 </button>
+</div>

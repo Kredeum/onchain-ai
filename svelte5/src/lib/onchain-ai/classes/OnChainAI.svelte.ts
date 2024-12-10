@@ -1,7 +1,6 @@
-import { SmartContract } from "$lib/wagmi/classes";
-import type { Address } from "viem";
-import type { InteractionType, InteractionTypeTuple } from "$lib/onchain-ai/ts";
+import type { Address, Log } from "viem";
 import { isAddress } from "$lib/scaffold-eth/ts";
+import { SmartContract } from "$lib/wagmi/classes";
 
 class OnChainAI extends SmartContract {
   get owner() {
@@ -25,4 +24,22 @@ class OnChainAI extends SmartContract {
   }
 }
 
+type InteractionTypeTuple = [string, Address, string, string];
+type InteractionType = {
+  requestId: string;
+  sender: Address;
+  prompt: string;
+  response: string;
+  isResponse?: boolean;
+};
+
+type InteractionLogWithArgs = Log & { args: InteractionType; index: number };
+type InteractionLogsParamsType = {
+  address: Address;
+  abi: any;
+  eventName: string;
+  args?: { sender: Address };
+};
+
 export { OnChainAI };
+export type { InteractionType, InteractionTypeTuple, InteractionLogWithArgs, InteractionLogsParamsType };

@@ -24,7 +24,7 @@
   const contract = new SmartContract(contractAddress);
   const data = $derived(contract.call(abiFunction.name));
 
-  const refresh = () => contract.fetch(abiFunction.name);
+  const refresh = () => contract.callAsync(abiFunction.name);
   $effect(() => {
     refreshDisplayVariables;
     refresh();

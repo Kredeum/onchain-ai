@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { ChainLink } from "$lib/onchain-ai/runes";
+  import { ChainLink } from "$lib/onchain-ai/classes";
 
   const { requestId }: { requestId?: `0x${string}` } = $props();
 

@@ -8,7 +8,7 @@ class SmartContract {
 
   isFetching: boolean = $state(false);
 
-  fetch = async (name: string): Promise<void> => {
+  callAsync = async (name: string): Promise<void> => {
     this.isFetching = true;
     const newData = Math.floor(Math.random() * 90 + 10);
     await sleep(1000);
@@ -18,7 +18,7 @@ class SmartContract {
     console.log("fetch", name, newData, this.results.get(name));
   };
   count = (name: string): number | undefined => {
-    this.fetch(name);
+    this.callAsync(name);
     return this.result(name);
   };
 }

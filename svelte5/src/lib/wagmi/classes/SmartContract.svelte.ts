@@ -1,12 +1,20 @@
 import { type Abi, type AbiFunction, type Address as AddressType } from "viem";
 import { SvelteMap } from "svelte/reactivity";
-import { type ReadContractReturnType, deepEqual, readContract, waitForTransactionReceipt, writeContract } from "@wagmi/core";
+import {
+  type ReadContractReturnType,
+  deepEqual,
+  readContract,
+  waitForTransactionReceipt,
+  writeContract
+} from "@wagmi/core";
 import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { wagmiConfig } from "$lib/wagmi/classes";
 import { isAddress } from "$lib/scaffold-eth/ts";
 import { readDeployment, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
 import { untrack } from "svelte";
 import { shorten0xString } from "$lib/scaffold-eth/ts";
+import { notification } from "$lib/scaffold-eth/ts";
+import { LinkTx } from "../components";
 
 let counter = 0;
 
@@ -71,7 +79,7 @@ class SmartContract {
 
   isFetching = $state(false);
   #datas: SvelteMap<string, unknown | undefined> = new SvelteMap();
-  fetch = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
+  callAsync = async (functionName: string = "", args: unknown[] = []): Promise<void> => {
     const { chainId, address, abi, dataKey } = this.#getParamsOnCurrentChain(functionName, args) || {};
     if (!(chainId && address && abi && dataKey)) return;
 
@@ -94,22 +102,61 @@ class SmartContract {
 
     if (this.#datas.has(dataKey!)) return this.#datas.get(dataKey!);
 
-    if (onStart) untrack(() => this.fetch(functionName, args));
+    if (onStart) untrack(() => this.callAsync(functionName, args));
   };
 
-
-  sendAsync = async (functionName: string = "", args: unknown[] = [], value = 0n) => {
+  // Write SmartContract : send and wait
+  sendId = $state<string>("");
+  sending = $state(false);
+  waiting = $state(false);
+  notifs = new Map();
+  send = async (functionName: string = "", args: unknown[] = [], value = 0n) => {
+    if (this.sending) return;
     const chainId = targetNetwork.id;
     const { address, abi } = readDeployment(chainId, this.#nameOrAddress!) ?? {};
     if (!(address && abi)) return;
 
-    const hash = await writeContract(wagmiConfig, { address, abi, functionName, args, value });
-    await waitForTransactionReceipt(wagmiConfig, { hash });
-  }
+    let hash: `0x${string}` | undefined;
+    try {
+      this.sending = true;
 
-  send = (functionName: string = "", args: unknown[] = [], value = 0n) => {
-    this.sendAsync(functionName, args, value);
-  }
+      this.sendId = notification.loading("Sending transaction...");
+
+      hash = await writeContract(wagmiConfig, { address, abi, functionName, args, value });
+
+      const idHash = notification.info(LinkTx as any, { props: { hash, message: "Transaction sent!" } });
+      this.notifs.set(hash, idHash);
+    } catch (e: unknown) {
+      notification.error(LinkTx as any, { props: { hash, message: "Transaction call failed!" } });
+      throw new Error(`writeContract error: ${e}`);
+    } finally {
+      this.sending = false;
+      notification.remove(this.sendId);
+    }
+
+    if (!hash) {
+      notification.error(`Transaction failed, no hash!`);
+      throw new Error("writeContract no hash");
+    }
+    return hash;
+  };
+  wait = async (hash: `0x${string}`) => {
+    this.waiting = true;
+    let receipt = await waitForTransactionReceipt(wagmiConfig, { hash });
+
+    notification.remove(this.notifs.get(hash));
+    notification.success(LinkTx as any, {
+      props: { hash, message: "Transaction validated!" }
+    });
+
+    this.waiting = false;
+    return receipt;
+  };
+  sendAndWait = async (functionName: string = "", args: unknown[] = [], value = 0n) => {
+    const hash = await this.send(functionName, args, value);
+    if (hash) await this.wait(hash);
+    return hash;
+  };
 
   constructor(nameOrAddress: DeploymentContractName | AddressType) {
     if (!nameOrAddress) throw new Error("SmartContract nameOrAddress is required");
@@ -118,6 +165,7 @@ class SmartContract {
     this.#setNameOrAddress(nameOrAddress);
 
     // $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.nameOrAddress, this.id);
+    // $inspect("SMARTCONTRACT SEND ID ING", this.sendId, this.sending);
   }
 }
 

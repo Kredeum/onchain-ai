@@ -1,24 +1,21 @@
 <script lang="ts">
   import { InputBase } from "$lib/scaffold-eth/components";
-  import { createWriteOnchainAI } from "$lib/onchain-ai/runes";
+  import { OnChainAI } from "../classes";
 
   let { hash = $bindable() }: { hash?: `0x${string}` } = $props();
 
-  let txReceipt = $state();
   let prompt: string = $state("");
 
-  const { send, wait } = $derived(
-    createWriteOnchainAI({ functionName: "sendRequest", args: [prompt], value: 10n ** 14n })
-  );
+  const onChainAI = new OnChainAI();
 
-  const handleSend = async () => {
+  const sendRequest = async () => {
     try {
-      hash = await send();
+      hash = await onChainAI.send("sendRequest", [prompt], 10n ** 14n);
       if (!hash) return;
 
       console.log("handleSend ~ hash:", hash);
 
-      txReceipt = await wait(hash);
+      const txReceipt = await onChainAI.wait(hash);
       console.log("handleSend ~ txReceipt:", txReceipt);
     } catch (e) {
       console.error(`Transaction KO ${e}`);
@@ -31,7 +28,7 @@
     <InputBase name="Prompt" placeholder="Enter your question" onchange={(input) => (prompt = input)} value={prompt} />
   </div>
 
-  <button id="ask-button" class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={handleSend}>
+  <button id="ask-button" class="btn btn-primary btn-sm h-10 rounded-full ml-4" onclick={sendRequest}>
     <span class="text-lg">Send</span>
   </button>
 </div>

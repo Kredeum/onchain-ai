@@ -18,6 +18,7 @@ contract DeployAll is DeployOnChainAI, DeployMockRouter, DeployFaucet, DeployCou
             deployMockRouter();
         }
         if (block.chainid == 84532) {
+            deployCounter();
             deployFaucet();
         }
         deployOnChainAI();

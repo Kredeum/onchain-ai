@@ -1,5 +1,5 @@
 import { SvelteMap } from "svelte/reactivity";
-import { type InteractionLogsParamsType, type InteractionLogWithArgs, type InteractionType } from "$lib/onchain-ai/ts";
+import { type InteractionLogWithArgs, type InteractionType } from "$lib/onchain-ai/classes";
 import { readDeployment } from "@onchain-ai/common";
 import { targetNetwork } from "$lib/scaffold-eth/classes";
 import { Account, wagmi } from "$lib/wagmi/classes";

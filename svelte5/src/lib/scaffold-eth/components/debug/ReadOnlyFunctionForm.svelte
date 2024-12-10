@@ -29,7 +29,7 @@
   const contract = new SmartContract(contractAddress);
   const data = $derived(contract.call(abiFunction.name, args, false));
 
-  const refresh = () => contract.fetch(abiFunction.name, args);
+  const refresh = () => contract.callAsync(abiFunction.name, args);
 
   const isFetching = false;
 
