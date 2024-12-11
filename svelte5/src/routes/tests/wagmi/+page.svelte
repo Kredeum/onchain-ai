@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { getAccount, http, createConfig, connect, watchAccount, type Config } from "@wagmi/core";
-  import { injected } from "@wagmi/connectors";
   import { onMount } from "svelte";
+  import { getAccount, connect, watchAccount } from "@wagmi/core";
+  import { injected } from "@wagmi/connectors";
   import { newWagmi, wagmiConfig } from "$lib/wagmi/classes";
 
   type AccountType = ReturnType<typeof getAccount>;

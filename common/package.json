@@ -12,7 +12,7 @@
     "build": "ts-node script/mergeAbis.ts"
   },
   "devDependencies": {
-    "@types/node": "^22.10.1",
+    "@types/node": "^22.10.2",
     "eslint": "^9.16.0",
     "eslint-plugin-json": "^4.0.1",
     "ts-node": "^10.9.2",

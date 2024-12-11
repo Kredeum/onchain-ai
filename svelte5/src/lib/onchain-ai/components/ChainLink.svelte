@@ -1,16 +1,17 @@
 <script lang="ts">
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { ChainLink } from "$lib/onchain-ai/classes";
+  import { ChainLink, Interactions, type InteractionType } from "$lib/onchain-ai/classes";
   import { Link } from "$lib/wagmi/components";
 
-  import { createInteractions } from "$lib/onchain-ai/runes";
+  import { Events } from "$lib/wagmi/classes";
   import { Interaction } from "$lib/onchain-ai/components";
 
-  const { lastInteraction } = $derived(createInteractions({ all: true, limit: 1 }));
+  const interactions = new Interactions({ limit: 1 });
+  const interactionLast = $derived(interactions.list?.[0]) as InteractionType;
 
   const chainLink = new ChainLink({});
 
-  const lastResponseSimulation = $derived(eval(lastInteraction.prompt));
+  const lastResponseSimulation = $derived(eval(interactionLast.prompt));
 </script>
 
 <div class="flex flex-col text-2xl">
@@ -33,9 +34,9 @@
 
 <div class="flex flex-col pl-6 pt-12">
   <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">
-    {#if lastInteraction?.prompt}
+    {#if interactionLast.prompt}
       <div class="pb-2 text-xl">Last Interaction:</div>
-      <Interaction interaction={lastInteraction} />
+      <Interaction interaction={interactionLast} />
     {:else}
       <div class="pb-2 text-xl">No Interaction found!</div>
     {/if}

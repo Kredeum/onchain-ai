@@ -16,7 +16,7 @@
     "clean": "rm -rf node_modules .turbo out broadcast cache && pnpm chain:kill",
     "deploy": "pnpm run deploy:anvil",
     "deploy:all": "forge script script/DeployAll.s.sol",
-    "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm run chain && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
+    "deploy:anvil": "export CHAIN=anvil ACCOUNT=anvil-deployer && pnpm deploy:deploy --password '' && pnpm run deploy:validate",
     "deploy:base": "CHAIN=base pnpm deploy:mainnet",
     "deploy:base-sepolia": "CHAIN=base-sepolia pnpm deploy:testnet",
     "deploy:deploy": "pnpm deploy:all --fork-url $CHAIN --account $ACCOUNT --broadcast",

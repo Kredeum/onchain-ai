@@ -159,7 +159,7 @@ class SmartContract {
   };
 
   constructor(nameOrAddress: DeploymentContractName | AddressType) {
-    if (!nameOrAddress) throw new Error("SmartContract nameOrAddress is required");
+    if (!nameOrAddress) throw new Error("SmartContract nameOrAddress required");
 
     this.id = ++counter;
     this.#setNameOrAddress(nameOrAddress);

@@ -20,7 +20,7 @@
     }
   };
 
-  $inspect("<Balance", address, addr.balance, formattedBalance, addr);
+  // $inspect("<Balance", address, addr.balance, formattedBalance, addr);
 </script>
 
 {#if addr.balance != null}

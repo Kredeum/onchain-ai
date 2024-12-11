@@ -50,6 +50,12 @@ const readDeploymentsChain = (chainId: number | string): DeploymentsChain => {
 
 type DeploymentType = { address: Address; abi: Abi; name?: string };
 
+const readDeploymentContractsName = (chainId: string | number): DeploymentContractName[] => {
+  const chainDeployment = readDeploymentsChain(chainId);
+
+  return Object.keys(chainDeployment) as DeploymentContractName[];
+};
+
 const readDeploymentByAddress = (
   chainId: string | number,
   address: string
@@ -93,6 +99,7 @@ const readDeployment = (
 export {
   readChainLinkConfig,
   readAddresses,
+  readDeploymentContractsName,
   readDeploymentsChain,
   readDeploymentByAddress,
   readDeploymentByName,

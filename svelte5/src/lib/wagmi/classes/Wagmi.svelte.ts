@@ -5,6 +5,7 @@ import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connec
 import { createBurnerConnector } from "$lib/burner-wallet";
 import { getAlchemyTransport } from "$lib/scaffold-eth/ts";
 import scaffoldConfig from "$lib/scaffold.config";
+import { Client } from "./Client.svelte";
 
 const { walletConnectProjectId, targetNetworks } = scaffoldConfig;
 
@@ -38,9 +39,7 @@ const wagmiConfig = createConfig({
   }
 });
 
-class Wagmi {
-  publicClient = $derived.by(() => getPublicClient(wagmiConfig));
-
+class Wagmi extends Client {
   recentConnectorId = $state();
 
   reconnect = async () => {
@@ -49,6 +48,7 @@ class Wagmi {
   };
 
   constructor() {
+    super();
     this.reconnect();
   }
 }
