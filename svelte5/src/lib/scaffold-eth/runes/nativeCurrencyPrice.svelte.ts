@@ -1,4 +1,4 @@
-import { targetNetwork } from "../classes/TargetNetwork.svelte";
+import { targetNetwork } from "$lib/wagmi/classes";
 import scaffoldConfig from "$lib/scaffold.config";
 import { fetchPriceFromUniswap } from "$lib/scaffold-eth/ts";
 

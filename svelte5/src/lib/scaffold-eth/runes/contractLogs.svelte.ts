@@ -1,4 +1,4 @@
-import { createPublicClient } from "$lib/wagmi/runes";
+import { createPublicClient } from "$lib/scaffold-eth/runes";
 import type { Address, Log } from "viem";
 
 export const createContractLogs = (address: Address) => {

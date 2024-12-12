@@ -1,6 +1,6 @@
 import { SmartContract } from "$lib/wagmi/classes";
 import { type Address } from "viem";
-import { isAddress } from "$lib/scaffold-eth/ts";
+import { isAddress } from "$lib/wagmi/ts";
 
 type getConsumerReturnType = {
   allowed: boolean;

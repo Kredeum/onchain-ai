@@ -1,4 +1,5 @@
 import scaffoldConfig from "$lib/scaffold.config";
+import { POLLING_INTERVAL } from "../config";
 
 class Watcher {
   id = $state(0);
@@ -8,7 +9,7 @@ class Watcher {
 
     if (onStart) fn();
 
-    this.id = setInterval(fn, scaffoldConfig.pollingInterval) as unknown as number;
+    this.id = setInterval(fn, POLLING_INTERVAL) as unknown as number;
     console.info("WATCHER START", this.id);
   };
   stop = () => {

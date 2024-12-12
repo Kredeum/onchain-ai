@@ -1,5 +1,5 @@
 import type { Address, Log } from "viem";
-import { isAddress } from "$lib/scaffold-eth/ts";
+import { isAddress } from "$lib/wagmi/ts";
 import { SmartContract } from "$lib/wagmi/classes";
 
 class OnChainAI extends SmartContract {

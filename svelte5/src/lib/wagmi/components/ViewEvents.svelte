@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Events } from "$lib/wagmi/components";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { readDeploymentContractsName, type DeploymentContractName } from "@onchain-ai/common";
+  import { targetNetwork } from "$lib/wagmi/classes";
+  import { readDeploymentContractsName, type DeploymentContractName } from "$lib/wagmi/ts";
 
   const localStorageContractKey = "scaffoldEth2.contractSelected";
 

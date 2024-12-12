@@ -1,7 +1,7 @@
 import { type Address as AddressType, checksumAddress } from "viem";
 import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } from "@wagmi/core";
 
-import { isAddress, isEns } from "$lib/scaffold-eth/ts";
+import { isAddress, isEns } from "$lib/wagmi/ts";
 import type { Nullable } from "$lib/wagmi/ts";
 import { Account as AccountClass, wagmiConfig, Watcher } from "$lib/wagmi/classes";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";

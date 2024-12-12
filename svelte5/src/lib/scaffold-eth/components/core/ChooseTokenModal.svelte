@@ -1,7 +1,7 @@
 <script lang="ts">
   import { InputBase } from "./inputs";
   import { Account } from "$lib/wagmi/classes";
-  import { targetNetwork } from "$lib/scaffold-eth/classes/TargetNetwork.svelte";
+  import { targetNetwork } from "$lib/wagmi/classes";
   import { ArrowRight, Icon } from "svelte-hero-icons";
   import type { Address } from "viem";
   import type { Token } from ".";

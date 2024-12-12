@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
 
   const { address, description = "address" }: { address?: `0x${string}`; description?: string } = $props();
 

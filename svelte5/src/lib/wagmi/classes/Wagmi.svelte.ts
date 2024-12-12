@@ -3,17 +3,14 @@ import { anvil, mainnet, type Chain } from "viem/chains";
 import { createConfig, getConnections, getPublicClient, reconnect } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 import { createBurnerConnector } from "$lib/burner-wallet";
-import { getAlchemyTransport } from "$lib/scaffold-eth/ts";
-import scaffoldConfig from "$lib/scaffold.config";
-import { Client } from "./Client.svelte";
-
-const { walletConnectProjectId, targetNetworks } = scaffoldConfig;
+import { Client } from "$lib/wagmi/classes";
+import { ALCHEMY_TRANSPORT, POLLING_INTERVAL, TARGET_NETWORKS, WALLET_CONNECT_PROJECT_ID } from "$lib/wagmi/config";
 
 const connectors = [
   injected(),
   metaMask(),
   walletConnect({
-    projectId: walletConnectProjectId,
+    projectId: WALLET_CONNECT_PROJECT_ID,
     showQrModal: true
   }),
   coinbaseWallet({
@@ -23,18 +20,18 @@ const connectors = [
   createBurnerConnector()
 ];
 
-const chains = targetNetworks.find((network: Chain) => network.id === 1)
-  ? targetNetworks
-  : ([...targetNetworks, mainnet] as const);
+const chains = TARGET_NETWORKS.find((network: Chain) => network.id === 1)
+  ? TARGET_NETWORKS
+  : ([...TARGET_NETWORKS, mainnet] as const);
 
 const wagmiConfig = createConfig({
   chains,
   connectors,
   client({ chain }) {
-    const client = createClient({ chain, transport: getAlchemyTransport(chain.id, "wss") });
+    const client = createClient({ chain, transport: ALCHEMY_TRANSPORT(chain.id, "wss") });
     // console.log("WAGMI client created:", chain.id, client);
 
-    if (chain.id === anvil.id) client.pollingInterval = scaffoldConfig.pollingInterval;
+    if (chain.id === anvil.id) client.pollingInterval = POLLING_INTERVAL;
     return client;
   }
 });

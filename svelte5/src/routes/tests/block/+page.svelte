@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
   import { BlockChain, Watcher } from "$lib/wagmi/classes";
 
   const blockChain = new BlockChain();

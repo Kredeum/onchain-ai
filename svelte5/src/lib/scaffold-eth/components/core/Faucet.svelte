@@ -4,11 +4,10 @@
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { untrack } from "svelte";
 
-  import { Account } from "$lib/wagmi/classes";
-  import { notification } from "$lib/scaffold-eth/ts";
+  import { notification } from "$lib/wagmi/ts";
   import { createTransactor } from "$lib/scaffold-eth/runes";
   import { Address, Balance, AddressInput, FaucetNotification, EtherInput } from "$lib/scaffold-eth/components";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
 
   const FAUCET_ACCOUNT_INDEX = 0;
 

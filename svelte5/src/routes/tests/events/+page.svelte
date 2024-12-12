@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { replacer } from "$lib/scaffold-eth/ts";
+  import { replacer } from "$lib/wagmi/ts";
   import { Events } from "$lib/wagmi/classes";
 
   const events = new Events("Counter", { limit: 5, sort: "ASC", watch: true });

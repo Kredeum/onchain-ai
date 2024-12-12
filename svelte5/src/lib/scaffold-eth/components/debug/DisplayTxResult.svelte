@@ -1,6 +1,6 @@
 <script lang="ts">
   import { formatEther, isAddress, type TransactionBase, type TransactionReceipt } from "viem";
-  import { replacer } from "$lib/scaffold-eth/ts";
+  import { replacer } from "$lib/wagmi/ts";
   import { Address } from "$lib/scaffold-eth/components";
 
   type DisplayContent =

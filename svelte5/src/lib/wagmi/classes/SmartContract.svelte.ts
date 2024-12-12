@@ -7,13 +7,12 @@ import {
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { targetNetwork } from "$lib/scaffold-eth/classes";
+import { targetNetwork } from "$lib/wagmi/classes";
 import { wagmiConfig } from "$lib/wagmi/classes";
-import { isAddress } from "$lib/scaffold-eth/ts";
-import { readDeployment, type DeploymentContractName, type DeploymentsChainId } from "@onchain-ai/common";
+import { isAddress, shorten0xString } from "$lib/wagmi/ts";
+import { readDeployment, type DeploymentContractName, type DeploymentsChainId } from "$lib/wagmi/ts";
 import { untrack } from "svelte";
-import { shorten0xString } from "$lib/scaffold-eth/ts";
-import { notification } from "$lib/scaffold-eth/ts";
+import { notification } from "$lib/wagmi/ts";
 import { LinkTx } from "../components";
 
 let counter = 0;

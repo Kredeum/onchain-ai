@@ -1,5 +1,3 @@
-import { type Address, isAddress as isAddressViem } from "viem";
-
 export type CommonInputProps<T = string> = {
   value: T;
   name?: string;
@@ -109,18 +107,3 @@ export const isValidInteger = (dataType: IntegerVariant, value: bigint | string,
   }
   return true;
 };
-
-export const isEns = (ensName: string | null | undefined) => {
-  if (!ensName) return false;
-
-  // Treat .eth string as potential ENS name
-  return /.+\.eth/.test(ensName);
-};
-
-export const isAddress = (address: Address | string | null | undefined): address is Address => {
-  if (!address) return false;
-
-  return isAddressViem(address as string);
-};
-
-export const shorten0xString = (addr: `0x${string}`) => addr?.slice(0, 8) + "..." + addr?.slice(-6);

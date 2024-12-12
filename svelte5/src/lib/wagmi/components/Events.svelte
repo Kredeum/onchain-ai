@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { replacer } from "$lib/scaffold-eth/ts";
+  import { replacer } from "$lib/wagmi/ts";
   import { Events } from "$lib/wagmi/classes";
-  import type { DeploymentContractName } from "@onchain-ai/common";
+  import type { DeploymentContractName } from "$lib/wagmi/ts";
 
   const { contractName }: { contractName: DeploymentContractName } = $props();
 

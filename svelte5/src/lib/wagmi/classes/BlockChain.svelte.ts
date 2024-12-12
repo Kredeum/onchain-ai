@@ -6,7 +6,7 @@ import {
   disconnect as disconnectWagmi
 } from "@wagmi/core";
 import { Watcher, wagmiConfig } from "$lib/wagmi/classes";
-import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
+import { targetNetwork, type TargetNetworkId } from "$lib/wagmi/classes";
 
 // BlockChain Singleton Class, reactive on chainId
 class BlockChain {

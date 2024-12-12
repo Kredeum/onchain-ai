@@ -2,7 +2,7 @@
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
   import ContractUI from "./ContractUI.svelte";
   import { contracts } from "$lib/scaffold-eth/ts";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
 
   const localStorageContractKey = "scaffoldEth2.selectedContract";
 

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount, type Snippet } from "svelte";
-  import { newTargetNetwork } from "$lib/scaffold-eth/classes";
+  import { newTargetNetwork } from "$lib/wagmi/classes";
   import { newWagmi } from "$lib/wagmi/classes";
   import { Header, Footer } from "$lib/scaffold-eth/components";
 

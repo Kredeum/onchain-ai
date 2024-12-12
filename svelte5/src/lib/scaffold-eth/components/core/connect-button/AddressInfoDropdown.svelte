@@ -12,13 +12,14 @@
     ArrowsRightLeft
   } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
-  import { isEns, getTargetNetworks } from "$lib/scaffold-eth/ts";
+  import { getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
   import { BlockChain } from "$lib/wagmi/classes";
   import { Account } from "$lib/wagmi/classes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
+  import { isEns } from "$lib/wagmi/ts";
 
   const {
     address,

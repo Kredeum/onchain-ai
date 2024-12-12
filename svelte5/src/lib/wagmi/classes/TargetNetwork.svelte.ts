@@ -1,7 +1,7 @@
 import scaffoldConfig from "$lib/scaffold.config";
 import { NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
 import { Account } from "$lib/wagmi/classes";
-import { createNativeCurrencyPrice } from "../runes";
+import { createNativeCurrencyPrice } from "../../scaffold-eth/runes";
 
 type TargetNetworkChain = (typeof scaffoldConfig.targetNetworks)[number];
 type TargetNetworkId = TargetNetworkChain["id"];

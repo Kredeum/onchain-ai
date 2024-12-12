@@ -1,7 +1,8 @@
 <script lang="ts">
   import { blo } from "blo";
   import { isAddress, type Address as AddressType } from "viem";
-  import { isEns, type CommonInputProps } from "$lib/scaffold-eth/ts";
+  import { type CommonInputProps } from "$lib/scaffold-eth/ts";
+  import { isEns } from "$lib/wagmi/ts";
 
   import { InputBase } from "$lib/scaffold-eth/components";
   import { Address } from "$lib/wagmi/classes";

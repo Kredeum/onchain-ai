@@ -5,8 +5,9 @@
 
   import scaffoldConfig from "$lib/scaffold.config";
   import { wagmiConfig } from "$lib/wagmi/classes";
-  import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
+  import { targetNetwork, type TargetNetworkId } from "$lib/wagmi/classes";
   import { anvil } from "viem/chains";
+  import { ONLY_BURNER_WALLET } from "$lib/wagmi/config";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
@@ -53,9 +54,7 @@
     const parameters: { connector: ConnectorType; chainId?: TargetNetworkId } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
-      parameters.chainId = scaffoldConfig.onlyLocalBurnerWallet
-        ? targetNetwork.idLocal
-        : targetNetwork.id || targetNetwork.idDefault;
+      parameters.chainId = ONLY_BURNER_WALLET ? targetNetwork.idLocal : targetNetwork.id || targetNetwork.idDefault;
     }
     const wallet = await connect(wagmiConfig, parameters);
 

@@ -6,7 +6,7 @@ import {
   type Log
 } from "viem";
 
-import { type DeploymentContractName } from "@onchain-ai/common";
+import { type DeploymentContractName } from "$lib/wagmi/ts";
 
 import { SmartContract, wagmiConfig } from "$lib/wagmi/classes";
 import { getContractEvents, type LogWithArgs } from "$lib/wagmi/ts";
