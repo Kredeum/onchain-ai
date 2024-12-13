@@ -27,7 +27,7 @@ class Account extends Address {
     watchAccount(wagmiConfig, {
       onChange: (newAccount: AccountType) => {
         this.#account = newAccount;
-        if (newAccount.address) super.address = newAccount.address;
+        super.address = newAccount.address;
       }
     });
 

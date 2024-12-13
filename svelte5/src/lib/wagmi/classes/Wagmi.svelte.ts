@@ -1,6 +1,6 @@
-import { createClient, http } from "viem";
+import { createClient } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";
-import { createConfig, getConnections, getPublicClient, reconnect } from "@wagmi/core";
+import { createConfig, reconnect } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
 import { createBurnerConnector } from "$lib/burner-wallet";
 import { Client } from "$lib/wagmi/classes";

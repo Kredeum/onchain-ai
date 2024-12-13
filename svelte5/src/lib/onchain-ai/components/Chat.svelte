@@ -3,17 +3,22 @@
   import { Interaction } from "$lib/onchain-ai/components";
   import { Account } from "$lib/wagmi/classes";
 
+  const account = new Account();
+  const sender = $derived(account.address);
+
   const limit = 3;
   const interactions = new Interactions({ limit });
+
   const noMore = $derived(interactions.count >= interactions.max);
-  const disabled = false;
-  const toggleAll = () => {};
-  const all = true;
+  const more = () => (interactions.limit += limit);
+
+  const all = $derived(!interactions.sender);
+  const toggleAll = () => (interactions.sender = all ? account.address : null);
+
+  const disabled = $derived(all && !account.address);
+
   $inspect("interactions:", interactions);
 
-  // const account = new Account();
-  // const all = $derived(!interactions.sender);
-  // const disabled = $derived(all && !account.address);
   // const toggleAll = () => (interactions.sender = all ? account.address : null);
 
   // const missingResponse = $derived(!interactions.last.response);
@@ -60,14 +65,12 @@
 </script>
 
 <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">
-  {#if interactions.count === 0}
+  {#each interactions.list as interaction, index}
+    <Interaction interaction={interaction as unknown as InteractionType} {index} />
+  {:else}
     <div class="p-6 m-12 text-center rounded-lg bg-base-200">
       <em> No questions yet </em>
     </div>
-  {/if}
-
-  {#each interactions.list as interaction, index}
-    <Interaction interaction={interaction as unknown as InteractionType} {index} />
   {/each}
 </div>
 
@@ -76,13 +79,7 @@
     {all ? "My" : "All"} questions
   </button>
 
-  <button
-    class="btn btn-sm h-10 rounded-full mx-4"
-    disabled={noMore}
-    onclick={() => {
-      interactions.limit += limit;
-    }}
-  >
+  <button class="btn btn-sm h-10 rounded-full mx-4" disabled={noMore} onclick={more}>
     More questions
     <div>{interactions.count}/{interactions.max}</div>
   </button>

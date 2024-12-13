@@ -71,7 +71,7 @@ class Address {
       this.#reset();
     }
   };
-  set address(addr: AddressType) {
+  set address(addr: Nullable<AddressType>) {
     const checkSumAddr = isAddress(addr) ? checksumAddress(addr as AddressType) : addr;
 
     // let noChange = false;

@@ -19,7 +19,7 @@ class ChainLink {
       this.href = href;
     });
 
-    $inspect("ChainLink", targetNetwork.id, this.href, config);
+    // $inspect("ChainLink", targetNetwork.id, this.href, config);
   }
 }
 
