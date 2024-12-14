@@ -6,12 +6,12 @@
   import { Events } from "$lib/wagmi/classes";
   import { Interaction } from "$lib/onchain-ai/components";
 
-  const interactions = new Interactions({ limit: 1 });
-  const interactionLast = $derived(interactions.list?.[0]) as InteractionType;
-
   const chainLink = new ChainLink({});
+  const interactions = new Interactions({ limit: 1 });
 
-  const lastResponseSimulation = $derived(eval(interactionLast.prompt));
+  const lastInteraction = $derived(interactions.list?.[0]) as InteractionType;
+  const lastPrompt = $derived(lastInteraction?.prompt);
+  const lastResponseSimulation = $derived(eval(lastPrompt));
 </script>
 
 <div class="flex flex-col text-2xl">
@@ -34,9 +34,9 @@
 
 <div class="flex flex-col pl-6 pt-12">
   <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">
-    {#if interactionLast.prompt}
+    {#if lastInteraction}
       <div class="pb-2 text-xl">Last Interaction:</div>
-      <Interaction interaction={interactionLast} />
+      <Interaction interaction={lastInteraction} />
     {:else}
       <div class="pb-2 text-xl">No Interaction found!</div>
     {/if}

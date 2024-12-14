@@ -16,7 +16,7 @@
     "chainName": "local",
     "donId": "fun-local-1",
     "explorer": "http://localhost:5173/blockexplorer",
-    "gatewayUrls": ["42", "4242"],
+    "gatewayUrls": [],
     "router": "0x0116686E2291dbd5e317F47faDBFb43B599786Ef",
     "price": "100000000000000",
     "rpc": "rpc42",
@@ -45,6 +45,19 @@
     "rpc": "https://eth-sepolia.g.alchemy.com/v2",
     "subscriptionId": 3275
   },
+  "10": {
+    "chainName": "optimism",
+    "donId": "fun-optimism-mainnet-1",
+    "explorer": "https://optimistic.etherscan.io/",
+    "gatewayUrls": [
+      "https://01.functions-gateway.chain.link/",
+      "https://02.functions-gateway.chain.link/"
+    ],
+    "price": "100000000000000",
+    "router": "0xaA8AaA682C9eF150C0C8E96a8D60945BCB21faad",
+    "rpc": "https://opt-mainnet.g.alchemy.com/v2",
+    "subscriptionId": 0
+  },
   "11155420": {
     "chainName": "optimism-sepolia",
     "donId": "fun-optimism-sepolia-1",
@@ -56,6 +69,29 @@
     "price": "100000000000000",
     "router": "0xC17094E3A1348E5C7544D4fF8A36c28f2C6AAE28",
     "rpc": "https://opt-sepolia.g.alchemy.com/v2",
+    "subscriptionId": 227
+  },
+  "1868": {
+    "chainName": "soneium",
+    "donId": "",
+    "explorer": "",
+    "gatewayUrls": [],
+    "price": "100000000000000",
+    "router": "",
+    "rpc": "",
+    "subscriptionId": 0
+  },
+  "1946": {
+    "chainName": "soneium-minato",
+    "donId": "fun-soneium-sepolia-1",
+    "explorer": "https://soneium-minato.blockscout.com",
+    "gatewayUrls": [
+      "https://01.functions-gateway.testnet.chain.link/",
+      "https://02.functions-gateway.testnet.chain.link/"
+    ],
+    "price": "100000000000000",
+    "router": "0x3704dc1eefCDCE04C58813836AEcfdBC8e7cB3D8",
+    "rpc": "https://soneium-minato.g.alchemy.com/v2",
     "subscriptionId": 227
   }
 }

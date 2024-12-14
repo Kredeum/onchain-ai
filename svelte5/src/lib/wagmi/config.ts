@@ -24,6 +24,8 @@ const RPC_ALCHEMY_NAMES: Record<number, string> = {
   421614: "arb-sepolia",
   8453: "base-mainnet",
   84532: "base-sepolia",
+  1868: "soneium",
+  1946: "soneium-minato",
   137: "polygon-mainnet",
   80002: "polygon-amoy"
 };
