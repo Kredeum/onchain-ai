@@ -4,7 +4,7 @@
   "keywords": [],
   "license": "ISC",
   "name": "@onchain-ai/common",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "scripts": {
     "clean": "rm -rf node_modules .turbo",
     "format": "prettier --write --list-different .",
