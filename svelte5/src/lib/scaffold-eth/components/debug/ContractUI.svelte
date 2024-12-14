@@ -2,7 +2,7 @@
   import { type Address as AddressType } from "viem";
   import { type ContractName } from "$lib/scaffold-eth/ts";
   import { createDeployedContractInfo, createNetworkColor } from "$lib/scaffold-eth/runes";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
   import {
     Address,
     Balance,
@@ -20,6 +20,8 @@
   const networkColor = $derived.by(createNetworkColor());
 
   let refreshDisplayVariables = $state(false);
+
+  // $inspect("CONTRACT UI deployedContractData:", deployedContractData);
 </script>
 
 {#if deployedContractLoading}

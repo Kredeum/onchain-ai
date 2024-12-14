@@ -2,7 +2,7 @@
   import { Icon, BarsArrowUp } from "svelte-hero-icons";
   import ContractUI from "./ContractUI.svelte";
   import { contracts } from "$lib/scaffold-eth/ts";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
 
   const localStorageContractKey = "scaffoldEth2.selectedContract";
 
@@ -53,7 +53,9 @@
       </div>
     {/if}
     {#each contractNames as contractName}
-      <ContractUI {contractName} hidden={contractName !== selectedContract} />
+      {#if contractName === selectedContract}
+        <ContractUI {contractName} hidden={contractName !== selectedContract} />
+      {/if}
     {/each}
   {/if}
 </div>

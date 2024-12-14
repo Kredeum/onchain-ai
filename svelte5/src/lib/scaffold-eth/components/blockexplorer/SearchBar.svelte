@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { createPublicClient } from "$lib/wagmi/runes";
+  import { createPublicClient } from "$lib/scaffold-eth/runes";
   import { isAddress, isHex } from "viem";
 
   let searchInput = $state("");

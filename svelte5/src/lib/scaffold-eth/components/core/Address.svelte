@@ -4,9 +4,9 @@
   import { CheckCircle, DocumentDuplicate, Icon } from "svelte-hero-icons";
 
   import { getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
   import { BlockieAvatar } from "$lib/scaffold-eth/components";
-  import { createEnsAvatar, createEnsName } from "$lib/wagmi/runes";
+  import { Address } from "$lib/wagmi/classes";
 
   const {
     address,
@@ -20,7 +20,7 @@
     size?: "xs" | "sm" | "base" | "lg" | "xl" | "2xl" | "3xl";
   } = $props();
 
-  const checkSumAddress = $derived(address ? getAddress(address) : undefined);
+  const checksumAddress = $derived(address ? getAddress(address) : undefined);
 
   const blockieSizeMap = {
     xs: 6,
@@ -32,43 +32,43 @@
     "3xl": 15
   };
 
-  let { ensName } = $derived(createEnsName(checkSumAddress));
-  let { ensAvatar } = $derived(createEnsAvatar(ensName));
+  const addr = new Address(address, { ens: true });
+
   let addressCopied = $state(false);
 
   let displayAddress = $derived.by(() => {
-    if (ensName) {
-      return ensName;
+    if (addr.ensName) {
+      return addr.ensName;
     } else if (format === "long") {
-      return checkSumAddress;
+      return checksumAddress;
     }
-    return checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4);
+    return checksumAddress?.slice(0, 6) + "..." + checksumAddress?.slice(-4);
   });
 
   let blockExplorerAddressLink = $state<string>();
   $effect(() => {
-    if (checkSumAddress) {
-      blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork.chain, checkSumAddress);
+    if (checksumAddress) {
+      blockExplorerAddressLink = getBlockExplorerAddressLink(targetNetwork.chain, checksumAddress);
     }
   });
 </script>
 
-{#if !checkSumAddress}
+{#if !checksumAddress}
   <div class="flex animate-pulse space-x-4">
     <div class="h-6 w-6 rounded-md bg-slate-300"></div>
     <div class="flex items-center space-y-6">
       <div class="h-2 w-28 rounded bg-slate-300"></div>
     </div>
   </div>
-{:else if !isAddress(checkSumAddress)}
+{:else if !isAddress(checksumAddress)}
   <span class="text-error">Wrong address</span>
 {:else}
   <div class="flex items-center">
     <div class="flex-shrink-0">
       <BlockieAvatar
-        address={checkSumAddress}
+        address={checksumAddress}
         size={(blockieSizeMap[size] * 24) / blockieSizeMap["base"]}
-        ensImage={ensAvatar}
+        ensImage={addr.ensAvatar}
       />
     </div>
     {#if disableAddressLink}
@@ -99,7 +99,7 @@
         class="ml-1.5 h-5 w-5 cursor-pointer text-xl font-normal text-sky-600"
         aria-hidden="true"
         onclick={() => {
-          navigator.clipboard.writeText(checkSumAddress);
+          navigator.clipboard.writeText(checksumAddress);
           addressCopied = true;
           setTimeout(() => (addressCopied = false), 800);
         }}

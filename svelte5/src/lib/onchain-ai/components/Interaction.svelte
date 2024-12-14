@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { InteractionType } from "$lib/onchain-ai/ts";
+  import type { InteractionType } from "$lib/onchain-ai/classes";
   import { LinksInteraction } from "$lib/onchain-ai/components";
 
   let { interaction, index = 0 }: { interaction?: InteractionType; index?: number } = $props();
@@ -21,7 +21,7 @@
     </div>
 
     <div class="pl-4 pb-4 text-left">
-      <LinksInteraction requestId="{interaction.requestId as `0x${string}`}}" />
+      <LinksInteraction requestId={interaction.requestId as `0x${string}`} />
     </div>
   </div>
 {/if}

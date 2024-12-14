@@ -8,9 +8,9 @@ interface IOnChainAI {
 }
 
 contract MockRouter is IMockRouter {
-    uint256 internal _requestId;
-    mapping(uint64 => mapping(address => bool)) internal _allowed;
     address public onChainAI;
+    uint256 public counter;
+    mapping(uint64 => mapping(address => bool)) internal _allowed;
 
     event RequestEvent(
         bytes32 indexed requestId,
@@ -34,7 +34,7 @@ contract MockRouter is IMockRouter {
         uint32 callbackGasLimit,
         bytes32 donId
     ) external returns (bytes32 requestId) {
-        requestId = bytes32(_requestId++);
+        requestId = bytes32(keccak256(abi.encode(counter++)));
 
         emit RequestEvent(requestId, data, subscriptionId, donId, dataVersion, callbackGasLimit);
     }

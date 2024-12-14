@@ -1,33 +1,26 @@
 <script lang="ts">
-  import { SmartContract } from "$lib/wagmi/classes";
-  import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
+  import { OnChainAI } from "$lib/onchain-ai/classes";
+  import { MockRouter } from "$lib/onchain-ai/classes";
 
-  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
-  $inspect("owner", JSON.stringify(owner, null, 2));
-
-  const smartContract = new SmartContract("OnChainAIv1");
-
-  let refresh = $state<number>();
-  let data = $state();
-
-  const smartContractCall = async () => (data = await smartContract.call({ functionName: "owner" }));
-
-  $effect(() => {
-    refresh;
-    smartContractCall();
-  });
-
-  $inspect("data", data);
+  const onChainAI = new OnChainAI();
+  const mockRouter = new MockRouter();
 </script>
 
 <div class="p-4">
-  data = {smartContract.dataRead}
+  owner = {onChainAI.owner}
+</div>
+<div class="p-4">
+  price = {onChainAI.price}
 </div>
 
-<div class="p-4">
-  owner = {owner}
-</div>
-
-<div class="p-4">
-  <button class="btn btn-primary" onclick={smartContractCall}>Refresh</button>
-</div>
+{#if mockRouter.addressOnChainAI}
+  <div class="p-4">
+    counter = {mockRouter.counter}
+  </div>
+  <div class="p-4">
+    addressOnChainAI = {mockRouter.addressOnChainAI}
+  </div>
+  <div class="p-4">
+    consumer.allowed = {mockRouter.getConsumer(mockRouter.addressOnChainAI)?.allowed}
+  </div>
+{/if}

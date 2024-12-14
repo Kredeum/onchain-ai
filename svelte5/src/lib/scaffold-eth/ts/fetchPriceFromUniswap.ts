@@ -3,12 +3,11 @@ import { CurrencyAmount, Token } from "@uniswap/sdk-core";
 import { Pair, Route } from "@uniswap/v2-sdk";
 import { parseAbi } from "abitype";
 import { type Address, createPublicClient, http } from "viem";
-import scaffoldConfig from "$lib/scaffold.config";
-import type { ChainWithAttributes } from "$lib/scaffold-eth/ts";
+import { getAlchemyTransport, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
 
 const publicClient = createPublicClient({
   chain: mainnet,
-  transport: http(`https://eth-mainnet.g.alchemy.com/v2/${scaffoldConfig.alchemyApiKey}`)
+  transport: getAlchemyTransport(mainnet.id)
 });
 
 const ABI = parseAbi([

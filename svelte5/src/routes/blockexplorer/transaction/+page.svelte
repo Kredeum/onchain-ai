@@ -1,15 +1,11 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import {
-    replacer,
-    decodeTransactionData,
-    getFunctionDetails,
-    type TransactionWithFunction
-  } from "$lib/scaffold-eth/ts";
+  import { decodeTransactionData, getFunctionDetails, type TransactionWithFunction } from "$lib/scaffold-eth/ts";
   import { Address } from "$lib/scaffold-eth/components";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { createPublicClient } from "$lib/wagmi/runes";
+  import { targetNetwork } from "$lib/wagmi/classes";
+  import { createPublicClient } from "$lib/scaffold-eth/runes";
   import { type Transaction, type TransactionReceipt, type Hash, formatEther, formatUnits } from "viem";
+  import { replacer } from "$lib/wagmi/ts";
 
   let txHash = $state("0x0" as Hash);
   $effect(() => {

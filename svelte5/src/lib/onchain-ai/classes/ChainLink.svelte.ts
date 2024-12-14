@@ -1,5 +1,5 @@
 import { readChainLinkConfig } from "@onchain-ai/common";
-import { targetNetwork } from "$lib/scaffold-eth/classes";
+import { targetNetwork } from "$lib/wagmi/classes";
 
 class ChainLink {
   href = $state<string>("");
@@ -19,7 +19,7 @@ class ChainLink {
       this.href = href;
     });
 
-    $inspect("ChainLink", targetNetwork.id, this.href, config);
+    // $inspect("ChainLink", targetNetwork.id, this.href, config);
   }
 }
 

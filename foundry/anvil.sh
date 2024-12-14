@@ -17,32 +17,46 @@ if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
   exit 0
 fi
 
+is_anvil_running() {
+    nc -z localhost 8545
+}
+kill_anvil() {
+  if is_anvil_running; then
+    pkill -f anvil
+    echo "❌ Anvil killed"
+  fi
+}
+run_anvil() {
+  # Test anvil port
+  if is_anvil_running; then
+    echo "✅ Anvil already running."
+  else
+    nohup anvil > ./anvil.log &
+
+    # Wait for: `Listening`...
+    while ! grep -q "Listening" < anvil.log; do
+      sleep 1
+    done
+    echo "✅ Anvil started"
+  fi
+}
+
 # Kill anvil: `anvil.sh --kill`
 if [ "$1" = "-k" ] || [ "$1" = "--kill" ]; then
-  pkill -f anvil
-  echo "❌ Anvil killed"
+  kill_anvil
   exit 0
 fi
 
 # Restart anvil: `anvil.sh --restart`
 if [ "$1" = "-r" ] || [ "$1" = "--restart" ]; then
-  pkill -f anvil
+  kill_anvil
   echo "🔄 Anvil restarting..."
+  run_anvil
+  exit 0
 fi
 
-# Test anvil port
-if nc -z localhost 8545; then
-  # Echo only
-  echo "✅ Anvil already running."
-else
-  # Start anvil
-  echo "🚀 Anvil starting (not started)"
-  nohup anvil > ./anvil.log &
+# Start anvil: `anvil.sh`
+echo "🚀 Anvil starting"
+run_anvil
 
-  # Wait for: `Listening`...
-  while ! grep -q "Listening" < anvil.log; do
-    sleep 1
-  done
-  echo "✅ Anvil started"
-fi
 

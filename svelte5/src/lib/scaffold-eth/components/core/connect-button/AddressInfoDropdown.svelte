@@ -12,13 +12,14 @@
     ArrowsRightLeft
   } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
-  import { isEns, getTargetNetworks } from "$lib/scaffold-eth/ts";
+  import { getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
   import { BlockChain } from "$lib/wagmi/classes";
-  import { createAccount } from "$lib/wagmi/runes";
+  import { Account } from "$lib/wagmi/classes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
+  import { isEns } from "$lib/wagmi/ts";
 
   const {
     address,
@@ -34,10 +35,9 @@
 
   let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
 
-  const { account } = $derived.by(createAccount);
+  const account = new Account();
   const switchEnabled = $derived(
-    getTargetNetworks().length > 1 &&
-      !(account?.connector?.id === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet)
+    getTargetNetworks().length > 1 && !(account.connectorId === "burnerWallet" && scaffoldConfig.onlyLocalBurnerWallet)
   );
 
   let dropdown: HTMLElement | undefined = undefined;
@@ -51,7 +51,7 @@
 
   const blockChain = new BlockChain();
 
-  const checkSumAddress = $derived(getAddress(address));
+  const checksumAddress = $derived(getAddress(address));
 
   let addressCopied = $state(false);
   let selectingNetwork = $state(false);
@@ -64,9 +64,9 @@
 
 <details id="address-info-dropdown" class="dropdown dropdown-end leading-3" bind:this={dropdown}>
   <summary tabIndex={0} class="dropdown-toggle btn btn-secondary btn-sm !h-auto gap-0 pl-0 pr-2 shadow-md">
-    <BlockieAvatar address={checkSumAddress} size={30} ensImage={ensAvatar} />
+    <BlockieAvatar address={checksumAddress} size={30} ensImage={ensAvatar} />
     <span class="ml-2 mr-1">
-      {isEns(displayName) ? displayName : checkSumAddress?.slice(0, 6) + "..." + checkSumAddress?.slice(-4)}
+      {isEns(displayName) ? displayName : checksumAddress?.slice(0, 6) + "..." + checksumAddress?.slice(-4)}
     </span>
     <Icon src={ChevronDown} class="ml-2 h-6 w-4 sm:ml-0" />
   </summary>
@@ -80,7 +80,7 @@
         onclick={() => {
           if (addressCopied) return;
 
-          navigator.clipboard.writeText(checkSumAddress);
+          navigator.clipboard.writeText(checksumAddress);
 
           addressCopied = true;
           setTimeout(() => {

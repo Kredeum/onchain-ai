@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Address } from "viem";
   import { createContractLogs } from "$lib/scaffold-eth/runes/contractLogs.svelte";
-  import { replacer } from "$lib/scaffold-eth/ts";
+  import { replacer } from "$lib/wagmi/ts";
 
   const { address }: { address: Address } = $props();
 

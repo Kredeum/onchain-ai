@@ -23,6 +23,8 @@
       setForm({ ...form, [stateObjectKey]: value });
     }
   });
+
+  $inspect("<ContractInput", inputProps.value);
 </script>
 
 <div class="flex w-full flex-col gap-1.5">

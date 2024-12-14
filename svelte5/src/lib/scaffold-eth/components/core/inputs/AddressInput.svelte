@@ -1,10 +1,11 @@
 <script lang="ts">
   import { blo } from "blo";
-  import { type Address } from "viem";
-  import { isAddress, isEns, type CommonInputProps } from "$lib/scaffold-eth/ts";
-  import { createEnsAddress, createEnsName, createEnsAvatar } from "$lib/wagmi/runes";
-  import InputBase from "./InputBase.svelte";
-  import { untrack } from "svelte";
+  import { isAddress, type Address as AddressType } from "viem";
+  import { type CommonInputProps } from "$lib/scaffold-eth/ts";
+  import { isEns } from "$lib/wagmi/ts";
+
+  import { InputBase } from "$lib/scaffold-eth/components";
+  import { Address } from "$lib/wagmi/classes";
 
   let {
     value = $bindable(),
@@ -12,50 +13,48 @@
     placeholder,
     onchange,
     disabled
-  }: CommonInputProps<Address | string> & {
+  }: CommonInputProps<AddressType | string> & {
     ens?: string | undefined;
   } = $props();
 
-  const { ensName: ensNameFromValue } = $derived(createEnsName(value));
-  const { ensAddress: ensAddressFromValue } = $derived(createEnsAddress(value));
-  const validEnsNameFromValue = $derived(isEns(ensNameFromValue));
-  const validEnsAddressFromValue = $derived(isAddress(ensAddressFromValue));
-
-  const ensName = $derived(validEnsAddressFromValue ? value : ensNameFromValue);
-  const ensAddress = $derived(validEnsNameFromValue ? ensAddressFromValue : null);
-  const { ensAvatar } = $derived(ensName ? createEnsAvatar(ensName) : { ensAvatar: null });
-
+  const addr = new Address(value);
   $effect(() => {
-    if (validEnsAddressFromValue) value = ensAddressFromValue!;
-  });
-
-  $effect(() => {
-    if (isAddress(value)) onchange?.(value);
+    addr.setAddressOrName(value);
+    if (addr.address && value === addr.ensName) value = addr.address;
   });
 
   const reFocus = $derived(isAddress(value));
 
-  // $inspect("AddressInput ~ value:", value);
+  $inspect("<AddressInput", value);
+  // $inspect("<AddressInput", value, addr.address, addr.ensName, addr.ensAvatar);
 </script>
 
-<InputBase bind:value={value as Address} {name} {placeholder} error={ensAddress === null} {disabled} {reFocus}>
+<InputBase
+  {name}
+  bind:value={value as AddressType}
+  {placeholder}
+  error={addr.address == null}
+  {onchange}
+  {disabled}
+  {reFocus}
+>
   {#snippet prefix()}
-    {#if ensName}
+    {#if addr.ensName}
       <div class="flex items-center rounded-l-full bg-base-300">
-        {#if ensAvatar}
+        {#if addr.ensAvatar}
           <span class="w-[35px]">
-            <img class="w-full rounded-full" src={ensAvatar} alt="{ensAddress} avatar" />
+            <img class="w-full rounded-full" src={addr.ensAvatar} alt="{addr.address} avatar" />
           </span>
         {:else}
           <div class="skeleton h-[35px] w-[35px] shrink-0 rounded-full bg-base-200"></div>
         {/if}
-        <span class="px-2 text-accent">{ensName}</span>
+        <span class="px-2 text-accent">{addr.ensName}</span>
       </div>
     {/if}
   {/snippet}
   {#snippet suffix()}
     {#if value}
-      <img alt="" class="!rounded-full" src={blo(value as Address)} width="35" height="35" />
+      <img alt="" class="!rounded-full" src={blo(value as AddressType)} width="35" height="35" />
     {/if}
   {/snippet}
 </InputBase>

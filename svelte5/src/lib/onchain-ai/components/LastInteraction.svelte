@@ -1,16 +1,19 @@
 <script lang="ts">
-  import { isAddress, type Address } from "viem";
-  import { type InteractionType } from "$lib/onchain-ai/ts";
   import { Interaction } from "$lib/onchain-ai/components";
-  import { LastInteraction } from "$lib/onchain-ai/runes/lastInteraction.svelte";
+  import { type Address } from "viem";
+  import { OnChainAI } from "../classes";
 
-  const { account }: { account: Address } = $props();
+  const { address }: { address: Address } = $props();
 
-  let data = $derived(new LastInteraction(account));
+  const onChainAI = new OnChainAI();
 
-  // $inspect("<LastInteraction", data.lastInteraction);
+  // $inspect("<LastInteraction", onChainAI.lastInteraction(address));
 </script>
 
-<div class="flex flex-col p-4 m-12 max-w-lg rounded-lg shadow-md bg-base-300">
-  <Interaction interaction={data.lastInteraction} />
-</div>
+{#if onChainAI && address}
+  <div class="flex flex-col p-4 m-12 max-w-lg rounded-lg shadow-md bg-base-300">
+    <Interaction interaction={onChainAI.lastInteraction(address)} />
+  </div>
+{:else}
+  <p class="p-4">No onChainAI or address found</p>
+{/if}

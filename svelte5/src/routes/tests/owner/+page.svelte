@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { createReadOnchainAI } from "$lib/onchain-ai/runes/read.svelte";
+  import { OnChainAI } from "$lib/onchain-ai/classes";
 
-  let { data: owner } = $derived(createReadOnchainAI({ functionName: "owner" }));
-
-  $inspect("owner", JSON.stringify(owner, null, 2));
+  const onChainAI = new OnChainAI();
 </script>
 
 <div class="p-4">
-  owner = {owner}
+  owner = {onChainAI.owner}
 </div>

@@ -4,10 +4,10 @@
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { untrack } from "svelte";
 
-  import { createAccount } from "$lib/wagmi/runes";
-  import { notification } from "$lib/scaffold-eth/ts";
+  import { notification } from "$lib/wagmi/ts";
   import { createTransactor } from "$lib/scaffold-eth/runes";
   import { Address, Balance, AddressInput, FaucetNotification, EtherInput } from "$lib/scaffold-eth/components";
+  import { targetNetwork } from "$lib/wagmi/classes";
 
   const FAUCET_ACCOUNT_INDEX = 0;
 
@@ -20,9 +20,6 @@
   let inputAddress = $state<AddressType>("" as AddressType);
   let faucetAddress = $state<AddressType>();
   let sendValue = $state("");
-
-  const { account } = $derived(createAccount());
-  const { chain } = $derived(account);
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 
@@ -63,7 +60,7 @@
   };
 </script>
 
-{#if chain?.id === anvil.id}
+{#if targetNetwork.id === anvil.id}
   <div>
     <label for="faucet-modal" class="btn btn-primary btn-sm gap-1 font-normal">
       <Icon src={Banknotes} class="h-4 w-4" />

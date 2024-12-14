@@ -19,7 +19,15 @@
       "group": "Default"
     },
     {
-      "filePath": "svelte5/src/routes",
+      "filePath": "foundry/addresses.json",
+      "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/lib/scaffold.config.ts",
+      "group": "Default"
+    },
+    {
+      "filePath": "svelte5/src/routes/tests",
       "group": "Default"
     }
   ]

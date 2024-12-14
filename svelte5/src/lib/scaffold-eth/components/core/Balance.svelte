@@ -1,34 +1,34 @@
 <script lang="ts">
-  import { formatEther, type Address } from "viem";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { Balance } from "$lib/wagmi/classes";
+  import { formatEther, type Address as AddressType } from "viem";
+  import { targetNetwork } from "$lib/wagmi/classes";
+  import { Address } from "$lib/wagmi/classes";
 
   const {
     address,
     class: className = "",
     usdMode = false
-  }: { address?: Address; class?: string; usdMode?: boolean } = $props();
+  }: { address?: AddressType; class?: string; usdMode?: boolean } = $props();
 
-  const balance = $derived(address && new Balance({ address }));
+  const addr = new Address(address, { watchBalance: true });
 
-  const formattedBalance = $derived(Number(formatEther(balance?.value || 0n)));
-  let displayUsdMode = $state(targetNetwork.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);
+  const formattedBalance = $derived(Number(formatEther(addr.balance || 0n)));
+  let displayUsdMode = $state(targetNetwork?.nativeCurrencyPrice > 0 ? Boolean(usdMode) : false);
 
   const toggleBalanceMode = () => {
-    if (targetNetwork.nativeCurrencyPrice > 0) {
+    if (targetNetwork?.nativeCurrencyPrice > 0) {
       displayUsdMode = !displayUsdMode;
     }
   };
 
-  // $inspect("<Balance", address, formattedBalance, balance);
+  // $inspect("<Balance", address, addr.balance, formattedBalance, addr);
 </script>
 
-{#if balance}
+{#if addr.balance != null}
   <button
     class="btn btn-ghost btn-sm flex flex-col items-center font-normal hover:bg-transparent {className}"
     onclick={toggleBalanceMode}
   >
-    <div class="flex w-full items-center justify-center user-balance" data-balance={balance?.value}>
+    <div class="flex w-full items-center justify-center user-balance" data-balance={addr.balance}>
       {#if displayUsdMode}
         <span class="mr-1 text-[0.8em] font-bold">$</span>
         <span>{(formattedBalance * targetNetwork.nativeCurrencyPrice).toFixed(2)}</span>

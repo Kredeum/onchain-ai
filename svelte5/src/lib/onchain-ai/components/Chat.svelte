@@ -1,25 +1,27 @@
 <script lang="ts">
-  import { createInteractions, createWriteOnchainAI } from "$lib/onchain-ai/runes";
-  import { createContract, createWriteContract } from "$lib/wagmi/runes";
+  import { Interactions, type InteractionType } from "$lib/onchain-ai/classes";
   import { Interaction } from "$lib/onchain-ai/components";
+  import { Account } from "$lib/wagmi/classes";
 
-  const lim = 3;
-  let all: boolean = $state(true);
-  let limit: number = $state(lim);
+  const account = new Account();
+  const sender = $derived(account.address);
 
-  // const { account, chainId, address, abi } = $derived.by(() => createContract("MockRouter"));
-  const { account, chainId } = $derived.by(() => createContract("OnChainAIv1"));
+  const limit = 3;
+  const interactions = new Interactions({ limit });
 
-  const { interactions, interactionsMax } = $derived(createInteractions({ all, limit }));
+  const noMore = $derived(interactions.count >= interactions.max);
+  const more = () => (interactions.limit += limit);
 
-  let noMore = $derived(limit >= interactionsMax);
-  let interactionsCount = $derived(interactions.length);
+  const all = $derived(!interactions.sender);
+  const toggleAll = () => (interactions.sender = all ? account.address : null);
 
-  let disabled = $derived(all && !account);
+  const disabled = $derived(all && !account.address);
 
-  const lastInteraction = $derived(interactions?.[0]);
-  const missingResponse = $derived(!lastInteraction.response);
+  $inspect("interactions:", interactions);
 
+  // const toggleAll = () => (interactions.sender = all ? account.address : null);
+
+  // const missingResponse = $derived(!interactions.last.response);
   // let hash = $state<`0x${string}`>();
   // let txReceipt = $state();
   // const { send, wait } = $derived(
@@ -28,7 +30,7 @@
   //     address,
   //     abi,
   //     functionName: "fulfillRequest",
-  //     args: [lastInteraction.requestId, "0x32" /*`Response to ${lastInteraction.prompt}`*/, ""]
+  //     args: [interactions.last.requestId, "0x32" /*`Response to ${interactions.last.prompt}`*/, ""]
   //   })
   // );
 
@@ -51,11 +53,11 @@
   // let done = false;
   // $effect(() => {
   //   if (done) return;
-  //   if (!lastInteraction) return;
+  //   if (!interactions.last) return;
   //   if (missingResponse) {
   //     done = true;
   //     handleSend();
-  //     // alert(`I wait for some response to '${lastInteraction.prompt}' ${lastInteraction.requestId}`);
+  //     // alert(`I wait for some response to '${interactions.last.prompt}' ${interactions.last.requestId}`);
   //   }
   // });
 
@@ -63,36 +65,22 @@
 </script>
 
 <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">
-  {#if interactionsCount === 0}
+  {#each interactions.list as interaction, index}
+    <Interaction interaction={interaction as unknown as InteractionType} {index} />
+  {:else}
     <div class="p-6 m-12 text-center rounded-lg bg-base-200">
       <em> No questions yet </em>
     </div>
-  {/if}
-
-  {#each interactions as interaction, index}
-    <Interaction {interaction} {index} />
   {/each}
 </div>
 
 <div class="flex py-4 justify-center">
-  <button
-    class="btn btn-sm h-10 rounded-full mx-4"
-    {disabled}
-    onclick={() => {
-      all = !all;
-    }}
-  >
+  <button class="btn btn-sm h-10 rounded-full mx-4" {disabled} onclick={toggleAll}>
     {all ? "My" : "All"} questions
   </button>
 
-  <button
-    class="btn btn-sm h-10 rounded-full mx-4"
-    disabled={noMore}
-    onclick={() => {
-      limit += lim;
-    }}
-  >
+  <button class="btn btn-sm h-10 rounded-full mx-4" disabled={noMore} onclick={more}>
     More questions
-    <div>{interactionsCount}/{interactionsMax}</div>
+    <div>{interactions.count}/{interactions.max}</div>
   </button>
 </div>

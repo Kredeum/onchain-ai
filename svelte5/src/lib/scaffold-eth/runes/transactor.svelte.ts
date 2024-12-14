@@ -1,8 +1,9 @@
 import TxnNotification from "./TxnNotification.svelte";
 import { getPublicClient, getWalletClient } from "@wagmi/core";
 import type { Hash, SendTransactionParameters, TransactionReceipt, WalletClient } from "viem";
-import { notification, getParsedError, getBlockExplorerTxLink } from "$lib/scaffold-eth/ts";
-import { wagmiConfig } from "$lib/wagmi/ts";
+import { getParsedError } from "$lib/scaffold-eth/ts";
+import { notification } from "$lib/wagmi/ts";
+import { wagmiConfig } from "$lib/wagmi/classes";
 import { LinkTx } from "$lib/wagmi/components";
 
 export type TransactionFunc = (

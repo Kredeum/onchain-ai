@@ -1,17 +1,16 @@
 <script lang="ts">
   import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
-  import { createAccount } from "$lib/wagmi/runes";
-  import { Balance } from "$lib/wagmi/classes";
+  import { Account } from "$lib/wagmi/classes";
 
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";
   import { anvil } from "viem/chains";
+  import { Address } from "$lib/wagmi/classes";
 
   const AMOUNT_TO_SEND = "1";
   const FAUCET_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";
 
-  const { account } = $derived(createAccount());
-  const { address, chain } = $derived(account);
+  const account = new Account();
 
   const localWalletClient = createWalletClient({
     chain: anvil,
@@ -20,9 +19,9 @@
 
   const faucetTxn = $derived.by(createTransactor(() => localWalletClient));
 
-  let balance = new Balance({ address: FAUCET_ADDRESS });
+  let addr = new Address(FAUCET_ADDRESS, { watchBalance: true });
 
-  const isBalanceZero = $derived(balance.value === 0n);
+  const isBalanceZero = $derived(addr.balance === 0n);
 
   let loading = $state(false);
 
@@ -32,7 +31,7 @@
       await faucetTxn({
         chain: anvil,
         account: FAUCET_ADDRESS,
-        to: address,
+        to: account.address,
         value: parseEther(AMOUNT_TO_SEND)
       });
       loading = false;
@@ -43,7 +42,7 @@
   };
 </script>
 
-{#if chain?.id === anvil.id}
+{#if account.chainId === anvil.id}
   <div
     class={!isBalanceZero
       ? "ml-1"

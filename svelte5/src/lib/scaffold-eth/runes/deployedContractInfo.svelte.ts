@@ -1,5 +1,5 @@
-import { targetNetwork } from "$lib/scaffold-eth/classes";
-import { createPublicClient } from "$lib/wagmi/runes";
+import { targetNetwork } from "$lib/wagmi/classes";
+import { createPublicClient } from "$lib/scaffold-eth/runes";
 import { ContractCodeStatus, contracts, type Contract, type ContractName } from "$lib/scaffold-eth/ts";
 import type { Address } from "viem";
 
@@ -9,7 +9,7 @@ export const createDeployedContractInfo = <TContractName extends ContractName>(c
   const deployedContract = $derived(targetNetwork.id ? contracts?.[targetNetwork.id]?.[contractName] : undefined);
   let status = $state(ContractCodeStatus.LOADING);
 
-  // $inspect("createDeployedContractInfo ~ chainIdCurrent (status)", chainIdCurrent, contractName, status);
+  // $inspect("CREATE DEPLOYED INFOS ~ chainIdCurrent (status)", targetNetwork.id, contractName, status);
 
   $effect(() => {
     const checkContractDeployment = async () => {

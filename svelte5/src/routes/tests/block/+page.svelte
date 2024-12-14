@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { BlockChain } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/wagmi/classes";
+  import { BlockChain, Watcher } from "$lib/wagmi/classes";
 
   const blockChain = new BlockChain();
-  $inspect("blockNumber:", blockChain.blockNumber);
+
+  $inspect("PAGE BLOCK blockNumber:", targetNetwork.id, blockChain.blockNumber);
 </script>
 
 <div class="p-4">
-  blockNumber = {blockChain.blockNumber} ...
+  blockNumber = {blockChain.blockNumber}
 </div>
 
 <div class="p-4">

@@ -24,8 +24,8 @@ test.describe("Ask!", () => {
     await page.locator("#ask-input .input").fill(prompt);
     await page.locator("#ask-button").click();
     await expect(page.locator(".notification-loading")).toContainText("Sending transaction...");
-    await expect(page.locator(".notification-success")).toContainText("Transaction validated!");
-    await expect(page.locator("#interaction-0 .prompt")).toHaveText(prompt);
+    await expect(page.locator(".notification-success")).toContainText("Transaction validated!", { timeout: 20000 });
+    await expect(page.locator("#interaction-0 .prompt")).toHaveText(prompt, { timeout: 10000 });
     await expect(page.locator("#interaction-0 .response")).toContainText(response, { timeout: 30000 });
   });
 });

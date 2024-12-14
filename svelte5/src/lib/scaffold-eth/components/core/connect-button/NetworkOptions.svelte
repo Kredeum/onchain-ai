@@ -2,21 +2,20 @@
   import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
   import { getTargetNetworks, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
   import { getNetworkColor, createDarkMode } from "$lib/scaffold-eth/runes";
-  import { createAccount } from "$lib/wagmi/runes";
+  import { Account } from "$lib/wagmi/classes";
   import { BlockChain } from "$lib/wagmi/classes";
-  import { type TargetNetworkId } from "$lib/scaffold-eth/classes";
+  import { type TargetNetworkId } from "$lib/wagmi/classes";
 
   const { hidden = false } = $props();
 
   const allowedNetworks = getTargetNetworks();
 
-  const { account } = $derived(createAccount());
-  const { chain } = $derived(account);
+  const account = new Account();
 
   const blockChain = new BlockChain();
   const { isDarkMode } = $derived.by(createDarkMode());
 
-  const items = $derived(allowedNetworks.filter((network) => network.id !== chain?.id));
+  const items = $derived(allowedNetworks.filter((network) => network.id !== account.chainId));
 
   const normalizeName = (name: string | undefined): string => (name ? name.toLowerCase().replace(/\s+/g, "-") : "");
 </script>

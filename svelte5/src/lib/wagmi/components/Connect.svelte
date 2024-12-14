@@ -4,9 +4,10 @@
   import { connect, getConnectors, switchChain, type GetConnectorsReturnType } from "@wagmi/core";
 
   import scaffoldConfig from "$lib/scaffold.config";
-  import { wagmiConfig } from "$lib/wagmi/ts";
-  import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
+  import { wagmiConfig } from "$lib/wagmi/classes";
+  import { targetNetwork, type TargetNetworkId } from "$lib/wagmi/classes";
   import { anvil } from "viem/chains";
+  import { ONLY_BURNER_WALLET } from "$lib/wagmi/config";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
@@ -53,17 +54,14 @@
     const parameters: { connector: ConnectorType; chainId?: TargetNetworkId } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
-      parameters.chainId = scaffoldConfig.onlyLocalBurnerWallet
-        ? targetNetwork.idLocal
-        : targetNetwork.id || targetNetwork.idDefault;
+      parameters.chainId = ONLY_BURNER_WALLET ? targetNetwork.idLocal : targetNetwork.id || targetNetwork.idDefault;
     }
     const wallet = await connect(wagmiConfig, parameters);
 
     address = wallet.accounts[0];
 
-    // if not on an existing configurated network, switch to default one
     if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === wallet.chainId)) {
-      console.log("<Connect connectWallet ~ switch default Chain:", targetNetwork.idDefault);
+      console.log("<Connect connectWallet ~ switch to default Chain:", targetNetwork.idDefault);
       switchChain(wagmiConfig, { chainId: targetNetwork.idDefault });
       chainId = targetNetwork.idDefault;
     } else {
