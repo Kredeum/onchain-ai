@@ -26,13 +26,14 @@ class MockRouter extends SmartContract {
   }
 
   constructor() {
-    if (targetNetwork.id != 31337) return;
     super("MockRouter");
 
     const interactions = new Interactions({ limit: 1 });
     const done: Map<string, boolean> = new Map();
 
     $effect(() => {
+      if (targetNetwork.id != 31337) return;
+
       const lastInteraction = interactions.last;
       if (!(lastInteraction && lastInteraction.prompt && !lastInteraction.response)) return;
 
