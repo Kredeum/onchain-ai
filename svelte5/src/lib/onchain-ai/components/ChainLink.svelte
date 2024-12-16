@@ -5,27 +5,13 @@
 
   import { Interaction } from "$lib/onchain-ai/components";
   import { encodeAbiParameters, stringToBytes, toBytes, toHex } from "viem";
+  import Form from "./Form.svelte";
 
   const chainLink = new ChainLink({});
   const interactions = new Interactions();
 
   const lastInteraction = $derived(interactions.last) as InteractionType;
-  const mockRouter = new MockRouter();
-  const doneMap: Map<string, boolean> = new Map();
-
-  $effect(() => {
-    if (!(lastInteraction && lastInteraction.prompt && !lastInteraction.response)) return;
-    if (doneMap.get(lastInteraction.requestId)) return;
-
-    const requestId = lastInteraction.requestId as `0x${string}`;
-    const response = toHex(toBytes(String(eval(lastInteraction.prompt))));
-
-    mockRouter.send("fulfillRequest", [requestId, response, ""]);
-
-    doneMap.set(lastInteraction.requestId, true);
-  });
-
-  // function fulfillRequest(bytes32 requestId, bytes memory response, bytes memory err) external {
+  new MockRouter();
 
   $inspect("lastInteraction:", lastInteraction);
 </script>
@@ -33,10 +19,14 @@
 <div class="flex flex-col text-2xl">
   <div class="flex flex-col w-full p-6">Chain {targetNetwork.name} ({targetNetwork.id})</div>
 
+  <div class="p-2 w-full max-w-lg">
+    <Form />
+  </div>
+
   {#if targetNetwork.id == 31337}
     <div class="flex flex-row w-full p-6 space-x-2">
-      <span class="link">Simulate</span>
-      <span>ChainLink Response '{lastInteraction?.prompt}' =&gt; '{eval(lastInteraction?.prompt)}'</span>
+      <span>Simulatation</span>
+      <span>ChainLink Response '{lastInteraction?.prompt}' =&gt; '{lastInteraction?.response}'</span>
     </div>
   {:else}
     <div class="flex flex-row w-full p-6 space-x-2">
