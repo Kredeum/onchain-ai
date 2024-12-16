@@ -18,6 +18,26 @@ contract OnChainAIv1Harness is OnChainAIv1 {
     function readJavascript() public view returns (string memory javascript) {
         javascript = _javascript;
     }
+
+    function readSubscriptionId() public view returns (uint64 subscriptionId) {
+        subscriptionId = _subscriptionId;
+    }
+
+    function readSetGasLimit() public view returns (uint32 gasLimit) {
+        gasLimit = _gasLimit;
+    }
+
+    function readDonId() public view returns (bytes32 donId) {
+        donId = _donId;
+    }
+
+    function readDonHostedSecretsVersion()
+        public
+        view
+        returns (uint64 donHostedSecretsVersion)
+    {
+        donHostedSecretsVersion = _donHostedSecretsVersion;
+    }
 }
 
 contract OnChainAIv1Test is Test, DeployLite {
@@ -48,7 +68,7 @@ contract OnChainAIv1Test is Test, DeployLite {
         vm.deal(address(onChainAIv1), initialAmount);
 
         assert(address(onChainAIv1).balance == initialAmount);
-        assert(address(owner).balance == 0);
+        assert(owner.balance == 0);
 
         vm.expectRevert();
         onChainAIv1.withdraw();
@@ -70,7 +90,10 @@ contract OnChainAIv1Test is Test, DeployLite {
         vm.prank(owner);
         onChainAIv1.setJavascript(newJavascript_);
 
-        assert(keccak256(abi.encodePacked(onChainAIv1.readJavascript())) == keccak256(abi.encodePacked(newJavascript_)));
+        assert(
+            keccak256(abi.encodePacked(onChainAIv1.readJavascript())) ==
+                keccak256(abi.encodePacked(newJavascript_))
+        );
     }
 
     function test_setSubscriptionId(uint64 subscriptionId_) public {
@@ -79,6 +102,8 @@ contract OnChainAIv1Test is Test, DeployLite {
 
         vm.prank(owner);
         onChainAIv1.setSubscriptionId(subscriptionId_);
+
+        assert(onChainAIv1.readSubscriptionId() == subscriptionId_);
     }
 
     function test_setGasLimit(uint32 gasLimit_) public {
@@ -87,6 +112,8 @@ contract OnChainAIv1Test is Test, DeployLite {
 
         vm.prank(owner);
         onChainAIv1.setGasLimit(gasLimit_);
+
+        assert(onChainAIv1.readSetGasLimit() == gasLimit_);
     }
 
     function test_setDonID(bytes32 donId_) public {
@@ -95,6 +122,8 @@ contract OnChainAIv1Test is Test, DeployLite {
 
         vm.prank(owner);
         onChainAIv1.setDonID(donId_);
+
+        assert(onChainAIv1.readDonId() == donId_);
     }
 
     function test_setPrice(uint256 price_) public {
@@ -106,13 +135,22 @@ contract OnChainAIv1Test is Test, DeployLite {
 
         vm.prank(owner);
         onChainAIv1.setPrice(price_);
+
+        assert(onChainAIv1.price() == price_);
     }
 
-    function test_setDonHostedSecretsVersion(uint64 donHostedSecretsVersion_) public {
+    function test_setDonHostedSecretsVersion(
+        uint64 donHostedSecretsVersion_
+    ) public {
         vm.expectRevert();
         onChainAIv1.setDonHostedSecretsVersion(donHostedSecretsVersion_);
 
         vm.prank(owner);
         onChainAIv1.setDonHostedSecretsVersion(donHostedSecretsVersion_);
+
+        assert(
+            onChainAIv1.readDonHostedSecretsVersion() ==
+                donHostedSecretsVersion_
+        );
     }
 }
