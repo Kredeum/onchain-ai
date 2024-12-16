@@ -25,6 +25,9 @@ class Interactions extends Events {
     const slicedList = sortedList.slice(0, this.limit);
     return this.raw ? slicedList : slicedList.map((event) => event.args);
   });
+  get last() {
+    return this.list[0];
+  }
   get max() {
     return this.#listUnique.length;
   }

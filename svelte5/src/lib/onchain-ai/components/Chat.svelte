@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Interactions, type InteractionType } from "$lib/onchain-ai/classes";
+  import { Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
   import { Interaction } from "$lib/onchain-ai/components";
   import { Account } from "$lib/wagmi/classes";
 
@@ -17,51 +17,9 @@
 
   const disabled = $derived(all && !account.address);
 
+  new MockRouter();
+
   $inspect("interactions:", interactions);
-
-  // const toggleAll = () => (interactions.sender = all ? account.address : null);
-
-  // const missingResponse = $derived(!interactions.last.response);
-  // let hash = $state<`0x${string}`>();
-  // let txReceipt = $state();
-  // const { send, wait } = $derived(
-  //   createWriteContract({
-  //     chainId,
-  //     address,
-  //     abi,
-  //     functionName: "fulfillRequest",
-  //     args: [interactions.last.requestId, "0x32" /*`Response to ${interactions.last.prompt}`*/, ""]
-  //   })
-  // );
-
-  // const handleSend = async () => {
-  //   try {
-  //     console.log("handleSend");
-
-  //     hash = await send();
-  //     if (!hash) return;
-
-  //     console.log("handleSend ~ hash:", hash);
-
-  //     txReceipt = await wait(hash);
-  //     console.log("handleSend ~ txReceipt:", txReceipt);
-  //   } catch (e) {
-  //     console.error(`Transaction KO ${e}`);
-  //   }
-  // };
-
-  // let done = false;
-  // $effect(() => {
-  //   if (done) return;
-  //   if (!interactions.last) return;
-  //   if (missingResponse) {
-  //     done = true;
-  //     handleSend();
-  //     // alert(`I wait for some response to '${interactions.last.prompt}' ${interactions.last.requestId}`);
-  //   }
-  // });
-
-  // $inspect("ABI", chainId, abi);
 </script>
 
 <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">

@@ -4,9 +4,9 @@ import { connectWallet, switchChain } from "./common";
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await connectWallet(page);
-  await switchChain(page, "base-sepolia");
-  // await switchChain(page, "anvil");
-  // await page.locator("#faucet-button").click();
+  // await switchChain(page, "base-sepolia");
+  await switchChain(page, "anvil");
+  await page.locator("#faucet-button").click();
 });
 
 test.describe("Ask!", () => {
