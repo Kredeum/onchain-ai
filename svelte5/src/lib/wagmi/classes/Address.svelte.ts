@@ -30,8 +30,6 @@ class Address {
     this.#getBalance();
     if (this.#watchBalance) {
       this.watcher ??= new Watcher();
-
-      console.log("WATCHER RESTART ", this.address);
       this.watcher.restart(this.#getBalance);
     }
   };

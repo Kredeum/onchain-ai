@@ -19,7 +19,7 @@
 
   new MockRouter();
 
-  $inspect("interactions:", interactions);
+  // $inspect("interactions:", interactions);
 </script>
 
 <div class="flex flex-col p-4 max-w-lg rounded-lg shadow-md bg-base-300">

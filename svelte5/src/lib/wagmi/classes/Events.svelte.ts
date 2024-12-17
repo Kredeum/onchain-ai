@@ -41,13 +41,13 @@ class Events extends SmartContract {
     if (!(this.address && this.abi)) return;
 
     const params = { address: this.address, abi: this.abi, ...this.filter };
-    console.log("EVENTS watchContractEvent", params);
+    // console.log("EVENTS watchContractEvent", params);
 
     try {
       watchContractEvent(wagmiConfig, {
         ...params,
         onLogs: (logs: Log[]) => {
-          console.log(`EVENTS watchContractEvent: ${logs.length} new log`);
+          // console.log(`EVENTS watchContractEvent: ${logs.length} new log`);
           this.listAll.push(...(logs as unknown as LogWithArgs[]));
         }
       });
@@ -71,7 +71,7 @@ class Events extends SmartContract {
         const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
         return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
       });
-      console.log("EVENTS  fetch", this.listAll.length, params, $state.snapshot(this.listAll));
+      // console.log("EVENTS  fetch", this.listAll.length, params, $state.snapshot(this.listAll));
     } catch (error) {
       console.error("EVENTS Failed to fetch logs:", error);
     }

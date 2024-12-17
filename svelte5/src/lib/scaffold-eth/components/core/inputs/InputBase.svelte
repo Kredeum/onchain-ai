@@ -48,7 +48,7 @@
     if (reFocus) input.focus();
   });
 
-  $inspect("<InputBase", value);
+  // $inspect("<InputBase", value);
 </script>
 
 <div class="flex rounded-full border-2 border-base-300 bg-base-200 text-accent {modifier}">

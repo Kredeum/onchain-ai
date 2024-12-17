@@ -10,13 +10,13 @@ class Watcher {
     if (onStart) fn();
 
     this.id = setInterval(fn, POLLING_INTERVAL) as unknown as number;
-    console.info("WATCHER START", this.id);
+    // console.info("WATCHER START", this.id);
   };
   stop = () => {
     if (!this.id) return;
 
     clearInterval(this.id);
-    console.info("WATCHER STOP", this.id);
+    // console.info("WATCHER STOP", this.id);
 
     this.id = 0;
   };

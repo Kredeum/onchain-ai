@@ -31,11 +31,7 @@ contract OnChainAIv1Harness is OnChainAIv1 {
         donId = _donId;
     }
 
-    function readDonHostedSecretsVersion()
-        public
-        view
-        returns (uint64 donHostedSecretsVersion)
-    {
+    function readDonHostedSecretsVersion() public view returns (uint64 donHostedSecretsVersion) {
         donHostedSecretsVersion = _donHostedSecretsVersion;
     }
 }
@@ -90,10 +86,7 @@ contract OnChainAIv1Test is Test, DeployLite {
         vm.prank(owner);
         onChainAIv1.setJavascript(newJavascript_);
 
-        assert(
-            keccak256(abi.encodePacked(onChainAIv1.readJavascript())) ==
-                keccak256(abi.encodePacked(newJavascript_))
-        );
+        assert(keccak256(abi.encodePacked(onChainAIv1.readJavascript())) == keccak256(abi.encodePacked(newJavascript_)));
     }
 
     function test_setSubscriptionId(uint64 subscriptionId_) public {
@@ -139,18 +132,13 @@ contract OnChainAIv1Test is Test, DeployLite {
         assert(onChainAIv1.price() == price_);
     }
 
-    function test_setDonHostedSecretsVersion(
-        uint64 donHostedSecretsVersion_
-    ) public {
+    function test_setDonHostedSecretsVersion(uint64 donHostedSecretsVersion_) public {
         vm.expectRevert();
         onChainAIv1.setDonHostedSecretsVersion(donHostedSecretsVersion_);
 
         vm.prank(owner);
         onChainAIv1.setDonHostedSecretsVersion(donHostedSecretsVersion_);
 
-        assert(
-            onChainAIv1.readDonHostedSecretsVersion() ==
-                donHostedSecretsVersion_
-        );
+        assert(onChainAIv1.readDonHostedSecretsVersion() == donHostedSecretsVersion_);
     }
 }

@@ -25,7 +25,7 @@
 
   const reFocus = $derived(isAddress(value));
 
-  $inspect("<AddressInput", value);
+  // $inspect("<AddressInput", value);
   // $inspect("<AddressInput", value, addr.address, addr.ensName, addr.ensAvatar);
 </script>
 
