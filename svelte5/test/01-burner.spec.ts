@@ -48,7 +48,7 @@ test.describe("Connected wallet interactions", () => {
     await expect(userbalance).toContainText("ETH");
   });
 
-  test("Should get 2 ETH from Faucet on Anvil", async ({ page }) => {
+  test("Should get some ETH from Faucet on Anvil", async ({ page }) => {
     const faucetButton = await page.locator("#faucet-button");
     await expect(faucetButton).toBeVisible();
 

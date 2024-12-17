@@ -3,9 +3,10 @@ import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } f
 
 import { isAddress, isEns } from "$lib/wagmi/ts";
 import type { Nullable } from "$lib/wagmi/ts";
-import { Account as AccountClass, wagmiConfig, Watcher } from "$lib/wagmi/classes";
+import { Account as AccountClass, targetNetwork, wagmiConfig, Watcher } from "$lib/wagmi/classes";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { mainnet } from "viem/chains";
+import { untrack } from "svelte";
 
 class Address {
   watcher: Nullable<Watcher>;
@@ -62,7 +63,7 @@ class Address {
     this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
   };
 
-  setAddressOrName = (addressOrName: AddressType | string) => {
+  setAddressOrName = (addressOrName: Nullable<AddressType | string>) => {
     if (isAddress(addressOrName)) {
       this.address = addressOrName;
     } else if (isEns(addressOrName)) {
@@ -74,21 +75,15 @@ class Address {
   set address(addr: Nullable<AddressType>) {
     const checkSumAddr = isAddress(addr) ? checksumAddress(addr as AddressType) : addr;
 
-    // let noChange = false;
-    // untrack(() => (noChange = this.#address === checkSumAddr));
-    // if (noChange) return;
-
     if (!isAddress(checkSumAddr)) this.#reset();
 
     this.#setAddressPlus(checkSumAddr!);
-    this.#getAndWatchBalance();
   }
   set ensName(ensName: string) {
     if (this.#ensName === ensName) return;
     if (!isEns(ensName)) this.#reset();
 
     this.#setEnsNamePlus(ensName!);
-    this.#getAndWatchBalance();
   }
 
   get address(): Nullable<AddressType> {
@@ -116,7 +111,14 @@ class Address {
     this.#watchBalance = watchBalance;
     this.#ens = ens;
 
-    if (addressOrName) this.setAddressOrName(addressOrName);
+    this.setAddressOrName(addressOrName);
+
+    // restart on network or address change
+    $effect(() => {
+      targetNetwork.id;
+      this.address;
+      untrack(() => this.#getAndWatchBalance());
+    });
 
     // $inspect("<Address", this.address, this.ensName);
   }
