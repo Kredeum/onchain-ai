@@ -2,9 +2,9 @@ import { type Address as AddressType, type ContractEventName, type Log } from "v
 
 import { type DeploymentContractName } from "$lib/wagmi/ts";
 
-import { SmartContract, targetNetwork, wagmiConfig } from "$lib/wagmi/classes";
+import { SmartContract, wagmiConfig } from "$lib/wagmi/classes";
 import { getContractEvents, type LogWithArgs } from "$lib/wagmi/ts";
-import { watchContractEvent, getBlockNumber } from "@wagmi/core";
+import { watchContractEvent, getBlockNumber, getChainId } from "@wagmi/core";
 
 type EventsFilter = { eventName?: ContractEventName; args?: Record<string, unknown> };
 type EventsSortOrder = "DESC" | "ASC" | undefined;
@@ -97,7 +97,7 @@ class Events extends SmartContract {
     this.raw = raw;
 
     $effect(() => {
-      targetNetwork.id;
+      getChainId(wagmiConfig);
       this.fetch(watch);
     });
 

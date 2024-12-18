@@ -1,4 +1,4 @@
-import { BaseNotification } from "$lib/scaffold-eth/components";
+import { BaseNotification } from "$lib/wagmi/components";
 import toast, { type Renderable, type ToastPosition } from "svelte-hot-french-toast";
 
 type NotificationProps = {

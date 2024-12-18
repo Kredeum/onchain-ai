@@ -1,17 +1,19 @@
 import scaffoldConfig from "$lib/scaffold.config";
-import { NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
-import { Account } from "$lib/wagmi/classes";
-import { createNativeCurrencyPrice } from "../../scaffold-eth/runes";
+import { fetchPriceFromUniswap, NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
+import { Account, Network } from "$lib/wagmi/classes";
 
 type TargetNetworkChain = (typeof scaffoldConfig.targetNetworks)[number];
 type TargetNetworkId = TargetNetworkChain["id"];
 type TargetNetworkName = TargetNetworkChain["name"];
 type TargetNetworkNativeCurrency = TargetNetworkChain["nativeCurrency"];
 
-class TargetNetwork {
+class TargetNetwork extends Network {
   chain: ChainWithAttributes = $state(scaffoldConfig.targetNetworks[0]);
 
-  id: TargetNetworkId = $derived(this.chain.id as TargetNetworkId);
+  get id() {
+    return this.chainId;
+  }
+
   idLocal: TargetNetworkId = 31337;
   idDefault: TargetNetworkId = scaffoldConfig.targetNetworks[0].id;
 
@@ -21,19 +23,25 @@ class TargetNetwork {
   nativeCurrency: TargetNetworkNativeCurrency = $derived(this.chain.nativeCurrency as TargetNetworkNativeCurrency);
 
   nativeCurrencyPrice: number = $state(0);
+  getNativeCurrencyPrice = async () => {
+    this.nativeCurrencyPrice = await fetchPriceFromUniswap(this.chain);
+  };
 
-  constructor() {
+  constructor(chainId?: TargetNetworkId) {
+    chainId ||= scaffoldConfig.targetNetworks[0].id;
+    super(chainId);
+
     const account = new Account();
-    const price = createNativeCurrencyPrice();
 
     $effect(() => {
+      if (!account.chainId) return;
+
       const newNetwork = scaffoldConfig.targetNetworks.find((nw) => nw.id === account.chainId && nw.id !== this.id);
+      if (!newNetwork) return;
 
-      if (newNetwork && account.chainId) this.chain = { ...newNetwork, ...NETWORKS_EXTRA_DATA[account.chainId] };
-    });
+      this.chain = { ...newNetwork, ...NETWORKS_EXTRA_DATA[account.chainId] };
 
-    $effect(() => {
-      this.nativeCurrencyPrice = price.nativeCurrencyPrice;
+      this.getNativeCurrencyPrice();
     });
 
     // $inspect("TargetNetwork", this.id, this.name);

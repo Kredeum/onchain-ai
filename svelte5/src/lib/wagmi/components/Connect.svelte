@@ -4,10 +4,11 @@
   import { connect, getConnectors, switchChain, type GetConnectorsReturnType } from "@wagmi/core";
 
   import scaffoldConfig from "$lib/scaffold.config";
+  import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
   import { wagmiConfig } from "$lib/wagmi/classes";
-  import { targetNetwork, type TargetNetworkId } from "$lib/wagmi/classes";
   import { anvil } from "viem/chains";
   import { ONLY_BURNER_WALLET } from "$lib/wagmi/config";
+  import type { DeploymentsChainId } from "../ts";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
@@ -20,6 +21,7 @@
     const connector = connectors.find((c) => c.type === type);
 
     const typeInjected = type === "injected";
+    targetNetwork;
     const slug = typeInjected ? injected : connector?.type;
     if (!slug) return {};
 
@@ -51,7 +53,7 @@
 
     address = undefined;
 
-    const parameters: { connector: ConnectorType; chainId?: TargetNetworkId } = { connector };
+    const parameters: { connector: ConnectorType; chainId?: DeploymentsChainId } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
       parameters.chainId = ONLY_BURNER_WALLET ? targetNetwork.idLocal : targetNetwork.id || targetNetwork.idDefault;

@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/wagmi/classes";
-  import { BlockChain, Watcher } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { Network, Watcher } from "$lib/wagmi/classes";
 
-  const blockChain = new BlockChain();
+  const blockChain = new Network(targetNetwork.id);
 
-  $inspect("PAGE BLOCK blockNumber:", targetNetwork.id, blockChain.blockNumber);
+  $inspect("PAGE BLOCK blockNumber:", blockChain.chainId, blockChain.blockNumber);
 </script>
 
 <div class="p-4">

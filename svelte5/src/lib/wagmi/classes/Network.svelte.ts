@@ -5,13 +5,12 @@ import {
   watchBlockNumber as watchBlockNumberWagmi,
   disconnect as disconnectWagmi
 } from "@wagmi/core";
-import { Watcher, wagmiConfig } from "$lib/wagmi/classes";
-import { targetNetwork, type TargetNetworkId } from "$lib/wagmi/classes";
+import { wagmiConfig } from "$lib/wagmi/classes";
 
-// BlockChain Singleton Class, reactive on chainId
-class BlockChain {
-  static instance: BlockChain;
+type WagmiChainId = (typeof wagmiConfig)["chains"][number]["id"];
 
+// Network Singleton Class, reactive on chainId
+class Network {
   blockNumber: number | undefined = $state();
   getBlockNumber = async () => {
     const blockNumber = Number(await getBlockNumberWagmi(wagmiConfig));
@@ -38,18 +37,18 @@ class BlockChain {
     };
   };
 
-  #chainId: number = 0;
+  #chainId: WagmiChainId;
   get chainId() {
     return this.#chainId;
   }
-  set chainId(chainId: number) {
+  set chainId(chainId: WagmiChainId) {
     if (this.#chainId !== chainId) {
       this.#chainId = chainId;
       this.getBlockNumber();
     }
   }
 
-  switchChain = async (chainId: TargetNetworkId) => {
+  switchChain = async (chainId: WagmiChainId) => {
     await switchChainWagmi(wagmiConfig, { chainId });
     this.chainId = chainId;
   };
@@ -58,16 +57,11 @@ class BlockChain {
     await disconnectWagmi(wagmiConfig);
   };
 
-  constructor({ watch = true }: { watch?: boolean } = {}) {
-    if (BlockChain.instance) return BlockChain.instance;
-    BlockChain.instance = this;
+  constructor(chainId: WagmiChainId) {
+    this.#chainId = chainId;
 
-    this.chainId = targetNetwork.id;
-
-    if (watch) this.watchBlockNumber();
-
-    // $inspect("BLOCKCHAIN", targetNetwork.id, this.chainId, this.blockNumber);
+    // $inspect("BLOCKCHAIN", this.chainId, this.blockNumber);
   }
 }
 
-export { BlockChain };
+export { Network };

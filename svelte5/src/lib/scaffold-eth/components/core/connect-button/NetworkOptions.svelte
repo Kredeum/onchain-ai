@@ -2,9 +2,9 @@
   import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
   import { getTargetNetworks, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
   import { getNetworkColor, createDarkMode } from "$lib/scaffold-eth/runes";
+  import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
   import { Account } from "$lib/wagmi/classes";
-  import { BlockChain } from "$lib/wagmi/classes";
-  import { type TargetNetworkId } from "$lib/wagmi/classes";
+  import { Network } from "$lib/wagmi/classes";
 
   const { hidden = false } = $props();
 
@@ -12,7 +12,7 @@
 
   const account = new Account();
 
-  const blockChain = new BlockChain();
+  const blockChain = new Network(targetNetwork.id);
   const { isDarkMode } = $derived.by(createDarkMode());
 
   const items = $derived(allowedNetworks.filter((network) => network.id !== account.chainId));

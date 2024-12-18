@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { shorten0xString } from "$lib/wagmi/ts";
 
   const {

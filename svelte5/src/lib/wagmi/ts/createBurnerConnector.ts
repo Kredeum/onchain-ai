@@ -1,4 +1,4 @@
-import { loadBurnerSK } from "./utils";
+import { loadBurnerSK } from "./utils2";
 import { BaseError, createConnector as createWagmiConnector } from "@wagmi/core";
 import {
   type EIP1193RequestFn,

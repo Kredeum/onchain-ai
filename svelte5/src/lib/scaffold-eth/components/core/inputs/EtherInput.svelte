@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { untrack } from "svelte";
   import { ArrowsRightLeft, Icon } from "svelte-hero-icons";
   import { InputBase } from "$lib/scaffold-eth/components";

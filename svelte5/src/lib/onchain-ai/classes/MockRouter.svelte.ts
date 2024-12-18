@@ -1,4 +1,5 @@
-import { SmartContract, targetNetwork } from "$lib/wagmi/classes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
+import { SmartContract } from "$lib/wagmi/classes";
 import { toBytes, toHex, type Address } from "viem";
 import { isAddress } from "$lib/wagmi/ts";
 import { Interactions } from "./Interactions.svelte";

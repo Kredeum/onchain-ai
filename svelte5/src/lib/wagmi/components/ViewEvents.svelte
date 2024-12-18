@@ -1,11 +1,12 @@
 <script lang="ts">
   import { Events } from "$lib/wagmi/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
   import { readDeploymentContractsName, type DeploymentContractName } from "$lib/wagmi/ts";
+  import { getChainId } from "@wagmi/core";
+  import { wagmiConfig } from "../classes";
 
   const localStorageContractKey = "scaffoldEth2.contractSelected";
 
-  const contractsName: DeploymentContractName[] = $derived(readDeploymentContractsName(targetNetwork.id));
+  const contractsName: DeploymentContractName[] = $derived(readDeploymentContractsName(getChainId(wagmiConfig)));
 
   const getDefaultContractName = () => {
     const localStorageContractName = localStorage.getItem(localStorageContractKey) as DeploymentContractName;

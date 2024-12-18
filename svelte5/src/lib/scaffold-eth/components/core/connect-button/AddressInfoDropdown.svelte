@@ -12,10 +12,10 @@
     ArrowsRightLeft
   } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
-  import { targetNetwork } from "$lib/wagmi/classes";
-  import { BlockChain } from "$lib/wagmi/classes";
+  import { Network } from "$lib/wagmi/classes";
   import { Account } from "$lib/wagmi/classes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
@@ -49,7 +49,7 @@
     }
   );
 
-  const blockChain = new BlockChain();
+  const blockChain = new Network(targetNetwork.id);
 
   const checksumAddress = $derived(getAddress(address));
 

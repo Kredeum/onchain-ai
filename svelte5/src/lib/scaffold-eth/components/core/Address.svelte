@@ -4,7 +4,7 @@
   import { CheckCircle, DocumentDuplicate, Icon } from "svelte-hero-icons";
 
   import { getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { BlockieAvatar } from "$lib/scaffold-eth/components";
   import { Address } from "$lib/wagmi/classes";
 

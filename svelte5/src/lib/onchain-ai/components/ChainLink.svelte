@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ChainLink, Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
   import { Link } from "$lib/wagmi/components";
 

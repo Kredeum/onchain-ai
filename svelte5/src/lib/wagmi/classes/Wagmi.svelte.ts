@@ -2,7 +2,7 @@ import { createClient } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";
 import { createConfig, reconnect } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
-import { createBurnerConnector } from "$lib/burner-wallet";
+import { createBurnerConnector } from "$lib/wagmi/ts";
 import { Client } from "$lib/wagmi/classes";
 import { ALCHEMY_TRANSPORT, POLLING_INTERVAL, TARGET_NETWORKS, WALLET_CONNECT_PROJECT_ID } from "$lib/wagmi/config";
 
