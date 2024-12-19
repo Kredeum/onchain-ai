@@ -3,14 +3,14 @@ import { SvelteMap } from "svelte/reactivity";
 import {
   type ReadContractReturnType,
   deepEqual,
+  getChainId,
   readContract,
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { targetNetwork } from "$lib/wagmi/classes";
 import { wagmiConfig } from "$lib/wagmi/classes";
-import { isAddress, shorten0xString } from "$lib/wagmi/ts";
-import { readDeployment, type DeploymentContractName, type DeploymentsChainId } from "$lib/wagmi/ts";
+import { isAddress, shorten0xString, type DeploymentsChainId } from "$lib/wagmi/ts";
+import { readDeployment, type DeploymentContractName } from "$lib/wagmi/ts";
 import { untrack } from "svelte";
 import { notification } from "$lib/wagmi/ts";
 import { LinkTx } from "../components";
@@ -19,17 +19,18 @@ let counter = 0;
 
 class SmartContract {
   id = 0;
+  chainId = $derived(wagmiConfig.state.chainId as DeploymentsChainId);
 
   name: string | undefined;
   #nameOrAddress: DeploymentContractName | AddressType | undefined;
 
   get address(): AddressType | undefined {
-    const { address } = readDeployment(targetNetwork.id, this.#nameOrAddress!) ?? {};
+    const { address } = readDeployment(this.chainId, this.#nameOrAddress!) ?? {};
     return address;
   }
 
   get abi(): Abi | undefined {
-    const { abi } = readDeployment(targetNetwork.id, this.#nameOrAddress!) ?? {};
+    const { abi } = readDeployment(this.chainId, this.#nameOrAddress!) ?? {};
     return abi;
   }
 
@@ -41,7 +42,8 @@ class SmartContract {
   }
 
   #getParamsOnCurrentChain = (functionName: string, args: unknown[]) => {
-    const chainId = targetNetwork.id;
+    const chainId = this.chainId;
+
     const { address, abi } = readDeployment(chainId, this.#nameOrAddress!) ?? {};
     if (!(address && abi)) return;
 
@@ -62,7 +64,7 @@ class SmartContract {
     try {
       data = await readContract(wagmiConfig, { address, abi, functionName, args });
     } catch (e: unknown) {
-      const newChainId = targetNetwork.id;
+      const newChainId = this.chainId;
       if (newChainId === chainId) {
         console.error(`SMARTCONTRACT READ '${functionName}' error on chain '${chainId}'`, e);
       } else {
@@ -111,8 +113,7 @@ class SmartContract {
   notifs = new Map();
   send = async (functionName: string = "", args: unknown[] = [], value = 0n) => {
     if (this.sending) return;
-    const chainId = targetNetwork.id;
-    const { address, abi } = readDeployment(chainId, this.#nameOrAddress!) ?? {};
+    const { address, abi } = readDeployment(this.chainId, this.#nameOrAddress!) ?? {};
     if (!(address && abi)) return;
 
     let hash: `0x${string}` | undefined;
@@ -163,7 +164,7 @@ class SmartContract {
     this.id = ++counter;
     this.#setNameOrAddress(nameOrAddress);
 
-    // $inspect("SMARTCONTRACT INSPECT", targetNetwork.id, "|", this.nameOrAddress, this.id);
+    // $inspect("SMARTCONTRACT INSPECT", this.chainId, "|", this.nameOrAddress, this.id);
     // $inspect("SMARTCONTRACT SEND ID ING", this.sendId, this.sending);
   }
 }

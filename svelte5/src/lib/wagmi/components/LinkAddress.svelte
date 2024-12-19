@@ -1,10 +1,12 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { getChainId } from "@wagmi/core";
+  import { Network, wagmiConfig } from "../classes";
 
   const { address, description = "address" }: { address?: `0x${string}`; description?: string } = $props();
 
-  const href = $derived(address && targetNetwork.explorer ? `${targetNetwork.explorer}/address/${address}` : "");
+  const explorer = $derived(Network.getExplorer(wagmiConfig.state.chainId));
+  const href = $derived(address && explorer ? `${explorer}/address/${address}` : "");
 </script>
 
 <Link {href} {description} />

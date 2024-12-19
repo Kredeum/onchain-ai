@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Link } from "$lib/wagmi/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
   import { shorten0xString } from "$lib/wagmi/ts";
+  import { Network, wagmiConfig } from "../classes";
+  import { getChainId } from "@wagmi/core";
 
   const {
     hash,
@@ -9,7 +10,8 @@
     message
   }: { hash: `0x${string}`; description?: string; message?: string } = $props();
 
-  const href = $derived(hash && targetNetwork.explorer ? `${targetNetwork.explorer}/tx/${hash}` : "");
+  const explorer = $derived(Network.getExplorer(wagmiConfig.state.chainId));
+  const href = $derived(hash && explorer ? `${explorer}/tx/${hash}` : "");
 </script>
 
 {#if message}
