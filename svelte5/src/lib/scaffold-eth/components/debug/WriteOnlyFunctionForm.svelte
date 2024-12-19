@@ -7,7 +7,7 @@
     getParsedContractFunctionArgs,
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { IntegerInput, InheritanceTooltip, ContractInput, DisplayTxResult } from "$lib/scaffold-eth/components";
 
   import { Account, SmartContract } from "$lib/wagmi/classes";

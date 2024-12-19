@@ -4,7 +4,6 @@ export * from "./contractLogs.svelte";
 export * from "./darkMode.svelte";
 export * from "./deployedContractInfo.svelte";
 export * from "./fetchBlocks.svelte";
-export * from "./nativeCurrencyPrice.svelte";
 export * from "./networkColor.svelte";
 export * from "./outsideClick.svelte";
 export * from "./public.svelte";

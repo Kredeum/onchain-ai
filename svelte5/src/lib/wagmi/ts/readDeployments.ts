@@ -5,41 +5,45 @@ import { isAddress } from "$lib/wagmi/ts";
 type KeysOfUnion<ObjectType> = ObjectType extends unknown ? keyof ObjectType : never;
 
 type DeploymentsChains = typeof jsonDeployments;
-type DeploymentsChainId = keyof DeploymentsChains;
-type DeploymentsChain = DeploymentsChains[DeploymentsChainId];
+type DeploymentsChainIdString = keyof DeploymentsChains;
+type DeploymentsChainIdStrict = DeploymentsChainIdString extends `${infer N extends number}` ? N : never;
+type DeploymentsChainId = DeploymentsChainIdStrict | 1;
+type DeploymentsChain = DeploymentsChains[DeploymentsChainIdStrict];
 type DeploymentContractName = KeysOfUnion<DeploymentsChain>;
 type DeploymentContractKey = keyof DeploymentsChain;
 
-const readDeploymentsChain = (chainId: number | string): DeploymentsChain => {
-  const chainIds = Object.keys(jsonDeployments);
-  const chainIdString = String(chainId) as DeploymentsChainId;
+const isDeploymentsChainId = (chainId: string | number): boolean => String(chainId) in jsonDeployments;
 
-  if (!chainIds.includes(chainIdString)) throw new Error(`No Deployments for chainId ${chainId}!`);
+const isDeploymentChainId = (chainId: DeploymentsChainId, contractName: DeploymentContractName): boolean =>
+  isDeploymentsChainId(chainId) && contractName in readDeploymentsChain(chainId);
 
-  return jsonDeployments[chainIdString];
+const readDeploymentsChain = (chainId: DeploymentsChainId): DeploymentsChain => {
+  if (!isDeploymentsChainId(chainId)) throw new Error(`No Deployments for chainId ${chainId}!`);
+
+  return jsonDeployments[String(chainId) as DeploymentsChainIdString];
 };
 
 type DeploymentType = { address: Address; abi: Abi; name?: string };
 
-const readDeploymentContractsName = (chainId: string | number): DeploymentContractName[] => {
+const readDeploymentContractsName = (chainId: DeploymentsChainId): DeploymentContractName[] => {
   const chainDeployment = readDeploymentsChain(chainId);
 
   return Object.keys(chainDeployment) as DeploymentContractName[];
 };
 
-const readDeploymentByAddress = (chainId: string | number, address: string): DeploymentType | undefined => {
-  const deployments: DeploymentsChain = readDeploymentsChain(chainId);
-  const deploymentsContractName = Object.keys(deployments) as DeploymentContractKey[];
-  const contractName = deploymentsContractName.find((contractName) => deployments[contractName].address === address);
-  if (!contractName) return;
+const readDeploymentByAddress = (chainId: DeploymentsChainId, address: string): DeploymentType | undefined => {
+  const deployments = readDeploymentsChain(chainId);
 
-  const deployment = deployments[contractName] as DeploymentType;
-  deployment.name = contractName;
+  const [name, dep] = Object.entries(deployments).find(([, dep]) => (dep as DeploymentType).address === address) || [];
+  if (!(name && dep)) return;
+
+  const deployment = dep as DeploymentType;
+  deployment.name = name;
   return deployment;
 };
 
 const readDeploymentByName = (
-  chainId: string | number,
+  chainId: DeploymentsChainId,
   contractName: DeploymentContractName
 ): DeploymentType | undefined => {
   const chainDeployment = readDeploymentsChain(chainId);
@@ -52,7 +56,7 @@ const readDeploymentByName = (
 };
 
 const readDeployment = (
-  chainId: string | number,
+  chainId: DeploymentsChainId,
   param: DeploymentContractName | Address
 ): DeploymentType | undefined => {
   if (!(chainId && param)) return;
@@ -63,6 +67,8 @@ const readDeployment = (
 };
 
 export {
+  isDeploymentChainId,
+  isDeploymentsChainId,
   readDeploymentContractsName,
   readDeploymentsChain,
   readDeploymentByAddress,

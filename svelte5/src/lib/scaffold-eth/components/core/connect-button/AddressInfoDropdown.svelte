@@ -12,10 +12,10 @@
     ArrowsRightLeft
   } from "svelte-hero-icons";
   import { goto } from "$app/navigation";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
-  import { targetNetwork } from "$lib/wagmi/classes";
-  import { BlockChain } from "$lib/wagmi/classes";
+  import { Network } from "$lib/wagmi/classes";
   import { Account } from "$lib/wagmi/classes";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
@@ -33,7 +33,7 @@
     ensAvatar?: string;
   } = $props();
 
-  let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
+  const isLocalNetwork = $derived(targetNetwork.id == Network.chainIdLocal);
 
   const account = new Account();
   const switchEnabled = $derived(
@@ -48,8 +48,6 @@
       dropdown?.removeAttribute("open");
     }
   );
-
-  const blockChain = new BlockChain();
 
   const checksumAddress = $derived(getAddress(address));
 
@@ -133,7 +131,7 @@
         id="disconnect-wallet"
         class="menu-item btn-sm flex gap-3 !rounded-xl py-3 text-error"
         type="button"
-        onclick={() => blockChain?.disconnect()}
+        onclick={() => targetNetwork?.disconnect()}
       >
         <Icon src={ArrowLeftOnRectangle} class="ml-2 h-6 w-4 sm:ml-0" /> <span>Disconnect</span>
       </button>

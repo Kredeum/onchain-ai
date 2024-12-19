@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import BuidlGuidlLogo from "./assets/BuidlGuidlLogo.svelte";
   import { CurrencyDollar, Heart, Icon, MagnifyingGlass } from "svelte-hero-icons";
   import Faucet from "./core/Faucet.svelte";

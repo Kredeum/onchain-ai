@@ -1,9 +1,9 @@
 import { type Address as AddressType, checksumAddress } from "viem";
-import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } from "@wagmi/core";
+import { deepEqual, getBalance as getBalanceWagmi, getChainId, type GetBalanceReturnType } from "@wagmi/core";
 
 import { isAddress, isEns } from "$lib/wagmi/ts";
 import type { Nullable } from "$lib/wagmi/ts";
-import { Account as AccountClass, targetNetwork, wagmiConfig, Watcher } from "$lib/wagmi/classes";
+import { wagmiConfig, Watcher } from "$lib/wagmi/classes";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { mainnet } from "viem/chains";
 import { untrack } from "svelte";
@@ -113,7 +113,7 @@ class Address {
 
     // restart on network or address change
     $effect(() => {
-      targetNetwork.id;
+      getChainId(wagmiConfig);
       this.address;
       untrack(() => this.#getAndWatchBalance());
     });

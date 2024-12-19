@@ -2,7 +2,7 @@
   import { page } from "$app/stores";
   import { decodeTransactionData, getFunctionDetails, type TransactionWithFunction } from "$lib/scaffold-eth/ts";
   import { Address } from "$lib/scaffold-eth/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { createPublicClient } from "$lib/scaffold-eth/runes";
   import { type Transaction, type TransactionReceipt, type Hash, formatEther, formatUnits } from "viem";
   import { replacer } from "$lib/wagmi/ts";

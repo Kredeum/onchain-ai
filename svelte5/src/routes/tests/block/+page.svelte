@@ -1,21 +1,18 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/wagmi/classes";
-  import { BlockChain, Watcher } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
 
-  const blockChain = new BlockChain();
-
-  $inspect("PAGE BLOCK blockNumber:", targetNetwork.id, blockChain.blockNumber);
+  $inspect("PAGE BLOCK blockNumber:", targetNetwork.chainId, targetNetwork.blockNumber);
 </script>
 
 <div class="p-4">
-  blockNumber = {blockChain.blockNumber}
+  blockNumber = {targetNetwork.blockNumber}
 </div>
 
 <div class="p-4">
   <button
     class="btn btn-info"
-    onclick={() => (blockChain.watchingBlockNumber ? blockChain.unwatchBlockNumber?.() : blockChain.watchBlockNumber())}
+    onclick={() => (targetNetwork.watchingBlockNumber ? targetNetwork.unwatchBlockNumber?.() : targetNetwork.watchBlockNumber())}
   >
-    {blockChain.watchingBlockNumber ? "Unwatch" : "Watch"}
+    {targetNetwork.watchingBlockNumber ? "Unwatch" : "Watch"}
   </button>
 </div>

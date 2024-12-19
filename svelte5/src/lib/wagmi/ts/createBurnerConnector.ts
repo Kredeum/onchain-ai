@@ -1,4 +1,4 @@
-import { loadBurnerSK } from "./utils";
+import { loadBurnerSK } from "./utils2";
 import { BaseError, createConnector as createWagmiConnector } from "@wagmi/core";
 import {
   type EIP1193RequestFn,
@@ -156,6 +156,7 @@ export const createBurnerConnector = () => {
     },
 
     async switchChain({ chainId }) {
+      console.log("createBurnerConnector switchChain", chainId);
       const provider = await this.getProvider();
       const chain = config.chains.find((x) => x.id === chainId);
       if (!chain) throw new SwitchChainError(new ChainNotConfiguredError());

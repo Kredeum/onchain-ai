@@ -7,7 +7,7 @@
   import { notification } from "$lib/wagmi/ts";
   import { createTransactor } from "$lib/scaffold-eth/runes";
   import { Address, Balance, AddressInput, FaucetNotification, EtherInput } from "$lib/scaffold-eth/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
 
   const FAUCET_ACCOUNT_INDEX = 0;
 

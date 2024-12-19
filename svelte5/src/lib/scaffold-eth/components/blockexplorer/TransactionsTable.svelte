@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Address } from "$lib/scaffold-eth/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import type { TransactionWithFunction, TransactionsTableProps } from "$lib/scaffold-eth/ts/block";
   import { formatEther } from "viem";
   import TransactionHash from "./TransactionHash.svelte";
