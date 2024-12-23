@@ -1,17 +1,23 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { type Address } from "viem";
-  import { connect, getConnectors, switchChain, type GetConnectorsReturnType } from "@wagmi/core";
+  import {
+    connect,
+    getConnections,
+    getConnectors,
+    type GetConnectorsReturnType
+  } from "@wagmi/core";
 
   import scaffoldConfig from "$lib/scaffold.config";
-  import { wagmiConfig } from "$lib/wagmi/classes";
-  import { targetNetwork, type TargetNetworkId } from "$lib/wagmi/classes";
-  import { anvil } from "viem/chains";
+  import { Network, wagmiConfig } from "$lib/wagmi/classes";
   import { ONLY_BURNER_WALLET } from "$lib/wagmi/config";
+  import { isDeploymentsChainId, type DeploymentsChainId, type Nullable } from "../ts";
 
   type ConnectorType = GetConnectorsReturnType[number];
 
-  let { chainId = $bindable(), address = $bindable() }: { chainId?: number; address?: Address } = $props();
+  let { chainId, address = $bindable() }: { chainId?: Nullable<number>; address?: Nullable<Address> } = $props();
+
+  const network = new Network();
 
   let injected: string | undefined = $state();
 
@@ -20,6 +26,7 @@
     const connector = connectors.find((c) => c.type === type);
 
     const typeInjected = type === "injected";
+    network.chainId;
     const slug = typeInjected ? injected : connector?.type;
     if (!slug) return {};
 
@@ -28,6 +35,8 @@
 
     return { connector, slug, name };
   };
+  const isActiveConnection = (type: string): boolean =>
+    getConnections(wagmiConfig).some((cnx) => cnx.connector.type === type);
 
   onMount(() => {
     const provider = window.ethereum;
@@ -46,24 +55,25 @@
   });
 
   const connectWallet = async (connector: ConnectorType) => {
-    if (!wagmiConfig) return;
     modalDisplay = false;
+    if (!wagmiConfig) return;
 
-    address = undefined;
+    console.log("connectWallet", connector.type);
+    if (isActiveConnection(connector.type)) return;
 
-    const parameters: { connector: ConnectorType; chainId?: TargetNetworkId } = { connector };
+    const parameters: { connector: ConnectorType; chainId?: number } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
-      parameters.chainId = ONLY_BURNER_WALLET ? targetNetwork.idLocal : targetNetwork.id || targetNetwork.idDefault;
+      parameters.chainId = ONLY_BURNER_WALLET ? Network.chainIdLocal : network.chainId || network.chainIdDefault;
     }
     const wallet = await connect(wagmiConfig, parameters);
 
     address = wallet.accounts[0];
 
-    if (!scaffoldConfig.targetNetworks.find((nw) => nw.id === wallet.chainId)) {
-      console.log("<Connect connectWallet ~ switch to default Chain:", targetNetwork.idDefault);
-      switchChain(wagmiConfig, { chainId: targetNetwork.idDefault });
-      chainId = targetNetwork.idDefault;
+    if (!isDeploymentsChainId(wallet.chainId)) {
+      console.log("<Connect connectWallet ~ switch to default Chain:", network.chainIdDefault);
+      network.switch(network.chainIdDefault);
+      chainId = network.chainIdDefault;
     } else {
       chainId = wallet.chainId;
     }
@@ -95,7 +105,7 @@
         {/if}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
-        {#if !scaffoldConfig.onlyLocalBurnerWallet || targetNetwork.id === anvil.id}
+        {#if !scaffoldConfig.onlyLocalBurnerWallet || network.chainId === Network.chainIdLocal}
           {@render connectSnippet("burnerWallet")}
         {/if}
       </ul>

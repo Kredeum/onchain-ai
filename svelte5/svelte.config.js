@@ -1,8 +1,9 @@
 import adapter from "@sveltejs/adapter-static";
 import { vitePreprocess } from "@sveltejs/vite-plugin-svelte";
+import { defineConfig } from "vite";
 
 /** @type {import('@sveltejs/kit').Config} */
-const config = {
+const config = defineConfig({
   preprocess: vitePreprocess(),
 
   kit: {
@@ -13,7 +14,13 @@ const config = {
       precompress: false,
       strict: true
     })
+  },
+
+  resolve: {
+    alias: {
+      "@routes": "/src/routes"
+    }
   }
-};
+});
 
 export default config;

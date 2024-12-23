@@ -1,4 +1,4 @@
-import { targetNetwork } from "$lib/wagmi/classes";
+import { targetNetwork } from "$lib/scaffold-eth/classes";
 import type { ChainWithAttributes } from "$lib/scaffold-eth/ts";
 import { createDarkMode } from "./darkMode.svelte";
 

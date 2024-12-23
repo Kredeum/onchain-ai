@@ -1,6 +1,13 @@
 <script lang="ts">
   import { replacer } from "$lib/wagmi/ts";
   import { Interactions } from "$lib/onchain-ai/classes";
+  import { Account, wagmiConfig } from "$lib/wagmi/classes";
+  import { getChainId } from "@wagmi/core";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
+
+  const account = new Account();
+
+  $inspect("TEST INTERACTIONS chainId", account.chainId, wagmiConfig.state.chainId, targetNetwork.id);
 
   const interactions = new Interactions();
 </script>

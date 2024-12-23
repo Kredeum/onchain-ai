@@ -5,11 +5,7 @@
   const { data }: { data: { contractData: { bytecode: string; assembly: string } } } = $props();
 
   const { contractData } = $derived(data);
-
-  let address = $state("");
-  $effect(() => {
-    address = $page.url.hash.slice(1);
-  });
+  const address = $derived($page.url.hash.slice(1));
 </script>
 
 <AddressComponent {address} {contractData} />

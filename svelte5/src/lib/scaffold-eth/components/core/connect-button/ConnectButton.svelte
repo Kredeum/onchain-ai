@@ -4,7 +4,7 @@
   import { formatENS, formatAddress, getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
   import { Account } from "$lib/wagmi/classes";
   import { Balance } from "$lib/scaffold-eth/components";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import AddressInfoDropdown from "./AddressInfoDropdown.svelte";
   import AddressQRCodeModal from "./AddressQRCodeModal.svelte";
   import { Connect } from "$lib/wagmi/components";

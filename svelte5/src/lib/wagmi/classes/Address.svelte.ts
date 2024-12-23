@@ -1,9 +1,9 @@
 import { type Address as AddressType, checksumAddress } from "viem";
-import { deepEqual, getBalance as getBalanceWagmi, type GetBalanceReturnType } from "@wagmi/core";
+import { deepEqual, getBalance as getBalanceWagmi, getChainId, type GetBalanceReturnType } from "@wagmi/core";
 
 import { isAddress, isEns } from "$lib/wagmi/ts";
 import type { Nullable } from "$lib/wagmi/ts";
-import { Account as AccountClass, targetNetwork, wagmiConfig, Watcher } from "$lib/wagmi/classes";
+import { wagmiConfig, Watcher } from "$lib/wagmi/classes";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { mainnet } from "viem/chains";
 import { untrack } from "svelte";
@@ -57,8 +57,10 @@ class Address {
   };
   #setEnsNamePlus = async (ensName: string) => {
     this.#ensName = ensName;
-    this.#ensAvatar = (await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName })) as string;
-    this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
+    if (this.#ens) {
+      this.#ensAvatar = (await getEnsAvatar(wagmiConfig, { chainId: mainnet.id, name: ensName })) as string;
+      this.#address = await getEnsAddress(wagmiConfig, { chainId: mainnet.id, name: ensName });
+    }
   };
 
   setAddressOrName = (addressOrName: Nullable<AddressType | string>) => {
@@ -113,7 +115,10 @@ class Address {
 
     // restart on network or address change
     $effect(() => {
-      targetNetwork.id;
+      if (!this.address) return;
+      wagmiConfig.state.chainId;
+      // getChainId(wagmiConfig);
+
       this.address;
       untrack(() => this.#getAndWatchBalance());
     });

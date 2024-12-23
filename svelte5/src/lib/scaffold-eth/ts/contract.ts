@@ -23,7 +23,6 @@ import scaffoldConfig from "$lib/scaffold.config";
 import type { Config } from "@wagmi/core";
 import type { WriteContractVariables } from "@wagmi/core/query";
 import type { WriteContractErrorType, WriteContractParameters, WriteContractReturnType } from "@wagmi/core/actions";
-import type { MutateOptions } from "@tanstack/svelte-query";
 
 type AddExternalFlag<T> = {
   [ChainId in keyof T]: {
@@ -188,14 +187,6 @@ export type TransactorFuncOptions = {
   onBlockConfirmation?: (txnReceipt: TransactionReceipt) => void;
   blockConfirmations?: number;
 };
-
-export type scaffoldWriteContractOptions = MutateOptions<
-  WriteContractReturnType,
-  WriteContractErrorType,
-  WriteVariables,
-  unknown
-> &
-  TransactorFuncOptions;
 
 type IndexedEventInputs<
   TContractName extends ContractName,

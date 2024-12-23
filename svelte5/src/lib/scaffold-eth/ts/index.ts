@@ -1,6 +1,5 @@
 export * from "../../scaffold.config";
 export * from "./block";
-export * from "./clickOutside";
 export * from "./contract";
 export * from "./decodeTxData";
 export * from "./getParsedError";
@@ -9,5 +8,4 @@ export * from "./fetchPriceFromUniswap";
 export * from "./utils";
 export * from "./utilsDebug";
 export * from "./utilsEns";
-export * from "./query";
 export * from "./types";

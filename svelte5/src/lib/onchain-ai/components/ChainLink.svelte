@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ChainLink, Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
   import { Link } from "$lib/wagmi/components";
 
@@ -25,7 +25,7 @@
 
   {#if targetNetwork.id == 31337}
     <div class="flex flex-row w-full p-6 space-x-2">
-      <span>Simulatation</span>
+      <span>Simulation</span>
       <span>ChainLink Response '{lastInteraction?.prompt}' =&gt; '{lastInteraction?.response}'</span>
     </div>
   {:else}

@@ -1,0 +1,11 @@
+DONE
+import toast, { type Renderable, type ToastPosition } from 'svelte-hot-french-toast';
+import { BaseNotification } from '$lib/scaffold-eth/components';
+import { createBurnerConnector } from '$lib/burner-wallet';
+import { clickOutside } from "$lib/scaffold-eth/ts";
+import { createNativeCurrencyPrice } from '../../scaffold-eth/runes';
+import { QueryClient, QueryClientProvider } from '@tanstack/svelte-query';
+import { NETWORKS_EXTRA_DATA, type ChainWithAttributes } from '$lib/scaffold-eth/ts';
+
+TODO
+/Users/alain/DEV/wagmi-svelte5/vite.config.ts:5:12 Error: No overload matches this call.

@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { WagmiProvider } from "$lib/wagmi/components";
-  import "../app.pcss";
+  import "../../app.pcss";
   import ScaffoldEthApp from "$lib/scaffold-eth/components/ScaffoldEthApp.svelte";
   import { Toaster } from "svelte-hot-french-toast";
   import type { Snippet } from "svelte";
@@ -32,8 +31,6 @@
 
 <Toaster />
 
-<WagmiProvider>
-  <ScaffoldEthApp>
-    {@render children()}
-  </ScaffoldEthApp>
-</WagmiProvider>
+<ScaffoldEthApp>
+  {@render children()}
+</ScaffoldEthApp>

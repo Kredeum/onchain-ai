@@ -4,11 +4,11 @@
 
   import { Link, Bars3, BugAnt, Beaker, Icon, ChatBubbleLeftRight, type IconSource } from "svelte-hero-icons";
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
-  import { targetNetwork } from "$lib/wagmi/classes";
+  import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
-  import { anvil } from "viem/chains";
+  import { Network, wagmiConfig } from "$lib/wagmi/classes";
 
-  let isLocalNetwork = $derived(targetNetwork.id == anvil.id);
+  const isLocalNetwork = $derived(targetNetwork.id == Network.chainIdLocal);
 
   let isDrawerOpen = $state(false);
   let burgerMenu: HTMLDivElement | undefined = undefined;
