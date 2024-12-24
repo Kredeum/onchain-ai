@@ -1,10 +1,11 @@
 import { createClient } from "viem";
-import { anvil, mainnet, type Chain } from "viem/chains";
+import * as chains from "viem/chains";
+import { type Chain, mainnet } from "viem/chains";
 import { createConfig, getChainId, reconnect, watchChainId, type Config } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
-import { createBurnerConnector, type Nullable } from "$lib/wagmi/ts";
-import { Account, Client } from "$lib/wagmi/classes";
-import { ALCHEMY_TRANSPORT, POLLING_INTERVAL, TARGET_NETWORKS, WALLET_CONNECT_PROJECT_ID } from "$lib/wagmi/config";
+import { createBurnerConnector } from "$lib/wagmi/ts";
+import { Network } from "$lib/wagmi/classes";
+import { ALCHEMY_TRANSPORT, POLLING_INTERVAL, CHAINS, WALLET_CONNECT_PROJECT_ID } from "$lib/wagmi/config";
 
 class Wagmi {
   #connectors = [
@@ -15,15 +16,20 @@ class Wagmi {
       showQrModal: true
     }),
     coinbaseWallet({
-      appName: "scaffold-eth-2",
+      appName: "Wagmi-Svelte-5",
       preference: "all"
     }),
     createBurnerConnector()
   ];
 
-  #chains = TARGET_NETWORKS.find((network: Chain) => network.id === 1)
-    ? TARGET_NETWORKS
-    : ([...TARGET_NETWORKS, mainnet] as const);
+  #getChains = () => {
+    const selectedChains: Chain[] = [];
+    CHAINS.forEach((chainName) => chainName in chains && selectedChains.push(chains[chainName as keyof typeof chains]));
+    selectedChains.push(mainnet);
+    return selectedChains;
+  };
+
+  #chains = this.#getChains() as [Chain, ...Chain[]];
 
   config = $state(
     createConfig({
@@ -34,7 +40,7 @@ class Wagmi {
         const client = createClient({ chain, transport: ALCHEMY_TRANSPORT(chain.id, "wss") });
         // console.log("WAGMI client created:", chain.id, client);
 
-        if (chain.id === anvil.id) client.pollingInterval = POLLING_INTERVAL;
+        if (chain.id === Network.chainIdLocal) client.pollingInterval = POLLING_INTERVAL;
         return client;
       }
     })
@@ -61,7 +67,6 @@ class Wagmi {
 
   constructor() {
     this.reconnect();
-
     this.watch();
 
     $inspect("WAGMI", this.#chainId);
@@ -70,7 +75,6 @@ class Wagmi {
 
 let wagmi: Wagmi;
 let wagmiConfig: Config;
-// Should only be instantiate once, by main app `ScaffoldEthApp.svelte`
 const newWagmi = () => {
   wagmi ||= new Wagmi();
   wagmiConfig = wagmi.config;

@@ -3,9 +3,8 @@
   import { type Address } from "viem";
   import { connect, getConnections, getConnectors, type GetConnectorsReturnType } from "@wagmi/core";
 
-  import scaffoldConfig from "$lib/scaffold.config";
   import { Network, wagmiConfig } from "$lib/wagmi/classes";
-  import { ONLY_BURNER_WALLET } from "$lib/wagmi/config";
+  import { BURNER_WALLET_ONLY_LOCAL } from "$lib/wagmi/config";
   import { isDeploymentsChainId, type DeploymentsChainId, type Nullable } from "../ts";
 
   type ConnectorType = GetConnectorsReturnType[number];
@@ -59,7 +58,7 @@
     const parameters: { connector: ConnectorType; chainId?: number } = { connector };
     // if burner wallet, and onlyLocalBurnerWallet, switch to anvil
     if (connector.type === "burnerWallet") {
-      parameters.chainId = ONLY_BURNER_WALLET ? Network.chainIdLocal : network.chainId || network.chainIdDefault;
+      parameters.chainId = BURNER_WALLET_ONLY_LOCAL ? Network.chainIdLocal : network.chainId || network.chainIdDefault;
     }
     const wallet = await connect(wagmiConfig, parameters);
 
@@ -100,7 +99,7 @@
         {/if}
         {@render connectSnippet("coinbaseWallet")}
         {@render connectSnippet("walletConnect")}
-        {#if !scaffoldConfig.onlyLocalBurnerWallet || network.chainId === Network.chainIdLocal}
+        {#if !BURNER_WALLET_ONLY_LOCAL || network.chainId === Network.chainIdLocal}
           {@render connectSnippet("burnerWallet")}
         {/if}
       </ul>

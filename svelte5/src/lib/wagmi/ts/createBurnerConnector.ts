@@ -17,7 +17,7 @@ import { privateKeyToAccount } from "viem/accounts";
 import { anvil } from "viem/chains";
 import { getHttpRpcClient, hexToBigInt, numberToHex } from "viem/utils";
 import type { SendTransactionParameters } from "viem/zksync";
-import scaffoldConfig from "$lib/scaffold.config";
+import { BURNER_WALLET_ONLY_LOCAL } from "$lib/wagmi/config";
 
 export class ConnectorNotConnectedError extends BaseError {
   override name = "ConnectorNotConnectedError";
@@ -34,10 +34,10 @@ export class ChainNotConfiguredError extends BaseError {
 }
 
 const localStoreSetChainId = (chainId: number) => {
-  window?.localStorage?.setItem("scaffoldEth2.burnerWallet.chainId", String(chainId));
+  window?.localStorage?.setItem("wagmiSvelte5.burnerWallet.chainId", String(chainId));
 };
 const localStoreGetChainId = (): number => {
-  return Number(window?.localStorage?.getItem("scaffoldEth2.burnerWallet.chainId"));
+  return Number(window?.localStorage?.getItem("wagmiSvelte5.burnerWallet.chainId"));
 };
 
 type Provider = ReturnType<Transport<"custom", Record<any, any>, EIP1193RequestFn<WalletRpcSchema>>>;
@@ -72,7 +72,7 @@ export const createBurnerConnector = () => {
       const chainIdLocal = anvil.id;
       const chainIdLocalStorage = localStoreGetChainId();
 
-      chainId = scaffoldConfig.onlyLocalBurnerWallet ? chainIdLocal : chainIdLocalStorage || chainDefault.id;
+      chainId = BURNER_WALLET_ONLY_LOCAL ? chainIdLocal : chainIdLocalStorage || chainDefault.id;
 
       const chain = config.chains.find((ch) => ch.id === chainId) ?? chainDefault;
 

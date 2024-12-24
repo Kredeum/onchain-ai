@@ -1,5 +1,4 @@
-import scaffoldConfig from "$lib/scaffold.config";
-import { POLLING_INTERVAL } from "../config";
+import { POLLING_INTERVAL } from "$lib/wagmi/config";
 
 class Watcher {
   id = $state(0);

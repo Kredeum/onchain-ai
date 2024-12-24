@@ -97,27 +97,13 @@ class Network {
       if (!Network.findChain(account.chainId)) return;
 
       untrack(() => {
-        console.log(
-          "Network $effect:",
-          this.#id,
-          this.chainId,
-          "=>",
-          account.chainId,
-          wagmi.chainId
-        );
+        console.log("Network $effect:", this.#id, this.chainId, "=>", account.chainId, wagmi.chainId);
 
         if (account.chainId == this.chainId) return;
         console.log("Network $effect switch:");
         this.switch(account.chainId);
 
-        console.log(
-          "Network $effect:",
-          this.#id,
-          this.chainId,
-          "==",
-          account.chainId,
-          wagmi.chainId
-        );
+        console.log("Network $effect:", this.#id, this.chainId, "==", account.chainId, wagmi.chainId);
       });
     });
 

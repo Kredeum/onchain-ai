@@ -3,7 +3,7 @@
   import { readDeploymentContractsName, type DeploymentContractName, type DeploymentsChainId } from "$lib/wagmi/ts";
   import { wagmi } from "$lib/wagmi/classes";
 
-  const localStorageContractKey = "scaffoldEth2.contractSelected";
+  const localStorageContractKey = "wagmiSvelte5.contractSelected";
 
   const contractsName: DeploymentContractName[] = $derived(
     readDeploymentContractsName(wagmi.chainId as DeploymentsChainId)

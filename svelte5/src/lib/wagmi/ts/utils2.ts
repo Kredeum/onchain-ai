@@ -1,9 +1,9 @@
 import { dev } from "$app/environment";
-import scaffoldConfig from "$lib/scaffold.config";
 import type { Hex } from "viem";
 import { generatePrivateKey } from "viem/accounts";
+import { BURNER_WALLET_KEY } from "$lib/wagmi/config";
 
-const burnerLocalStorageKey = "scaffoldEth2.burnerWallet.sk";
+const burnerLocalStorageKey = "wagmiSvelte5.burnerWallet.sk";
 let currentSk: Hex = "0x";
 
 /**
@@ -37,7 +37,7 @@ export const loadBurnerSK = (): Hex => {
   const localStorageKey = (window?.localStorage?.getItem?.(burnerLocalStorageKey)?.replaceAll('"', "") ?? "0x") as Hex;
 
   // search for Key in environnement (dev mode only)
-  const envStorageKey = ((dev && scaffoldConfig.burnetWalletKey) || "0x") as Hex;
+  const envStorageKey = ((dev && BURNER_WALLET_KEY) || "0x") as Hex;
 
   // set the current key to the first valid key found
   currentSk = isValidSk(localStorageKey)
