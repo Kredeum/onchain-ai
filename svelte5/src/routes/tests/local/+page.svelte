@@ -1,6 +1,6 @@
 <script lang="ts">
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { Account, wagmiConfig } from "$lib/wagmi/classes";
+  import { wagmi, Account, wagmiConfig } from "$lib/wagmi/classes";
   import { getChainId } from "@wagmi/core";
 
   const account = new Account();
@@ -14,6 +14,10 @@
 
 <div class="p-4">
   targetNetwork.id = {targetNetwork.id}
+</div>
+
+<div class="p-4">
+  wagmi.chainId = {wagmi.chainId}
 </div>
 
 <div class="p-4">

@@ -1,11 +1,9 @@
 <script lang="ts">
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { ChainLink, Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
   import { Link } from "$lib/wagmi/components";
-
-  import { Interaction } from "$lib/onchain-ai/components";
-  import { encodeAbiParameters, stringToBytes, toBytes, toHex } from "viem";
-  import Form from "./Form.svelte";
+  import { wagmi } from "$lib/wagmi/classes";
+  import { ChainLink, Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
+  import { Interaction, Form } from "$lib/onchain-ai/components";
 
   const chainLink = new ChainLink({});
   const interactions = new Interactions();
@@ -17,13 +15,13 @@
 </script>
 
 <div class="flex flex-col text-2xl">
-  <div class="flex flex-col w-full p-6">Chain {targetNetwork.name} ({targetNetwork.id})</div>
+  <div class="flex flex-col w-full p-6">Chain {targetNetwork.name} ({wagmi.chainId})</div>
 
   <div class="p-2 w-full max-w-lg">
     <Form />
   </div>
 
-  {#if targetNetwork.id == 31337}
+  {#if wagmi.chainId == 31337}
     <div class="flex flex-row w-full p-6 space-x-2">
       <span>Simulation</span>
       <span>ChainLink Response '{lastInteraction?.prompt}' =&gt; '{lastInteraction?.response}'</span>

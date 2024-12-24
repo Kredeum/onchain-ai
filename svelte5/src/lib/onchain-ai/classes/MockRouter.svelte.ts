@@ -1,9 +1,7 @@
-import { targetNetwork } from "$lib/scaffold-eth/classes";
-import { SmartContract } from "$lib/wagmi/classes";
+import { SmartContract, wagmi } from "$lib/wagmi/classes";
 import { toBytes, toHex, type Address } from "viem";
 import { isAddress } from "$lib/wagmi/ts";
 import { Interactions } from "./Interactions.svelte";
-import { type InteractionType } from "$lib/onchain-ai/classes";
 import { simulateFunction } from "$lib/onchain-ai/ts";
 
 type getConsumerReturnType = {
@@ -47,7 +45,7 @@ class MockRouter extends SmartContract {
     this.interactions = new Interactions({ limit: 1 });
 
     $effect(() => {
-      if (targetNetwork.id != 31337) return;
+      if (wagmi.chainId != 31337) return;
       this.mockResponse();
     });
   }

@@ -5,6 +5,7 @@
 {/snippet}
 
 <ul class="list-disc pl-5 space-y-2">
+  {@render pageTest("chainId")}
   {@render pageTest("local")}
   {@render pageTest("interactions")}
   {@render pageTest("events")}

@@ -1,10 +1,9 @@
 <script lang="ts">
   import "../../app.pcss";
   import { Connect } from "$lib/wagmi/components";
-  import { Account, newWagmi, wagmi, wagmiConfig } from "$lib/wagmi/classes";
+  import { Account, newWagmi, wagmi } from "$lib/wagmi/classes";
   import type { Snippet } from "svelte";
   import { newTargetNetwork, targetNetwork } from "$lib/scaffold-eth/classes";
-  import { NetworkOptions } from "$lib/scaffold-eth/components";
   import { getTargetNetworks } from "$lib/scaffold-eth/ts";
 
   let { children }: { children: Snippet } = $props();
@@ -13,7 +12,7 @@
   newTargetNetwork();
 
   const account = new Account();
-  const chains = $derived(getTargetNetworks().filter((network) => network.id !== account.chainId));
+  const chains = $derived(getTargetNetworks().filter((network) => network.id !== wagmi.chainId));
 </script>
 
 <div class="flex min-h-screen flex-col">
@@ -32,9 +31,11 @@
         <button class="btn btn-primary btn-sm" onclick={() => targetNetwork.disconnect()}>Disconnect</button>
 
         {#each chains as chain (chain.id)}
-          <button class="btn btn-default btn-sm" onclick={() => targetNetwork.switch(chain.id)}>
-            {chain.name}
-          </button>
+          <span class="px-1">
+            <button class="btn btn-default btn-sm" onclick={() => targetNetwork.switch(chain.id)}>
+              {chain.name}
+            </button>
+          </span>
         {/each}
         <div class="p-2"></div>
       {:else}

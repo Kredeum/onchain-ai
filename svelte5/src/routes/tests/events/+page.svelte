@@ -2,7 +2,8 @@
   import { replacer } from "$lib/wagmi/ts";
   import { Events } from "$lib/wagmi/classes";
 
-  const events = new Events("Counter", { limit: 5, sort: "ASC", watch: true });
+  // const events = new Events("Counter", { limit: 5, sort: "ASC", watch: true });
+  const events = new Events("OnChainAIv1", { limit: 5, sort: "DESC", watch: true });
 </script>
 
 <div class="flex flex-col w-full p-4 items-center">

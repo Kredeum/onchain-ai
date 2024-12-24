@@ -6,7 +6,7 @@ import {
   disconnect as disconnectWagmi,
   getChainId
 } from "@wagmi/core";
-import { Account, wagmiConfig } from "$lib/wagmi/classes";
+import { Account, wagmi, wagmiConfig } from "$lib/wagmi/classes";
 import * as chains from "viem/chains";
 import type { Chain } from "viem/chains";
 import { untrack } from "svelte";
@@ -77,9 +77,9 @@ class Network {
 
     this.#chainId = chainId;
 
-    if (chainId !== wagmiConfig.state.chainId) await switchChain(wagmiConfig, { chainId });
+    if (chainId !== wagmi.chainId) await switchChain(wagmiConfig, { chainId });
 
-    console.log("<Network switch", chainId, "=>", wagmiConfig.state.chainId);
+    console.log("<Network switch", chainId, "=>", wagmi.chainId);
     this.getBlockNumber();
   };
 
@@ -103,8 +103,7 @@ class Network {
           this.chainId,
           "=>",
           account.chainId,
-          getChainId(wagmiConfig),
-          wagmiConfig.state.chainId
+          wagmi.chainId
         );
 
         if (account.chainId == this.chainId) return;
@@ -117,8 +116,7 @@ class Network {
           this.chainId,
           "==",
           account.chainId,
-          getChainId(wagmiConfig),
-          wagmiConfig.state.chainId
+          wagmi.chainId
         );
       });
     });

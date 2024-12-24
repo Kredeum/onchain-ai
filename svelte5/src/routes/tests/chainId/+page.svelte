@@ -3,5 +3,5 @@
 </script>
 
 <div class="p-4">
-  wagmiChainId = {wagmi.chainId}
+  chainId = {wagmi.chainId}
 </div>

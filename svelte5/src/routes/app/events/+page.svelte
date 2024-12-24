@@ -1,12 +1,11 @@
 <script lang="ts">
   import { ViewEvents } from "$lib/wagmi/components";
-  import { Account, wagmiConfig } from "$lib/wagmi/classes";
-  import { getChainId } from "@wagmi/core";
-  import { targetNetwork } from "$lib/scaffold-eth/classes";
+  import { Account } from "$lib/wagmi/classes";
+  import { wagmi } from "$lib/wagmi/classes";
 
   const account = new Account();
 
-  $inspect("PAGE EVENTS chainId", account.chainId, wagmiConfig.state.chainId, targetNetwork.id);
+  $inspect("PAGE EVENTS chainId", account.chainId, wagmi.chainId);
 </script>
 
 <ViewEvents />

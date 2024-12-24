@@ -1,12 +1,12 @@
 import { createClient } from "viem";
 import { anvil, mainnet, type Chain } from "viem/chains";
-import { createConfig, reconnect, type Config } from "@wagmi/core";
+import { createConfig, getChainId, reconnect, watchChainId, type Config } from "@wagmi/core";
 import { coinbaseWallet, injected, metaMask, walletConnect } from "@wagmi/connectors";
-import { createBurnerConnector } from "$lib/wagmi/ts";
-import { Client } from "$lib/wagmi/classes";
+import { createBurnerConnector, type Nullable } from "$lib/wagmi/ts";
+import { Account, Client } from "$lib/wagmi/classes";
 import { ALCHEMY_TRANSPORT, POLLING_INTERVAL, TARGET_NETWORKS, WALLET_CONNECT_PROJECT_ID } from "$lib/wagmi/config";
 
-class Wagmi extends Client {
+class Wagmi {
   #connectors = [
     injected(),
     metaMask(),
@@ -29,6 +29,7 @@ class Wagmi extends Client {
     createConfig({
       chains: this.#chains,
       connectors: this.#connectors,
+      syncConnectedChain: true,
       client({ chain }) {
         const client = createClient({ chain, transport: ALCHEMY_TRANSPORT(chain.id, "wss") });
         // console.log("WAGMI client created:", chain.id, client);
@@ -39,6 +40,18 @@ class Wagmi extends Client {
     })
   );
 
+  #chainId = $state<number>(getChainId(this.config));
+  get chainId() {
+    return this.#chainId;
+  }
+  watch = () =>
+    watchChainId(this.config, {
+      onChange: (chainId: number) => {
+        console.log("watchChainId Change:", chainId);
+        this.#chainId = chainId;
+      }
+    });
+
   recentConnectorId = $state();
 
   reconnect = async () => {
@@ -47,10 +60,11 @@ class Wagmi extends Client {
   };
 
   constructor() {
-    super();
     this.reconnect();
 
-    $inspect("WAGMI", this.config.state.chainId, this.config);
+    this.watch();
+
+    $inspect("WAGMI", this.#chainId);
   }
 }
 
@@ -62,4 +76,4 @@ const newWagmi = () => {
   wagmiConfig = wagmi.config;
 };
 
-export { newWagmi, wagmi, wagmiConfig };
+export { Wagmi, newWagmi, wagmi, wagmiConfig };

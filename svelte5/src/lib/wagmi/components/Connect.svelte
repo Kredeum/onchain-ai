@@ -1,12 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { type Address } from "viem";
-  import {
-    connect,
-    getConnections,
-    getConnectors,
-    type GetConnectorsReturnType
-  } from "@wagmi/core";
+  import { connect, getConnections, getConnectors, type GetConnectorsReturnType } from "@wagmi/core";
 
   import scaffoldConfig from "$lib/scaffold.config";
   import { Network, wagmiConfig } from "$lib/wagmi/classes";

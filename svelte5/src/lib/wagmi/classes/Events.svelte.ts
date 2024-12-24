@@ -2,7 +2,7 @@ import { type Address as AddressType, type ContractEventName, type Log } from "v
 
 import { type DeploymentContractName } from "$lib/wagmi/ts";
 
-import { SmartContract, wagmiConfig } from "$lib/wagmi/classes";
+import { SmartContract, wagmi, wagmiConfig } from "$lib/wagmi/classes";
 import { getContractEvents, type LogWithArgs } from "$lib/wagmi/ts";
 import { watchContractEvent, getBlockNumber, getChainId } from "@wagmi/core";
 
@@ -71,15 +71,13 @@ class Events extends SmartContract {
         const indexDelta = (Number(a.transactionIndex) || 0) - (b.transactionIndex || 0);
         return blockDelta > 0 ? 1 : blockDelta < 0 ? -1 : indexDelta;
       });
-      // console.log("EVENTS  fetch", this.listAll.length, params, $state.snapshot(this.listAll));
+      console.log("EVENTS  fetch", this.listAll.length, params, $state.snapshot(this.listAll));
     } catch (error) {
       console.error("EVENTS Failed to fetch logs:", error);
     }
 
     if (watch) this.watch();
   };
-
-  #chainId: number = $derived(wagmiConfig.state.chainId);
 
   constructor(
     nameOrAddress: DeploymentContractName | AddressType,
@@ -99,8 +97,8 @@ class Events extends SmartContract {
     this.raw = raw;
 
     $effect(() => {
-      this.#chainId;
-      console.log("EVENTS $effect ~ chainId :", this.#chainId);
+      wagmi.chainId;
+      console.log("EVENTS $effect ~ chainId :", wagmi.chainId);
       this.fetch(watch);
     });
 

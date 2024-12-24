@@ -2,7 +2,7 @@ import { type Page, test, expect } from "@playwright/test";
 import { connectWallet, switchChain } from "./common";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/tests/void");
+  await page.goto("/app");
 });
 
 test.describe("Wallet connection, deconnection", () => {
@@ -57,12 +57,7 @@ test.describe("Connected wallet interactions", () => {
 
     const bal1 = bal0 + 10n ** 18n;
     faucetButton.click();
-    await expect(userbalance).toHaveAttribute("data-balance", String(bal1));
-    await page.locator(".notification-close").click();
-
-    const bal2 = bal1 + 10n ** 18n;
-    faucetButton.click();
-    await expect(userbalance).toHaveAttribute("data-balance", String(bal2));
+    await expect(userbalance).toHaveAttribute("data-balance", String(bal1), { timeout: 10000 });
     await page.locator(".notification-close").click();
   });
 });

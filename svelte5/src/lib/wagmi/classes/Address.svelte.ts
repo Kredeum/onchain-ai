@@ -3,7 +3,7 @@ import { deepEqual, getBalance as getBalanceWagmi, getChainId, type GetBalanceRe
 
 import { isAddress, isEns } from "$lib/wagmi/ts";
 import type { Nullable } from "$lib/wagmi/ts";
-import { wagmiConfig, Watcher } from "$lib/wagmi/classes";
+import { wagmi, wagmiConfig, Watcher } from "$lib/wagmi/classes";
 import { getEnsAddress, getEnsAvatar, getEnsName } from "@wagmi/core";
 import { mainnet } from "viem/chains";
 import { untrack } from "svelte";
@@ -27,13 +27,13 @@ class Address {
   };
 
   #getAndWatchBalance = () => {
-    this.#getBalance();
+    this.getBalance();
     if (this.#watchBalance) {
       this.watcher ??= new Watcher();
-      this.watcher.restart(this.#getBalance);
+      this.watcher.restart(this.getBalance);
     }
   };
-  #getBalance = async () => {
+  getBalance = async () => {
     if (!(this.address && isAddress(this.address))) return;
 
     const balance = await getBalanceWagmi(wagmiConfig, { address: this.address });
@@ -77,6 +77,7 @@ class Address {
 
     if (!isAddress(checkSumAddr)) this.#reset();
 
+    this.getBalance();
     this.#setAddressPlus(checkSumAddr!);
   }
   set ensName(ensName: string) {
@@ -116,7 +117,7 @@ class Address {
     // restart on network or address change
     $effect(() => {
       if (!this.address) return;
-      wagmiConfig.state.chainId;
+      wagmi.chainId;
       // getChainId(wagmiConfig);
 
       this.address;

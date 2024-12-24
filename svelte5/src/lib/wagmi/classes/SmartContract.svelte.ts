@@ -8,7 +8,7 @@ import {
   waitForTransactionReceipt,
   writeContract
 } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/classes";
+import { wagmi, wagmiConfig } from "$lib/wagmi/classes";
 import { isAddress, shorten0xString, type DeploymentsChainId } from "$lib/wagmi/ts";
 import { readDeployment, type DeploymentContractName } from "$lib/wagmi/ts";
 import { untrack } from "svelte";
@@ -19,7 +19,7 @@ let counter = 0;
 
 class SmartContract {
   id = 0;
-  chainId = $derived(wagmiConfig.state.chainId as DeploymentsChainId);
+  chainId = $derived(wagmi.chainId as DeploymentsChainId);
 
   name: string | undefined;
   #nameOrAddress: DeploymentContractName | AddressType | undefined;

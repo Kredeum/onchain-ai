@@ -6,7 +6,7 @@
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
-  import { Network, wagmiConfig } from "$lib/wagmi/classes";
+  import { Network } from "$lib/wagmi/classes";
 
   const isLocalNetwork = $derived(targetNetwork.id == Network.chainIdLocal);
 
@@ -28,28 +28,28 @@
   const menuLinks: HeaderMenuLink[] = [
     {
       label: "Ask?",
-      href: "/",
+      href: "/app",
       icon: ChatBubbleLeftRight
     },
     {
       label: "Debug Contracts",
-      href: "/debug",
+      href: "/app/debug",
       icon: BugAnt
+    },
+    {
+      label: "View Events",
+      href: "/app/events",
+      icon: Bars3
+    },
+    {
+      label: "ChainLink Admin",
+      href: "/app/chainlink",
+      icon: Link
     },
     {
       label: "Tests",
       href: "/tests",
       icon: Beaker
-    },
-    {
-      label: "View Events",
-      href: "/events",
-      icon: Bars3
-    },
-    {
-      label: "ChainLink Admin",
-      href: "/chainlink",
-      icon: Link
     }
   ];
 

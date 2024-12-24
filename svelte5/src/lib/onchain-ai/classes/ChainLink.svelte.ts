@@ -1,25 +1,25 @@
 import { readChainLinkConfig } from "@onchain-ai/common";
-import { targetNetwork } from "$lib/scaffold-eth/classes";
+import { wagmi } from "$lib/wagmi/classes";
 
 class ChainLink {
   href = $state<string>("");
   chainId = $state<number>(0);
 
   constructor({ requestId }: { requestId?: `0x${string}` } = {}) {
-    const config = $derived(readChainLinkConfig(targetNetwork.id));
+    const config = $derived(readChainLinkConfig(wagmi.chainId));
     const href = $derived(
-      targetNetwork.id === 31337
+      wagmi.chainId === 31337
         ? "/chainLink"
         : `https://functions.chain.link/${config.chainName}/${config.subscriptionId}` +
             (requestId ? `#/side-drawer/request/${requestId}` : "")
     );
 
     $effect(() => {
-      this.chainId = targetNetwork.id;
+      this.chainId = wagmi.chainId;
       this.href = href;
     });
 
-    // $inspect("ChainLink", targetNetwork.id, this.href, config);
+    // $inspect("ChainLink", wagmi.chainId, this.href, config);
   }
 }
 
