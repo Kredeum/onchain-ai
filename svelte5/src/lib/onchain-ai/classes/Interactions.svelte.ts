@@ -1,5 +1,5 @@
-import { Events, type EventsSortOrder } from "$lib/wagmi/classes";
-import type { Nullable } from "$lib/wagmi/ts";
+import { Events, type EventsSortOrder } from "@kredeum/wagmi-svelte5";
+import type { Nullable } from "@kredeum/wagmi-svelte5";
 import type { Address } from "abitype";
 
 class Interactions extends Events {

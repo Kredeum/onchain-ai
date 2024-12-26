@@ -8,7 +8,7 @@
     transformAbiFunction
   } from "$lib/scaffold-eth/ts";
   import { ContractInput, DisplayTxResult, InheritanceTooltip } from "$lib/scaffold-eth/components";
-  import { SmartContract } from "$lib/wagmi/classes";
+  import { SmartContract } from "@kredeum/wagmi-svelte5";
   import { untrack } from "svelte";
 
   const {

@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import { getAccount, connect, watchAccount } from "@wagmi/core";
   import { injected } from "@wagmi/connectors";
-  import { newWagmi, wagmiConfig } from "$lib/wagmi/classes";
+  import { newWagmi, wagmiConfig } from "@kredeum/wagmi-svelte5";
 
   type AccountType = ReturnType<typeof getAccount>;
 

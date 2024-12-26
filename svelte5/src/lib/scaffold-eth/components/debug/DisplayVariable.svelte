@@ -5,7 +5,7 @@
 
   import { InheritanceTooltip, DisplayTxResult } from "$lib/scaffold-eth/components";
   import { createAnimationConfig } from "$lib/scaffold-eth/runes";
-  import { SmartContract } from "$lib/wagmi/classes";
+  import { SmartContract } from "@kredeum/wagmi-svelte5";
 
   const {
     contractAddress,

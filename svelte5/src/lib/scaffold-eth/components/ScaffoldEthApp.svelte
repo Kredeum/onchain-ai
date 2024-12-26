@@ -2,7 +2,7 @@
   import { onMount, type Snippet } from "svelte";
   import { newTargetNetwork } from "$lib/scaffold-eth/classes";
   import { Header, Footer } from "$lib/scaffold-eth/components";
-  import { newWagmi } from "$lib/wagmi/classes";
+  import { newWagmi } from "@kredeum/wagmi-svelte5";
 
   let { children }: { children: Snippet } = $props();
 

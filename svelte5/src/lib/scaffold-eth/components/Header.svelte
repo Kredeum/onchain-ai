@@ -6,7 +6,7 @@
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { ConnectButton, FaucetButton } from "$lib/scaffold-eth/components";
-  import { Network } from "$lib/wagmi/classes";
+  import { Network } from "@kredeum/wagmi-svelte5";
 
   const isLocalNetwork = $derived(targetNetwork.id == Network.chainIdLocal);
 

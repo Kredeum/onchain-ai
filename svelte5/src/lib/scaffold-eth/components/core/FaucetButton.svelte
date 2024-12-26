@@ -1,11 +1,11 @@
 <script lang="ts">
   import { createTransactor } from "$lib/scaffold-eth/runes/transactor.svelte";
-  import { Account } from "$lib/wagmi/classes";
+  import { Account } from "@kredeum/wagmi-svelte5";
 
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { createWalletClient, http, parseEther } from "viem";
   import { anvil } from "viem/chains";
-  import { Address } from "$lib/wagmi/classes";
+  import { Address } from "@kredeum/wagmi-svelte5";
 
   const AMOUNT_TO_SEND = "1";
   const FAUCET_ADDRESS = "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266";

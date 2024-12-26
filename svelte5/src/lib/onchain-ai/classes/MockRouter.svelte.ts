@@ -1,6 +1,6 @@
-import { SmartContract, wagmi } from "$lib/wagmi/classes";
+import { SmartContract, wagmi } from "@kredeum/wagmi-svelte5";
 import { toBytes, toHex, type Address } from "viem";
-import { isAddress } from "$lib/wagmi/ts";
+import { isAddress } from "@kredeum/wagmi-svelte5";
 import { Interactions } from "./Interactions.svelte";
 import { simulateFunction } from "$lib/onchain-ai/ts";
 

@@ -1,6 +1,6 @@
 import scaffoldConfig from "$lib/scaffold.config";
 import { fetchPriceFromUniswap, NETWORKS_EXTRA_DATA, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
-import { Account, Network } from "$lib/wagmi/classes";
+import { Account, Network } from "@kredeum/wagmi-svelte5";
 import type { Chain } from "viem/chains";
 
 type TargetNetworkChain = (typeof scaffoldConfig.targetNetworks)[number];

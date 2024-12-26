@@ -2,12 +2,12 @@
   import type { Address as AddressType } from "viem";
   import { createNetworkColor } from "$lib/scaffold-eth/runes";
   import { formatENS, formatAddress, getBlockExplorerAddressLink } from "$lib/scaffold-eth/ts";
-  import { Account } from "$lib/wagmi/classes";
+  import { Account } from "@kredeum/wagmi-svelte5";
   import { Balance } from "$lib/scaffold-eth/components";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import AddressInfoDropdown from "./AddressInfoDropdown.svelte";
   import AddressQRCodeModal from "./AddressQRCodeModal.svelte";
-  import { Connect } from "$lib/wagmi/components";
+  import { Connect } from "@kredeum/wagmi-svelte5";
 
   const account = new Account({ ens: true });
   const { address, chain, isConnected, ensName, ensAvatar } = $derived(account);

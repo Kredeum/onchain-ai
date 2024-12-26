@@ -1,7 +1,7 @@
 <script lang="ts">
   import { formatEther, type Address as AddressType } from "viem";
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { Address } from "$lib/wagmi/classes";
+  import { Address } from "@kredeum/wagmi-svelte5";
 
   const {
     address,

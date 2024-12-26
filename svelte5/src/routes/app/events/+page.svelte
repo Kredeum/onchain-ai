@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { ViewEvents } from "$lib/wagmi/components";
-  import { Account } from "$lib/wagmi/classes";
-  import { wagmi } from "$lib/wagmi/classes";
+  import { ViewEvents } from "@kredeum/wagmi-svelte5";
+  import { Account } from "@kredeum/wagmi-svelte5";
+  import { wagmi } from "@kredeum/wagmi-svelte5";
 
   const account = new Account();
 

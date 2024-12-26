@@ -15,11 +15,11 @@
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { getTargetNetworks } from "$lib/scaffold-eth/ts";
   import { createOutsideClick } from "$lib/scaffold-eth/runes";
-  import { Network } from "$lib/wagmi/classes";
-  import { Account } from "$lib/wagmi/classes";
+  import { Network } from "@kredeum/wagmi-svelte5";
+  import { Account } from "@kredeum/wagmi-svelte5";
   import { BlockieAvatar, NetworkOptions } from "$lib/scaffold-eth/components";
   import scaffoldConfig from "$lib/scaffold.config";
-  import { isEns } from "$lib/wagmi/ts";
+  import { isEns } from "@kredeum/wagmi-svelte5";
 
   const {
     address,

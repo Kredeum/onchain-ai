@@ -5,7 +5,7 @@
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { createPublicClient } from "$lib/scaffold-eth/runes";
   import { type Transaction, type TransactionReceipt, type Hash, formatEther, formatUnits } from "viem";
-  import { replacer } from "$lib/wagmi/ts";
+  import { replacer } from "@kredeum/wagmi-svelte5";
 
   let txHash = $state("0x0" as Hash);
   $effect(() => {

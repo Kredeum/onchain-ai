@@ -1,6 +1,6 @@
-import { SmartContract } from "$lib/wagmi/classes";
+import { SmartContract } from "@kredeum/wagmi-svelte5";
 import type { Address } from "viem";
-import { isAddress } from "$lib/wagmi/ts";
+import { isAddress } from "@kredeum/wagmi-svelte5";
 
 class Faucet extends SmartContract {
   get owner() {

@@ -3,7 +3,7 @@
   import { getTargetNetworks, type ChainWithAttributes } from "$lib/scaffold-eth/ts";
   import { getNetworkColor, createDarkMode } from "$lib/scaffold-eth/runes";
   import { targetNetwork, type TargetNetworkId } from "$lib/scaffold-eth/classes";
-  import { Account } from "$lib/wagmi/classes";
+  import { Account } from "@kredeum/wagmi-svelte5";
 
   const { hidden = false } = $props();
 

@@ -4,7 +4,7 @@
   import { Banknotes, Icon } from "svelte-hero-icons";
   import { untrack } from "svelte";
 
-  import { notification } from "$lib/wagmi/ts";
+  import { notification } from "@kredeum/wagmi-svelte5";
   import { createTransactor } from "$lib/scaffold-eth/runes";
   import { Address, Balance, AddressInput, FaucetNotification, EtherInput } from "$lib/scaffold-eth/components";
   import { targetNetwork } from "$lib/scaffold-eth/classes";

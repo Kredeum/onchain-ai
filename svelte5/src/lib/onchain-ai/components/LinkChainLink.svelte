@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Link } from "$lib/wagmi/components";
+  import { Link } from "@kredeum/wagmi-svelte5";
   import { ChainLink } from "$lib/onchain-ai/classes";
 
   const { requestId }: { requestId?: `0x${string}` } = $props();

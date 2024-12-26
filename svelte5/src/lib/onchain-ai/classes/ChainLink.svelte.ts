@@ -1,5 +1,5 @@
 import { readChainLinkConfig } from "@onchain-ai/common";
-import { wagmi } from "$lib/wagmi/classes";
+import { wagmi } from "@kredeum/wagmi-svelte5";
 
 class ChainLink {
   href = $state<string>("");

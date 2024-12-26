@@ -10,7 +10,7 @@
   import { targetNetwork } from "$lib/scaffold-eth/classes";
   import { IntegerInput, InheritanceTooltip, ContractInput, DisplayTxResult } from "$lib/scaffold-eth/components";
 
-  import { Account, SmartContract } from "$lib/wagmi/classes";
+  import { Account, SmartContract } from "@kredeum/wagmi-svelte5";
 
   const {
     abi,

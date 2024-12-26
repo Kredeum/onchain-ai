@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
   import { Interaction } from "$lib/onchain-ai/components";
-  import { Account } from "$lib/wagmi/classes";
+  import { Account } from "@kredeum/wagmi-svelte5";
 
   const account = new Account();
   const sender = $derived(account.address);

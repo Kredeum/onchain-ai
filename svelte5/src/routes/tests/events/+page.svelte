@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { replacer } from "$lib/wagmi/ts";
-  import { Events } from "$lib/wagmi/classes";
+  import { replacer } from "@kredeum/wagmi-svelte5";
+  import { Events } from "@kredeum/wagmi-svelte5";
 
   // const events = new Events("Counter", { limit: 5, sort: "ASC", watch: true });
   const events = new Events("OnChainAIv1", { limit: 5, sort: "DESC", watch: true });

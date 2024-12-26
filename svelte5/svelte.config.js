@@ -15,11 +15,8 @@ const config = defineConfig({
       strict: true
     })
   },
-
-  resolve: {
-    alias: {
-      "@routes": "/src/routes"
-    }
+  alias: {
+    "@wagmi-svelte5": "../wagmi-svelte5/src/lib/wagmi"
   }
 });
 

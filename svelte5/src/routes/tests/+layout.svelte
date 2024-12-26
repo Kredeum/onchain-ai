@@ -1,7 +1,7 @@
 <script lang="ts">
   import "../../app.pcss";
-  import { Connect } from "$lib/wagmi/components";
-  import { Account, newWagmi, wagmi } from "$lib/wagmi/classes";
+  import { Connect } from "@kredeum/wagmi-svelte5";
+  import { Account, newWagmi, wagmi } from "@kredeum/wagmi-svelte5";
   import type { Snippet } from "svelte";
   import { newTargetNetwork, targetNetwork } from "$lib/scaffold-eth/classes";
   import { getTargetNetworks } from "$lib/scaffold-eth/ts";

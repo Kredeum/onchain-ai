@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { replacer } from "$lib/wagmi/ts";
+  import { replacer } from "@kredeum/wagmi-svelte5";
   import { Interactions } from "$lib/onchain-ai/classes";
-  import { Account, wagmi } from "$lib/wagmi/classes";
+  import { Account, wagmi } from "@kredeum/wagmi-svelte5";
 
   const account = new Account();
 

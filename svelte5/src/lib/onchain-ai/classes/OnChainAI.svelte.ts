@@ -1,6 +1,6 @@
 import type { Address, Log } from "viem";
-import { isAddress } from "$lib/wagmi/ts";
-import { SmartContract } from "$lib/wagmi/classes";
+import { isAddress } from "@kredeum/wagmi-svelte5";
+import { SmartContract } from "@kredeum/wagmi-svelte5";
 
 class OnChainAI extends SmartContract {
   get owner() {

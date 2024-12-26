@@ -1,7 +1,7 @@
 <script lang="ts">
   import { OnChainAI } from "$lib/onchain-ai/classes";
   import { LastInteraction } from "$lib/onchain-ai/components";
-  import { Account } from "$lib/wagmi/classes";
+  import { Account } from "@kredeum/wagmi-svelte5";
 
   const account = new Account();
   const onChainAI = new OnChainAI();

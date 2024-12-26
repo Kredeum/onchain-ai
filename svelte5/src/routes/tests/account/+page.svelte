@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Account } from "$lib/wagmi/classes";
+  import { Account } from "@kredeum/wagmi-svelte5";
   const account = new Account({ watchBalance: true, ens: true });
 
   $inspect("PAGE account", account.chainId, account.address);

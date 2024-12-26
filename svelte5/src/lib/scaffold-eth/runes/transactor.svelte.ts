@@ -2,9 +2,9 @@ import TxnNotification from "./TxnNotification.svelte";
 import { getPublicClient, getWalletClient } from "@wagmi/core";
 import type { Hash, SendTransactionParameters, TransactionReceipt, WalletClient } from "viem";
 import { getParsedError } from "$lib/scaffold-eth/ts";
-import { notification } from "$lib/wagmi/ts";
-import { wagmiConfig } from "$lib/wagmi/classes";
-import { LinkTx } from "$lib/wagmi/components";
+import { notification } from "@kredeum/wagmi-svelte5";
+import { wagmiConfig } from "@kredeum/wagmi-svelte5";
+import { LinkTx } from "@kredeum/wagmi-svelte5";
 
 export type TransactionFunc = (
   tx: (() => Promise<Hash>) | SendTransactionParameters,

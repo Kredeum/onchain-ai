@@ -1,6 +1,6 @@
 <script lang="ts">
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { wagmi, Account, wagmiConfig } from "$lib/wagmi/classes";
+  import { wagmi, Account, wagmiConfig } from "@kredeum/wagmi-svelte5";
   import { getChainId } from "@wagmi/core";
 
   const account = new Account();

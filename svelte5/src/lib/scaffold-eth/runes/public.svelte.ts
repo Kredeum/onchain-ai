@@ -4,7 +4,7 @@ import {
   watchPublicClient,
   type WatchPublicClientReturnType
 } from "@wagmi/core";
-import { wagmiConfig } from "$lib/wagmi/classes";
+import { wagmiConfig } from "@kredeum/wagmi-svelte5";
 
 const createPublicClient = () => {
   let publicClient = $state(getPublicClient(wagmiConfig));

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { LinkAddress, LinkTx } from "$lib/wagmi/components";
+  import { LinkAddress, LinkTx } from "@kredeum/wagmi-svelte5";
   import { LinkChainLink } from "$lib/onchain-ai/components";
-  import type { Nullable } from "$lib/wagmi/ts";
+  import type { Nullable } from "@kredeum/wagmi-svelte5";
   import type { Address } from "viem";
 
   const { hash, address, requestId }: { hash?: `0x${string}`; address?: Nullable<Address>; requestId?: `0x${string}` } =

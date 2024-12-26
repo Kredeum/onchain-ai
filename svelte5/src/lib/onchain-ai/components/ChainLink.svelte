@@ -1,7 +1,7 @@
 <script lang="ts">
   import { targetNetwork } from "$lib/scaffold-eth/classes";
-  import { Link } from "$lib/wagmi/components";
-  import { wagmi } from "$lib/wagmi/classes";
+  import { Link } from "@kredeum/wagmi-svelte5";
+  import { wagmi } from "@kredeum/wagmi-svelte5";
   import { ChainLink, Interactions, MockRouter, type InteractionType } from "$lib/onchain-ai/classes";
   import { Interaction, Form } from "$lib/onchain-ai/components";
 
