@@ -58,6 +58,5 @@ test.describe("Connected wallet interactions", () => {
     const bal1 = bal0 + 10n ** 18n;
     faucetButton.click();
     await expect(userbalance).toHaveAttribute("data-balance", String(bal1), { timeout: 10000 });
-    await page.locator(".notification-close").click();
   });
 });
